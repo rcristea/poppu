@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name="tests")
 public class TestModel {
 
+    // @Id and all those are JPA syntax. JPA is what connects Java and MySQL
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
