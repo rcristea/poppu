@@ -8,7 +8,9 @@ export class LandingPage extends Component {
       <div className='container'>
         <NavBar />
         <div className='landing-page-container'>
+          <div className='landing-page-hero'>
 
+          </div>
         </div>
         {/*Footer here*/}
       </div>

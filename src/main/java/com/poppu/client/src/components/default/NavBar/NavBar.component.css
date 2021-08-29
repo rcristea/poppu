@@ -44,56 +44,17 @@
   text-decoration: underline;
 }
 
-.nav-mobile-bag {
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-  margin-right: 2px;
-}
-
-.nav-mobile-fullscreen {
-  z-index: 1;
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-  background-color: #fff;
-}
-
-.nav-mobile-container {
-  padding: 10px 20px;
-}
-
-.nav-mobile-group {
-  display: flex;
-  flex-direction: column;
-  margin: 15px 0;
-}
-
-.nav-mobile-group h3 {
-  font-size: 9px;
-  text-transform: uppercase;
-  font-weight: 100;
-  margin: 5px 0;
-}
-
-.nav-mobile-group a {
-  text-transform: uppercase;
-  margin: 1px 0;
-}
-
-.nav-mobile-group a:hover {
-  text-decoration: underline;
-}
-
 .logo {
   font-family: MavenPro-ExtraBold;
   font-size: 2rem;
 }
 
-.logo a {
+.logo-mobile {
+  font-family: MavenPro-ExtraBold;
+  font-size: 1rem;
+}
+
+.logo a, .logo-mobile a {
   text-decoration: none;
   color: #fff
 }
@@ -135,10 +96,22 @@
   .nav-mobile {
     display: flex;
   }
+
+  .nav-link a {
+    font-size: 0.625rem;
+  }
+
+  .login-button {
+    padding: 6px 12px;
+  }
 }
 
-@media screen and (min-width: 767px) {
-  .nav-mobile-fullscreen {
-    display: none;
+@media screen and (max-width: 512px) {
+  .nav {
+    max-width: 95%;
+  }
+
+  .nav-link {
+    margin: 0 5px;
   }
 }
