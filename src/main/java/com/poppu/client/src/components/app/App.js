@@ -1,15 +1,14 @@
-import './App.css';
-import {Component} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import LandingPage from '../default/LandingPage/LandingPage.component';
+import {Component} from 'react'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import './App.css'
 import TestIndex from '../tests/TestIndex/TestIndex.component'
-import TestAdd from '../tests/TestAdd/TestAdd.component';
-import TestEdit from '../tests/TestEdit/TestEdit.component';
+import TestAdd from '../tests/TestAdd/TestAdd.component'
+import TestEdit from '../tests/TestEdit/TestEdit.component'
+import LandingPage from "../default/LandingPage/LandingPage.component";
 
 class App extends Component {
   render() {
     return (
-    <div className='App'>
       <BrowserRouter>
         <Switch>
           <Route path='/' exact={true} component={LandingPage} />
@@ -18,9 +17,8 @@ class App extends Component {
           <Route path='/tests/:id' component={TestEdit} />
         </Switch>
       </BrowserRouter>
-    </div>
     );
   }
 }
 
-export default App;
+export default App

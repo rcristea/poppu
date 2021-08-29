@@ -1,15 +1,16 @@
-import React, {Component} from 'react'
+import {Component} from 'react'
 import './LandingPage.component.css'
-import {Link} from 'react-router-dom';
+import NavBar from "../NavBar/NavBar.component";
 
 export class LandingPage extends Component {
   render() {
     return (
-      <div className='landing-page-container'>
-        <ul>
-          <li><Link to='/tests'>Index Tests</Link></li>
-          <li><Link to='/tests/add'>Add Test</Link></li>
-        </ul>
+      <div className='container'>
+        <NavBar />
+        <div className='landing-page-container'>
+
+        </div>
+        {/*Footer here*/}
       </div>
     )
   }
