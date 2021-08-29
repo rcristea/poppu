@@ -44,9 +44,9 @@ export class NavBar extends Component {
               </div>
             </div>
             <div className='nav-right'>
-              <div className='login-button'>
-                <Link to='/login'>Login</Link>
-              </div>
+              <Link to='/login'>
+                <div className='login-button'>Login</div>
+              </Link>
             </div>
           </nav>
           <nav className='nav nav-mobile'>
@@ -62,9 +62,9 @@ export class NavBar extends Component {
               <div className='nav-link'>
                 <a href='/#'>Theaters</a>
               </div>
-              <div className='login-button'>
-                <Link to='/login'>Login</Link>
-              </div>
+              <Link to='/login'>
+                <div className='login-button'>Login</div>
+              </Link>
             </div>
           </nav>
         </header>
