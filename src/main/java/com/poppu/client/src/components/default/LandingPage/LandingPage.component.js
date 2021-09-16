@@ -17,8 +17,11 @@ export class LandingPage extends Component {
               </svg>
             </div>
           </div>
-          <div className='test'>
+          <div className='landing-page-content'>
+            <div className='horizontal-scroll-snap-container'>
+              <div className='horizontal-scroll-snap-heading'>Now Showing</div>
 
+            </div>
           </div>
         </div>
         {/*Footer here*/}
