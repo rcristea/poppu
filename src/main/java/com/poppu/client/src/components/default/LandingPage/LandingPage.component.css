@@ -37,3 +37,15 @@
   background-color: #171717;
   padding: 50px 80px;
 }
+
+@media screen and (max-width: 767px) {
+  .landing-page-content {
+    padding: 50px 25px;
+  }
+}
+
+@media screen and (max-width: 512px) {
+  .landing-page-content {
+    padding: 50px 15px;
+  }
+}
