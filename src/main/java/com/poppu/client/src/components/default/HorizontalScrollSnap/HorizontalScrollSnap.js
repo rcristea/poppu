@@ -11,6 +11,7 @@ export class HorizontalSnapScroll extends Component {
     this.state = {
       scroller: null,
       itemWidth: 0,
+      movies: props.data,
     }
 
     this.containerRef = createRef()
@@ -37,7 +38,7 @@ export class HorizontalSnapScroll extends Component {
   render() {
     return (
       <div>
-        <div className='horizontal-scroll-snap-heading'>Now Showing {this.state.currentItem} {this.state.numItems}</div>
+        <div className='horizontal-scroll-snap-heading'>{this.props.heading}</div>
         <div className='horizontal-scroll-snap-inline'>
           <button onClick={e => this.previous()}>
             <div className='horizontal-scroll-snap-left'>
@@ -45,42 +46,20 @@ export class HorizontalSnapScroll extends Component {
             </div>
           </button>
           <div className='horizontal-scroll-snap-container' ref={this.containerRef}>
-            <section className='horizontal-scroll-snap-child'>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/8YjFbMbfXaQ"
-                      title="YouTube video player" frameBorder="0"
-                      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen />
-            </section>
-            <section className='horizontal-scroll-snap-child'>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/K8nm0iYLvcs"
-                      title="YouTube video player" frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen />
-            </section>
-            <section className='horizontal-scroll-snap-child'>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/MysGjRS9jFU"
-                      title="YouTube video player" frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen />
-            </section>
-            <section className='horizontal-scroll-snap-child'>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/gRbG2tjHYCA"
-                      title="YouTube video player" frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen />
-            </section>
-            <section className='horizontal-scroll-snap-child'>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/20DF6U1HcGQ"
-                      title="YouTube video player" frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen />
-            </section>
-            <section className='horizontal-scroll-snap-child'>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/t7FwypV69qc"
-                      title="YouTube video player" frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen />
-            </section>
+            {this.state.movies.map(movie =>  {
+              return (
+                <section className='horizontal-scroll-snap-child' key={movie.movie_id}>
+                  <iframe width='560' height='315' src={`https://www.youtube.com/embed/${movie.movie_trailer_link}`}
+                          title={movie.movie_name} frameBorder='0'
+                          allow='accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                          allowFullScreen />
+                  <div className='horizontal-scroll-snap-child-info'>
+                    <h2 className='grow-1'>{movie.movie_name}</h2>
+                    <h2>{movie.movie_rating} / 10</h2>
+                  </div>
+                </section>
+              )
+            })}
           </div>
           <button onClick={e =>this.next()}>
             <div className='horizontal-scroll-snap-right'>

@@ -33,8 +33,7 @@
   fill: #171717;
 }
 
-.landing-page-content {
+.landing-page-content, .spacer {
   background-color: #171717;
   padding: 50px 80px;
-  height: 200vh;
 }

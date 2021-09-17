@@ -10,6 +10,10 @@ button {
   outline: inherit;
 }
 
+.grow-1 {
+  flex-grow: 1;
+}
+
 .horizontal-scroll-snap-heading {
   color: #fff;
   font-size: 1.5rem;
@@ -28,7 +32,7 @@ button {
   margin: 14px;
 }
 
-.horizontal-scroll-snap-left, .horizontal-scroll-snap-right {
+.horizontal-scroll-snap-left, .horizontal-scroll-snap-right, .horizontal-scroll-snap-child-info {
   color: #fff;
 }
 
@@ -36,7 +40,11 @@ button {
   width: 32px;
 }
 
-.horizontal-scroll-snap-inline {
+.horizontal-scroll-snap-inline, .horizontal-scroll-snap-child-info {
   display: flex;
   flex-direction: row;
+}
+
+.horizontal-scroll-snap-child-info {
+  margin: 10px 15px 0 0;
 }
