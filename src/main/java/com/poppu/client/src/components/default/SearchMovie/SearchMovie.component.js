@@ -1,4 +1,4 @@
-import {Component, createRef} from 'react'
+import {Component} from 'react'
 import './SearchMovie.component.css'
 
 import { AiOutlineSearch } from 'react-icons/ai'
