@@ -1,15 +1,3 @@
-button {
-  display: flex;
-  align-items: center;
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-}
-
 .grow-1 {
   flex-grow: 1;
 }
@@ -30,6 +18,18 @@ button {
   scroll-snap-align: start;
   display: inline-block;
   margin: 14px;
+}
+
+.btn-arrow {
+  display: flex;
+  align-items: center;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 .horizontal-scroll-snap-left, .horizontal-scroll-snap-right, .horizontal-scroll-snap-child-info {

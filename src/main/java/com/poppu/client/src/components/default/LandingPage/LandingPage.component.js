@@ -97,7 +97,7 @@ export class LandingPage extends Component {
             </div>
           </div>
           <div className='landing-page-content'>
-            {/*<SearchMovie />*/}
+            <SearchMovie />
             <HorizontalScrollSnap data={this.nowShowing} heading='Now Showing'/>
             <div className='spacer' />
             <HorizontalScrollSnap data={this.comingSoon} heading='Coming Soon'/>

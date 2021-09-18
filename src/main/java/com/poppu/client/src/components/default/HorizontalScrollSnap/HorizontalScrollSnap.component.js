@@ -40,7 +40,7 @@ export class HorizontalSnapScroll extends Component {
       <div>
         <div className='horizontal-scroll-snap-heading'>{this.props.heading}</div>
         <div className='horizontal-scroll-snap-inline'>
-          <button onClick={e => this.previous()}>
+          <button className='btn-arrow' onClick={e => this.previous()}>
             <div className='horizontal-scroll-snap-left'>
               <IoIosArrowBack size={32} />
             </div>
@@ -61,7 +61,7 @@ export class HorizontalSnapScroll extends Component {
               )
             })}
           </div>
-          <button onClick={e =>this.next()}>
+          <button className='btn-arrow' onClick={e =>this.next()}>
             <div className='horizontal-scroll-snap-right'>
               <IoIosArrowForward size={32} />
             </div>
