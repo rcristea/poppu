@@ -1,0 +1,32 @@
+.search-movie-container {
+  margin: 50px 0;
+}
+
+.query-container {
+  display: flex;
+}
+
+.query {
+  width: 300px;
+  border: 1px solid #000;
+  border-right: none;
+  padding: 15px;
+  height: 20px;
+  border-radius: 50px 0 0 50px;
+  outline: none;
+  color: #fff;
+  background-color: #131313;
+  font-size: 1.25rem;
+}
+
+.searchButton {
+  width: 40px;
+  height: 52px;
+  border: 1px solid #000;
+  background: #000;
+  text-align: center;
+  color: #fff;
+  padding: 0 5px;
+  border-radius: 0 50px 50px 0;
+  cursor: pointer;
+}

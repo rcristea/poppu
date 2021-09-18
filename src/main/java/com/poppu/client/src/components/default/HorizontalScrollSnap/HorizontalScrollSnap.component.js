@@ -1,5 +1,5 @@
 import {Component, createRef} from 'react'
-import './HorizontalScrollSnap.css'
+import './HorizontalScrollSnap.component.css'
 
 import { IoIosArrowBack } from 'react-icons/io'
 import { IoIosArrowForward } from 'react-icons/io'

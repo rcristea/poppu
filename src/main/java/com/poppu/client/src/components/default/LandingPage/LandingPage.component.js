@@ -1,7 +1,8 @@
 import { Component } from 'react'
 import './LandingPage.component.css'
 import NavBar from '../NavBar/NavBar.component'
-import HorizontalScrollSnap from '../HorizontalScrollSnap/HorizontalScrollSnap'
+import HorizontalScrollSnap from '../HorizontalScrollSnap/HorizontalScrollSnap.component'
+import SearchMovie from "../SearchMovie/SearchMovie.component";
 
 export class LandingPage extends Component {
   nowShowing = [
@@ -96,6 +97,7 @@ export class LandingPage extends Component {
             </div>
           </div>
           <div className='landing-page-content'>
+            {/*<SearchMovie />*/}
             <HorizontalScrollSnap data={this.nowShowing} heading='Now Showing'/>
             <div className='spacer' />
             <HorizontalScrollSnap data={this.comingSoon} heading='Coming Soon'/>
