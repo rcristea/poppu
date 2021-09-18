@@ -26,7 +26,41 @@
   background: #000;
   text-align: center;
   color: #fff;
-  padding: 0 5px;
   border-radius: 0 50px 50px 0;
   cursor: pointer;
+}
+
+.category-container, .date-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+}
+
+.category-container label, .date-container label {
+  color: #fff;
+  margin-bottom: 7px;
+  font-size: 0.625rem;
+  font-weight: bold;
+}
+
+.category-container select {
+  border: 1px solid #000;
+  color: #fff;
+  background-color: #131313;
+  padding: 7px;
+  border-radius: 50px;
+  outline: none;
+}
+
+.date-container input[type=date] {
+  border: 1px solid #000;
+  color: #fff;
+  background-color: #131313;
+  padding: 6px;
+  border-radius: 50px;
+  outline: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
