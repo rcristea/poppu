@@ -14,8 +14,8 @@ export class Login extends Component {
             <div className='form-container'>
               <h1 className='form-header'>Login</h1>
               <form className='form-login'>
-                <input type='text' placeholder='Email or Username'/>
-                <input type='password' placeholder='●●●●●●●●'/>
+                <input type='text' placeholder='Email' name='email'/>
+                <input type='password' placeholder='●●●●●●●●' name='password'/>
                 <button type='submit'>Login</button>
               </form>
               <p className='signup'>New to poppu? <Link to='/signup'>Sign up</Link></p>
