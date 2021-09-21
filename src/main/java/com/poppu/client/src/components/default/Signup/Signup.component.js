@@ -18,6 +18,7 @@ export class Signup extends Component {
           <div className='signup-form-border'>
             <div className='signup-form-container'>
               <h1 className='signup-form-header'>Sign Up</h1>
+              <p className='subheading'>* All Fields Required</p>
               <form className='form-signup' onSubmit={this.handleSubmit}>
                 <input type='text' placeholder='Name' name='name'/>
                 <input type='text' placeholder='Email' name='email' />
