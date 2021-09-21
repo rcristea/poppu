@@ -9,6 +9,7 @@ import Login from '../default/Login/Login.component'
 import Signup from '../default/Signup/Signup.component'
 import SignupPayment from '../default/SignupPayment/SignupPayment.component'
 import SignupAddress from '../default/SignupAddress/SignupAddress.component'
+import SignupConfirm from '../default/SignupConfirm/SignupConfirm.component'
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
           <Route path='/signup' exact={true} component={Signup} />
           <Route path='/signup/payment' exact={true} component={SignupPayment} />
           <Route path='/signup/address' exact={true} component={SignupAddress} />
+          <Route path='/signup/confirm' exact={true} component={SignupConfirm} />
 
           <Route path='/tests' exact={true} component={TestIndex} />
           <Route path='/tests/add' exact={true} component={TestAdd} />
