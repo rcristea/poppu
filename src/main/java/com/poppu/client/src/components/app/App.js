@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import TestIndex from '../tests/TestIndex/TestIndex.component'
 import TestAdd from '../tests/TestAdd/TestAdd.component'
 import TestEdit from '../tests/TestEdit/TestEdit.component'

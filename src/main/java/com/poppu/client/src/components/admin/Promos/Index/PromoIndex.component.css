@@ -1,6 +1,52 @@
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(179, 179, 179, .5);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.pagination {
+  justify-content: center;
+}
+
 .promos-container {
+  position: relative;
   margin: 50px 0 0 200px;
-  padding: 15px;
+  background: linear-gradient(90deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
+  min-height: 100vh;
+}
+
+.promos-card {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
   background-color: #fff;
-  height: 200vh;
+  overflow: scroll;
+}
+
+.promos-card-heading {
+  padding: 50px;
+}
+
+.promos-card-heading h1 {
+  font-size: 2rem;
+  color: #171717;
+  margin-bottom: 15px;
+}
+
+.promos-card-heading h3 {
+  font-size: .75rem;
+  font-weight: 400;
+  color: #898989;
+}
+
+.promos-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
