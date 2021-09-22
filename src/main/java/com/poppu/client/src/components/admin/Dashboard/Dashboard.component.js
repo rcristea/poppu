@@ -1,12 +1,16 @@
 import { React, Component } from 'react'
 import './Dashboard.component.css'
+import Sidebar from '../Sidebar/Sidebar.component'
 
 class Dashboard extends Component {
   render() {
     return (
-      <div>
-        Dashboard
-      </div>
+      <>
+        <Sidebar />
+        <div className='dashboard-container'>
+          test
+        </div>
+      </>
     )
   }
 }

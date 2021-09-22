@@ -1,0 +1,55 @@
+.topbar {
+  height: 50px;
+  width: 100%;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #171717;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.4);
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.sidebar-container {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #131313;
+  overflow-x: hidden;
+}
+
+.sidebar-nav-container {
+  margin-top: 50px;
+  padding: 15px;
+}
+
+.sidebar-nav-container a, .topbar a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  padding: 10px 5px;
+  border-bottom: 1px solid transparent;
+}
+
+.sidebar-nav-item:hover, .active {
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
+  border-image-slice: 1;
+}
+
+.sidebar-nav-item-title {
+  margin-left: 5px;
+}
+
+.logo {
+  font-family: MavenPro-ExtraBold;
+  font-size: 1.5rem;
+  color: #fff;
+}
