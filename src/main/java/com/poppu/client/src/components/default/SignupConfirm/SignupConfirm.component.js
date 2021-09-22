@@ -1,12 +1,11 @@
 import { Component } from 'react'
-import { Link } from "react-router-dom"
 import './SignupConfirm.component.css'
 import NavBar from '../NavBar/NavBar.component'
 
 
 export class SignupConfirm extends Component {
   handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     this.props.history.push('/')
   }
 

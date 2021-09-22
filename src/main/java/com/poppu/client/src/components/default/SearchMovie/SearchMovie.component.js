@@ -17,7 +17,7 @@ export class SearchMovie extends Component {
         <form className='search-movie-form'>
           <div className='query-container'>
             <input type='text' className='query' placeholder='Search Movies'/>
-            <button type="submit" className="searchButton">
+            <button type='submit' className='searchButton'>
               <AiOutlineSearch size='24px'/>
             </button>
           </div>
