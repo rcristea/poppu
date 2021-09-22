@@ -28,7 +28,7 @@ class App extends Component {
           <Route path='/tests/:id' component={TestEdit} />
         </Switch>
       </BrowserRouter>
-    );
+    )
   }
 }
 

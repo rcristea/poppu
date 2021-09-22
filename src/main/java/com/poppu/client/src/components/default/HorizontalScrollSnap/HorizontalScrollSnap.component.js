@@ -51,7 +51,7 @@ export class HorizontalSnapScroll extends Component {
                 <section className='horizontal-scroll-snap-child' key={movie.movie_id}>
                   <iframe width='560' height='315' src={`https://www.youtube.com/embed/${movie.movie_trailer_link}`}
                           title={movie.movie_name} frameBorder='0'
-                          allow='accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                          allow='accelerometer clipboard-write encrypted-media gyroscope picture-in-picture'
                           allowFullScreen />
                   <div className='horizontal-scroll-snap-child-info'>
                     <h2 className='grow-1'>{movie.movie_name}</h2>
