@@ -1,9 +1,10 @@
 import { React, Component } from 'react'
-import { Pagination } from 'react-bootstrap'
 import './PromoIndex.component.css'
 import Sidebar from '../../Sidebar/Sidebar.component'
+import { BiPlus } from 'react-icons/bi'
 
-import { BiDotsVerticalRounded } from 'react-icons/bi'
+//TODO need to paginate the index
+//  This isnt needed for deliverable so maybe skip for now
 
 class PromoIndex extends Component {
   constructor(props) {
@@ -71,42 +72,6 @@ class PromoIndex extends Component {
       currentPage: 1,
       totalPages: totalPages,
     }
-
-    this.changePage = this.changePage.bind(this)
-    this.renderPagination = this.renderPagination.bind(this)
-  }
-
-  renderPagination() {
-    // <Pagination>
-    //   <Pagination.First />
-    //   <Pagination.Prev />
-    //   <Pagination.Item>{1}</Pagination.Item>
-    //   <Pagination.Ellipsis />
-    //
-    //   <Pagination.Item>{10}</Pagination.Item>
-    //   <Pagination.Item>{11}</Pagination.Item>
-    //   <Pagination.Item active>{12}</Pagination.Item>
-    //   <Pagination.Item>{13}</Pagination.Item>
-    //   <Pagination.Item disabled>{14}</Pagination.Item>
-    //
-    //   <Pagination.Ellipsis />
-    //   <Pagination.Item>{20}</Pagination.Item>
-    //   <Pagination.Next />
-    //   <Pagination.Last />
-    // </Pagination>
-    if (this.state.totalPages < 10) {
-      return (
-        <Pagination>
-          {}
-        </Pagination>
-      )
-    }
-  }
-
-  changePage(event) {
-    this.setState({
-      currentPage: Number(event.target.id)
-    });
   }
 
   render() {
@@ -119,28 +84,14 @@ class PromoIndex extends Component {
               <div className='promos-card-heading'>
                 <div className='promos-card-title'>
                   <h1>Promotions</h1>
+                  <a href='/promos/add'>Add <BiPlus /></a>
                 </div>
                 <div className='promos-card-subtitle'>
                   <h3>For more options, click the three dots on the right.</h3>
                 </div>
               </div>
               <div className='promos-card-content'>
-                <table>
-                  <tr>
-                    <th>ID</th>
-                    <th>Code</th>
-                    <th>Amount</th>
-                    <th></th>
-                  </tr>
-                  {this.state.promos.map(promo =>
-                    <tr>
-                      <th>{promo.id}</th>
-                      <td>{promo.code}</td>
-                      <td>{promo.amount}</td>
-                      <td><BiDotsVerticalRounded /></td>
-                    </tr>
-                  )}
-                </table>
+
               </div>
             </div>
           </div>
