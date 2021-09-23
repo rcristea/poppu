@@ -34,6 +34,7 @@
 
 .sidebar-nav-item {
   display: flex;
+  align-items: center;
   padding: 10px 5px;
   border-bottom: 1px solid transparent;
 }
@@ -45,7 +46,7 @@
 }
 
 .sidebar-nav-item-title {
-  margin-left: 5px;
+  margin: 0 5px;
 }
 
 .logo {
