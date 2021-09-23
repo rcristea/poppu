@@ -1,11 +1,13 @@
 .signup-container {
-  margin: 150px;
+  padding: 150px;
+  background-color: #171717;
+  min-height: 100vh;
 }
 
 .signup-confirm-form-border {
   margin: auto;
   width: 352px;
-  height: 202px;
+  height: 252px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,7 +20,7 @@
 
 .signup-confirm-form-container {
   width: 350px;
-  height: 200px;
+  height: 250px;
   border-radius: 25px;
   background-color: #171717;
   display: flex;

@@ -12,7 +12,7 @@ export class Signup extends Component {
 
   render() {
     return (
-      <div className='container'>
+      <>
         <NavBar />
         <div className='signup-container'>
           <div className='signup-form-border'>
@@ -32,7 +32,7 @@ export class Signup extends Component {
           </div>
         </div>
         {/*Footer here*/}
-      </div>
+      </>
     )
   }
 }

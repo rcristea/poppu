@@ -11,7 +11,7 @@ export class SignupConfirm extends Component {
 
   render() {
     return (
-      <div className='container'>
+      <>
         <NavBar />
         <div className='signup-container'>
           <div className='signup-confirm-form-border'>
@@ -25,7 +25,7 @@ export class SignupConfirm extends Component {
           </div>
         </div>
         {/*Footer here*/}
-      </div>
+      </>
     )
   }
 }

@@ -1,5 +1,6 @@
 .signup-container {
-  margin: 150px;
+  padding: 150px;
+  background-color: #171717;
 }
 
 .subheading {
@@ -10,7 +11,7 @@
 .signup-form-border {
   margin: auto;
   width: 352px;
-  height: 502px;
+  height: 602px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,7 +24,7 @@
 
 .signup-form-container {
   width: 350px;
-  height: 500px;
+  height: 600px;
   border-radius: 25px;
   background-color: #171717;
   display: flex;

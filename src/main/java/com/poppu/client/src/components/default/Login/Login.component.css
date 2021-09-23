@@ -1,5 +1,6 @@
 .login-container {
-  margin: 150px;
+  padding: 150px;
+  background-color: #171717;
 }
 
 .form-border {

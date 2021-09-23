@@ -1,11 +1,12 @@
 .signup-container {
-  margin: 150px;
+  padding: 150px;
+  background-color: #171717;
 }
 
 .signup-payment-form-border {
   margin: auto;
   width: 352px;
-  height: 602px;
+  height: 702px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,7 +19,7 @@
 
 .signup-payment-form-container {
   width: 350px;
-  height: 600px;
+  height: 700px;
   border-radius: 25px;
   background-color: #171717;
   display: flex;

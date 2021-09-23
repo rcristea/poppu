@@ -7,7 +7,7 @@ import NavBar from '../NavBar/NavBar.component'
 export class Login extends Component {
   render() {
     return (
-      <div className='container'>
+      <>
         <NavBar />
         <div className='login-container'>
           <div className='form-border'>
@@ -23,7 +23,7 @@ export class Login extends Component {
           </div>
         </div>
         {/*Footer here*/}
-      </div>
+      </>
     )
   }
 }

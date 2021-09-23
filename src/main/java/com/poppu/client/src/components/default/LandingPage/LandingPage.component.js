@@ -84,7 +84,7 @@ export class LandingPage extends Component {
 
   render() {
     return (
-      <div className='container'>
+      <div className='landing-container'>
         <NavBar />
         <div className='landing-page-container'>
           <div className='landing-page-hero'>
