@@ -1,8 +1,20 @@
 import { React, Component } from 'react'
 import './PromoAdd.component.css'
 import Sidebar from '../../Sidebar/Sidebar.component'
+import { Form, FormLabel, FormGroup, FormControl, Button } from 'react-bootstrap'
 
 class PromoAdd extends Component {
+  constructor(props) {
+    super(props)
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    this.props.history.push('/promos')
+  }
+
   render() {
     return (
       <>
@@ -19,7 +31,28 @@ class PromoAdd extends Component {
                 </div>
               </div>
               <div className='promos-card-content'>
-                Add promo
+                <Form className='promos-add' onSubmit={this.handleSubmit}>
+                  <FormGroup>
+                    <FormLabel>Code</FormLabel>
+                    <FormControl type='text' name='code'/>
+                  </FormGroup>
+                  <FormGroup>
+                    <FormLabel>Amount</FormLabel>
+                    <FormControl type='text' name='amount' />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormLabel>Start Date</FormLabel>
+                    <FormControl type='datetime-local' name='start_date' />
+                  </FormGroup>
+                  <FormGroup>
+                    <FormLabel>End Date</FormLabel>
+                    <FormControl type='datetime-local' name='end_date' />
+                  </FormGroup>
+                  <FormGroup>
+                    <button type='submit'>Submit</button>
+                    <a className='cancel'  href='/promos'>Cancel</a>
+                  </FormGroup>
+                </Form>
               </div>
             </div>
           </div>
