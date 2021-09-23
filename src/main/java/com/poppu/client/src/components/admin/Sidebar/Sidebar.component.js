@@ -45,13 +45,13 @@ class Sidebar extends Component {
                 </div>
               </Link>
               <Link to='/movies'>
-                <div className={ `sidebar-nav-item ${this.state.active === '/movies' ? 'active' : ''} `}>
+                <div className={ `sidebar-nav-item ${this.state.active.includes('/movies') ? 'active' : ''} `}>
                   <BiMovie color='#fff'/>
                   <p className='sidebar-nav-item-title'>Movies</p>
                 </div>
               </Link>
               <Link to='/promos'>
-                <div className={ `sidebar-nav-item ${this.state.active === '/promos' ? 'active' : ''} `}>
+                <div className={ `sidebar-nav-item ${this.state.active.includes('/promos') ? 'active' : ''} `}>
                   <RiCoupon2Line color='#fff'/>
                   <p className='sidebar-nav-item-title'>Promos</p>
                 </div>

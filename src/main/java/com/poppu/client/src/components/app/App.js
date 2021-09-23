@@ -14,6 +14,7 @@ import SignupConfirm from '../default/SignupConfirm/SignupConfirm.component'
 import Dashboard from '../admin/Dashboard/Dashboard.component'
 import MovieIndex from '../admin/Movies/Index/MovieIndex.component'
 import PromoIndex from '../admin/Promos/Index/PromoIndex.component'
+import PromoAdd from '../admin/Promos/Add/PromoAdd.component'
 
 class App extends Component {
   render() {
@@ -29,6 +30,7 @@ class App extends Component {
           <Route path='/admin' exact={true} component={Dashboard} />
           <Route path='/movies' exact={true} component={MovieIndex} />
           <Route path='/promos' exact={true} component={PromoIndex} />
+          <Route path='/promos/add' exact={true} component={PromoAdd} />
 
           <Route path='/tests' exact={true} component={TestIndex} />
           <Route path='/tests/add' exact={true} component={TestAdd} />
