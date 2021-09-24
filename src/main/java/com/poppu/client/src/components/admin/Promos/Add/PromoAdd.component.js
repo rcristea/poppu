@@ -1,7 +1,7 @@
 import { React, Component } from 'react'
 import './PromoAdd.component.css'
 import Sidebar from '../../Sidebar/Sidebar.component'
-import { Form, FormLabel, FormGroup, FormControl, Button } from 'react-bootstrap'
+import { Form, FormLabel, FormGroup, FormControl } from 'react-bootstrap'
 
 class PromoAdd extends Component {
   constructor(props) {
