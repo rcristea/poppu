@@ -3,32 +3,34 @@ import {Card, Row, Table} from "react-bootstrap";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap/'
+import EditButton from "./EditButton.component";
 
 export class DisplayTable extends Component {
     constructor(props) {
         super(props);
     }
-
     render() {
         return (
             <Row className={'my-2'}>
                 <Card>
-                    <Card.Title>{this.props.title}</Card.Title>
+                    <Card.Title>{this.props.card_title}</Card.Title>
                     <Card.Body>
-                        <Table>
+                        <Table striped bordered hover>
                             <thead>
                                 <tr>
                                     {this.props.headings.split(',').map(heading => {
                                         return (
-                                            <th>{heading}</th>
+                                            <th style={{'text-transform': 'capitalize'}}>{heading}</th>
                                         )
                                     })}
                                 </tr>
                             </thead>
                             <tbody>
-                            {this.props.table_data.map(row => {
+                            {
+
+                                this.props.table_data.map(row => {
                                 return (
-                                    <TableRow row_data={row}/>
+                                    <TableRow row_data={row} editable={this.props.editable} deletabe={this.props.deletable}/>
                                 )
                             })}
                             </tbody>
@@ -48,11 +50,14 @@ export class TableRow extends Component {
     render() {
         return (
             <tr>
-                {this.props.row_data.map((key, val) => {
+                {Object.entries(this.props.row_data).map(entry => {
                     return (
-                        <td>{val}</td>
+                        <td>{entry[1]}</td>
                     )
                 })}
+                <td>
+                    <EditButton/>
+                </td>
             </tr>
         )
     }

@@ -5,8 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap/'
 
 export class DisplayCard extends Component {
-    card_title;
-    display_data;
     constructor(props) {
         super(props)
     }
