@@ -12,9 +12,11 @@ export class DeleteButton extends SuperButton {
 
     render() {
         return (
-            <Button variant={"delete"}>
+            <Button variant={"danger"}>
                 X Delete
             </Button>
         )
     }
 }
+
+export default DeleteButton
