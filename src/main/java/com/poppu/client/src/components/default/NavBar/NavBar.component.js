@@ -49,24 +49,6 @@ export class NavBar extends Component {
               </Link>
             </div>
           </nav>
-          <nav className='nav nav-mobile'>
-            <div className='nav-left'>
-              <div className='logo-mobile'>
-                <Link to='/'>poppu</Link>
-              </div>
-            </div>
-            <div className='nav-right'>
-              <div className='nav-link'>
-                <a href='/#'>Movies</a>
-              </div>
-              <div className='nav-link'>
-                <a href='/#'>Theaters</a>
-              </div>
-              <Link to='/login'>
-                <div className='login-button'>Login</div>
-              </Link>
-            </div>
-          </nav>
         </header>
       </div>
     )
