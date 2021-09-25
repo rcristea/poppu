@@ -3,7 +3,7 @@ import {Container, Row} from "react-bootstrap";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap/'
-import AutoTable from "../../utils/Display/AutoTable.component";
+import AutoTable from "../../../utils/Display/AutoTable.component";
 
 export class ManageMoviesComponent extends Component{
     nowShowing = [

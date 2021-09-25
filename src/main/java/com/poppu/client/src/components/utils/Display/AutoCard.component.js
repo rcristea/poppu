@@ -4,7 +4,7 @@ import {Card, Col, Row} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap/'
 
-export class DisplayCard extends Component {
+export class AutoCard extends Component {
     constructor(props) {
         super(props)
     }
@@ -15,14 +15,14 @@ export class DisplayCard extends Component {
                 <Card>
                     <Card.Title>{this.props.card_title}</Card.Title>
                     <Card.Body>
-                        {this.props.display_data.map(item => {
+                        {Object.entries(this.props.display_data).map(item => {
                             return (
                                 <Row>
                                     <Col md={2} style={'text-transform: capitalize;'}>
-                                        {item.replace('_', ' ')}
+                                        {item[0].replaceAll('_', ' ')}
                                     </Col>
                                     <Col md={'auto'}>
-                                        {this.props.data[item]}
+                                        {item[1]}
                                     </Col>
                                 </Row>
                             )
@@ -34,4 +34,4 @@ export class DisplayCard extends Component {
     }
 }
 
-export default DisplayCard
+export default AutoCard
