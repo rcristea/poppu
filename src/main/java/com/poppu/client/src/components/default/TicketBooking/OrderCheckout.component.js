@@ -5,10 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap/'
 
 export class OrderCheckoutComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <Container className='my-3'>

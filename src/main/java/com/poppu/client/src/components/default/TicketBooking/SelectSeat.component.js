@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import {Button, Card, Col, Container, Form, FormSelect, Row} from "react-bootstrap";
+import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
 
 export class SelectSeatComponent extends Component {
     constructor(props) {

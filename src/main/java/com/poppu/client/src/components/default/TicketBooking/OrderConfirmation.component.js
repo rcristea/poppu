@@ -1,14 +1,10 @@
 import { Component } from 'react'
-import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Card, Col, Container, Row} from "react-bootstrap";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap/'
 
 export class OrderConfirmationComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <Container>
