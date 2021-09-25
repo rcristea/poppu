@@ -1,6 +1,7 @@
 import { React, Component } from 'react'
 import './Dashboard.component.css'
 import Sidebar from '../Sidebar/Sidebar.component'
+import { format } from 'date-fns'
 
 import { BiDotsVerticalRounded, BiPlus } from 'react-icons/bi'
 import { Table, Dropdown } from 'react-bootstrap'
@@ -18,73 +19,85 @@ class Dashboard extends Component {
         'movie_id': 1,
         'movie_name': 'Shang-Chi',
         'movie_rating': 8.8,
-        'movie_trailer_link': '8YjFbMbfXaQ'
+        'movie_trailer_link': '8YjFbMbfXaQ',
+        'showtime': '2021-01-01T01:00:00',
       },
       {
         'movie_id': 2,
         'movie_name': 'Uncle Frank',
         'movie_rating': 7.8,
-        'movie_trailer_link': 'K8nm0iYLvcs'
+        'movie_trailer_link': 'K8nm0iYLvcs',
+        'showtime': '2021-01-02T02:00:00',
       },
       {
         'movie_id': 3,
         'movie_name': 'KATE',
         'movie_rating': 6.6,
-        'movie_trailer_link': 'MysGjRS9jFU'
+        'movie_trailer_link': 'MysGjRS9jFU',
+        'showtime': '2021-01-02T03:00:00',
       },
       {
         'movie_id': 4,
         'movie_name': 'Don\'t Breathe 2',
         'movie_rating': 8.2,
-        'movie_trailer_link': 'gRbG2tjHYCA'
+        'movie_trailer_link': 'gRbG2tjHYCA',
+        'showtime': '2021-02-01T04:00:00',
       },
       {
         'movie_id': 5,
         'movie_name': 'Cinderella',
         'movie_rating': 1.5,
-        'movie_trailer_link': '20DF6U1HcGQ'
+        'movie_trailer_link': '20DF6U1HcGQ',
+        'showtime': '2021-01-01T01:00:00',
       },
       {
         'movie_id': 6,
         'movie_name': 'Red Dot',
         'movie_rating': 5.7,
-        'movie_trailer_link': 't7FwypV69qc'
+        'movie_trailer_link': 't7FwypV69qc',
+        'showtime': '2021-01-01T01:00:00',
       },
       {
         'movie_id': 7,
         'movie_name': 'After We Fell',
         'movie_rating': 5.4,
-        'movie_trailer_link': 'NYdNN6C9hfI'
+        'movie_trailer_link': 'NYdNN6C9hfI',
+        'showtime': '2021-01-01T01:00:00',
       },
       {
         'movie_id': 8,
         'movie_name': 'SPIDER-MAN: NO WAY HOME',
         'movie_rating': 7.8,
-        'movie_trailer_link': 'rt-2cxAiPJk'
+        'movie_trailer_link': 'rt-2cxAiPJk',
+        'showtime': '2021-01-01T01:00:00',
       },
       {
         'movie_id': 9,
         'movie_name': 'My Hero Academia: World Heroes\' Mission',
         'movie_rating': 6.6,
-        'movie_trailer_link': '6cBYUfAno-0'
+        'movie_trailer_link': '6cBYUfAno-0',
+        'showtime': '2021-01-01T01:00:00',
       },
       {
         'movie_id': 10,
         'movie_name': 'The Matrix Ressurections',
         'movie_rating': 4.2,
-        'movie_trailer_link': '9ix7TUGVYIo'
+        'movie_trailer_link': '9ix7TUGVYIo',
+        'showtime': '2021-01-01T01:00:00',
       },
       {
         'movie_id': 11,
         'movie_name': 'Eternals',
         'movie_rating': 7.5,
-        'movie_trailer_link': 'x_me3xsvDgk'
+        'movie_trailer_link': 'x_me3xsvDgk',
+        'showtime': '2021-01-01T01:00:00',
       },
       {
         'movie_id': 12,
         'movie_name': 'SPIDER-MAN: INTO THE SPIDER-VERSE 2',
         'movie_rating': 9.7,
-        'movie_trailer_link': 'HsX8pVqp_gg'
+        'movie_trailer_link': 'HsX8pVqp_gg',
+        'showtime': '2021-01-01T01:00:00',
       },
     ]
 
@@ -169,6 +182,7 @@ class Dashboard extends Component {
 
     this.handleMovieDelete = this.handleMovieDelete.bind(this)
     this.handlePromoDelete = this.handlePromoDelete.bind(this)
+    this.formatDateTime = this.formatDateTime.bind(this)
   }
 
   handleMovieDelete(movieID) {
@@ -183,6 +197,12 @@ class Dashboard extends Component {
       e.preventDefault()
       alert(`Delete method not implemented yet!\n Promotion attempted to delete: ${promoID}`)
     }
+  }
+
+  formatDateTime(dateTimeString) {
+    const date = new Date(dateTimeString)
+
+    return format(date, 'MMM dd, yy - p')
   }
 
   render() {
@@ -213,6 +233,7 @@ class Dashboard extends Component {
                       <tr>
                         <th>ID</th>
                         <th>Movie Name</th>
+                        <th>Show Time</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -221,6 +242,7 @@ class Dashboard extends Component {
                         <tr key={movie.movie_id}>
                           <td>{movie.movie_id}</td>
                           <td>{movie.movie_name}</td>
+                          <td>{this.formatDateTime(movie.showtime)}</td>
                           <td>
                             <Dropdown className='card-table-dropdown'>
                               <DropdownToggle><BiDotsVerticalRounded /></DropdownToggle>
