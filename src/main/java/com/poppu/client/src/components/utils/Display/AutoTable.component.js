@@ -9,10 +9,6 @@ import DeleteButton from "../Buttons/DeleteButton.component";
 import AddButton from "../Buttons/AddButton.component";
 
 export class AutoTable extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <Row className={'my-2'}>
@@ -55,10 +51,6 @@ export class AutoTable extends Component {
 }
 
 export class TableRow extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <tr>

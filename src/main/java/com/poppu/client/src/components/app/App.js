@@ -16,7 +16,6 @@ import OrderSummaryComponent from "../default/TicketBooking/OrderSummary.compone
 import OrderCheckoutComponent from "../default/TicketBooking/OrderCheckout.component";
 import OrderConfirmationComponent from "../default/TicketBooking/OrderConfirmation.component";
 import EditProfileComponent from "../default/EditProfile/EditProfile.component";
-import {ManageMoviesComponent} from "../admin/Movies/Index/ManageMovies.component";
 import Dashboard from "../admin/Dashboard/Dashboard.component";
 import PromoIndex from "../admin/Promos/Index/PromoIndex.component";
 import PromoAdd from "../admin/Promos/Add/PromoAdd.component";
