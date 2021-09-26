@@ -125,7 +125,7 @@ export class OrderSummaryComponent extends Component {
                 <Row>
                     <Card className='my-2'>
                         <Card.Body>
-                            <Button className='mx-1' variant='primary' type="submit" >Proceed to Checkout</Button>
+                            <Button className='mx-1' variant='primary' type="submit" href={'/booking/order/checkout'}>Proceed to Checkout</Button>
                             <Button className='mx-1' variant="danger">Cancel</Button>
                         </Card.Body>
                     </Card>

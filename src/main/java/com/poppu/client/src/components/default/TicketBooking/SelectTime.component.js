@@ -117,7 +117,7 @@ export class SelectTimeComponent extends Component {
                         </Card>
                         <Card className='my-3'>
                             <Card.Body>
-                                <Button className='mx-1' variant='primary' type="submit" >Select Seats</Button>
+                                <Button className='mx-1' variant='primary' type="submit" href={'/booking/seats'}>Select Seats</Button>
                                 <Button className='mx-1' variant="danger">Cancel</Button>
                             </Card.Body>
                         </Card>

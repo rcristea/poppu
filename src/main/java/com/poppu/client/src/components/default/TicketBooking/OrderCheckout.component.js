@@ -113,7 +113,7 @@ export class OrderCheckoutComponent extends Component {
                         </Card>
                         <Card className='my-3'>
                             <Card.Body>
-                                <Button className='mx-1' variant='primary' type="submit" >Confirm</Button>
+                                <Button className='mx-1' variant='primary' type="submit" href={'/booking/order/confirm'}>Confirm</Button>
                                 <Button className='mx-1' variant="danger">Cancel</Button>
                             </Card.Body>
                         </Card>
