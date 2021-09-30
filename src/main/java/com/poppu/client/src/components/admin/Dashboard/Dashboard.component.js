@@ -8,12 +8,12 @@ import { Table, Dropdown } from 'react-bootstrap'
 import DropdownToggle from 'react-bootstrap/DropdownToggle'
 import DropdownMenu from 'react-bootstrap/DropdownMenu'
 import DropdownItem from 'react-bootstrap/DropdownItem'
-import "bootstrap/dist/css/bootstrap.min.css"
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 class Dashboard extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     const movies = [
       {
@@ -229,7 +229,7 @@ class Dashboard extends Component {
                   </div>
                 </div>
                 <div className='dashboard-card-content'>
-                  <Table responsive bordered className={"text-black"}>
+                  <Table responsive bordered className={'text-black'}>
                     <thead>
                       <tr>
                         <th>ID</th>
@@ -276,7 +276,7 @@ class Dashboard extends Component {
                   </div>
                 </div>
                 <div className='dashboard-card-content'>
-                  <Table responsive bordered className={"text-black"}>
+                  <Table responsive bordered className={'text-black'}>
                     <thead>
                     <tr>
                       <th>ID</th>

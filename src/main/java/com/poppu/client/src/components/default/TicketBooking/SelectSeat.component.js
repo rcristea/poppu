@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
+import {Button, Card, Col, Container, Form, Image, Row} from 'react-bootstrap'
 import theater_img from '../../../assets/seats/Theater.png'
 import seat0 from '../../../assets/seats/Seat(0).png'
 import seat1 from '../../../assets/seats/Seat(1).png'
@@ -26,8 +26,8 @@ export class SelectSeatComponent extends Component {
                         </Card>
                         <Card className='my-3'>
                             <Card.Body>
-                                <Button className='mx-1' variant='primary' type="submit" href={'/booking/order/summary'}>Next</Button>
-                                <Button className='mx-1' variant="danger" href={"/"}>Cancel</Button>
+                                <Button className='mx-1' variant='primary' type='submit' href={'/booking/order/summary'}>Next</Button>
+                                <Button className='mx-1' variant='danger' href={'/'}>Cancel</Button>
                             </Card.Body>
                         </Card>
                     </Form>
@@ -80,7 +80,7 @@ function Seats(props) {
 
 export class Seat extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             img_src: seat0
         }
@@ -105,7 +105,7 @@ export class Seat extends Component {
 
     render() {
         return (
-            <button className={"btn-outline-dark"} onClick={this.handleClick}>
+            <button className={'btn-outline-dark'} onClick={this.handleClick}>
                 <Image src={this.state.img_src} height={50} width={50}/>
             </button>
         )

@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-bootstrap/'
 import { Component } from 'react'
-import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Card, Col, Container, Form, Row} from 'react-bootstrap'
 
 export class SelectTimeComponent extends Component {
     constructor(props) {
@@ -9,61 +9,61 @@ export class SelectTimeComponent extends Component {
         this.state = {
             dates: [
                 {
-                    "date": "10/02/2021",
-                    "times": [
+                    'date': '10/02/2021',
+                    'times': [
                         {
-                            "showtime": "4:30 pm",
-                            "availableSeats": 25
+                            'showtime': '4:30 pm',
+                            'availableSeats': 25
                         },
                         {
-                            "showtime": "6:00 pm",
-                            "availableSeats": 34
+                            'showtime': '6:00 pm',
+                            'availableSeats': 34
                         },
                         {
-                            "showtime": "7:30 pm",
-                            "availableSeats": 22
+                            'showtime': '7:30 pm',
+                            'availableSeats': 22
                         },
                         {
-                            "showtime": "9:00 pm",
-                            "availableSeats": 34
+                            'showtime': '9:00 pm',
+                            'availableSeats': 34
                         }
                     ]
                 },
                 {
-                    "date": "10/05/2021",
-                    "times": [
+                    'date': '10/05/2021',
+                    'times': [
                         {
-                            "showtime": "4:30 pm",
-                            "availableSeats": 25
+                            'showtime': '4:30 pm',
+                            'availableSeats': 25
                         },
                         {
-                            "showtime": "6:00 pm",
-                            "availableSeats": 34
+                            'showtime': '6:00 pm',
+                            'availableSeats': 34
                         },
                         {
-                            "showtime": "7:30 pm",
-                            "availableSeats": 22
+                            'showtime': '7:30 pm',
+                            'availableSeats': 22
                         },
                         {
-                            "showtime": "9:00 pm",
-                            "availableSeats": 34
+                            'showtime': '9:00 pm',
+                            'availableSeats': 34
                         },
                         {
-                            "showtime": "10:30 pm",
-                            "availableSeats": 34
+                            'showtime': '10:30 pm',
+                            'availableSeats': 34
                         }
                     ]
                 },
                 {
-                    "date": "10/07/2021",
-                    "times": [
+                    'date': '10/07/2021',
+                    'times': [
                         {
-                            "showtime": "7:30 pm",
-                            "availableSeats": 22
+                            'showtime': '7:30 pm',
+                            'availableSeats': 22
                         },
                         {
-                            "showtime": "9:00 pm",
-                            "availableSeats": 34
+                            'showtime': '9:00 pm',
+                            'availableSeats': 34
                         }
                     ]
                 }
@@ -109,15 +109,15 @@ export class SelectTimeComponent extends Component {
                                 <Form.Label>
                                     <h2>Select The Number of Tickets:</h2>
                                 </Form.Label>
-                                <Form.Control className='my-3' type="number" placeholder="Adult Tickets" />
-                                <Form.Control className='my-3' type="number" placeholder="Child Tickets" />
-                                <Form.Control className='my-3' type="number" placeholder="Senior Tickets" />
+                                <Form.Control className='my-3' type='number' placeholder='Adult Tickets' />
+                                <Form.Control className='my-3' type='number' placeholder='Child Tickets' />
+                                <Form.Control className='my-3' type='number' placeholder='Senior Tickets' />
                             </Card.Body>
                         </Card>
                         <Card className='my-3'>
                             <Card.Body>
-                                <Button className='mx-1' variant='primary' type="submit" href={'/booking/seats'}>Select Seats</Button>
-                                <Button className='mx-1' variant="danger" href={"/"}>Cancel</Button>
+                                <Button className='mx-1' variant='primary' type='submit' href={'/booking/seats'}>Select Seats</Button>
+                                <Button className='mx-1' variant='danger' href={'/'}>Cancel</Button>
                             </Card.Body>
                         </Card>
                     </Form>

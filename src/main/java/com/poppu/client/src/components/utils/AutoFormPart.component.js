@@ -1,5 +1,5 @@
-import {Component} from "react"
-import {Card, Container, Form} from "react-bootstrap"
+import {Component} from 'react'
+import {Card, Container, Form} from 'react-bootstrap'
 
 import 'react-bootstrap/'
 import 'bootstrap/dist/css/vapor.css'

@@ -1,9 +1,9 @@
 import { Component } from 'react'
-import {ButtonGroup, Card, Container, Row, Table} from "react-bootstrap";
-import EditButton from "./Buttons/EditButton.component";
-import ViewButton from "./Buttons/ViewButton.component";
-import DeleteButton from "./Buttons/DeleteButton.component";
-import AddButton from "./Buttons/AddButton.component";
+import {ButtonGroup, Card, Container, Row, Table} from 'react-bootstrap'
+import EditButton from './Buttons/EditButton.component'
+import ViewButton from './Buttons/ViewButton.component'
+import DeleteButton from './Buttons/DeleteButton.component'
+import AddButton from './Buttons/AddButton.component'
 
 import 'bootstrap/dist/css/vapor.css'
 import 'react-bootstrap/'
@@ -17,7 +17,7 @@ export class AutoTable extends Component {
                     <Card>
                         <Card.Title><h2>{this.props.card_title}</h2></Card.Title>
                         <Card.Body>
-                            <Table variant={"dark"} striped bordered hover style={{'width': '100%'}}>
+                            <Table variant={'dark'} striped bordered hover style={{'width': '100%'}}>
                                 <tr>
                                     {this.props.widths.map(width => {
                                         return (

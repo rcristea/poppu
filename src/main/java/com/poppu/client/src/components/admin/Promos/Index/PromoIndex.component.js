@@ -8,7 +8,7 @@ import { BiPlus } from 'react-icons/bi'
 
 class PromoIndex extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     const newPromos = [
       {

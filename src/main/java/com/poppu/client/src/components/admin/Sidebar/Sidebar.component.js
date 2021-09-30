@@ -8,7 +8,7 @@ import { RiDashboardLine } from 'react-icons/ri'
 
 class Sidebar extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       active: 'admin',
