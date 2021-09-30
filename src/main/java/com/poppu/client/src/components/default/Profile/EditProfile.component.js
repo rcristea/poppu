@@ -94,16 +94,11 @@ export class EditProfileComponent extends Component {
                                     </Col>
                                     <Col md={2}><Form.Control type='number' placeholder='ZIP'/></Col>
                                 </Row>
-                                <Row className='my-3'>
-                                    <Col md={2}><h5>Credit Card</h5></Col>
-                                    <Col md={7}><Form.Control type='text' placeholder='Credit Card Number'/></Col>
-                                    <Col md={3}><Form.Control type='text' placeholder='Verification PIN'/></Col>
-                                </Row>
                             </Card.Body>
                         </Card>
                         <Card className='my-3'>
                             <Card.Body>
-                                <Button className='mx-1' variant='primary' type="submit" >Update Profile</Button>
+                                <Button className='mx-1' variant='primary' type="submit" href={'/profile'}>Update Profile</Button>
                             </Card.Body>
                         </Card>
                     </Form>

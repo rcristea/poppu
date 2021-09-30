@@ -3,10 +3,10 @@ import {ButtonGroup, Card, Row, Table} from "react-bootstrap";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap/'
-import EditButton from "../Buttons/EditButton.component";
-import ViewButton from "../Buttons/ViewButton.component";
-import DeleteButton from "../Buttons/DeleteButton.component";
-import AddButton from "../Buttons/AddButton.component";
+import EditButton from "./Buttons/EditButton.component";
+import ViewButton from "./Buttons/ViewButton.component";
+import DeleteButton from "./Buttons/DeleteButton.component";
+import AddButton from "./Buttons/AddButton.component";
 
 export class AutoTable extends Component {
     render() {

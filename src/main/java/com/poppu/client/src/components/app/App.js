@@ -15,11 +15,15 @@ import SelectSeatComponent from "../default/TicketBooking/SelectSeat.component";
 import OrderSummaryComponent from "../default/TicketBooking/OrderSummary.component";
 import OrderCheckoutComponent from "../default/TicketBooking/OrderCheckout.component";
 import OrderConfirmationComponent from "../default/TicketBooking/OrderConfirmation.component";
-import EditProfileComponent from "../default/EditProfile/EditProfile.component";
+import EditProfileComponent from "../default/Profile/EditProfile.component";
 import Dashboard from "../admin/Dashboard/Dashboard.component";
 import PromoIndex from "../admin/Promos/Index/PromoIndex.component";
 import PromoAdd from "../admin/Promos/Add/PromoAdd.component";
 import MovieIndex from "../admin/Movies/Index/MovieIndex.component";
+import AddMovie from "../admin/Movies/Index/AddMovie.component";
+import AddShowTime from "../admin/Movies/Index/AddShowtime.component";
+import {ViewMovie} from "../admin/Movies/Index/ViewMovie.component";
+import ProfileComponent from "../default/Profile/Profile.component";
 
 class App extends Component {
   render() {
@@ -37,13 +41,17 @@ class App extends Component {
           <Route path='/booking/order/summary' exact={true} component={OrderSummaryComponent} />
           <Route path='/booking/order/checkout' exact={true} component={OrderCheckoutComponent} />
           <Route path='/booking/order/confirm' exact={true} component={OrderConfirmationComponent} />
-          <Route path='/profile' exact={true} component={EditProfileComponent} />
+
+          <Route path='/profile' exact={true} component={ProfileComponent} />
+          <Route path='/profile/edit' exact={true} component={EditProfileComponent} />
 
           <Route path='/admin' exact={true} component={Dashboard} />
           <Route path='/promos' exact={true} component={PromoIndex} />
           <Route path='/promos/add' exact={true} component={PromoAdd} />
           <Route path='/movies' exact={true} component={MovieIndex} />
-          {/*<Route path='/movies/add' exact={true} component={AddMoviesComponent} />*/}
+          <Route path='/movies/add' exact={true} component={AddMovie} />
+          <Route path='/movies/id' exact={true} component={ViewMovie} />
+          <Route path='/showtime/add' exact={true} component={AddShowTime} />
 
           <Route path='/tests' exact={true} component={TestIndex} />
           <Route path='/tests/add' exact={true} component={TestAdd} />
