@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/vapor.css'
 import 'react-bootstrap/'
 
 export class SuperButton extends Component {

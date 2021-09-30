@@ -1,7 +1,8 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {Component} from "react"
+import {Button, Card, Container, Form} from "react-bootstrap"
+
 import 'react-bootstrap/'
-import {Component} from "react";
-import {Button, Card, Container, Form} from "react-bootstrap";
+import 'bootstrap/dist/css/vapor.css'
 
 export class AutoCompleteForm extends Component {
     render() {

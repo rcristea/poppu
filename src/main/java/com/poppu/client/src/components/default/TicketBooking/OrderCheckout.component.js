@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import {Button, Card, Col, Container, Form, FormSelect, Row} from "react-bootstrap";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/vapor.css'
 import 'react-bootstrap/'
 
 export class OrderCheckoutComponent extends Component {
@@ -113,8 +113,8 @@ export class OrderCheckoutComponent extends Component {
                         </Card>
                         <Card className='my-3'>
                             <Card.Body>
-                                <Button className='mx-1' variant='primary' type="submit" href={'/booking/order/confirm'}>Confirm</Button>
-                                <Button className='mx-1' variant="danger">Cancel</Button>
+                                <Button className='mx-1' variant='primary' type="submit" href={'/booking/order/confirm'}>Confirm Order</Button>
+                                <Button className='mx-1' variant="danger" href={"/"}>Cancel</Button>
                             </Card.Body>
                         </Card>
                     </Form>

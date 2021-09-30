@@ -1,8 +1,8 @@
 import { Component } from 'react'
 import {Button, Col, Container, Row} from "react-bootstrap";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap/'
+import 'bootstrap/dist/css/vapor.css'
 import AutoCard from "../../utils/AutoCard.component";
 import AutoList from "../../utils/AutoList.component";
 
@@ -49,7 +49,7 @@ export class ProfileComponent extends Component {
                     <AutoList component_title={"Payment Info"} component_data={this.payment_info} />
                 </Row>
                 <Row className={"mx-3"}>
-                    <Col md={4}><Button variant={"warning"}>Edit Profile</Button></Col>
+                    <Col md={4}><Button variant={"warning"} href={"/profile/edit"}>Edit Profile</Button></Col>
                     <Col md={4}><Button variant={"success"} href={"/"}>Back to Home Screen</Button></Col>
                     <Col md={4}><Button variant={"danger"}>Delete Account</Button></Col>
                 </Row>

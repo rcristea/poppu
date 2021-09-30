@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/vapor.css'
 import 'react-bootstrap/'
 
 export class OrderConfirmationComponent extends Component {
@@ -77,7 +77,7 @@ export class OrderConfirmationComponent extends Component {
                 <Row>
                     <Card className='my-2'>
                         <Card.Body>
-                            <Button className='mx-1' variant='primary' type="submit" >Back to Home</Button>
+                            <Button className='mx-1' variant='primary' type="submit" href={"/"}>Back to Home</Button>
                         </Card.Body>
                     </Card>
                 </Row>

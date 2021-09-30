@@ -1,14 +1,14 @@
 import { Component } from 'react'
 import { Card, Col, Container, Row} from "react-bootstrap";
 
-import 'bootstrap/dist/css/bootstrap.css';
 import 'react-bootstrap/'
+import 'bootstrap/dist/css/vapor.css'
 
 export class AutoCard extends Component {
     render() {
         return (
-            <Container className={'m-2 p-2'}>
-                <Card className={'p-2'}>
+            <Container className={'m-2 p-2 border-primary'}>
+                <Card className={'p-2 border-primary'}>
                     <Card.Title className={'m-2 p-2'}>
                         <h2>{this.props.component_title}</h2>
                     </Card.Title>

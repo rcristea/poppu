@@ -8,6 +8,7 @@ import { Table, Dropdown } from 'react-bootstrap'
 import DropdownToggle from 'react-bootstrap/DropdownToggle'
 import DropdownMenu from 'react-bootstrap/DropdownMenu'
 import DropdownItem from 'react-bootstrap/DropdownItem'
+import "bootstrap/dist/css/bootstrap.min.css"
 
 
 class Dashboard extends Component {
@@ -228,7 +229,7 @@ class Dashboard extends Component {
                   </div>
                 </div>
                 <div className='dashboard-card-content'>
-                  <Table responsive>
+                  <Table responsive bordered className={"text-black"}>
                     <thead>
                       <tr>
                         <th>ID</th>
@@ -247,7 +248,7 @@ class Dashboard extends Component {
                             <Dropdown className='card-table-dropdown'>
                               <DropdownToggle><BiDotsVerticalRounded /></DropdownToggle>
 
-                              <DropdownMenu>
+                              <DropdownMenu >
                                 <DropdownItem href={`/movies/${movie.movie_id}`}>View</DropdownItem>
                                 <DropdownItem href={`/movies/edit/${movie.movie_id}`}>Edit</DropdownItem>
                                 <Dropdown.Divider />
@@ -275,7 +276,7 @@ class Dashboard extends Component {
                   </div>
                 </div>
                 <div className='dashboard-card-content'>
-                  <Table responsive>
+                  <Table responsive bordered className={"text-black"}>
                     <thead>
                     <tr>
                       <th>ID</th>

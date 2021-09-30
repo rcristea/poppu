@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import {Button, Col, Container, Row} from "react-bootstrap";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/vapor.css'
 import 'react-bootstrap/'
 import AutoCard from "../../utils/AutoCard.component";
 
@@ -28,9 +28,9 @@ export class OrderSummaryComponent extends Component {
                     <AutoCard component_title={this.component_title} component_data={this.component_data} />
                 </Row>
                 <Row className={"mx-3"}>
-                    <Col md={4}><Button variant={"warning"}>Go Back and Edit</Button></Col>
-                    <Col md={4}><Button variant={"success"} href={"/booking/seats"}>Proceed To Checkout</Button></Col>
-                    <Col md={4}><Button variant={"danger"}>Cancel</Button></Col>
+                    <Col md={4}><Button variant={"warning"} href={"/booking/times"}>Go Back and Edit</Button></Col>
+                    <Col md={4}><Button variant={"success"} href={"/booking/order/checkout"}>Proceed To Checkout</Button></Col>
+                    <Col md={4}><Button variant={"danger"} href={"/"}>Cancel</Button></Col>
                 </Row>
             </Container>
         )

@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/vapor.css'
 import 'react-bootstrap/'
 import {Component} from "react";
 import {Button, Col, Container, Row} from "react-bootstrap";
@@ -41,7 +41,7 @@ export class AddShowTime extends Component {
                     />
                 </Row>
                 <Row>
-                    <Col md={4}><Button variant={"danger"}>Cancel</Button></Col>
+                    <Col md={4}><Button variant={"danger"} href={"/movies"}>Cancel</Button></Col>
                 </Row>
             </Container>
         );

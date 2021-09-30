@@ -1,9 +1,9 @@
 import { Component } from 'react'
 import {Container, Row} from "react-bootstrap";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap/'
-import AutoTable from "../../../utils/AutoTable.component";
+import AutoTable from "../../../utils/AutoTable.component"
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 export class ManageMoviesComponent extends Component{
     movies = [

@@ -4,6 +4,7 @@ import theater_img from '../../../assets/seats/Theater.png'
 import seat0 from '../../../assets/seats/Seat(0).png'
 import seat1 from '../../../assets/seats/Seat(1).png'
 import seat2 from '../../../assets/seats/Seat(2).png'
+import 'bootstrap/dist/css/vapor.css'
 
 
 export class SelectSeatComponent extends Component {
@@ -25,8 +26,8 @@ export class SelectSeatComponent extends Component {
                         </Card>
                         <Card className='my-3'>
                             <Card.Body>
-                                <Button className='mx-1' variant='primary' type="submit" href={'/booking/order/summary'}>Select Seats</Button>
-                                <Button className='mx-1' variant="danger">Cancel</Button>
+                                <Button className='mx-1' variant='primary' type="submit" href={'/booking/order/summary'}>Next</Button>
+                                <Button className='mx-1' variant="danger" href={"/"}>Cancel</Button>
                             </Card.Body>
                         </Card>
                     </Form>

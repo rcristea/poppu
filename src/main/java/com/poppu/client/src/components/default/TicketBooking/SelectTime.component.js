@@ -1,8 +1,7 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-bootstrap/'
 import { Component } from 'react'
 import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-bootstrap/'
 
 export class SelectTimeComponent extends Component {
     constructor(props) {
@@ -94,7 +93,7 @@ export class SelectTimeComponent extends Component {
                                                     movieDate.times.map(showTime => {
                                                         return (
                                                             <Col md={2}>
-                                                                <Button className='container' name='dateTime'>{showTime.showtime}</Button>
+                                                                <Button className='container btn-secondary' name='dateTime'>{showTime.showtime}</Button>
                                                             </Col>
                                                         )
                                                     })
@@ -118,7 +117,7 @@ export class SelectTimeComponent extends Component {
                         <Card className='my-3'>
                             <Card.Body>
                                 <Button className='mx-1' variant='primary' type="submit" href={'/booking/seats'}>Select Seats</Button>
-                                <Button className='mx-1' variant="danger">Cancel</Button>
+                                <Button className='mx-1' variant="danger" href={"/"}>Cancel</Button>
                             </Card.Body>
                         </Card>
                     </Form>

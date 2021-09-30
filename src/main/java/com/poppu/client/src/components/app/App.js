@@ -24,6 +24,7 @@ import AddMovie from "../admin/Movies/Index/AddMovie.component";
 import AddShowTime from "../admin/Movies/Index/AddShowtime.component";
 import {ViewMovie} from "../admin/Movies/Index/ViewMovie.component";
 import ProfileComponent from "../default/Profile/Profile.component";
+import AddPaymentComponent from "../default/Profile/AddPaymentInfo.component";
 
 class App extends Component {
   render() {
@@ -44,6 +45,7 @@ class App extends Component {
 
           <Route path='/profile' exact={true} component={ProfileComponent} />
           <Route path='/profile/edit' exact={true} component={EditProfileComponent} />
+          <Route path='/payment/add' exact={true} component={AddPaymentComponent} />
 
           <Route path='/admin' exact={true} component={Dashboard} />
           <Route path='/promos' exact={true} component={PromoIndex} />

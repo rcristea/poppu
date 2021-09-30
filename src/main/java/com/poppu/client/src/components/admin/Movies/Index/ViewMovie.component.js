@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/vapor.css'
 import 'react-bootstrap/'
 import {Component} from "react";
 import {Button, Col, Container, Row} from "react-bootstrap";
@@ -49,7 +49,7 @@ export class ViewMovie extends Component {
                 <Row className={"mx-3"}>
                     <Col md={4}><Button variant={"warning"}>Edit Movie</Button></Col>
                     <Col md={4}><Button variant={"success"} href={"/movies"}>Back to Movies</Button></Col>
-                    <Col md={4}><Button variant={"danger"}>Delete Movie</Button></Col>
+                    <Col md={4}><Button variant={"danger"} href={"/movies"}>Delete Movie</Button></Col>
                 </Row>
             </Container>
         )
