@@ -20,7 +20,7 @@ export class AutoList extends Component {
                                         {Object.entries(list_item).map(item => {
                                             return (
                                                 <Row className={'my-2'}>
-                                                    <Col md={2} style={{'text-transform': 'capitalize'}}>
+                                                    <Col md={2} style={{'textTransform': 'capitalize'}}>
                                                         <strong>{item[0].replaceAll('_', ' ')}</strong>
                                                     </Col>
                                                     <Col md={'auto'}>

@@ -88,7 +88,10 @@ export class LandingPage extends Component {
         <NavBar />
         <div className='landing-page-container'>
           <div className='landing-page-hero'>
-            <div className='background' />
+            <div className='background'>
+              <p className='hero-title'>The Cinema Booking System</p>
+              <p className='hero-subtitle'>It's what's poppu</p>
+            </div>
             <div className='custom-shape-divider-bottom-1630245566'>
               <svg data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'
                    preserveAspectRatio='none'>

@@ -16,7 +16,7 @@ export class AutoCard extends Component {
                         {Object.entries(this.props.component_data).map(item => {
                             return (
                                 <Row className={'my-2'}>
-                                    <Col md={2} style={{'text-transform': 'capitalize'}}>
+                                    <Col md={2} style={{'textTransform': 'capitalize'}}>
                                         <strong>{item[0].replaceAll('_', ' ')}</strong>
                                     </Col>
                                     <Col md={8}>

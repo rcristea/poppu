@@ -211,95 +211,47 @@ class Dashboard extends Component {
       <>
         <Sidebar />
         <div className='dashboard-container'>
-          <div className='cover'>
-            <div className='dashboard-header'>
-              <h1>Poppu Admin Dashboard</h1>
-              <h3>Dashboard / Analytics</h3>
-            </div>
-            <div className='dashboard-card-container'>
-              <div className='dashboard-card'>
-                <div className='dashboard-card-header'>
-                  <div className='left'>
-                    <h1>Manage Movies</h1>
-                    <h3>View details, create, edit, and delete Movies</h3>
-                  </div>
-                  <div className='right'>
-                    <a href='/movies/add'>Add <BiPlus /></a>
-                    <a href='/movies'>View All</a>
-                  </div>
+          <div className='dashboard-header'>
+            <h1>Poppu Admin Dashboard</h1>
+            <h3>Dashboard / Analytics</h3>
+          </div>
+          <div className='dashboard-card-container'>
+            <div className='dashboard-card'>
+              <div className='dashboard-card-header'>
+                <div className='left'>
+                  <h1>Manage Movies</h1>
+                  <h3>View details, create, edit, and delete Movies</h3>
                 </div>
-                <div className='dashboard-card-content'>
-                  <Table responsive bordered className={'text-black'}>
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Movie Name</th>
-                        <th>Show Time</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.state.movies.map(movie => (
-                        <tr key={movie.movie_id}>
-                          <td>{movie.movie_id}</td>
-                          <td>{movie.movie_name}</td>
-                          <td>{this.formatDateTime(movie.showtime)}</td>
-                          <td>
-                            <Dropdown className='card-table-dropdown'>
-                              <DropdownToggle><BiDotsVerticalRounded /></DropdownToggle>
-
-                              <DropdownMenu >
-                                <DropdownItem href={`/movies/${movie.movie_id}`}>View</DropdownItem>
-                                <DropdownItem href={`/movies/edit/${movie.movie_id}`}>Edit</DropdownItem>
-                                <Dropdown.Divider />
-                                <form onSubmit={this.handleMovieDelete(movie.movie_id)}>
-                                  <button type='submit'>Delete</button>
-                                </form>
-                              </DropdownMenu>
-                            </Dropdown>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                <div className='right'>
+                  <a href='/movies/add'>Add <BiPlus /></a>
+                  <a href='/movies'>View All</a>
                 </div>
               </div>
-              <div className='dashboard-card'>
-                <div className='dashboard-card-header'>
-                  <div className='left'>
-                    <h1>Manage Promotions</h1>
-                    <h3>View details, create, edit, and delete promotions</h3>
-                  </div>
-                  <div className='right'>
-                    <a href='/promos/add'>Add <BiPlus /></a>
-                    <a href='/promos'>View All</a>
-                  </div>
-                </div>
-                <div className='dashboard-card-content'>
-                  <Table responsive bordered className={'text-black'}>
-                    <thead>
+              <div className='dashboard-card-content'>
+                <Table responsive bordered className={'text-black'}>
+                  <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Promo Code</th>
-                      <th>Amount</th>
+                      <th>Movie Name</th>
+                      <th>Show Time</th>
                       <th></th>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {this.state.promos.map(promo => (
-                      <tr key={promo.id}>
-                        <td>{promo.id}</td>
-                        <td>{promo.code}</td>
-                        <td>{promo.amount}</td>
+                  </thead>
+                  <tbody>
+                    {this.state.movies.map(movie => (
+                      <tr key={movie.movie_id}>
+                        <td>{movie.movie_id}</td>
+                        <td>{movie.movie_name}</td>
+                        <td>{this.formatDateTime(movie.showtime)}</td>
                         <td>
                           <Dropdown className='card-table-dropdown'>
                             <DropdownToggle><BiDotsVerticalRounded /></DropdownToggle>
 
-                            <DropdownMenu>
-                              <DropdownItem href={`/promos/${promo.id}`}>View</DropdownItem>
-                              <DropdownItem href={`/promos/edit/${promo.id}`}>Edit</DropdownItem>
+                            <DropdownMenu >
+                              <DropdownItem href={`/movies/${movie.movie_id}`}>View</DropdownItem>
+                              <DropdownItem href={`/movies/edit/${movie.movie_id}`}>Edit</DropdownItem>
                               <Dropdown.Divider />
-                              <form onSubmit={this.handlePromoDelete(promo.id)}>
+                              <form onSubmit={this.handleMovieDelete(movie.movie_id)}>
                                 <button type='submit'>Delete</button>
                               </form>
                             </DropdownMenu>
@@ -307,9 +259,55 @@ class Dashboard extends Component {
                         </td>
                       </tr>
                     ))}
-                    </tbody>
-                  </Table>
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+            <div className='dashboard-card'>
+              <div className='dashboard-card-header'>
+                <div className='left'>
+                  <h1>Manage Promotions</h1>
+                  <h3>View details, create, edit, and delete promotions</h3>
                 </div>
+                <div className='right'>
+                  <a href='/promos/add'>Add <BiPlus /></a>
+                  <a href='/promos'>View All</a>
+                </div>
+              </div>
+              <div className='dashboard-card-content'>
+                <Table responsive bordered className={'text-black'}>
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Promo Code</th>
+                    <th>Amount</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {this.state.promos.map(promo => (
+                    <tr key={promo.id}>
+                      <td>{promo.id}</td>
+                      <td>{promo.code}</td>
+                      <td>{promo.amount}</td>
+                      <td>
+                        <Dropdown className='card-table-dropdown'>
+                          <DropdownToggle><BiDotsVerticalRounded /></DropdownToggle>
+
+                          <DropdownMenu>
+                            <DropdownItem href={`/promos/${promo.id}`}>View</DropdownItem>
+                            <DropdownItem href={`/promos/edit/${promo.id}`}>Edit</DropdownItem>
+                            <Dropdown.Divider />
+                            <form onSubmit={this.handlePromoDelete(promo.id)}>
+                              <button type='submit'>Delete</button>
+                            </form>
+                          </DropdownMenu>
+                        </Dropdown>
+                      </td>
+                    </tr>
+                  ))}
+                  </tbody>
+                </Table>
               </div>
             </div>
           </div>

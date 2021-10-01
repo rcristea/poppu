@@ -1,3 +1,7 @@
+.horizontal-scroll-snap-child * {
+  text-shadow: none;
+}
+
 .grow-1 {
   flex-grow: 1;
 }
