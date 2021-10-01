@@ -23,3 +23,17 @@
 .promos-card-content button {
   background: hsla(245, 58%, 60%, 1);
 }
+
+.promos-card-content label {
+  color: #171717;
+}
+
+.promos-card-content .form-control {
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #171717;
+}
+
+.promos-card-content .form-control:focus {
+  background-color: #fff;
+}

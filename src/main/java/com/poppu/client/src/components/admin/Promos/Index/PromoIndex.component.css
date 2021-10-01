@@ -12,6 +12,10 @@
   justify-content: center;
 }
 
+.promos-container * {
+  text-shadow: none;
+}
+
 .promos-container {
   position: relative;
   margin: 50px 0 0 200px;

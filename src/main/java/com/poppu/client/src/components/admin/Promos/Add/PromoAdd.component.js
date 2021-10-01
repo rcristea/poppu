@@ -1,4 +1,4 @@
-import { React, Component } from 'react'
+import React, { Component } from 'react'
 import './PromoAdd.component.css'
 import Sidebar from '../../Sidebar/Sidebar.component'
 import { Form, FormLabel, FormGroup, FormControl } from 'react-bootstrap'
