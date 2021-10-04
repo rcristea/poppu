@@ -14,13 +14,14 @@
 
 .promos-container * {
   text-shadow: none;
+  box-shadow: none;
 }
 
 .promos-container {
   position: relative;
   margin: 50px 0 0 200px;
   background: linear-gradient(90deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
-  min-height: 94vh;
+  min-height: 92vh;
 }
 
 .promos-card {
@@ -76,4 +77,8 @@
   flex-direction: column;
   justify-content: center;
   margin: 0 50px;
+}
+
+.delete-promo {
+  margin-top: 0 !important;
 }

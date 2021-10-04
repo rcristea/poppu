@@ -1,16 +1,18 @@
 import { React, Component } from 'react'
 import './PromoIndex.component.css'
 import Sidebar from '../../Sidebar/Sidebar.component'
-import { BiPlus } from 'react-icons/bi'
-
-//TODO need to paginate the index
-//  This isnt needed for deliverable so maybe skip for now
+import SearchBar from '../SearchBar/SearchBar.component'
+import {BiDotsVerticalRounded, BiPlus} from 'react-icons/bi'
+import {Dropdown, Table} from 'react-bootstrap'
+import DropdownToggle from 'react-bootstrap/DropdownToggle'
+import DropdownMenu from 'react-bootstrap/DropdownMenu'
+import DropdownItem from 'react-bootstrap/DropdownItem'
 
 class PromoIndex extends Component {
   constructor(props) {
     super(props)
 
-    const newPromos = [
+    const promos = [
       {
         'id': 1,
         'code': 'one',
@@ -84,13 +86,17 @@ class PromoIndex extends Component {
       }
     ]
 
-    const length = newPromos.length
-    const totalPages = Math.ceil(length / 3)
-
     this.state = {
-      promos: newPromos,
-      currentPage: 1,
-      totalPages: totalPages,
+      promos: promos,
+    }
+
+    this.handleDelete = this.handleDelete.bind(this)
+  }
+
+  handleDelete(id) {
+    return e => {
+      e.preventDefault()
+      alert('Attempted to delete promo with id: ' + id)
     }
   }
 
@@ -111,7 +117,40 @@ class PromoIndex extends Component {
                 </div>
               </div>
               <div className='promos-card-content'>
+                <SearchBar />
+                <Table responsive bordered className='promos-card-table text-black'>
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Promo Code</th>
+                    <th>Amount</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {this.state.promos.map(promo => (
+                    <tr key={promo.id}>
+                      <td>{promo.id}</td>
+                      <td>{promo.code}</td>
+                      <td>{promo.amount}</td>
+                      <td>
+                        <Dropdown className='card-table-dropdown'>
+                          <DropdownToggle><BiDotsVerticalRounded /></DropdownToggle>
 
+                          <DropdownMenu>
+                            <DropdownItem href={`/promos/${promo.id}`}>View</DropdownItem>
+                            <DropdownItem href={`/promos/edit/${promo.id}`}>Edit</DropdownItem>
+                            <Dropdown.Divider />
+                            <form onSubmit={this.handleDelete(promo.id)}>
+                              <button className='delete-promo' type='submit'>Delete</button>
+                            </form>
+                          </DropdownMenu>
+                        </Dropdown>
+                      </td>
+                    </tr>
+                  ))}
+                  </tbody>
+                </Table>
               </div>
             </div>
           </div>
