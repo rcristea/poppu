@@ -120,12 +120,12 @@ class PromoIndex extends Component {
                 <SearchBar />
                 <Table responsive bordered className='promos-card-table text-black'>
                   <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Promo Code</th>
-                    <th>Amount</th>
-                    <th></th>
-                  </tr>
+                    <tr>
+                      <th>ID</th>
+                      <th>Promo Code</th>
+                      <th>Amount</th>
+                      <th></th>
+                    </tr>
                   </thead>
                   <tbody>
                   {this.state.promos.map(promo => (
