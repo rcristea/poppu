@@ -22,6 +22,10 @@ public class UserModel {
     @Column(name = "email")
     private String email;
 
+    public UserModel() {
+
+    }
+
     public UserModel(String firstName, String lastName, Enum role, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
