@@ -82,6 +82,24 @@ export class LandingPage extends Component {
     },
   ]
 
+  /**
+   * Gets all the now showing movies from the data base.
+   *
+   * @returns Array of now showing movie models.
+   */
+  async getNowShowing() {
+    return
+  }
+
+  /**
+   * Gets all the coming soon movies from the data base.
+   *
+   * @returns Array of coming soon movie models.
+   */
+  async getComingSoon() {
+    return
+  }
+
   render() {
     return (
       <div className='landing-container'>
