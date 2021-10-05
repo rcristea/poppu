@@ -8,7 +8,7 @@ class SearchBar extends Component {
         <form className='search-bar'>
           <input type='text' name='code' placeholder='Promo Code' />
           <input className='mx-15' type='text' name='amount' placeholder='Promo Amount' />
-          <button type='submit'>Search</button>
+          <button className='search-button'  type='submit'>Search</button>
         </form>
       </>
     )
