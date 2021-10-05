@@ -135,7 +135,7 @@ class PromoIndex extends Component {
                       <td>{promo.amount}</td>
                       <td>
                         <Dropdown className='card-table-dropdown'>
-                          <DropdownToggle><BiDotsVerticalRounded /></DropdownToggle>
+                          <DropdownToggle className='card-table-dropdown-button'><BiDotsVerticalRounded /></DropdownToggle>
 
                           <DropdownMenu>
                             <DropdownItem href={`/promos/${promo.id}`}>View</DropdownItem>

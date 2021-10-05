@@ -78,6 +78,16 @@
   overflow-y: scroll;
 }
 
+.card-table-dropdown-button {
+  margin-top: 0 !important;
+  margin-bottom: 5px;
+  background-color: transparent !important;
+}
+
+.card-table-dropdown-button:hover {
+  background-color: transparent !important;
+}
+
 .delete-promo {
   margin-top: 0 !important;
 }

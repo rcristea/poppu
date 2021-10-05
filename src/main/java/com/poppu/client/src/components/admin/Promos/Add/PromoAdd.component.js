@@ -30,7 +30,7 @@ class PromoAdd extends Component {
                   <h3>Fill out the form below to create a new promotion</h3>
                 </div>
               </div>
-              <div className='promos-card-content'>
+              <div className='promos-card-content-noscroll'>
                 <Form className='promos-add' onSubmit={this.handleSubmit}>
                   <FormGroup>
                     <FormLabel>Code</FormLabel>
