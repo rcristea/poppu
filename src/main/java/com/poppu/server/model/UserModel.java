@@ -6,17 +6,18 @@ import com.poppu.server.util.Role;
 import com.poppu.server.util.Status;
 
 @Entity
-@Table(name="users")
+@Table(name="user")
 public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    @Column (name = "user_id")
+    private long userId;
 
-    @Column(name = "firstname", nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "lastname", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Column(name = "role", columnDefinition = "varchar(6)")
