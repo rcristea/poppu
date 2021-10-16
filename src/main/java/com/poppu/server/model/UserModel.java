@@ -2,6 +2,9 @@ package com.poppu.server.model;
 
 import javax.persistence.*;
 
+import com.poppu.server.util.Role;
+import com.poppu.server.util.Status;
+
 @Entity
 @Table(name="users")
 public class UserModel {
@@ -10,27 +13,43 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @Column(name = "firstname")
+    @Column(name = "firstname", nullable = false)
     private String firstName;
 
-    @Column(name = "lastname")
+    @Column(name = "lastname", nullable = false)
     private String lastName;
 
-    @Column(name = "role")
-    private Enum role;
+    @Column(name = "role", columnDefinition = "varchar(6)")
+    private Role role; // change to string
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "phone_num", nullable = false)
+    private String phoneNum;
+
+    @Column(name = "is_subscribed", columnDefinition = "boolean default false")
+    private boolean isSubscribed;
+
+    @Column(name = "status", columnDefinition = "varchar(16) default 'ACTIVE'")
+    private Status status = Status.ACTIVE; // change to string
 
     public UserModel() {
 
     }
 
-    public UserModel(String firstName, String lastName, Enum role, String email) {
+    public UserModel(String firstName, String lastName, Role role, String email, String password, String phoneNum, boolean isSubscribed, Status status) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.email = email;
+        this.password = password;
+        this.phoneNum = phoneNum;
+        this.isSubscribed = isSubscribed;
+        this.status = status;
     }
 
     public long getId() {
@@ -57,11 +76,11 @@ public class UserModel {
         this.lastName = lastName;
     }
 
-    public Enum getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(Enum role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -72,4 +91,37 @@ public class UserModel {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public boolean getIsSubscribed() {
+        return this.isSubscribed;
+    }
+
+    public void setIsSubscribed(boolean isSubscribed) {
+        this.isSubscribed = isSubscribed;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }
+
