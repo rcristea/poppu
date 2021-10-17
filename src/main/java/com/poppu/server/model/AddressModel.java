@@ -17,23 +17,23 @@ public class AddressModel {
     @Column (name = "city", nullable = false)
     private String city;
 
-    @Column (name = "zip_code", nullable = false)
+    @Column (name = "zip_code", nullable = false, length = 12)
     private String zipCode;
 
+    // **** IMPORTANT: WORK ON THE ASSOCIATION BETWEEN USER AND ADDRESS ****
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "user_id", referencedColumnName = "user_user_id")
-    private int userId;
+    private UserModel user;
 
     public AddressModel() {
 
     }
 
-    public AddressModel(int addressId, String street, String city, String zipCode, int userId){
-        this.addressId = addressId;
+    public AddressModel(String street, String city, String zipCode, UserModel user){
         this.street = street;
         this.city = city;
         this.zipCode = zipCode;
-        this.userId = userId;
+        this.user = user;
     }
 
     public int getAddressId() {
@@ -52,8 +52,8 @@ public class AddressModel {
         return zipCode;
     }
 
-    public int getUserId() {
-        return userId;
+    public UserModel getUser() {
+        return user;
     }
 
     public void setAddressId(int addressId) {
@@ -72,7 +72,7 @@ public class AddressModel {
         this.zipCode = zipCode;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 }

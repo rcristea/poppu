@@ -63,56 +63,64 @@ public class MovieModel {
         this.trailerLink = trailerLink;
     }
 
-    public String getTitle() {
-        return title;
+    public int getMovieId() {
+        return movieId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getTitle() {
+        return title;
     }
 
     public Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public String getCategory() {
         return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getSynopsis() {
         return synopsis;
     }
 
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
-    }
-
     public RatingCode getRating() {
         return rating;
-    }
-
-    public void setRating(RatingCode rating) {
-        this.rating = rating;
     }
 
     public String getTrailerPhoto() {
         return trailerPhoto;
     }
 
-    public void setTrailerPhoto(String trailerPhoto) {
-        this.trailerPhoto = trailerPhoto;
-    }
-
     public String getTrailerLink() {
         return trailerLink;
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+
+    public void setRating(RatingCode rating) {
+        this.rating = rating;
+    }
+
+    public void setTrailerPhoto(String trailerPhoto) {
+        this.trailerPhoto = trailerPhoto;
     }
 
     public void setTrailerLink(String trailerLink) {

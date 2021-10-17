@@ -21,8 +21,7 @@ public class DirectorModel {
 
     }
 
-    public DirectorModel(int directorId, String fistName, String lastName) {
-        this.directorId = directorId;
+    public DirectorModel(String fistName, String lastName) {
         this.firstName = fistName;
         this.lastName = lastName;
     }
@@ -31,20 +30,20 @@ public class DirectorModel {
         return directorId;
     }
 
-    public void setDirectorId(int directorId) {
-        this.directorId = directorId;
-    }
-
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
+    }
+
+    public void setDirectorId(int directorId) {
+        this.directorId = directorId;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {

@@ -18,8 +18,7 @@ public class PromotionModel {
 
     }
 
-    public PromotionModel(int promotionId, int offer) {
-        this.promotionId = promotionId;
+    public PromotionModel(int offer) {
         this.offer = offer;
     }
 

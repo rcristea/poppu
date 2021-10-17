@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class MovieActorModel {
     // implement the foreign keys for movie_id, actor_id
 
-    @Column(name = "role", nullable = true)
+    @Column(name = "role", nullable = false)
     private String role;
 
     public MovieActorModel() {

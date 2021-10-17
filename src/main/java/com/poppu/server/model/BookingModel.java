@@ -2,6 +2,7 @@ package com.poppu.server.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+
 @Entity
 @Table(name="booking")
 public class BookingModel {
@@ -17,14 +18,15 @@ public class BookingModel {
     @Column (name = "show_date_time", nullable = false)
     private Timestamp showDateTime;
 
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "card_num", referencedColumnName = "payment_info_card_num")
-    private PaymentInfoModel payment;
+    @Column(name = "card_num", nullable = false)
+    private int cardNum;
 
+    // **** IMPORTANT: WORK ON MANY-TO-ONE ASSOCIATION WITH USER ****
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "user_id", referencedColumnName = "user_user_id")
     private UserModel user;
 
+    // **** IMPORTANT: CHECK MANY-TO-ONE ASSOCIATION WITH PROMOTION
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "promotion_id", referencedColumnName = "promotion_promotion_id")
     private PromotionModel promotion;
@@ -34,20 +36,18 @@ public class BookingModel {
     }
 
     public BookingModel(
-            int bookingNum,
             String movieTitle,
             Timestamp showDateTime,
             int cardNum,
-            int userId,
-            int promotionId
+            UserModel user,
+            PromotionModel promotion
     )
     {
-        this.bookingNum = bookingNum;
         this.movieTitle = movieTitle;
         this.showDateTime = showDateTime;
         this.cardNum = cardNum;
-        this.userId = userId;
-        this.promotionId = promotionId;
+        this.user = user;
+        this.promotion = promotion;
     }
 
     public int getBookingNum() {
@@ -66,12 +66,12 @@ public class BookingModel {
         return cardNum;
     }
 
-    public int getUserId() {
-        return userId;
+    public UserModel getUser() {
+        return user;
     }
 
-    public int getPromotionId() {
-        return promotionId;
+    public PromotionModel getPromotion() {
+        return promotion;
     }
 
     public void setBookingNum(int bookingNum) {
@@ -90,11 +90,11 @@ public class BookingModel {
         this.cardNum = cardNum;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 
-    public void setPromotionId(int promotionId) {
-        this.promotionId = promotionId;
+    public void setPromotion(PromotionModel promotion) {
+        this.promotion = promotion;
     }
 }

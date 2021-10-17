@@ -17,24 +17,25 @@ public class PaymentInfoModel {
     @Column (name = "exp_date", nullable = false)
     private String expDate;
 
+    // **** IMPORTANT: CHECK ONE-TO-ONE ASSOCIATION WITH ADDRESS
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "address_id", referencedColumnName = "address_address_id")
-    private int addressId;
+    private AddressModel address;
 
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "user_id", referencedColumnName = "user_user_id")
-    private int userId;
+    private UserModel user;
 
     public PaymentInfoModel() {
 
     }
 
-    public PaymentInfoModel(int cardNum, String cardType, String expDate, int addressId, int userId){
+    public PaymentInfoModel(int cardNum, String cardType, String expDate, AddressModel address, UserModel user){
         this.cardNum = cardNum;
         this.cardType = cardType;
         this.expDate = expDate;
-        this.addressId = addressId;
-        this.userId = userId;
+        this.address = address;
+        this.user = user;
     }
 
     public int getCardNum() {
@@ -49,12 +50,12 @@ public class PaymentInfoModel {
         return expDate;
     }
 
-    public int getAddressId() {
-        return addressId;
+    public AddressModel getAddress() {
+        return address;
     }
 
-    public int getUserId() {
-        return userId;
+    public UserModel getUser() {
+        return user;
     }
 
     public void setCardNum(int cardNum) {
@@ -69,11 +70,11 @@ public class PaymentInfoModel {
         this.expDate = expDate;
     }
 
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
+    public void setAddress(AddressModel address) {
+        this.address = address;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 }
