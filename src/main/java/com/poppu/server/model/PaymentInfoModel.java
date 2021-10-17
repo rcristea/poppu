@@ -17,11 +17,11 @@ public class PaymentInfoModel {
     @Column (name = "exp_date", nullable = false)
     private String expDate;
 
-    @OneToOne (cascade = CascadeType.All)
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "address_id", referencedColumnName = "address_address_id")
     private int addressId;
 
-    @OneToOne (cascade = CascadeType.All)
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "user_id", referencedColumnName = "user_user_id")
     private int userId;
 

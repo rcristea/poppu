@@ -17,17 +17,17 @@ public class BookingModel {
     @Column (name = "show_date_time", nullable = false)
     private Timestamp showDateTime;
 
-    @OneToOne (cascade = CascadeType.All)
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "card_num", referencedColumnName = "payment_info_card_num")
-    private int cardNum;
+    private PaymentInfoModel payment;
 
-    @OneToOne (cascade = CascadeType.All)
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "user_id", referencedColumnName = "user_user_id")
-    private int userId;
+    private UserModel user;
 
-    @OneToOne (cascade = CascadeType.All)
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "promotion_id", referencedColumnName = "promotion_promotion_id")
-    private int promotionId;
+    private PromotionModel promotion;
 
     public BookingModel() {
 

@@ -20,7 +20,7 @@ public class AddressModel {
     @Column (name = "zip_code", nullable = false)
     private String zipCode;
 
-    @OneToOne (cascade = CascadeType.All)
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "user_id", referencedColumnName = "user_user_id")
     private int userId;
 

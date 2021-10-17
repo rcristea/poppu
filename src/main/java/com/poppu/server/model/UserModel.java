@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import com.poppu.server.util.Role;
 import com.poppu.server.util.Status;
+import org.apache.tomcat.jni.Address;
 
 @Entity
 @Table(name="user")
@@ -11,7 +12,7 @@ public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private long userId;
 
     @Column(name = "first_name", nullable = false)
@@ -20,29 +21,44 @@ public class UserModel {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "role", columnDefinition = "varchar(6)")
+    @Enumerated(EnumType.STRING)
     private Role role; // change to string
 
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", nullable = false, length = 32)
     private String password;
 
-    @Column(name = "phone_num", nullable = false)
+    @Column(name = "phone_num", nullable = false, length = 16)
     private String phoneNum;
 
     @Column(name = "is_subscribed", columnDefinition = "boolean default false")
-    private boolean isSubscribed;
+    private boolean isSubscribed = false;
 
-    @Column(name = "status", columnDefinition = "varchar(16) default 'ACTIVE'")
+    @Enumerated(EnumType.STRING)
     private Status status = Status.ACTIVE; // change to string
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", unique = true)
+    private AddressModel address;
 
     public UserModel() {
 
     }
 
-    public UserModel(String firstName, String lastName, Role role, String email, String password, String phoneNum, boolean isSubscribed, Status status) {
+    public UserModel(String firstName, String lastName, Role role, String email,
+                     String password, String phoneNum) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNum = phoneNum;
+    }
+
+    public UserModel(String firstName, String lastName, Role role, String email,
+                     String password, String phoneNum, boolean isSubscribed,
+                     Status status, AddressModel address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
@@ -51,14 +67,15 @@ public class UserModel {
         this.phoneNum = phoneNum;
         this.isSubscribed = isSubscribed;
         this.status = status;
+        this.address = address;
     }
 
     public long getId() {
-        return id;
+        return userId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public String getFirstName() {
