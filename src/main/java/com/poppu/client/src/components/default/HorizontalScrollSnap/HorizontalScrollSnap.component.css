@@ -1,5 +1,6 @@
 .horizontal-scroll-snap-child * {
   text-shadow: none;
+  text-decoration: none;
 }
 
 .grow-1 {

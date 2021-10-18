@@ -95,6 +95,11 @@
   font-weight: bold;
 }
 
+.cart-icon {
+  color: #fff;
+  padding: 15px;
+}
+
 @media screen and (max-width: 767px) {
   .nav {
     padding: 10px 20px;
