@@ -103,7 +103,7 @@ class Registration extends Component {
     )
   }
 
-  validateForm() {
+  async validateForm() {
     let formErrors = []
 
     if (this.state.name.length === 0) {
@@ -131,12 +131,12 @@ class Registration extends Component {
     }
 
     if (formErrors.length > 0) {
-      this.setState({
+      await this.setState({
         formErrors: formErrors,
         currentStep: 1,
       })
     } else {
-      this.setState({
+      await this.setState({
         formErrors: [],
       })
     }
@@ -151,12 +151,13 @@ class Registration extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.validateForm()
-    if (this.state.formErrors.length !== 0) {
-      return
-    }
+    this.validateForm().then(response => {
+      if (this.state.formErrors.length !== 0) {
+        return
+      }
 
-    alert('must implement')
+      alert('must implement')
+    })
   }
 
   render() {
