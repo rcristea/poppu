@@ -19,6 +19,7 @@ class Registration extends Component {
       phone: '',
       password: '',
       confirmPassword: '',
+      promo: true,
       cardType: '0',
       cardNumber: '',
       cardExpiry: '',
@@ -179,6 +180,7 @@ class Registration extends Component {
                 phone={this.state.phone}
                 password={this.state.password}
                 confirmPassword={this.state.confirmPassword}
+                promo={this.state.promo}
               />
               <Step2
                 currentStep={this.state.currentStep}

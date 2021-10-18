@@ -50,6 +50,16 @@ class Step1 extends Component {
             placeholder='Confirm Password'
             value={this.props.confirmPassword}
             onChange={this.props.handleChange} />
+          <div className='registration-checkbox'>
+            <input
+              type='checkbox'
+              className='registration-input'
+              id='promo'
+              name='promo'
+              defaultChecked={this.props.promo}
+              onChange={this.props.handleChange}/>
+            <label htmlFor='promo'>Register for promotion emails</label>
+          </div>
         </div>
       </>
     )

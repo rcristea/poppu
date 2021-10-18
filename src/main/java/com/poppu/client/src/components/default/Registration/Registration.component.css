@@ -78,3 +78,14 @@
   text-shadow: none;
   font-size: 0.625rem;
 }
+
+.registration-checkbox {
+  margin: 10px;
+}
+
+.registration-checkbox label {
+  margin-left: 15px;
+  color: #fff;
+  text-shadow: none;
+  font-size: 0.75rem;
+}
