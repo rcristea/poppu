@@ -25,6 +25,7 @@ import AddShowTime from '../admin/Movies/Index/AddShowtime.component'
 import {ViewMovie} from '../admin/Movies/Index/ViewMovie.component'
 import ProfileComponent from '../default/Profile/Profile.component'
 import AddPaymentComponent from '../default/Profile/AddPaymentInfo.component'
+import Registration from '../default/Registration/Registration.component'
 
 class App extends Component {
   render() {
@@ -37,6 +38,9 @@ class App extends Component {
           <Route path='/signup/payment' exact={true} component={SignupPayment} />
           <Route path='/signup/address' exact={true} component={SignupAddress} />
           <Route path='/signup/confirm' exact={true} component={SignupConfirm} />
+
+          <Route path='/register' exact={true} component={Registration} />
+
           <Route path='/booking/times' exact={true} component={SelectTimeComponent} />
           <Route path='/booking/seats' exact={true} component={SelectSeatComponent} />
           <Route path='/booking/order/summary' exact={true} component={OrderSummaryComponent} />
