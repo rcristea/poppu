@@ -1,5 +1,5 @@
-import {Component} from "react"
-import {Button, Card, Container, Form} from "react-bootstrap"
+import {Component} from 'react'
+import {Button, Card, Container, Form} from 'react-bootstrap'
 
 import 'react-bootstrap/'
 import 'bootstrap/dist/css/vapor.css'
@@ -22,7 +22,7 @@ export class AutoCompleteForm extends Component {
                                     </Form.Group>
                                 )
                             })}
-                            <Button type={"submit"} variant={"success"} href={this.props.submit_link}>{this.props.submit_message}</Button>
+                            <Button type={'submit'} variant={'success'} href={this.props.submit_link}>{this.props.submit_message}</Button>
                         </Form>
                     </Card.Body>
                 </Card>

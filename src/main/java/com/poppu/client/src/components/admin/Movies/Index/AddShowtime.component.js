@@ -1,33 +1,33 @@
 import 'bootstrap/dist/css/vapor.css'
 import 'react-bootstrap/'
-import {Component} from "react";
-import {Button, Col, Container, Row} from "react-bootstrap";
-import AutoCompleteForm from "../../../utils/AutoForm.component";
+import {Component} from 'react'
+import {Button, Col, Container, Row} from 'react-bootstrap'
+import AutoCompleteForm from '../../../utils/AutoForm.component'
 
 export class AddShowTime extends Component {
-    component_title = "Add Showtime"
+    component_title = 'Add Showtime'
     component_data = [
         {
-            "control_id": "movieID",
-            "label": "Movie ID",
-            "type": "number",
-            "placeholder": "Enter movie ID.",
+            'control_id': 'movieID',
+            'label': 'Movie ID',
+            'type': 'number',
+            'placeholder': 'Enter movie ID.',
         },
         {
-            "control_id": "movieDate",
-            "label": "Show Date",
-            "type": "date",
-            "placeholder": "Enter movie date.",
+            'control_id': 'movieDate',
+            'label': 'Show Date',
+            'type': 'date',
+            'placeholder': 'Enter movie date.',
         },
         {
-            "control_id": "movieTime",
-            "label": "Show Time",
-            "type": "text",
-            "placeholder": "Enter movie date.",
+            'control_id': 'movieTime',
+            'label': 'Show Time',
+            'type': 'text',
+            'placeholder': 'Enter movie date.',
         },
     ]
-    submit_message = "Add Showtime"
-    submit_lint = "/admin"
+    submit_message = 'Add Showtime'
+    submit_lint = '/admin'
 
     render() {
         return (
@@ -41,10 +41,10 @@ export class AddShowTime extends Component {
                     />
                 </Row>
                 <Row>
-                    <Col md={4}><Button variant={"danger"} href={"/movies"}>Cancel</Button></Col>
+                    <Col md={4}><Button variant={'danger'} href={'/movies'}>Cancel</Button></Col>
                 </Row>
             </Container>
-        );
+        )
     }
 }
 

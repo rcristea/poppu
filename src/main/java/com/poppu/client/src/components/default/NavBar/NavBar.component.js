@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import './NavBar.component.css'
 import {Link} from 'react-router-dom'
+import { BsFillCartFill } from 'react-icons/bs'
 
 export class NavBar extends Component {
   constructor(props) {
@@ -44,6 +45,11 @@ export class NavBar extends Component {
               </div>
             </div>
             <div className='nav-right'>
+              <Link to='/cart'>
+                <div className='cart-icon'>
+                  <BsFillCartFill size='25px'/>
+                </div>
+              </Link>
               <Link to='/login'>
                 <div className='login-button'>Login</div>
               </Link>

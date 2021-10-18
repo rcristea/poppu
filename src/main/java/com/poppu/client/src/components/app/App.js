@@ -10,21 +10,21 @@ import Signup from '../default/Signup/Signup.component'
 import SignupPayment from '../default/SignupPayment/SignupPayment.component'
 import SignupAddress from '../default/SignupAddress/SignupAddress.component'
 import SignupConfirm from '../default/SignupConfirm/SignupConfirm.component'
-import SelectTimeComponent from "../default/TicketBooking/SelectTime.component";
-import SelectSeatComponent from "../default/TicketBooking/SelectSeat.component";
-import OrderSummaryComponent from "../default/TicketBooking/OrderSummary.component";
-import OrderCheckoutComponent from "../default/TicketBooking/OrderCheckout.component";
-import OrderConfirmationComponent from "../default/TicketBooking/OrderConfirmation.component";
-import EditProfileComponent from "../default/Profile/EditProfile.component";
-import Dashboard from "../admin/Dashboard/Dashboard.component";
-import PromoIndex from "../admin/Promos/Index/PromoIndex.component";
-import PromoAdd from "../admin/Promos/Add/PromoAdd.component";
-import MovieIndex from "../admin/Movies/Index/MovieIndex.component";
-import AddMovie from "../admin/Movies/Index/AddMovie.component";
-import AddShowTime from "../admin/Movies/Index/AddShowtime.component";
-import {ViewMovie} from "../admin/Movies/Index/ViewMovie.component";
-import ProfileComponent from "../default/Profile/Profile.component";
-import AddPaymentComponent from "../default/Profile/AddPaymentInfo.component";
+import SelectTimeComponent from '../default/TicketBooking/SelectTime.component'
+import SelectSeatComponent from '../default/TicketBooking/SelectSeat.component'
+import OrderSummaryComponent from '../default/TicketBooking/OrderSummary.component'
+import OrderCheckoutComponent from '../default/TicketBooking/OrderCheckout.component'
+import OrderConfirmationComponent from '../default/TicketBooking/OrderConfirmation.component'
+import EditProfileComponent from '../default/Profile/EditProfile.component'
+import Dashboard from '../admin/Dashboard/Dashboard.component'
+import PromoIndex from '../admin/Promos/Index/PromoIndex.component'
+import PromoAdd from '../admin/Promos/Add/PromoAdd.component'
+import MovieIndex from '../admin/Movies/Index/MovieIndex.component'
+import AddMovie from '../admin/Movies/Index/AddMovie.component'
+import AddShowTime from '../admin/Movies/Index/AddShowtime.component'
+import {ViewMovie} from '../admin/Movies/Index/ViewMovie.component'
+import ProfileComponent from '../default/Profile/Profile.component'
+import AddPaymentComponent from '../default/Profile/AddPaymentInfo.component'
 
 class App extends Component {
   render() {
@@ -60,7 +60,7 @@ class App extends Component {
           <Route path='/tests/:id' component={TestEdit} />
         </Switch>
       </BrowserRouter>
-    );
+    )
   }
 }
 

@@ -1,3 +1,7 @@
+.nav * {
+  text-shadow: none;
+}
+
 .nav {
   display: flex;
   padding: 20px 40px;
@@ -89,6 +93,11 @@
   text-decoration: none;
   color: #000;
   font-weight: bold;
+}
+
+.cart-icon {
+  color: #fff;
+  padding: 15px;
 }
 
 @media screen and (max-width: 767px) {
