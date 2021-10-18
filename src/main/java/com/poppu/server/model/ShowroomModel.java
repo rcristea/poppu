@@ -30,10 +30,6 @@ public class ShowroomModel {
         return name;
     }
 
-    public void setShowroomId(int showroomId) {
-        this.showroomId = showroomId;
-    }
-
     public void setName(String name) {
         this.name = name;
     }

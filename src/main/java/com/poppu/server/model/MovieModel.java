@@ -6,6 +6,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -54,7 +55,7 @@ public class MovieModel {
     private boolean isShowing;
 
     @OneToMany(mappedBy = "movie")
-    Set<MovieActorModel> actors;
+    private Set<MovieActorModel> cast = new HashSet<MovieActorModel>();
 
     public MovieModel() {
 
@@ -160,4 +161,11 @@ public class MovieModel {
     public void setShowing(boolean showing) {
         isShowing = showing;
     }
+
+    // public Set<ActorModel> getActors() { }
+    // public void addActor(ActorModel a) { }
+    // public void removeActor(ActorModel a) { }
+    // private boolean findActor(ActorModel a) { }
+
+    // maybe methods for creating or checking for directors and producers to ensure that they were created?
 }
