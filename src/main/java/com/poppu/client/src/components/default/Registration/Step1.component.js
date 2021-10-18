@@ -8,7 +8,8 @@ class Step1 extends Component {
 
     return (
       <>
-        <div className='registration-step-1'>
+        <p>* All fields on this step are required</p>
+        <div className='registration-step'>
           <input
             type='text'
             className='registration-input'
@@ -39,7 +40,7 @@ class Step1 extends Component {
             id='password'
             name='password'
             placeholder='Password'
-            value={this.props.phone}
+            value={this.props.password}
             onChange={this.props.handleChange} />
           <input
             type='password'

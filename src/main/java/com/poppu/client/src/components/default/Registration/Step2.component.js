@@ -8,7 +8,7 @@ class Step2 extends Component {
 
     return (
       <>
-        <div className='registration-step-2'>
+        <div className='registration-step'>
           <h3>Payment Information</h3>
           <select
             className='registration-input'
@@ -33,7 +33,6 @@ class Step2 extends Component {
             className='registration-input'
             id='card-expiry'
             name='cardExpiry'
-            placeholder='Card Expiration'
             value={this.props.cardExpiry}
             onChange={this.props.handleChange} />
           <h3>Billing</h3>
@@ -51,7 +50,7 @@ class Step2 extends Component {
             id='billing-city'
             name='billingCity'
             placeholder='City'
-            value={this.props.cardExpiry}
+            value={this.props.billingCity}
             onChange={this.props.handleChange} />
           <input
             type='text'
@@ -59,7 +58,7 @@ class Step2 extends Component {
             id='billing-zip'
             name='billingZip'
             placeholder='Zipcode'
-            value={this.props.cardExpiry}
+            value={this.props.billingZip}
             onChange={this.props.handleChange} />
           <select
             className='registration-input'

@@ -4,6 +4,9 @@ import NavBar from '../NavBar/NavBar.component'
 import Step1 from './Step1.component'
 import Step2 from './Step2.component'
 import Step3 from './Step3.component'
+import isEmail from 'validator/lib/isEmail'
+import isMobilePhone from 'validator/es/lib/isMobilePhone'
+import isStrongPassword from 'validator/es/lib/isStrongPassword'
 
 class Registration extends Component {
   constructor(props) {
@@ -27,12 +30,15 @@ class Registration extends Component {
       homeCity: '',
       homeZip: '',
       homeState: '0',
+      formErrors: [],
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.prev = this.prev.bind(this)
     this.next = this.next.bind(this)
     this.renderButtons = this.renderButtons.bind(this)
+    this.renderErrors = this.renderErrors.bind(this)
+    this.validateForm = this.validateForm.bind(this)
   }
 
   prev() {
@@ -57,21 +63,82 @@ class Registration extends Component {
 
   renderButtons() {
     let nextButton = <button
-        className='registration-next'
+        className='registration-button registration-next'
         type='button'
         onClick={this.next}
       >Next</button>
     let prevButton = <button
-        className='registration-prev'
+        className='registration-button registration-prev'
         type='button'
         onClick={this.prev}
       >Back</button>
+    let submitButton = <button
+      className='registration-button registration-submit'
+      type='submit'>Submit</button>
     return (
       <div>
         { this.state.currentStep !== 1 ? prevButton : null }
         { this.state.currentStep !== 3 ? nextButton : null }
+        { this.state.currentStep === 3 ? submitButton : null }
       </div>
     )
+  }
+
+  renderErrors() {
+    if (this.state.formErrors.length === 0) {
+      return null
+    }
+
+    return (
+      <div className='registration-form-errors'>
+        <ul>
+          {this.state.formErrors.map(error => {
+            return (
+              <li key={error}>{error}</li>
+            )
+          })}
+        </ul>
+      </div>
+    )
+  }
+
+  validateForm() {
+    let formErrors = []
+
+    if (this.state.name.length === 0) {
+      formErrors.push('The name field must be filled in.')
+    }
+
+    if (this.state.email.length === 0) {
+      formErrors.push('The email field must be filled in.')
+    } else if (!isEmail(this.state.email)) {
+      formErrors.push('Please enter a valid email.')
+    }
+
+    if (this.state.phone.length === 0) {
+      formErrors.push('The phone number field must be filled in.')
+    } else if (!isMobilePhone(this.state.phone)) {
+      formErrors.push('Please enter a valid phone number.')
+    }
+
+    if (this.state.password.length === 0 || this.state.password.length === 0) {
+      formErrors.push('The password and confirm password fields must be filled in.')
+    } else if (!isStrongPassword(this.state.password)) {
+      formErrors.push('Your password must have: Minimum length 8, 1 upper case letter, 1 lower case letter, 1 number and 1 symbol.')
+    } else if (this.state.password !== this.state.confirmPassword) {
+      formErrors.push('Your passwords must match.')
+    }
+
+    if (formErrors.length > 0) {
+      this.setState({
+        formErrors: formErrors,
+        currentStep: 1,
+      })
+    } else {
+      this.setState({
+        formErrors: [],
+      })
+    }
   }
 
   handleChange(event) {
@@ -83,6 +150,11 @@ class Registration extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    this.validateForm()
+    if (this.state.formErrors.length !== 0) {
+      return
+    }
+
     alert('must implement')
   }
 
@@ -91,39 +163,44 @@ class Registration extends Component {
       <>
         <NavBar />
         <div className='registration-container'>
-          <form className='registration-form' onSubmit={this.handleSubmit}>
-            <Step1
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-              name={this.state.name}
-              email={this.state.email}
-              phone={this.state.phone}
-              password={this.state.password}
-              confirmPassword={this.state.confirmPassword}
-            />
-            <Step2
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-              cardType={this.state.cardType}
-              cardNumber={this.state.cardNumber}
-              cardExpiry={this.state.cardExpiry}
-              billingStreet={this.state.billingStreet}
-              billingCity={this.state.billingCity}
-              billingZip={this.state.billingZip}
-              billingState={this.state.billingState}
-            />
-            <Step3
-              currentStep={this.state.currentStep}
-              handleChange={this.handleChange}
-              homeStreet={this.state.homeStreet}
-              homeCity={this.state.homeCity}
-              homeZip={this.state.homeZip}
-              homeState={this.state.homeState}
-            />
-            <div className='registration-buttons'>
-              {this.renderButtons()}
-            </div>
-          </form>
+          <div className='registration-form-container'>
+            <h1>Registration</h1>
+            <div className='divider gradient-border' />
+            <form className='registration-form' onSubmit={this.handleSubmit}>
+              <div className='registration-buttons'>
+                {this.renderButtons()}
+                {this.renderErrors()}
+              </div>
+              <Step1
+                currentStep={this.state.currentStep}
+                handleChange={this.handleChange}
+                name={this.state.name}
+                email={this.state.email}
+                phone={this.state.phone}
+                password={this.state.password}
+                confirmPassword={this.state.confirmPassword}
+              />
+              <Step2
+                currentStep={this.state.currentStep}
+                handleChange={this.handleChange}
+                cardType={this.state.cardType}
+                cardNumber={this.state.cardNumber}
+                cardExpiry={this.state.cardExpiry}
+                billingStreet={this.state.billingStreet}
+                billingCity={this.state.billingCity}
+                billingZip={this.state.billingZip}
+                billingState={this.state.billingState}
+              />
+              <Step3
+                currentStep={this.state.currentStep}
+                handleChange={this.handleChange}
+                homeStreet={this.state.homeStreet}
+                homeCity={this.state.homeCity}
+                homeZip={this.state.homeZip}
+                homeState={this.state.homeState}
+              />
+            </form>
+          </div>
         </div>
       </>
     )

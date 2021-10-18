@@ -8,7 +8,7 @@ class Step3 extends Component {
 
     return (
       <>
-        <div className='registration-step-3'>
+        <div className='registration-step'>
           <h3>Home Address</h3>
           <input
             type='text'
