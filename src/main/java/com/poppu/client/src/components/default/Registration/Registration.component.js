@@ -132,13 +132,25 @@ class Registration extends Component {
     }
 
     if (this.state.cardType === 0 && this.state.cardNumber.length > 0) {
-      formErrors.push('Please select the type of payment')
+      formErrors.push('Please select the type of payment.')
     }
 
-    if (this.state.cardNumber.length > 0 && !isCreditCard(this.state.cardNumber)) {
-      formErrors.push('Please enter a valid card number')
+    if (this.state.cardNumber.length > 0) {
+      if (this.state.cardType === 0) {
+        formErrors.push('Please select a type for your payment information.')
+      } else if (!isCreditCard(this.state.cardNumber)) {
+        formErrors.push('Please enter a valid card number.')
+      } else if (this.state.cardExpiry.length === 0) {
+        formErrors.push('The expiration date must be filled out for your payment information.')
+      } else if (
+        this.state.billingStreet.length === 0 ||
+        this.state.billingState === 0 ||
+        this.state.billingCity.length === 0 ||
+        this.state.billingZip.length === 0
+      ) {
+        formErrors.push('The billing address cannot be empty if you are providing billing information')
+      }
     }
-
 
 
     if (formErrors.length > 0) {

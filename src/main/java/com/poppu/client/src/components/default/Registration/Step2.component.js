@@ -10,6 +10,7 @@ class Step2 extends Component {
     return (
       <>
         <div className='registration-step'>
+          <p>You may skip this step if you wish.</p>
           <h3>Payment Information</h3>
           <select
             className='registration-input'
@@ -54,14 +55,14 @@ class Step2 extends Component {
             placeholder='City'
             value={this.props.billingCity}
             onChange={this.props.handleChange} />
-          <input
-            type='text'
+          <InputMask
+            mask='99999'
             className='registration-input'
             id='billing-zip'
             name='billingZip'
             placeholder='Zipcode'
             value={this.props.billingZip}
-            onChange={this.props.handleChange} />
+            onChange={this.props.handleChange}/>
           <select
             className='registration-input'
             id='billing-state'

@@ -15,6 +15,10 @@
   font-size: 1.5rem;
 }
 
+.registration-container h3 {
+  margin-top: 25px;
+}
+
 .registration-container p {
   text-shadow: none;
   color: #fff;

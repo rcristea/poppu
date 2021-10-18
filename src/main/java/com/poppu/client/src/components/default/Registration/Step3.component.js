@@ -9,6 +9,7 @@ class Step3 extends Component {
     return (
       <>
         <div className='registration-step'>
+          <p>You may skip this step if you wish.</p>
           <h3>Home Address</h3>
           <input
             type='text'
