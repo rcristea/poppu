@@ -144,11 +144,21 @@ class Registration extends Component {
         formErrors.push('The expiration date must be filled out for your payment information.')
       } else if (
         this.state.billingStreet.length === 0 ||
-        this.state.billingState === 0 ||
-        this.state.billingCity.length === 0 ||
-        this.state.billingZip.length === 0
+        this.state.billingState         === 0 ||
+        this.state.billingCity.length   === 0 ||
+        this.state.billingZip.length    === 0
       ) {
-        formErrors.push('The billing address cannot be empty if you are providing billing information')
+        formErrors.push('The billing address cannot be empty if you are providing billing information.')
+      }
+    }
+
+    if (this.state.homeStreet.length > 0) {
+      if (
+        this.state.homeState === 0 ||
+        this.state.homeCity.length === 0 ||
+        this.state.homeZip.length === 0
+      ) {
+        formErrors.push('If you are filling out your home address, you must complete the entire address.')
       }
     }
 
