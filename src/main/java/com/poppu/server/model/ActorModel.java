@@ -39,10 +39,6 @@ public class ActorModel {
         return lastName;
     }
 
-    public void setActorId(int actorId) {
-        this.actorId = actorId;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
