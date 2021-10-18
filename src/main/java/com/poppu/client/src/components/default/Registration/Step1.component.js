@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import InputMask from "react-input-mask";
 
 class Step1 extends Component {
   render() {
@@ -26,14 +27,14 @@ class Step1 extends Component {
             placeholder='Email'
             value={this.props.email}
             onChange={this.props.handleChange} />
-          <input
-            type='text'
+          <InputMask
+            mask='(999) 999 - 9999'
             className='registration-input'
             id='phone'
             name='phone'
             placeholder='Phone Number'
             value={this.props.phone}
-            onChange={this.props.handleChange} />
+            onChange={this.props.handleChange}/>
           <input
             type='password'
             className='registration-input'

@@ -4,9 +4,10 @@ import NavBar from '../NavBar/NavBar.component'
 import Step1 from './Step1.component'
 import Step2 from './Step2.component'
 import Step3 from './Step3.component'
-import isEmail from 'validator/lib/isEmail'
+import isEmail from 'validator/es/lib/isEmail'
 import isMobilePhone from 'validator/es/lib/isMobilePhone'
 import isStrongPassword from 'validator/es/lib/isStrongPassword'
+import isCreditCard from 'validator/es/lib/isCreditCard'
 
 class Registration extends Component {
   constructor(props) {
@@ -129,6 +130,16 @@ class Registration extends Component {
     } else if (this.state.password !== this.state.confirmPassword) {
       formErrors.push('Your passwords must match.')
     }
+
+    if (this.state.cardType === 0 && this.state.cardNumber.length > 0) {
+      formErrors.push('Please select the type of payment')
+    }
+
+    if (this.state.cardNumber.length > 0 && !isCreditCard(this.state.cardNumber)) {
+      formErrors.push('Please enter a valid card number')
+    }
+
+
 
     if (formErrors.length > 0) {
       await this.setState({

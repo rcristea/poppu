@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import InputMask from 'react-input-mask'
 
 class Step2 extends Component {
   render() {
@@ -28,13 +29,14 @@ class Step2 extends Component {
             placeholder='Card Number'
             value={this.props.cardNumber}
             onChange={this.props.handleChange} />
-          <input
-            type='month'
+          <InputMask
+            mask='99/99'
             className='registration-input'
             id='card-expiry'
             name='cardExpiry'
+            placeholder='Expiration Date'
             value={this.props.cardExpiry}
-            onChange={this.props.handleChange} />
+            onChange={this.props.handleChange}/>
           <h3>Billing</h3>
           <input
             type='text'
