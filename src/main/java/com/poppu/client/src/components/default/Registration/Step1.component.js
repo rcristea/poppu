@@ -45,6 +45,7 @@ class Step1 extends Component {
               <li>1 lower case letter</li>
               <li>1 number</li>
               <li>1 special character</li>
+              <li>8 characters</li>
             </ul>
           </div>
           <input
