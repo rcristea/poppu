@@ -185,19 +185,51 @@ class Registration extends Component {
     })
   }
 
-  handleSubmit = e => {
+  handleSubmit = async(e) => {
     e.preventDefault()
-    this.validateForm().then(response => {
-      if (this.state.formErrors.length !== 0) {
-        return
-      }
+    await this.validateForm()
 
-      console.log('TODO - send request to backend to create an inactive user')
-      console.log('in the .then() of axios after the response is received, send another request to send an email with the confirmation code')
+    if (this.state.formErrors.length !== 0) {
+      return
+    }
 
-      this.setState({
-        currentStep: 4,
-      })
+    // Create User
+    let userData = {
+      'firstName': this.state.name.split(' ')[0],
+      'lastName': this.state.name.split(' ')[1],
+      'role': 'USER',
+      'email': this.state.email,
+      'password': this.state.password,
+      'phoneNum': this.state.phoneNum,
+      'isSubscribed': this.state.promo,
+      'status': 'INACTIVE',
+    }
+
+    // Create user's payment info
+
+    // Create user's address
+
+    let userHomeAddress = {
+      'street': this.state.homeStreet,
+      'city': this.state.homeCity,
+      'zipCode': this.state.homeZip,
+    }
+
+    await fetch('http://localhost:8080/api/address/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userHomeAddress),
+    }).then(response => {
+      console.log(response)
+    }).catch(error => {
+      console.log(error)
+    })
+
+    this.setState({
+      currentStep: 4,
     })
   }
 
