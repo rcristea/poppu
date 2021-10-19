@@ -42,6 +42,7 @@ class Registration extends Component {
     this.renderButtons = this.renderButtons.bind(this)
     this.renderErrors = this.renderErrors.bind(this)
     this.validateForm = this.validateForm.bind(this)
+    this.postData = this.postData.bind(this)
   }
 
   prev() {
@@ -185,42 +186,55 @@ class Registration extends Component {
     })
   }
 
-  handleSubmit = async(e) => {
-    e.preventDefault()
-    await this.validateForm()
-
-    if (this.state.formErrors.length !== 0) {
-      return
-    }
-
-    // Create user's address
-
-    let userHomeAddress = {
-      'street': this.state.homeStreet,
-      'city': this.state.homeCity,
-      'zipCode': this.state.homeZip,
-    }
-
-    await fetch('http://localhost:8080/api/address/', {
+  async postData(data, destination) {
+    await fetch('http://localhost:8080/api/' + destination + '/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(userHomeAddress),
+      body: JSON.stringify(data),
     }).then(response => {
       response.json().then(json => {
-        console.log(json);
+        return json
       });
     }).catch(error => {
       console.log(error)
+      return null
     })
+  }
 
-    // Create user's payment info
+  handleSubmit = async(e) => {
+    e.preventDefault()
+
+    await this.validateForm()
+    if (this.state.formErrors.length !== 0) {
+      return
+    }
+
+    let userHomeAddressJSON = null
+    let userBillingAddressJSON = null
+    let userPaymentJSON = null
+    let userJSON = null
+
+    let hasHomeAddress = this.state.homeStreet.length > 0
+    let hasUserPayment = this.state.cardNumber.length > 0
+
+    // Create user's address
+
+    if (hasHomeAddress) {
+      let userHomeAddress = {
+        'street': this.state.homeStreet,
+        'city': this.state.homeCity,
+        'zipCode': this.state.homeZip,
+      }
+
+      userHomeAddressJSON = await this.postData(userHomeAddress, 'address')
+    }
 
     // Create User
 
-    let userData = {
+    let user = {
       'firstName': this.state.name.split(' ')[0],
       'lastName': this.state.name.split(' ')[1],
       'role': 'USER',
@@ -229,7 +243,37 @@ class Registration extends Component {
       'phoneNum': this.state.phoneNum,
       'isSubscribed': this.state.promo,
       'status': 'INACTIVE',
+      'address': userHomeAddressJSON['addressId'],
+      'paymentCards': null,
     }
+
+    userJSON = await this.postData(user, 'users')
+
+    // Create user's payment info
+
+    if (hasUserPayment) {
+      let userBillingAddress =  {
+        'street': this.state.billingStreet,
+        'city': this.state.billingCity,
+        'zipCode': this.state.billingZip,
+      }
+
+      userBillingAddressJSON = await this.postData(userBillingAddress, 'address')
+
+      let userPayment = {
+        'cardNum': this.state.cardNumber,
+        'cardType': this.state.cardType,
+        'expDate': this.state.cardExpiry,
+        'address': userBillingAddressJSON['addressId'],
+        'user': userJSON['userId'],
+      }
+
+      userPaymentJSON = await this.postData(userPayment, 'paymentInfo')
+    }
+
+    // TODO add userPaymentJSON[' to the array list of <PaymentInfoModel> in UserModel
+
+
 
     this.setState({
       currentStep: 4,
