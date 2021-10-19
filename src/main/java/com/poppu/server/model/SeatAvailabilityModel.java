@@ -17,6 +17,11 @@ public class SeatAvailabilityModel {
     private ShowModel show;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @MapsId("showroomId")
+    @JoinColumn(name = "showroom_id")
+    private ShowroomModel showroom;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @MapsId("seatId")
     @JoinColumn(name = "seat_id")
     private SeatModel seat;
@@ -28,8 +33,9 @@ public class SeatAvailabilityModel {
 
     }
 
-    public SeatAvailabilityModel(ShowModel show, SeatModel seat, boolean isAvailable) {
+    public SeatAvailabilityModel(ShowModel show, ShowroomModel showroom, SeatModel seat, boolean isAvailable) {
         this.show = show;
+        this.showroom = showroom;
         this.seat = seat;
         this.isAvailable = isAvailable;
     }
@@ -40,6 +46,10 @@ public class SeatAvailabilityModel {
 
     public ShowModel getShow() {
         return show;
+    }
+
+    public ShowroomModel getShowroom() {
+        return showroom;
     }
 
     public SeatModel getSeat() {
@@ -56,6 +66,10 @@ public class SeatAvailabilityModel {
 
     public void setShow(ShowModel show) {
         this.show = show;
+    }
+
+    public void setShowroom(ShowroomModel showroom) {
+        this.showroom = showroom;
     }
 
     public void setSeat(SeatModel seat) {
