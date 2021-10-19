@@ -83,6 +83,17 @@
   font-size: 0.625rem;
 }
 
+.registration-password-info p {
+  margin: 10px 0 0 0;
+}
+
+.registration-password-info li {
+  list-style-type: circle;
+  color: #fff;
+  text-shadow: none;
+  font-size: 0.625rem;
+}
+
 .registration-checkbox {
   margin: 10px;
 }

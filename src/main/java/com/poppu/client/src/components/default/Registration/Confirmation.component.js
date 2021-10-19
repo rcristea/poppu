@@ -10,15 +10,17 @@ class Confirmation extends Component {
       <>
         <div className='registration-step'>
           <h3>Confirmation</h3>
-          <p>An email has been sent to your account with a confirmation code. Please enter it here to continue.</p>
-          <input
-            type='text'
-            className='registration-input'
-            id='confirmation-code'
-            name='confirmationCode'
-            placeholder='Confirmation Code'
-            value={this.props.confirmationCode}
-            onChange={this.props.handleChange} />
+          <p>An email has been sent to <span Style='font-weight: bold'>{this.props.userEmail}</span> with a confirmation code. Please enter the confirmation code here to continue.</p>
+          <form onSubmit={this.props.handleSubmitConfirmation}>
+            <input
+              type='text'
+              className='registration-input'
+              id='confirmation-code'
+              name='confirmationCode'
+              placeholder='Confirmation Code'
+              value={this.props.confirmationCode}
+              onChange={this.props.handleChange} />
+          </form>
         </div>
       </>
     )

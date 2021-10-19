@@ -4,8 +4,8 @@ import NavBar from '../NavBar/NavBar.component'
 import Step1 from './Step1.component'
 import Step2 from './Step2.component'
 import Step3 from './Step3.component'
+import Confirmation from './Confirmation.component'
 import isEmail from 'validator/es/lib/isEmail'
-import isMobilePhone from 'validator/es/lib/isMobilePhone'
 import isStrongPassword from 'validator/es/lib/isStrongPassword'
 import isCreditCard from 'validator/es/lib/isCreditCard'
 
@@ -33,6 +33,7 @@ class Registration extends Component {
       homeZip: '',
       homeState: '0',
       formErrors: [],
+      confirmationCode: '',
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -119,8 +120,6 @@ class Registration extends Component {
 
     if (this.state.phone.length === 0) {
       formErrors.push('The phone number field must be filled in.')
-    } else if (!isMobilePhone(this.state.phone)) {
-      formErrors.push('Please enter a valid phone number.')
     }
 
     if (this.state.password.length === 0 || this.state.password.length === 0) {
@@ -189,8 +188,18 @@ class Registration extends Component {
         return
       }
 
-      alert('must implement')
+      console.log('TODO - send request to backend to create an inactive user')
+      console.log('in the .then() of axios after the response is received, send another request to send an email with the confirmation code')
+
+      this.setState({
+        currentStep: 4,
+      })
     })
+  }
+
+  handleSubmitConfirmation = e => {
+    e.preventDefault()
+    alert('Handle confirmation code here')
   }
 
   render() {
@@ -214,8 +223,7 @@ class Registration extends Component {
                 phone={this.state.phone}
                 password={this.state.password}
                 confirmPassword={this.state.confirmPassword}
-                promo={this.state.promo}
-              />
+                promo={this.state.promo} />
               <Step2
                 currentStep={this.state.currentStep}
                 handleChange={this.handleChange}
@@ -225,16 +233,20 @@ class Registration extends Component {
                 billingStreet={this.state.billingStreet}
                 billingCity={this.state.billingCity}
                 billingZip={this.state.billingZip}
-                billingState={this.state.billingState}
-              />
+                billingState={this.state.billingState} />
               <Step3
                 currentStep={this.state.currentStep}
                 handleChange={this.handleChange}
                 homeStreet={this.state.homeStreet}
                 homeCity={this.state.homeCity}
                 homeZip={this.state.homeZip}
-                homeState={this.state.homeState}
-              />
+                homeState={this.state.homeState} />
+              <Confirmation
+                currentStep={this.state.currentStep}
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmitConfirmation}
+                userEmail={this.state.email}
+                confirmationCode={this.state.confirmationCode} />
             </form>
           </div>
         </div>

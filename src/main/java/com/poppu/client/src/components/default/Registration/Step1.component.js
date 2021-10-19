@@ -35,6 +35,15 @@ class Step1 extends Component {
             placeholder='Phone Number'
             value={this.props.phone}
             onChange={this.props.handleChange}/>
+          <div className='registration-password-info'>
+            <p>Password must contain at least:</p>
+            <ul>
+              <li>1 upper case letter</li>
+              <li>1 lower case letter</li>
+              <li>1 number</li>
+              <li>1 special character</li>
+            </ul>
+          </div>
           <input
             type='password'
             className='registration-input'
