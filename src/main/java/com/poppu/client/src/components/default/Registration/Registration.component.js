@@ -193,20 +193,6 @@ class Registration extends Component {
       return
     }
 
-    // Create User
-    let userData = {
-      'firstName': this.state.name.split(' ')[0],
-      'lastName': this.state.name.split(' ')[1],
-      'role': 'USER',
-      'email': this.state.email,
-      'password': this.state.password,
-      'phoneNum': this.state.phoneNum,
-      'isSubscribed': this.state.promo,
-      'status': 'INACTIVE',
-    }
-
-    // Create user's payment info
-
     // Create user's address
 
     let userHomeAddress = {
@@ -223,10 +209,27 @@ class Registration extends Component {
       },
       body: JSON.stringify(userHomeAddress),
     }).then(response => {
-      console.log(response)
+      response.json().then(json => {
+        console.log(json);
+      });
     }).catch(error => {
       console.log(error)
     })
+
+    // Create user's payment info
+
+    // Create User
+
+    let userData = {
+      'firstName': this.state.name.split(' ')[0],
+      'lastName': this.state.name.split(' ')[1],
+      'role': 'USER',
+      'email': this.state.email,
+      'password': this.state.password,
+      'phoneNum': this.state.phoneNum,
+      'isSubscribed': this.state.promo,
+      'status': 'INACTIVE',
+    }
 
     this.setState({
       currentStep: 4,
