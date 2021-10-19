@@ -40,10 +40,10 @@ public class UserModel {
     private boolean isSubscribed = false;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", columnDefinition = "varchar(10) default 'ACTIVE'")
-    private Status status = Status.ACTIVE;
+    @Column(name = "status", columnDefinition = "varchar(10) default 'INACTIVE'")
+    private Status status = Status.INACTIVE;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", unique = true)
     private AddressModel address;
 

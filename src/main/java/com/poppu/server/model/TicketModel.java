@@ -20,18 +20,18 @@ public class TicketModel {
     @Column(name = "price", nullable = false)
     private double price;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "show_id")
     private ShowModel show;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "showroom_id")
     private ShowroomModel showroom;
 
     @Column(name = "seat", length = 5, nullable = false)
     private String seat;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_num")
     private BookingModel booking;
 

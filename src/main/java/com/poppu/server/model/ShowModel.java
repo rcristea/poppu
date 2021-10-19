@@ -20,11 +20,11 @@ public class ShowModel {
     @Column(name = "duration", nullable = false)
     private double duration;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id")
     private MovieModel movie;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "showroom_id")
     private ShowroomModel showroom;
 

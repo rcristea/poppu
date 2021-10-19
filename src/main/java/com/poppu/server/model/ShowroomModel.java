@@ -16,7 +16,7 @@ public class ShowroomModel {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
-    @OneToMany(mappedBy = "showroom")
+    @OneToMany(mappedBy = "showroom", cascade = CascadeType.ALL)
     private List<SeatModel> seats = new ArrayList<SeatModel>();
 
     public ShowroomModel() {

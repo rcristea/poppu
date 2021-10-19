@@ -8,7 +8,10 @@ public class PaymentInfoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column (name = "card_num")
+    @Column (name = "payment_id")
+    private int paymentID;
+
+    @Column (name = "card_num", nullable = false)
     private int cardNum;
 
     @Column (name = "card_type", nullable = false, length = 45)
@@ -21,7 +24,7 @@ public class PaymentInfoModel {
     @JoinColumn (name = "address_id")
     private AddressModel address;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn (name = "user_id")
     private UserModel user;
 

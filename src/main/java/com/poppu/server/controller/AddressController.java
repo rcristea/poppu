@@ -30,6 +30,7 @@ public class AddressController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    /*
     @GetMapping("/user/{id}")
     public ResponseEntity<AddressModel> getAddressByUserId(@PathVariable("id") long userId) {
         Optional<AddressModel> getAddressTest = this.addressRepository.findAll().stream().filter(addressModel ->
@@ -38,7 +39,7 @@ public class AddressController {
         return getAddressTest.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
+    */
     @PutMapping("/{id}")
     public ResponseEntity<AddressModel> putAddress(@RequestBody AddressModel newAddressInfo, @PathVariable("id") long id) throws URISyntaxException {
         AddressModel updatedAddress = this.addressRepository.findById(id)
