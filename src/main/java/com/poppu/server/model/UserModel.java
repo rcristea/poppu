@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 import com.poppu.server.util.Role;
 import com.poppu.server.util.Status;
-import org.apache.tomcat.jni.Address;
 
 import java.util.ArrayList;
 import java.util.List;
