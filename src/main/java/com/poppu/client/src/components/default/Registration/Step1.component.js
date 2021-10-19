@@ -17,6 +17,7 @@ class Step1 extends Component {
             id='name'
             name='name'
             placeholder='Name'
+            autoComplete='name'
             value={this.props.name}
             onChange={this.props.handleChange} />
           <input
@@ -25,6 +26,7 @@ class Step1 extends Component {
             id='email'
             name='email'
             placeholder='Email'
+            autoComplete='email'
             value={this.props.email}
             onChange={this.props.handleChange} />
           <InputMask
@@ -33,6 +35,7 @@ class Step1 extends Component {
             id='phone'
             name='phone'
             placeholder='Phone Number'
+            autoComplete='tel'
             value={this.props.phone}
             onChange={this.props.handleChange}/>
           <div className='registration-password-info'>
@@ -50,6 +53,7 @@ class Step1 extends Component {
             id='password'
             name='password'
             placeholder='Password'
+            autoComplete='new-password'
             value={this.props.password}
             onChange={this.props.handleChange} />
           <input
@@ -58,6 +62,7 @@ class Step1 extends Component {
             id='confirm-password'
             name='confirmPassword'
             placeholder='Confirm Password'
+            autoComplete='off'
             value={this.props.confirmPassword}
             onChange={this.props.handleChange} />
           <div className='registration-checkbox'>

@@ -65,6 +65,10 @@ class Registration extends Component {
   }
 
   renderButtons() {
+    if (this.state.currentStep === 4) {
+      return null
+    }
+
     let nextButton = <button
         className='registration-button registration-next'
         type='button'
@@ -241,13 +245,13 @@ class Registration extends Component {
                 homeCity={this.state.homeCity}
                 homeZip={this.state.homeZip}
                 homeState={this.state.homeState} />
-              <Confirmation
-                currentStep={this.state.currentStep}
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmitConfirmation}
-                userEmail={this.state.email}
-                confirmationCode={this.state.confirmationCode} />
             </form>
+            <Confirmation
+              currentStep={this.state.currentStep}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmitConfirmation}
+              userEmail={this.state.email}
+              confirmationCode={this.state.confirmationCode} />
           </div>
         </div>
       </>

@@ -9,9 +9,9 @@ class Confirmation extends Component {
     return (
       <>
         <div className='registration-step'>
-          <h3>Confirmation</h3>
-          <p>An email has been sent to <span Style='font-weight: bold'>{this.props.userEmail}</span> with a confirmation code. Please enter the confirmation code here to continue.</p>
-          <form onSubmit={this.props.handleSubmitConfirmation}>
+          <form className='registration-form' onSubmit={this.props.handleSubmit}>
+            <h3>Confirmation</h3>
+            <p>An email has been sent to <span>{this.props.userEmail}</span> with a confirmation code. Please enter the confirmation code here to continue.</p>
             <input
               type='text'
               className='registration-input'
@@ -20,6 +20,10 @@ class Confirmation extends Component {
               placeholder='Confirmation Code'
               value={this.props.confirmationCode}
               onChange={this.props.handleChange} />
+            <br />
+            <button
+              className='registration-button registration-submit'
+              type='submit'>Submit</button>
           </form>
         </div>
       </>
