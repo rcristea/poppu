@@ -1,6 +1,5 @@
 package com.poppu.server.controller;
 
-import com.poppu.server.model.TestModel;
 import com.poppu.server.model.UserModel;
 import com.poppu.server.repository.UserRepository;
 import org.slf4j.Logger;
@@ -25,26 +24,46 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/users")
-    public List<UserModel> getTests() {
+    @GetMapping("/")
+    public List<UserModel> getUsers() {
         return this.userRepository.findAll();
     }
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<UserModel> getTestById(@PathVariable(required = false) long id) {
-        Optional<UserModel> test = this.userRepository.findById(id);
-        return test.map(response -> ResponseEntity.ok().body(response))
+    @GetMapping("/{id}")
+    public ResponseEntity<UserModel> getUserById(@PathVariable("id") long id) {
+        Optional<UserModel> getUserTest = this.userRepository.findById(id);
+        return getUserTest.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/users")
-    public ResponseEntity<UserModel> createTest(@RequestBody UserModel user) throws URISyntaxException {
-        UserModel res = this.userRepository.save(user);
-        return ResponseEntity.created(new URI("/api/users/" + res.getId())).body(res);
+    @PutMapping("/{id}")
+    public ResponseEntity<UserModel> putUser(@RequestBody UserModel newUserInfo, @PathVariable("id") long id) throws  URISyntaxException {
+        UserModel updatedUser = this.userRepository.findById(id)
+                .map(user -> {
+                    user.setFirstName(newUserInfo.getFirstName());
+                    user.setLastName(newUserInfo.getLastName());
+                    user.setPhoneNum(newUserInfo.getPhoneNum());
+                    user.setPassword(newUserInfo.getPassword());
+                    user.setIsSubscribed(newUserInfo.getIsSubscribed());
+                    user.setRole(newUserInfo.getRole());
+                    return this.userRepository.save(user);
+                })
+                .orElseGet(() -> this.userRepository.save(newUserInfo));
+        return ResponseEntity
+                .created(new URI("/api/users/" + updatedUser.getId()))
+                .body(updatedUser);
     }
 
-    @DeleteMapping("/tests/{id}")
-    public ResponseEntity<HttpStatus> deleteTest(@PathVariable("id") long id) {
+    @PostMapping("/")
+    public ResponseEntity<UserModel> createUser(@RequestBody UserModel user) throws URISyntaxException {
+        UserModel res = this.userRepository.save(user);
+        return ResponseEntity
+                .created(new URI("/api/users/" + res.getId()))
+                .body(res);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
         this.userRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
