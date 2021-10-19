@@ -14,32 +14,39 @@ public class TicketModel {
     private int ticketId;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false, length = 50)
     private TicketType type;
 
     @Column(name = "price", nullable = false)
     private double price;
 
-    // **** IMPORTANT: Implement MANY-TO-ONE ASSOCIATION WITH SHOW, SHOWROOM
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "show_id")
+    private ShowModel show;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "showroom_id")
+    private ShowroomModel showroom;
 
     @Column(name = "seat", length = 5, nullable = false)
     private String seat;
 
-    // **** IMPORTANT: IMPLEMENT MANY-TO-ONE ASSOCIATION WITH BOOKING
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "booking_num")
+    private BookingModel booking;
 
     public TicketModel() {
 
     }
 
-    public TicketModel(TicketType type, double price, /*ShowModel show, ShowroomModel showroom,*/
-                       String seat/*, BookingModel booking*/) {
+    public TicketModel(TicketType type, double price, ShowModel show, ShowroomModel showroom,
+                       String seat, BookingModel booking) {
         this.type = type;
         this.price = price;
-        /*
         this.show = show;
         this.showroom = showroom;
-         */
         this.seat = seat;
-        // this.booking = booking;
+        this.booking = booking;
     }
 
     public int getTicketId() {
@@ -54,12 +61,20 @@ public class TicketModel {
         return price;
     }
 
+    public ShowModel getShow() {
+        return show;
+    }
+
+    public ShowroomModel getShowroom() {
+        return showroom;
+    }
+
     public String getSeat() {
         return seat;
     }
 
-    public void setTicketId(int ticketId) {
-        this.ticketId = ticketId;
+    public BookingModel getBooking() {
+        return booking;
     }
 
     public void setType(TicketType type) {
@@ -70,7 +85,19 @@ public class TicketModel {
         this.price = price;
     }
 
+    public void setShow(ShowModel show) {
+        this.show = show;
+    }
+
+    public void setShowroom(ShowroomModel showroom) {
+        this.showroom = showroom;
+    }
+
     public void setSeat(String seat) {
         this.seat = seat;
+    }
+
+    public void setBooking(BookingModel booking) {
+        this.booking = booking;
     }
 }

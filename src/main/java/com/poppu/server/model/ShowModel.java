@@ -2,6 +2,8 @@ package com.poppu.server.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "show")
@@ -18,19 +20,26 @@ public class ShowModel {
     @Column(name = "duration", nullable = false)
     private double duration;
 
-    // **** IMPORTANT: IMPLEMENT THE MANY-TO-ONE ASSOCATIONS WITH MOVIE, SHOWROOM ****
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "movie_id")
+    private MovieModel movie;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "showroom_id")
+    private ShowroomModel showroom;
+
+    @OneToMany(mappedBy = "show")
+    private Set<SeatAvailabilityModel> seats = new HashSet<SeatAvailabilityModel>();
 
     public ShowModel() {
 
     }
 
-    public ShowModel(Timestamp dateTime, double duration/*, MovieModel movie, ShowroomModel showroom*/) {
+    public ShowModel(Timestamp dateTime, double duration, MovieModel movie, ShowroomModel showroom) {
         this.dateTime = dateTime;
         this.duration = duration;
-        /*
         this.movie = movie;
         this.showroom = showroom;
-         */
     }
 
     public int getShowID() {
@@ -45,8 +54,12 @@ public class ShowModel {
         return duration;
     }
 
-    public void setShowID(int showID) {
-        this.showID = showID;
+    public MovieModel getMovie() {
+        return movie;
+    }
+
+    public ShowroomModel getShowroom() {
+        return showroom;
     }
 
     public void setDateTime(Timestamp dateTime) {
@@ -55,5 +68,14 @@ public class ShowModel {
 
     public void setDuration(double duration) {
         this.duration = duration;
+    }
+
+    public void setMovie(MovieModel movie) {
+        this.movie = movie;
+    }
+
+    // impacts the SeatAvailabilityModel
+    public void setShowroom(ShowroomModel showroom) {
+        this.showroom = showroom;
     }
 }

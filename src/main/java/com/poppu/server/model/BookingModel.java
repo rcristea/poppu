@@ -2,6 +2,8 @@ package com.poppu.server.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="booking")
@@ -21,15 +23,16 @@ public class BookingModel {
     @Column(name = "card_num", nullable = false)
     private int cardNum;
 
-    // **** IMPORTANT: WORK ON MANY-TO-ONE ASSOCIATION WITH USER ****
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "user_id", referencedColumnName = "user_user_id")
+    @ManyToOne(optional = false)
+    @JoinColumn (name = "user_id")
     private UserModel user;
 
-    // **** IMPORTANT: CHECK MANY-TO-ONE ASSOCIATION WITH PROMOTION
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "promotion_id", referencedColumnName = "promotion_promotion_id")
+    @ManyToOne
+    @JoinColumn (name = "promotion_id")
     private PromotionModel promotion;
+
+    @OneToMany(mappedBy = "booking")
+    private List<TicketModel> tickets = new ArrayList<TicketModel>();
 
     public BookingModel() {
 
@@ -74,10 +77,6 @@ public class BookingModel {
         return promotion;
     }
 
-    public void setBookingNum(int bookingNum) {
-        this.bookingNum = bookingNum;
-    }
-
     public void setMovieTitle(String movieTitle) {
         this.movieTitle = movieTitle;
     }
@@ -97,4 +96,8 @@ public class BookingModel {
     public void setPromotion(PromotionModel promotion) {
         this.promotion = promotion;
     }
+
+    // public void addTicket(TicketModel t) { }
+    // public List<TicketModel> getTickets() { }
+    // public boolean removeTicket(TicketModel t) { }
 }

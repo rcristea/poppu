@@ -28,12 +28,4 @@ public class MovieActorKey implements Serializable {
     public int getActorId() {
         return actorId;
     }
-
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
-    }
-
-    public void setActorId(int actorId) {
-        this.actorId = actorId;
-    }
 }

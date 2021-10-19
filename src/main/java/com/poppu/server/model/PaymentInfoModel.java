@@ -11,19 +11,18 @@ public class PaymentInfoModel {
     @Column (name = "card_num")
     private int cardNum;
 
-    @Column (name = "card_type", nullable = false)
+    @Column (name = "card_type", nullable = false, length = 45)
     private String cardType;
 
-    @Column (name = "exp_date", nullable = false)
+    @Column (name = "exp_date", nullable = false, length = 10)
     private String expDate;
 
-    // **** IMPORTANT: CHECK ONE-TO-ONE ASSOCIATION WITH ADDRESS
     @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "address_id", referencedColumnName = "address_address_id")
+    @JoinColumn (name = "address_id")
     private AddressModel address;
 
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "user_id", referencedColumnName = "user_user_id")
+    @ManyToOne(optional = false)
+    @JoinColumn (name = "user_id")
     private UserModel user;
 
     public PaymentInfoModel() {

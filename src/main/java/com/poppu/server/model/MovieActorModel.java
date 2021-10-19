@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class MovieActorModel {
 
     @EmbeddedId
-    MovieActorKey id;
+    private MovieActorKey id;
 
     @ManyToOne(optional = false)
     @MapsId("movieId")
@@ -32,6 +32,14 @@ public class MovieActorModel {
         this.movie = movie;
         this.actor = actor;
         this.role = role;
+    }
+
+    public MovieActorKey getId() {
+        return id;
+    }
+
+    public MovieModel getMovie() {
+        return movie;
     }
 
     public ActorModel getActor() {

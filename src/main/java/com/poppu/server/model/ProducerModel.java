@@ -38,10 +38,6 @@ public class ProducerModel {
         return lastName;
     }
 
-    public void setProducerId(int producerId) {
-        this.producerId = producerId;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }

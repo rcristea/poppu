@@ -30,10 +30,6 @@ public class SeatModel {
         return seat;
     }
 
-    public void setSeatId(int seatId) {
-        this.seatId = seatId;
-    }
-
     public void setSeat(String seat) {
         this.seat = seat;
     }

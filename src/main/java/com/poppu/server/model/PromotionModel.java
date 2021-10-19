@@ -30,10 +30,6 @@ public class PromotionModel {
         return offer;
     }
 
-    public void setPromotionId(int promotionId) {
-        this.promotionId = promotionId;
-    }
-
     public void setOffer(int offer) {
         this.offer = offer;
     }

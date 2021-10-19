@@ -38,10 +38,6 @@ public class DirectorModel {
         return lastName;
     }
 
-    public void setDirectorId(int directorId) {
-        this.directorId = directorId;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
