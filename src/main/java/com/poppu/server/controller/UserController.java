@@ -36,8 +36,13 @@ public class UserController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/email")
+    public ResponseEntity<UserModel> getUserByEmail(@RequestParam("email") String email) {
+        return this.getUserByEmail(email);
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<UserModel> putUser(@RequestBody UserModel newUserInfo, @PathVariable("id") long id) throws  URISyntaxException {
+    public ResponseEntity<UserModel> putUser(@RequestBody UserModel newUserInfo, @PathVariable("id") long id) throws URISyntaxException {
         UserModel updatedUser = this.userRepository.findById(id)
                 .map(user -> {
                     user.setFirstName(newUserInfo.getFirstName());
@@ -49,6 +54,19 @@ public class UserController {
                     return this.userRepository.save(user);
                 })
                 .orElseGet(() -> this.userRepository.save(newUserInfo));
+        return ResponseEntity
+                .created(new URI("/api/users/" + updatedUser.getId()))
+                .body(updatedUser);
+    }
+
+    @PutMapping("/{id}/password")
+    public ResponseEntity<UserModel> putPassword(@PathVariable long id, @RequestParam("password") String password) throws URISyntaxException {
+        UserModel updatedUser = this.userRepository.findById(id)
+                .map(user -> {
+                    user.setPassword(password);
+                    return this.userRepository.save(user);
+                })
+                .orElseThrow(() -> new RuntimeException("Password not updated"));
         return ResponseEntity
                 .created(new URI("/api/users/" + updatedUser.getId()))
                 .body(updatedUser);
