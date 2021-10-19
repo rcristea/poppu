@@ -1,0 +1,106 @@
+.gradient-border {
+  border: 1px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(90deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
+}
+
+.registration-container {
+  min-height: 100vh;
+  background-color: #171717;
+}
+
+.registration-container h1, .registration-container h3 {
+  text-shadow: none;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.registration-container h3 {
+  margin-top: 25px;
+}
+
+.registration-container p {
+  text-shadow: none;
+  color: #fff;
+  font-size: 0.625rem;
+}
+
+.registration-container .divider {
+  width: 150px;
+  margin: 25px 0;
+}
+
+.registration-form-container {
+  padding: 150px 100px 150px 100px;
+}
+
+.registration-form {
+  margin: auto;
+  width: 600px
+}
+
+.registration-step {
+  display: flex;
+  flex-direction: column;
+}
+
+.registration-step input, .registration-step select {
+  margin: 5px 0;
+  padding: 10px;
+  background-color: #131313;
+  color: #fff;
+  border: 1px solid #000000;
+  border-radius: 25px;
+  outline: 0;
+}
+
+.registration-button {
+  margin: 15px 0;
+  padding: 5px 25px;
+  color: #fff;
+  border: 1px solid hsla(283, 92%, 63%, 1);
+  background-color: #131313;
+  border-radius: 25px;
+  transition: 0.1s;
+}
+
+.registration-button:hover {
+  background-color: #000;
+}
+
+.registration-prev {
+  margin-right: 10px;
+}
+
+.registration-submit {
+  border: 1px solid hsla(180, 67%, 67%, 1);
+}
+
+.registration-form-errors li {
+  list-style-type: circle;
+  color: #f00;
+  text-shadow: none;
+  font-size: 0.625rem;
+}
+
+.registration-password-info p {
+  margin: 10px 0 0 0;
+}
+
+.registration-password-info li {
+  list-style-type: circle;
+  color: #fff;
+  text-shadow: none;
+  font-size: 0.625rem;
+}
+
+.registration-checkbox {
+  margin: 10px;
+}
+
+.registration-checkbox label {
+  margin-left: 15px;
+  color: #fff;
+  text-shadow: none;
+  font-size: 0.75rem;
+}
