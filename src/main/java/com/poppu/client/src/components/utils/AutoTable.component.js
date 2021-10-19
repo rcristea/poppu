@@ -5,7 +5,6 @@ import ViewButton from './Buttons/ViewButton.component'
 import DeleteButton from './Buttons/DeleteButton.component'
 import AddButton from './Buttons/AddButton.component'
 
-import 'bootstrap/dist/css/vapor.css'
 import 'react-bootstrap/'
 
 

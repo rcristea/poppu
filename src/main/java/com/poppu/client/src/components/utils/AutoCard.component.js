@@ -2,7 +2,6 @@ import { Component } from 'react'
 import { Card, Col, Container, Row} from 'react-bootstrap'
 
 import 'react-bootstrap/'
-import 'bootstrap/dist/css/vapor.css'
 
 export class AutoCard extends Component {
     render() {

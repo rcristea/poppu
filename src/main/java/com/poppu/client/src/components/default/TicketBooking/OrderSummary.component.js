@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import {Button, Col, Container, Row} from 'react-bootstrap'
 
-import 'bootstrap/dist/css/vapor.css'
 import 'react-bootstrap/'
 import AutoCard from '../../utils/AutoCard.component'
 

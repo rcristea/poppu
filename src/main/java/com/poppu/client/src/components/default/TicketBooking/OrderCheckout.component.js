@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import {Button, Card, Col, Container, Form, FormSelect, Row} from 'react-bootstrap'
 
-import 'bootstrap/dist/css/vapor.css'
 import 'react-bootstrap/'
 
 export class OrderCheckoutComponent extends Component {
