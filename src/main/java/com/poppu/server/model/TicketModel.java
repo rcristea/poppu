@@ -14,6 +14,7 @@ public class TicketModel {
     private int ticketId;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false, length = 50)
     private TicketType type;
 
     @Column(name = "price", nullable = false)
@@ -29,8 +30,6 @@ public class TicketModel {
 
     @Column(name = "seat", length = 5, nullable = false)
     private String seat;
-
-    // **** IMPORTANT: IMPLEMENT MANY-TO-ONE ASSOCIATION WITH BOOKING
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "booking_num")
