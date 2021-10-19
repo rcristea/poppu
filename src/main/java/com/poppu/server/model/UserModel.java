@@ -50,8 +50,6 @@ public class UserModel {
     @OneToMany(mappedBy = "user")
     private List<PaymentInfoModel> paymentCards = new ArrayList<PaymentInfoModel>();
 
-    @OneToMany(mappedBy = "user")
-    private List<BookingModel> bookings = new ArrayList<BookingModel>();
 
     public UserModel() {
 
