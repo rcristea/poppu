@@ -187,20 +187,21 @@ class Registration extends Component {
   }
 
   async postData(data, destination) {
-    await fetch('http://localhost:8080/api/' + destination + '/', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data),
-    }).then(response => {
-      response.json().then(json => {
-        return json
-      });
-    }).catch(error => {
-      console.log(error)
-      return null
+    return new Promise(function (resolve, reject) {
+      fetch('http://localhost:8080/api/' + destination + '/', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+      }).then(response => {
+        response.json().then(json => {
+          resolve(json)
+        });
+      }).catch(error => {
+        reject(error)
+      })
     })
   }
 
@@ -212,10 +213,11 @@ class Registration extends Component {
       return
     }
 
-    let userHomeAddressJSON = null
-    let userBillingAddressJSON = null
-    let userPaymentJSON = null
-    let userJSON = null
+    let userHomeAddressJSON
+    let userHomeAddressId
+    let userBillingAddressJSON
+    let userPaymentJSON
+    let userJSON
 
     let hasHomeAddress = this.state.homeStreet.length > 0
     let hasUserPayment = this.state.cardNumber.length > 0
@@ -230,6 +232,7 @@ class Registration extends Component {
       }
 
       userHomeAddressJSON = await this.postData(userHomeAddress, 'address')
+      userHomeAddressId = userHomeAddressJSON['addressId']
     }
 
     // Create User
@@ -240,12 +243,14 @@ class Registration extends Component {
       'role': 'USER',
       'email': this.state.email,
       'password': this.state.password,
-      'phoneNum': this.state.phoneNum,
+      'phoneNum': this.state.phone,
       'isSubscribed': this.state.promo,
       'status': 'INACTIVE',
-      'address': userHomeAddressJSON['addressId'],
+      'address': userHomeAddressId,
       'paymentCards': null,
     }
+
+    console.log(userHomeAddressId)
 
     userJSON = await this.postData(user, 'users')
 
@@ -268,10 +273,11 @@ class Registration extends Component {
         'user': userJSON['userId'],
       }
 
-      userPaymentJSON = await this.postData(userPayment, 'paymentInfo')
+      userPaymentJSON = await this.postData(userPayment, 'paymentinfo')
+      console.log(userPaymentJSON)
     }
 
-    // TODO add userPaymentJSON[' to the array list of <PaymentInfoModel> in UserModel
+    // TODO add userPaymentJSON to the array list of <PaymentInfoModel> in UserModel
 
 
 
