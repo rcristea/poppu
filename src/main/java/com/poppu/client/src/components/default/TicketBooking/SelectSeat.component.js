@@ -4,7 +4,6 @@ import theater_img from '../../../assets/seats/Theater.png'
 import seat0 from '../../../assets/seats/Seat(0).png'
 import seat1 from '../../../assets/seats/Seat(1).png'
 import seat2 from '../../../assets/seats/Seat(2).png'
-import 'bootstrap/dist/css/vapor.css'
 
 
 export class SelectSeatComponent extends Component {

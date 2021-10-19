@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/vapor.css'
 import 'react-bootstrap/'
 import {Component} from 'react'
 import {Button, Col, Container, Row} from 'react-bootstrap'
