@@ -23,7 +23,7 @@ public class PaymentInfoController {
         this.paymentInfoRepository = paymentInfoRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public List<PaymentInfoModel> getPaymentInfo() {
         return this.paymentInfoRepository.findAll();
     }
