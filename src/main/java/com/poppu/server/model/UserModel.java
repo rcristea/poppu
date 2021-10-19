@@ -51,6 +51,9 @@ public class UserModel {
     @OneToMany(mappedBy = "user")
     private List<PaymentInfoModel> paymentCards = new ArrayList<PaymentInfoModel>();
 
+    @OneToMany(mappedBy = "user")
+    private List<BookingModel> bookings = new ArrayList<BookingModel>();
+
     public UserModel() {
 
     }
@@ -126,6 +129,7 @@ public class UserModel {
         this.role = role;
     }
 
+    // NOTE: USERS CANNOT CHANGE THEIR EMAIL
     public void setEmail(String email) {
         this.email = email;
     }
@@ -145,5 +149,20 @@ public class UserModel {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    // public boolean addAddress(AddressModel a) { return false; }
+    // public boolean deleteAddress(AddressModel a) { return false; }
+    // public boolean addPayment(PaymentModel p) { return false; }
+    // public boolean deletePayment(PaymentModel p) { return false; }
+    // public List<PaymentModel> getPayments() { return null; }
+
+    // NOTE: FUNCTION COULD EITHER BE CREATEBOOKING OR ADDBOOKING
+    // public boolean createBooking() { return false; }
+
+    // public List<BookingModel> getBookings() { return null; }
+
+    // **** Admin-only operations
+    // private boolean isAdmin() { return false; }
+    // public boolean setStatus(UserModel u, StatusType s) { return false; }
 }
 
