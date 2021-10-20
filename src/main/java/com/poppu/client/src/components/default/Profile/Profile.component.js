@@ -38,6 +38,21 @@ export class ProfileComponent extends Component {
         }
     ]
 
+    constructor(props) {
+        super(props);
+
+        this.logOut = this.logOut.bind(this)
+    }
+
+    logOut() {
+        if (sessionStorage.getItem('role')) {
+            sessionStorage.removeItem('role')
+            sessionStorage.setItem('alert', 'Successfully logged out!')
+
+            this.props.history.push('/')
+        }
+    }
+
     componentDidMount() {
         if (sessionStorage.getItem('role') !== 'user') {
             sessionStorage.setItem('alert', 'User does not have correct privileges.')
@@ -54,10 +69,11 @@ export class ProfileComponent extends Component {
                 <Row>
                     <AutoList component_title={'Payment Info'} component_data={this.payment_info} />
                 </Row>
-                <Row className={'mx-3'}>
+                <Row className={'mx-4'}>
                     <Col md={4}><Button variant={'warning'} href={'/profile/edit'}>Edit Profile</Button></Col>
                     <Col md={4}><Button variant={'success'} href={'/'}>Back to Home Screen</Button></Col>
                     <Col md={4}><Button variant={'danger'}>Delete Account</Button></Col>
+                    <Col md={4}><Button variant={'primary'} onClick={this.logOut}>Log out</Button></Col>
                 </Row>
             </Container>
         )

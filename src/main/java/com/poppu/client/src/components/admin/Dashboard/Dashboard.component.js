@@ -184,6 +184,7 @@ class Dashboard extends Component {
     this.handleMovieDelete = this.handleMovieDelete.bind(this)
     this.handlePromoDelete = this.handlePromoDelete.bind(this)
     this.formatDateTime = this.formatDateTime.bind(this)
+    this.logOut = this.logOut.bind(this)
   }
 
   componentDidMount() {
@@ -213,10 +214,19 @@ class Dashboard extends Component {
     return format(date, 'MMM dd, yy - p')
   }
 
+  logOut() {
+    if (sessionStorage.getItem('role')) {
+      sessionStorage.removeItem('role')
+      sessionStorage.setItem('alert', 'Successfully logged out!')
+
+      this.props.history.push('/')
+    }
+  }
+
   render() {
     return (
       <>
-        <Sidebar />
+        <Sidebar logOut={this.logOut} />
         <div className='dashboard-container'>
           <div className='dashboard-header'>
             <h1>Poppu Admin Dashboard</h1>

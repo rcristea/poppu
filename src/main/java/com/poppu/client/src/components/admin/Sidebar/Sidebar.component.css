@@ -12,6 +12,18 @@
   padding: 0 15px;
 }
 
+.topbar-left {
+  flex-grow: 1;
+}
+
+.topbar-right button {
+  background-color: hsla(245, 58%, 60%, 1);
+  color: #fff;
+  border: 0;
+  border-radius: 50px;
+  padding: 0 15px;
+}
+
 .sidebar-container {
   height: 100%;
   width: 200px;

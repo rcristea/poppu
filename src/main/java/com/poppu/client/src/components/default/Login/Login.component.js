@@ -18,9 +18,8 @@ export class Login extends Component {
     } else if (loggedIn && user) {
       sessionStorage.setItem('role', 'user')
       alert('Logged in as user')
-      this.props.history.push('/')
+      this.props.history.push('/profile')
     }
-
   }
 
   render() {
