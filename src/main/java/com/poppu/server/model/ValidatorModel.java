@@ -1,6 +1,8 @@
 package com.poppu.server.model;
 
 import javax.persistence.*;
+import javax.websocket.Session;
+import java.util.Properties;
 import java.util.Random;
 
 @Entity
@@ -57,6 +59,5 @@ public class ValidatorModel {
     }
 
     public void sendEmail() {
-
     }
 }
