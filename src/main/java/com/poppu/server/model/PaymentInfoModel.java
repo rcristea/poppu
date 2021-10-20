@@ -7,9 +7,8 @@ import javax.persistence.*;
 public class PaymentInfoModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column (name = "card_num")
-    private int cardNum;
+    @Column (name = "card_num", nullable = false, length = 128)
+    private String cardNum;
 
     @Column (name = "card_type", nullable = false, length = 45)
     private String cardType;
@@ -29,7 +28,7 @@ public class PaymentInfoModel {
 
     }
 
-    public PaymentInfoModel(int cardNum, String cardType, String expDate, AddressModel address, UserModel user){
+    public PaymentInfoModel(String cardNum, String cardType, String expDate, AddressModel address, UserModel user){
         this.cardNum = cardNum;
         this.cardType = cardType;
         this.expDate = expDate;
@@ -37,7 +36,7 @@ public class PaymentInfoModel {
         this.user = user;
     }
 
-    public int getCardNum() {
+    public String getCardNum() {
         return cardNum;
     }
 
@@ -57,7 +56,7 @@ public class PaymentInfoModel {
         return user;
     }
 
-    public void setCardNum(int cardNum) {
+    public void setCardNum(String cardNum) {
         this.cardNum = cardNum;
     }
 
