@@ -69,17 +69,18 @@
   background: -webkit-linear-gradient(180deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
 }
 
-.signup {
+.signup, .forgot-password {
   color: #fff;
   margin-top: 15px;
   font-size: 0.625rem;
 }
 
-.signup a {
+.signup a, .forgot-password a {
   text-decoration: none;
   color: #fff;
 }
 
-.signup a:hover {
+.signup a:hover, .forgot-password a:hover {
+  color: hsla(180, 67%, 67%, 1);
   text-decoration: underline;
 }

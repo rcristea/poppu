@@ -36,6 +36,7 @@ export class Login extends Component {
                 <input type='password' placeholder='●●●●●●●●' name='password'/>
                 <button type='submit'>Login</button>
               </form>
+              <p className='forgot-password'>Forgot your password? <Link to='/forgot_password'>Click here</Link></p>
               <p className='signup'>New to poppu? <Link to='/register'>Sign up</Link></p>
             </div>
           </div>
