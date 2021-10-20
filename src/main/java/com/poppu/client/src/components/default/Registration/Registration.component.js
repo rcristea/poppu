@@ -8,6 +8,7 @@ import Confirmation from './Confirmation.component'
 import isEmail from 'validator/es/lib/isEmail'
 import isStrongPassword from 'validator/es/lib/isStrongPassword'
 import isCreditCard from 'validator/es/lib/isCreditCard'
+import bcrypt from 'bcryptjs'
 
 class Registration extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class Registration extends Component {
       homeState: '0',
       formErrors: [],
       confirmationCode: '',
+      salt: '$2a$10$O1RbZIPCQCLr522HZUP51/', // for encryption
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -242,7 +244,7 @@ class Registration extends Component {
       'lastName': this.state.name.split(' ')[1],
       'role': 'USER',
       'email': this.state.email,
-      'password': this.state.password,
+      'password': bcrypt.hashSync(this.state.password, this.state.salt),
       'phoneNum': this.state.phone,
       'isSubscribed': this.state.promo,
       'status': 'INACTIVE',
@@ -266,7 +268,7 @@ class Registration extends Component {
       userBillingAddressJSON = await this.postData(userBillingAddress, 'address')
 
       let userPayment = {
-        'cardNum': this.state.cardNumber,
+        'cardNum': bcrypt.hashSync(this.state.cardNumber, this.state.salt),
         'cardType': this.state.cardType,
         'expDate': this.state.cardExpiry,
         'address': userBillingAddressJSON['addressId'],

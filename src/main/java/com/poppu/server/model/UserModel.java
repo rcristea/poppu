@@ -30,7 +30,7 @@ public class UserModel {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password", nullable = false, length = 32)
+    @Column(name = "password", nullable = false, length = 128)
     private String password;
 
     @Column(name = "phone_num", nullable = false, length = 16)

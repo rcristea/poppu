@@ -24,6 +24,15 @@ import AddPaymentComponent from '../default/Profile/AddPaymentInfo.component'
 import Registration from '../default/Registration/Registration.component'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      'salt': '$2a$10$O1RbZIPCQCLr522HZUP51/'
+    }
+  }
+
+
   render() {
     return (
       <BrowserRouter>
