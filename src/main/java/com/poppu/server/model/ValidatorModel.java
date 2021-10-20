@@ -1,9 +1,11 @@
 package com.poppu.server.model;
 
 import javax.persistence.*;
-import javax.websocket.Session;
 import java.util.Properties;
 import java.util.Random;
+
+import javax.mail.*;
+import javax.mail.internet.*;
 
 @Entity
 @Table(name = "validator")
@@ -59,5 +61,20 @@ public class ValidatorModel {
     }
 
     public void sendEmail() {
+        Properties props = new Properties();
+        props.put("mail.smtp.com" , "smtp.gmail.com");
+        Session session  = Session.getDefaultInstance( props , null);
+        String to = this.email;
+        String from = "from@gmail.com";
+        String subject = "Poppu Validation Code";
+        Message msg = new MimeMessage(session);
+        try {
+            msg.setFrom(new InternetAddress(from));
+            msg.setRecipient(Message.RecipientType.TO , new InternetAddress(to));
+            msg.setSubject(subject);
+            msg.setText("Your validation code is: " + this.code);
+        }  catch(Exception exc) {
+
+        }
     }
 }
