@@ -23,12 +23,12 @@ public class PaymentInfoController {
         this.paymentInfoRepository = paymentInfoRepository;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public List<PaymentInfoModel> getPaymentInfo() {
         return this.paymentInfoRepository.findAll();
     }
 
-    @GetMapping("/")
+    @GetMapping("/{id}")
     public ResponseEntity<PaymentInfoModel> getPaymentInfo(@PathVariable("id") long id) {
         Optional<PaymentInfoModel> getPaymentInfoTest =  this.paymentInfoRepository.findById(id);
         return getPaymentInfoTest.map(response -> ResponseEntity.ok().body(response))

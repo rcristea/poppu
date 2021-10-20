@@ -3,7 +3,7 @@ package com.poppu.server.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="payment_info")
+@Table(name="PaymentInfoModel")
 public class PaymentInfoModel {
 
     @Id
