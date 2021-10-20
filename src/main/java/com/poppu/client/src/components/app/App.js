@@ -38,10 +38,12 @@ class App extends Component {
           <Route path='/booking/order/checkout' exact={true} component={OrderCheckoutComponent} />
           <Route path='/booking/order/confirm' exact={true} component={OrderConfirmationComponent} />
 
+          {/* User Routes */}
           <Route path='/profile' exact={true} component={ProfileComponent} />
           <Route path='/profile/edit' exact={true} component={EditProfileComponent} />
           <Route path='/payment/add' exact={true} component={AddPaymentComponent} />
 
+          {/* Admin Routes */}
           <Route path='/admin' exact={true} component={Dashboard} />
           <Route path='/promos' exact={true} component={PromoIndex} />
           <Route path='/promos/add' exact={true} component={PromoAdd} />

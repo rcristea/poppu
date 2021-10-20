@@ -28,6 +28,13 @@ export class AddShowTime extends Component {
     submit_message = 'Add Showtime'
     submit_lint = '/admin'
 
+    componentDidMount() {
+        if (sessionStorage.getItem('role') !== 'admin') {
+            sessionStorage.setItem('alert', 'User does not have correct privileges.')
+            this.props.history.push('/')
+        }
+    }
+
     render() {
         return (
             <Container className={'my-2'}>

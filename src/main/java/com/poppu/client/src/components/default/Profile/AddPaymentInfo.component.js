@@ -34,6 +34,13 @@ export class AddPaymentComponent extends Component {
     submit_message = 'Add Payment Method'
     submit_lint = '/profile'
 
+    componentDidMount() {
+        if (sessionStorage.getItem('role') !== 'user') {
+            sessionStorage.setItem('alert', 'User does not have correct privileges.')
+            this.props.history.push('/')
+        }
+    }
+
     render() {
         return (
             <Container className={'my-2'}>

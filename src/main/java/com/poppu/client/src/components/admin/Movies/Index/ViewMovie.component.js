@@ -36,6 +36,13 @@ export class ViewMovie extends Component {
         },
     ]
 
+    componentDidMount() {
+        if (sessionStorage.getItem('role') !== 'admin') {
+            sessionStorage.setItem('alert', 'User does not have correct privileges.')
+            this.props.history.push('/')
+        }
+    }
+
     render() {
         return (
             <Container className={'my-2'}>

@@ -15,6 +15,13 @@ class PromoAdd extends Component {
     this.props.history.push('/promos')
   }
 
+  componentDidMount() {
+    if (sessionStorage.getItem('role') !== 'admin') {
+      sessionStorage.setItem('alert', 'User does not have correct privileges.')
+      this.props.history.push('/')
+    }
+  }
+
   render() {
     return (
       <>
