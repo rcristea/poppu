@@ -1,6 +1,8 @@
 package com.poppu.server.controller;
 
 import com.poppu.server.model.PaymentInfoModel;
+import com.poppu.server.model.UserModel;
+import com.poppu.server.model.ValidatorModel;
 import com.poppu.server.repository.PaymentInfoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -44,6 +48,14 @@ public class PaymentInfoController {
                 paymentInfoModel.getUser().getId() == userId
                 )
                 .collect(Collectors.toList());
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<PaymentInfoModel> createPayment(@RequestBody PaymentInfoModel paymentInfoModel) throws URISyntaxException {
+        PaymentInfoModel res = this.paymentInfoRepository.save(paymentInfoModel);
+        return ResponseEntity
+                .created(new URI("/api/paymentinfo/" + res.getCardNum()))
+                .body(res);
     }
 
     @DeleteMapping("/{id}")
