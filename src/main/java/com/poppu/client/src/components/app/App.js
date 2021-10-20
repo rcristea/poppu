@@ -6,10 +6,6 @@ import TestAdd from '../tests/TestAdd/TestAdd.component'
 import TestEdit from '../tests/TestEdit/TestEdit.component'
 import LandingPage from '../default/LandingPage/LandingPage.component'
 import Login from '../default/Login/Login.component'
-import Signup from '../default/Signup/Signup.component'
-import SignupPayment from '../default/SignupPayment/SignupPayment.component'
-import SignupAddress from '../default/SignupAddress/SignupAddress.component'
-import SignupConfirm from '../default/SignupConfirm/SignupConfirm.component'
 import SelectTimeComponent from '../default/TicketBooking/SelectTime.component'
 import SelectSeatComponent from '../default/TicketBooking/SelectSeat.component'
 import OrderSummaryComponent from '../default/TicketBooking/OrderSummary.component'
@@ -34,11 +30,6 @@ class App extends Component {
         <Switch>
           <Route path='/' exact={true} component={LandingPage} />
           <Route path='/login' exact={true} component={Login} />
-          <Route path='/signup' exact={true} component={Signup} />
-          <Route path='/signup/payment' exact={true} component={SignupPayment} />
-          <Route path='/signup/address' exact={true} component={SignupAddress} />
-          <Route path='/signup/confirm' exact={true} component={SignupConfirm} />
-
           <Route path='/register' exact={true} component={Registration} />
 
           <Route path='/booking/times' exact={true} component={SelectTimeComponent} />

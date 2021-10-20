@@ -186,6 +186,13 @@ class Dashboard extends Component {
     this.formatDateTime = this.formatDateTime.bind(this)
   }
 
+  componentDidMount() {
+    if (sessionStorage.getItem('role') !== 'admin') {
+      sessionStorage.setItem('alert', 'User does not have correct privileges.')
+      this.props.history.push('/')
+    }
+  }
+
   handleMovieDelete(movieID) {
     return e => {
       e.preventDefault()

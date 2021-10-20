@@ -198,7 +198,7 @@ class Registration extends Component {
       }).then(response => {
         response.json().then(json => {
           resolve(json)
-        });
+        })
       }).catch(error => {
         reject(error)
       })

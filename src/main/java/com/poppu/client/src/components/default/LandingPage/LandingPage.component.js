@@ -1,10 +1,19 @@
-import { Component } from 'react'
+import {Component, createRef} from 'react'
 import './LandingPage.component.css'
 import NavBar from '../NavBar/NavBar.component'
 import HorizontalScrollSnap from '../HorizontalScrollSnap/HorizontalScrollSnap.component'
 import SearchMovie from '../SearchMovie/SearchMovie.component'
+import { IoIosClose } from 'react-icons/io'
 
 export class LandingPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.closeAlert = this.closeAlert.bind(this)
+
+    this.alertRef = createRef()
+  }
+
   nowShowing = [
     {
       'movie_id': 1,
@@ -112,10 +121,27 @@ export class LandingPage extends Component {
     return
   }
 
+  closeAlert() {
+    this.alertRef.current.style.display = 'none'
+  }
+
+  renderAlert() {
+    if (sessionStorage.getItem('alert')) {
+      let message = sessionStorage.getItem('alert')
+      sessionStorage.removeItem('alert')
+      return (
+        <div className='session-alert' ref={this.alertRef}>
+          <p>{message}</p><IoIosClose size='25px' color='#fff' onClick={this.closeAlert}/>
+        </div>
+      )
+    }
+  }
+
   render() {
     return (
       <div className='landing-container'>
         <NavBar />
+        {this.renderAlert()}
         <div className='landing-page-container'>
           <div className='landing-page-hero'>
             <div className='background' />
