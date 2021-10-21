@@ -46,7 +46,6 @@ public class UserModel {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", unique = true)
-    @RestResource(path = "addressModel", rel="address")
     private AddressModel address;
 
     @OneToMany(mappedBy = "user")
