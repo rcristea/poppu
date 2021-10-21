@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import com.poppu.server.util.Role;
 import com.poppu.server.util.Status;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.ArrayList;
 import java.util.List;

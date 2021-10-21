@@ -25,7 +25,6 @@ public class PaymentInfoModel {
     private UserModel user;
 
     public PaymentInfoModel() {
-
     }
 
     public PaymentInfoModel(String cardNum, String cardType, String expDate, AddressModel address, UserModel user){
