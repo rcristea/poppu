@@ -1,5 +1,6 @@
 package com.poppu.server.controller;
 
+import com.poppu.server.model.AddressModel;
 import com.poppu.server.model.UserModel;
 import com.poppu.server.repository.UserRepository;
 import org.slf4j.Logger;

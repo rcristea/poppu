@@ -202,7 +202,7 @@ class Registration extends Component {
           resolve(json)
         })
       }).catch(error => {
-        error.json().then(json => {
+        error.json().then(error => {
           reject(error)
         })
       })
