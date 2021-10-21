@@ -202,7 +202,9 @@ class Registration extends Component {
           resolve(json)
         })
       }).catch(error => {
-        reject(error)
+        error.json().then(json => {
+          reject(error)
+        })
       })
     })
   }
@@ -239,7 +241,7 @@ class Registration extends Component {
 
     // Create User
 
-    let user = {
+    let userData = {
       'firstName': this.state.name.split(' ')[0],
       'lastName': this.state.name.split(' ')[1],
       'role': 'USER',
@@ -252,9 +254,7 @@ class Registration extends Component {
       'paymentCards': null,
     }
 
-    console.log(userHomeAddressId)
-
-    userJSON = await this.postData(user, 'users')
+    userJSON = await this.postData(userData, 'users')
 
     // Create user's payment info
 
@@ -266,13 +266,16 @@ class Registration extends Component {
       }
 
       userBillingAddressJSON = await this.postData(userBillingAddress, 'address')
+      let userBillingAddressId = userBillingAddressJSON['addressId']
+      let userId = userJSON['id']
+
 
       let userPayment = {
         'cardNum': bcrypt.hashSync(this.state.cardNumber, this.state.salt),
         'cardType': this.state.cardType,
         'expDate': this.state.cardExpiry,
-        'address': userBillingAddressJSON['addressId'],
-        'user': userJSON['userId'],
+        'address': userBillingAddressId,
+        'user': userId,
       }
 
       userPaymentJSON = await this.postData(userPayment, 'paymentinfo')

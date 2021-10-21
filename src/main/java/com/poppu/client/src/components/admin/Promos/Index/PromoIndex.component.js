@@ -91,12 +91,22 @@ class PromoIndex extends Component {
     }
 
     this.handleDelete = this.handleDelete.bind(this)
+    this.logOut = this.logOut.bind(this)
   }
 
   handleDelete(id) {
     return e => {
       e.preventDefault()
       alert('Attempted to delete promo with id: ' + id)
+    }
+  }
+
+  logOut() {
+    if (sessionStorage.getItem('role')) {
+      sessionStorage.removeItem('role')
+      sessionStorage.setItem('alert', 'Successfully logged out!')
+
+      this.props.history.push('/')
     }
   }
 
@@ -110,7 +120,7 @@ class PromoIndex extends Component {
   render() {
     return (
       <>
-        <Sidebar />
+        <Sidebar logOut={this.logOut}/>
         <div className='promos-container'>
           <div className='cover'>
             <div className='promos-card'>
