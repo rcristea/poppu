@@ -38,7 +38,9 @@ public class UserController {
 
     @GetMapping("/email")
     public ResponseEntity<UserModel> getUserByEmail(@RequestParam("email") String email) {
-        return this.getUserByEmail(email);
+        Optional<UserModel> getUserByEmailTest = Optional.ofNullable(this.userRepository.findDistinctByEmail(email));
+        return getUserByEmailTest.map(response -> ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("/{id}")

@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import com.poppu.server.util.Role;
 import com.poppu.server.util.Status;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class UserModel {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", unique = true)
+    @RestResource(path = "addressModel", rel="address")
     private AddressModel address;
 
     @OneToMany(mappedBy = "user")
