@@ -20,12 +20,12 @@ public class PaymentInfoModel {
     @Column (name = "exp_date", nullable = false, length = 10)
     private String expDate;
 
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "address_id")
+    @OneToOne (cascade = CascadeType.ALL, optional = false)
+    @JoinColumn (name = "address_id", foreignKey = @ForeignKey(name = "FK_payment_address"))
     private AddressModel address;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn (name = "user_id")
+    @JoinColumn (name = "user_id", foreignKey = @ForeignKey(name = "FK_payment_user"))
     private UserModel user;
 
     public PaymentInfoModel() {

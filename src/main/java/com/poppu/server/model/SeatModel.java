@@ -15,7 +15,7 @@ public class SeatModel {
     private String seat;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "showroom_id", nullable = false)
+    @JoinColumn(name = "showroom_id", nullable = false, foreignKey = @ForeignKey(name = "FK_seat_showroom"))
     private ShowroomModel showroom;
 
     public SeatModel() {

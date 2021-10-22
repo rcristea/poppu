@@ -21,11 +21,11 @@ public class ShowModel {
     private String duration;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "movie_id", foreignKey = @ForeignKey(name = "FK_show_movie"))
     private MovieModel movie;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "showroom_id")
+    @JoinColumn(name = "showroom_id", foreignKey = @ForeignKey(name = "FK_show_showroom"))
     private ShowroomModel showroom;
 
     @OneToMany(mappedBy = "show")

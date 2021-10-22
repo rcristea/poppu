@@ -24,11 +24,11 @@ public class BookingModel {
     private String cardNum;
 
     @ManyToOne(optional = false)
-    @JoinColumn (name = "user_id")
+    @JoinColumn (name = "user_id", foreignKey = @ForeignKey(name = "FK_booking_user"))
     private UserModel user;
 
     @ManyToOne
-    @JoinColumn (name = "promotion_id")
+    @JoinColumn (name = "promotion_id", foreignKey = @ForeignKey(name = "FK_booking_promotion"))
     private PromotionModel promotion;
 
     @OneToMany(mappedBy = "booking")

@@ -13,12 +13,12 @@ public class MovieActorModel {
 
     @ManyToOne(optional = false)
     @MapsId("movieId")
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "movie_id", foreignKey = @ForeignKey(name = "FK_movie_actor_movie"))
     private MovieModel movie;
 
     @ManyToOne(optional = false)
     @MapsId("actorId")
-    @JoinColumn(name = "actor_id")
+    @JoinColumn(name = "actor_id", foreignKey = @ForeignKey(name = "FK_movie_actor_actor"))
     private ActorModel actor;
 
     @Column(name = "role", nullable = false)

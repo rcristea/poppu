@@ -11,7 +11,7 @@ public class PromotionModel {
     @Column (name = "promotion_id")
     private long promotionId;
 
-    @Column (name = "offer")
+    @Column (name = "offer", nullable = false)
     private String offer;
 
     public PromotionModel() {
