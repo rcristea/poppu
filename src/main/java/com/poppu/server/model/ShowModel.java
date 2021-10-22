@@ -6,19 +6,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "show")
+@Table(name = "shows")
 public class ShowModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "show_id")
-    private int showID;
+    private long showID;
 
     @Column(name = "date_time", nullable = false)
     private Timestamp dateTime;
 
-    @Column(name = "duration", nullable = false)
-    private double duration;
+    @Column(name = "duration", nullable = false, length = 16)
+    private String duration;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id")
@@ -35,14 +35,14 @@ public class ShowModel {
 
     }
 
-    public ShowModel(Timestamp dateTime, double duration, MovieModel movie, ShowroomModel showroom) {
+    public ShowModel(Timestamp dateTime, String duration, MovieModel movie, ShowroomModel showroom) {
         this.dateTime = dateTime;
         this.duration = duration;
         this.movie = movie;
         this.showroom = showroom;
     }
 
-    public int getShowID() {
+    public long getShowID() {
         return showID;
     }
 
@@ -50,7 +50,7 @@ public class ShowModel {
         return dateTime;
     }
 
-    public double getDuration() {
+    public String getDuration() {
         return duration;
     }
 
@@ -66,7 +66,7 @@ public class ShowModel {
         this.dateTime = dateTime;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 

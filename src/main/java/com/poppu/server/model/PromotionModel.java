@@ -3,34 +3,34 @@ package com.poppu.server.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="promotion")
+@Table(name="promotions")
 public class PromotionModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column (name = "promotion_id")
-    private int promotionId;
+    private long promotionId;
 
     @Column (name = "offer")
-    private int offer;
+    private String offer;
 
     public PromotionModel() {
 
     }
 
-    public PromotionModel(int offer) {
+    public PromotionModel(String offer) {
         this.offer = offer;
     }
 
-    public int getPromotionId() {
+    public long getPromotionId() {
         return promotionId;
     }
 
-    public int getOffer() {
+    public String getOffer() {
         return offer;
     }
 
-    public void setOffer(int offer) {
+    public void setOffer(String offer) {
         this.offer = offer;
     }
 }

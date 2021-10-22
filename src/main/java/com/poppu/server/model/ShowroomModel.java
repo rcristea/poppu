@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "showroom")
+@Table(name = "showrooms")
 public class ShowroomModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "showroom_id")
-    private int showroomId;
+    private long showroomId;
 
-    @Column(name = "name", nullable = false, length = 45)
+    @Column(name = "name", nullable = false, length = 2)
     private String name;
 
     @OneToMany(mappedBy = "showroom", cascade = CascadeType.ALL)
@@ -27,7 +27,7 @@ public class ShowroomModel {
         this.name = name;
     }
 
-    public int getShowroomId() {
+    public long getShowroomId() {
         return showroomId;
     }
 

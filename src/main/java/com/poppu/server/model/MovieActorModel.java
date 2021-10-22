@@ -5,7 +5,7 @@ import com.poppu.server.key.MovieActorKey;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "movie_actor")
+@Table(name = "movie_actors")
 public class MovieActorModel {
 
     @EmbeddedId

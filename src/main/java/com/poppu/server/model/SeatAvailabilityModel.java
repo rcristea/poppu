@@ -5,7 +5,7 @@ import com.poppu.server.key.SeatAvailabilityKey;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "seat_availability")
+@Table(name = "seat_availabilities")
 public class SeatAvailabilityModel {
 
     @EmbeddedId

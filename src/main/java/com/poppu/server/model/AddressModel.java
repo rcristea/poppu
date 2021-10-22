@@ -3,13 +3,13 @@ package com.poppu.server.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "address")
+@Table(name = "addresses")
 public class AddressModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column (name = "address_id")
-    private int addressId;
+    private long addressId;
 
     @Column (name = "street", nullable = false)
     private String street;
@@ -30,7 +30,7 @@ public class AddressModel {
         this.zipCode = zipCode;
     }
 
-    public int getAddressId() {
+    public long getAddressId() {
         return addressId;
     }
 
@@ -46,7 +46,7 @@ public class AddressModel {
         return zipCode;
     }
 
-    public void setAddressId(int addressId) {
+    public void setAddressId(long addressId) {
         this.addressId = addressId;
     }
 

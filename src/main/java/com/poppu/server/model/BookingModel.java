@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="booking")
+@Table(name="bookings")
 public class BookingModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column (name = "booking_num", nullable = false)
-    private int bookingNum;
+    private long bookingNum;
 
     @Column (name = "movie_title", nullable = false)
     private String movieTitle;
@@ -20,8 +20,8 @@ public class BookingModel {
     @Column (name = "show_date_time", nullable = false)
     private Timestamp showDateTime;
 
-    @Column(name = "card_num", nullable = false)
-    private int cardNum;
+    @Column(name = "card_num", nullable = false, length = 128)
+    private String cardNum;
 
     @ManyToOne(optional = false)
     @JoinColumn (name = "user_id")
@@ -41,7 +41,7 @@ public class BookingModel {
     public BookingModel(
             String movieTitle,
             Timestamp showDateTime,
-            int cardNum,
+            String cardNum,
             UserModel user,
             PromotionModel promotion
     )
@@ -53,7 +53,7 @@ public class BookingModel {
         this.promotion = promotion;
     }
 
-    public int getBookingNum() {
+    public long getBookingNum() {
         return bookingNum;
     }
 
@@ -65,7 +65,7 @@ public class BookingModel {
         return showDateTime;
     }
 
-    public int getCardNum() {
+    public String getCardNum() {
         return cardNum;
     }
 
@@ -85,7 +85,7 @@ public class BookingModel {
         this.showDateTime = showDateTime;
     }
 
-    public void setCardNum(int cardNum) {
+    public void setCardNum(String cardNum) {
         this.cardNum = cardNum;
     }
 

@@ -7,25 +7,25 @@ import java.io.Serializable;
 public class MovieActorKey implements Serializable {
 
     @Column(name = "movie_id")
-    private int movieId;
+    private long movieId;
 
     @Column(name = "actor_id")
-    private int actorId;
+    private long actorId;
 
     public MovieActorKey() {
 
     }
 
-    public MovieActorKey(int movieId, int actorId) {
+    public MovieActorKey(long movieId, long actorId) {
         this.movieId = movieId;
         this.actorId = actorId;
     }
 
-    public int getMovieId() {
+    public long getMovieId() {
         return movieId;
     }
 
-    public int getActorId() {
+    public long getActorId() {
         return actorId;
     }
 }

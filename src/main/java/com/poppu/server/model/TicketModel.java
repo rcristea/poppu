@@ -5,13 +5,13 @@ import com.poppu.server.util.TicketType;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ticket")
+@Table(name = "tickets")
 public class TicketModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ticket_id")
-    private int ticketId;
+    private long ticketId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false, length = 50)
@@ -49,7 +49,7 @@ public class TicketModel {
         this.booking = booking;
     }
 
-    public int getTicketId() {
+    public long getTicketId() {
         return ticketId;
     }
 

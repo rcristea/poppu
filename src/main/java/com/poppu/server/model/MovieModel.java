@@ -10,13 +10,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "movie")
+@Table(name = "movies")
 public class MovieModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "movie_id")
-    private int movieId;
+    private long movieId;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -77,7 +77,7 @@ public class MovieModel {
         this.isShowing = isShowing;
     }
 
-    public int getMovieId() {
+    public long getMovieId() {
         return movieId;
     }
 

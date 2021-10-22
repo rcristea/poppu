@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class UserModel {
 
     @Id
@@ -24,7 +24,7 @@ public class UserModel {
     private String lastName;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", length = 12)
+    @Column(name = "role", length = 12, nullable = false)
     private Role role;
 
     @Column(name = "email", nullable = false)
@@ -33,7 +33,7 @@ public class UserModel {
     @Column(name = "password", nullable = false, length = 128)
     private String password;
 
-    @Column(name = "phone_num", nullable = false, length = 16)
+    @Column(name = "phone_num", nullable = false, length = 12)
     private String phoneNum;
 
     @Column(name = "is_subscribed", columnDefinition = "tinyint(1) default 0")

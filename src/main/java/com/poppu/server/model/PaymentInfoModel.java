@@ -3,16 +3,16 @@ package com.poppu.server.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="payment_info")
+@Table(name="payment_infos")
 public class PaymentInfoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column (name = "payment_id")
-    private int paymentID;
+    private long paymentID;
 
-    @Column (name = "card_num", nullable = false)
-    private int cardNum;
+    @Column (name = "card_num", nullable = false, length = 128)
+    private String cardNum;
 
     @Column (name = "card_type", nullable = false, length = 45)
     private String cardType;
@@ -32,7 +32,7 @@ public class PaymentInfoModel {
 
     }
 
-    public PaymentInfoModel(int cardNum, String cardType, String expDate, AddressModel address, UserModel user){
+    public PaymentInfoModel(String cardNum, String cardType, String expDate, AddressModel address, UserModel user){
         this.cardNum = cardNum;
         this.cardType = cardType;
         this.expDate = expDate;
@@ -40,7 +40,7 @@ public class PaymentInfoModel {
         this.user = user;
     }
 
-    public int getCardNum() {
+    public String getCardNum() {
         return cardNum;
     }
 
@@ -60,7 +60,7 @@ public class PaymentInfoModel {
         return user;
     }
 
-    public void setCardNum(int cardNum) {
+    public void setCardNum(String cardNum) {
         this.cardNum = cardNum;
     }
 
