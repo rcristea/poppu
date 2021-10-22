@@ -2,6 +2,7 @@ import { Component } from 'react'
 import {Link} from 'react-router-dom'
 import './Login.component.css'
 import NavBar from '../NavBar/NavBar.component'
+import bcrypt from 'bcryptjs'
 
 
 export class Login extends Component {
@@ -11,24 +12,37 @@ export class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      isValid: true,
+      salt: '$2a$10$O1RbZIPCQCLr522HZUP51/', // for encryption
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.getUser = this.getUser.bind(this)
+    this.renderIsValid = this.renderIsValid.bind(this)
   }
 
-  async getUser(email) {
+  renderIsValid() {
+    if (!this.state.isValid) {
+      return (
+        <div className='invalid-container'>
+          <p>Your email or password is invalid.</p>
+        </div>
+      )
+    }
+  }
+
+  getUser(email) {
     return new Promise(function (resolve, reject) {
       fetch(`http://localhost:8080/api/users/email?email=${email}`, {
         method: 'GET',
       }).then(response => {
         response.json().then(json => {
           resolve(json)
-        })
-      }).catch(error => {
-        error.json().then(error => {
+        }).catch(error => {
           reject(error)
         })
+      }).catch(error => {
+        reject(error)
       })
     })
   }
@@ -36,7 +50,8 @@ export class Login extends Component {
   handleChange(event) {
     const {name, value} = event.target
     this.setState({
-      [name]: value
+      [name]: value,
+      isValid: true,
     })
   }
 
@@ -44,21 +59,35 @@ export class Login extends Component {
   handleSubmit = async(e) => {
     e.preventDefault()
 
-    let user = await this.getUser(this.state.email)
+    if (this.state.email.length === 0 || this.state.password === 0) {
+      this.setState({
+        isValid: false
+      })
 
-    console.log(user)
-    // let admin = false
-    // let user = true
-    // let loggedIn = true
-    // if (loggedIn && admin) {
-    //   sessionStorage.setItem('role', 'admin')
-    //   alert('Logged in as admin')
-    //   this.props.history.push('/admin')
-    // } else if (loggedIn && user) {
-    //   sessionStorage.setItem('role', 'user')
-    //   alert('Logged in as user')
-    //   this.props.history.push('/profile')
-    // }
+      return
+    }
+
+    try {
+      let user = await this.getUser(this.state.email)
+      let inputHash = await bcrypt.hash(this.state.password, this.state.salt)
+      if (user['password'] === inputHash) {
+        let role = user['role'].toLowerCase()
+        sessionStorage.setItem('role', role)
+        if (role === 'user') {
+          this.props.history.push('/profile')
+        } else if (role === 'admin') {
+          this.props.history.push('/admin')
+        }
+      } else {
+        this.setState({
+          isValid: false,
+        })
+      }
+    } catch (e) {
+      this.setState({
+        isValid: false,
+      })
+    }
   }
 
   render() {
@@ -69,7 +98,7 @@ export class Login extends Component {
           <div className='form-border'>
             <div className='form-container'>
               <h1 className='form-header'>Login</h1>
-              {this.state.email} {this.state.password}
+              {this.renderIsValid()}
               <form className='form-login' onSubmit={this.handleSubmit}>
                 <input
                   type='text'
