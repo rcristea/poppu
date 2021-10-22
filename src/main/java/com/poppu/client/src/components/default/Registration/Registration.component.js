@@ -45,6 +45,7 @@ class Registration extends Component {
     this.renderErrors = this.renderErrors.bind(this)
     this.validateForm = this.validateForm.bind(this)
     this.postData = this.postData.bind(this)
+    this.putData = this.putData.bind(this)
   }
 
   prev() {
@@ -188,9 +189,30 @@ class Registration extends Component {
     })
   }
 
+  async putData(data, destination) {
+    return new Promise(function (resolve, reject) {
+      fetch(destination, {
+        method: 'PUT',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Accept': 'text/uri-list',
+          'Content-Type': 'text/uri/list'
+        },
+        body: data,
+      }).then(response => {
+        response.json().then(json => {
+          resolve(json)
+        })
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  }
+
   async postData(data, destination) {
     return new Promise(function (resolve, reject) {
-      fetch('http://localhost:8080/api/' + destination + '/', {
+      console.log(data, destination)
+      fetch(`http://localhost:8080/${destination}/`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -202,9 +224,7 @@ class Registration extends Component {
           resolve(json)
         })
       }).catch(error => {
-        error.json().then(error => {
-          reject(error)
-        })
+        reject(error)
       })
     })
   }
@@ -218,7 +238,6 @@ class Registration extends Component {
     }
 
     let userHomeAddressJSON
-    let userHomeAddressId
     let userBillingAddressJSON
     let userPaymentJSON
     let userJSON
@@ -230,13 +249,12 @@ class Registration extends Component {
 
     if (hasHomeAddress) {
       let userHomeAddress = {
-        'street': this.state.homeStreet,
         'city': this.state.homeCity,
+        'street': this.state.homeStreet,
         'zipCode': this.state.homeZip,
       }
 
-      userHomeAddressJSON = await this.postData(userHomeAddress, 'address')
-      userHomeAddressId = userHomeAddressJSON['addressId']
+      userHomeAddressJSON = await this.postData(userHomeAddress, 'addresses')
     }
 
     // Create User
@@ -250,11 +268,16 @@ class Registration extends Component {
       'phoneNum': this.state.phone,
       'isSubscribed': this.state.promo,
       'status': 'INACTIVE',
-      'address': userHomeAddressId,
-      'paymentCards': null,
     }
 
     userJSON = await this.postData(userData, 'users')
+
+    if (hasHomeAddress) {
+      await this.putData(
+        userHomeAddressJSON['_links']['self']['href'],
+        userJSON['_links']['address']['href']
+      )
+    }
 
     // Create user's payment info
 
@@ -265,26 +288,26 @@ class Registration extends Component {
         'zipCode': this.state.billingZip,
       }
 
-      userBillingAddressJSON = await this.postData(userBillingAddress, 'address')
-      let userBillingAddressId = userBillingAddressJSON['addressId']
-      let userId = userJSON['id']
-
+      userBillingAddressJSON = await this.postData(userBillingAddress, 'addresses')
 
       let userPayment = {
         'cardNum': bcrypt.hashSync(this.state.cardNumber, this.state.salt),
         'cardType': this.state.cardType,
         'expDate': this.state.cardExpiry,
-        'address': userBillingAddressId,
-        'user': userId,
       }
 
-      userPaymentJSON = await this.postData(userPayment, 'paymentinfo')
-      console.log(userPaymentJSON)
+      userPaymentJSON = await this.postData(userPayment, 'paymentinfos')
+
+      await this.putData(
+        userBillingAddressJSON['_links']['self']['href'],
+        userPaymentJSON['_links']['address']['href']
+      )
+
+      await this.putData(
+        userPaymentJSON['_links']['self']['href'],
+        userJSON['_links']['paymentCards']['href']
+      )
     }
-
-    // TODO add userPaymentJSON to the array list of <PaymentInfoModel> in UserModel
-
-
 
     this.setState({
       currentStep: 4,
