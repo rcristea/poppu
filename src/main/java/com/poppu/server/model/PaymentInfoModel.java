@@ -3,10 +3,14 @@ package com.poppu.server.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="PaymentInfoModel")
+@Table(name="payment_info")
 public class PaymentInfoModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "payment_id", nullable = false)
+    private long payment_id;
+
     @Column (name = "card_num", nullable = false, length = 128)
     private String cardNum;
 
