@@ -22,6 +22,7 @@ import {ViewMovie} from '../admin/Movies/Index/ViewMovie.component'
 import ProfileComponent from '../default/Profile/Profile.component'
 import AddPaymentComponent from '../default/Profile/AddPaymentInfo.component'
 import Registration from '../default/Registration/Registration.component'
+import ForgotPassword from '../default/ForgotPassword/ForgotPassword.component'
 
 class App extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class App extends Component {
           <Route path='/' exact={true} component={LandingPage} />
           <Route path='/login' exact={true} component={Login} />
           <Route path='/register' exact={true} component={Registration} />
+          <Route path='/forgot_password' exact={true} component={ForgotPassword} />
 
           <Route path='/booking/times' exact={true} component={SelectTimeComponent} />
           <Route path='/booking/seats' exact={true} component={SelectSeatComponent} />
