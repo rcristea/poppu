@@ -70,7 +70,6 @@ export class ForgotPassword extends Component {
         body: `email=${encodeURIComponent(email)}`
       }).then(response => {
         response.json().then(json => {
-          console.log(json)
           resolve(json)
         }).catch(error => {
           reject(error)
@@ -168,7 +167,6 @@ export class ForgotPassword extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
-    // First check if the code is correct
     this.validateCode().then(response => {
       if (response['validated']) {
         sessionStorage.setItem('role', 'user')
@@ -180,8 +178,6 @@ export class ForgotPassword extends Component {
         })
       }
     })
-
-    // Second log the user in
   }
 
   render() {

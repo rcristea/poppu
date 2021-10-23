@@ -196,13 +196,11 @@ class Registration extends Component {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Accept': 'text/uri-list',
-          'Content-Type': 'text/uri/list'
+          'Content-Type': 'text/uri-list'
         },
         body: data,
       }).then(response => {
-        response.json().then(json => {
-          resolve(json)
-        })
+        resolve(response)
       }).catch(error => {
         reject(error)
       })
@@ -211,7 +209,6 @@ class Registration extends Component {
 
   async postData(data, destination) {
     return new Promise(function (resolve, reject) {
-      console.log(data, destination)
       fetch(`http://localhost:8080/${destination}/`, {
         method: 'POST',
         headers: {
@@ -294,10 +291,10 @@ class Registration extends Component {
         'cardNum': bcrypt.hashSync(this.state.cardNumber, this.state.salt),
         'cardType': this.state.cardType,
         'expDate': this.state.cardExpiry,
+        'user': userJSON['_links']['self']['href']
       }
 
       userPaymentJSON = await this.postData(userPayment, 'paymentinfos')
-
       await this.putData(
         userBillingAddressJSON['_links']['self']['href'],
         userPaymentJSON['_links']['address']['href']
