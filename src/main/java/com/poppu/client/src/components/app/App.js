@@ -19,8 +19,7 @@ import MovieIndex from '../admin/Movies/Index/MovieIndex.component'
 import AddMovie from '../admin/Movies/Index/AddMovie.component'
 import AddShowTime from '../admin/Movies/Index/AddShowtime.component'
 import {ViewMovie} from '../admin/Movies/Index/ViewMovie.component'
-import ProfileComponent from '../default/Profile/Profile.component'
-import AddPaymentComponent from '../default/Profile/AddPaymentInfo.component'
+import ViewProfileComponent from '../default/Profile/ViewProfile.component'
 import Registration from '../default/Registration/Registration.component'
 import ForgotPassword from '../default/ForgotPassword/ForgotPassword.component'
 
@@ -50,9 +49,8 @@ class App extends Component {
           <Route path='/booking/order/confirm' exact={true} component={OrderConfirmationComponent} />
 
           {/* User Routes */}
-          <Route path='/profile' exact={true} component={ProfileComponent} />
+          <Route path='/profile' exact={true} component={ViewProfileComponent} />
           <Route path='/profile/edit' exact={true} component={EditProfileComponent} />
-          <Route path='/payment/add' exact={true} component={AddPaymentComponent} />
 
           {/* Admin Routes */}
           <Route path='/admin' exact={true} component={Dashboard} />

@@ -1,11 +1,12 @@
 import { Component } from 'react'
-import {Button, Col, Container, Row} from 'react-bootstrap'
+import {Button, Card, Col, Container, Form, Row} from 'react-bootstrap'
 
 import 'react-bootstrap/'
 import AutoCard from '../../utils/AutoCard.component'
 import AutoList from '../../utils/AutoList.component'
+import {AddressComponent, DisplayAttribute, TitleComponent} from "./Utils.component";
 
-export class ProfileComponent extends Component {
+export class ViewProfileComponent extends Component {
     profile_name = 'Abhinav Singh'
     profile_data = {
         'first_name': 'Abhinav',
@@ -62,22 +63,26 @@ export class ProfileComponent extends Component {
 
     render() {
         return (
-            <Container className={'my-2'}>
-                <Row>
-                    <AutoCard component_title={this.profile_name} component_data={this.profile_data} />
-                </Row>
-                <Row>
-                    <AutoList component_title={'Payment Info'} component_data={this.payment_info} />
-                </Row>
-                <Row className={'mx-4'}>
-                    <Col md={4}><Button variant={'warning'} href={'/profile/edit'}>Edit Profile</Button></Col>
-                    <Col md={4}><Button variant={'success'} href={'/'}>Back to Home Screen</Button></Col>
-                    <Col md={4}><Button variant={'danger'}>Delete Account</Button></Col>
-                    <Col md={4}><Button variant={'primary'} onClick={this.logOut}>Log out</Button></Col>
-                </Row>
+            <Container classname={'m-2 p-2 border-primary'}>
+                <TitleComponent compTitle={this.props.user.Name.concat('\'s Profile')}/>
+                <Card classname={'m-2 p-2 border-primary'}>
+                    <DisplayAttribute attName={'First Name'} attVal={this.props.user.firstName}/>
+                    <DisplayAttribute attName={'Last Name'} attVal={this.props.user.cardType}/>
+                    <DisplayAttribute attName={'Role'} attVal={this.props.user.role}/>
+                    <DisplayAttribute attName={'Email'} attVal={this.props.user.email}/>
+                    <DisplayAttribute attName={'Password'} attVal={'+++++++++++'}/>
+                    <DisplayAttribute attName={'Subscribed'} attVal={this.props.user.isSubscribed}/>
+                    <DisplayAttribute attName={'Phone Number'} attVal={this.props.user.phoneNum}/>
+                    <DisplayAttribute attName={'Status'} attVal={this.props.user.status}/>
+                    <Card classname={'m-2 p-2 border-primary'}>
+                        <AddressComponent compTitle={'Your Address'} address={this.props.user.address}/>
+                        <Button variant={"warning"}>Edit Your Address Information</Button>
+                    </Card>
+                    <Button>Edit Profile Information</Button>
+                </Card>
             </Container>
         )
     }
 }
 
-export default ProfileComponent
+export default ViewProfileComponent
