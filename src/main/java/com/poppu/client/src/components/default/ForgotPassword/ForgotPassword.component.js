@@ -163,7 +163,6 @@ export class ForgotPassword extends Component {
     })
   }
 
-
   handleSubmit = (e) => {
     e.preventDefault()
 

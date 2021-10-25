@@ -74,8 +74,8 @@ public class ValidatorModel {
         props.put("mail.debug", "true");
         props.put("mail.store.protocol", "pop3");
         props.put("mail.transport.protocol", "smtp");
-        final String username = "enterUserEmail";//
-        final String password = "enterPassword";
+        final String username = "poppuofficial@gmail.com";//
+        final String password = "poppu4Life";
         try{
             Session session = Session.getDefaultInstance(props,
                     new javax.mail.Authenticator(){
