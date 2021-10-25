@@ -4,14 +4,14 @@ import {Card, Col, Container, Form, Row} from "react-bootstrap";
 export class AddressComponent extends Component {
     render() {
         return (
-            <Container classname={'m-2 p-2 border-primary'}>
-                <TitleComponent page_title={this.props.compTitle}/>
-                <Card classname={'m-2 p-2 border-primary'}>
+            <div className={'m-2 bg-info bg-opacity-25'}>
+                <HeadingComponent compTitle={this.props.compTitle}/>
+                <Card className={'m-2 bg-info bg-opacity-10'}>
                     <DisplayAttribute attName={'City'} attVal={this.props.address.city}/>
                     <DisplayAttribute attName={'Street'} attVal={this.props.address.street}/>
                     <DisplayAttribute attName={'Zip Code'} attVal={this.props.address.zipCode}/>
                 </Card>
-            </Container>
+            </div>
         )
     }
 }
@@ -19,17 +19,17 @@ export class AddressComponent extends Component {
 export class PaymentInfoComponent extends Component {
     render() {
         return (
-            <Container classname={'m-2 p-2 border-primary'}>
-                <TitleComponent compTitle={this.props.compTitle}/>
-                <Card classname={'m-2 p-2 border-primary'}>
+            <div className={'m-2 bg-success bg-opacity-50'}>
+                <HeadingComponent compTitle={this.props.compTitle}/>
+                <Card className={'m-2 bg-success bg-opacity-25'}>
                     <DisplayAttribute attName={'Card Number'} attVal={this.props.paymentInfo.cardNum}/>
                     <DisplayAttribute attName={'Card Type'} attVal={this.props.paymentInfo.cardType}/>
                     <DisplayAttribute attName={'Expiration Date'} attVal={this.props.paymentInfo.expDate}/>
-                    <Card classname={'m-2 p-2 border-primary'}>
+                    <Card className={'m-2'}>
                         <AddressComponent compTitle={'Payment Address'} address={this.props.paymentInfo.address}/>
                     </Card>
                 </Card>
-            </Container>
+            </div>
         )
     }
 }
@@ -37,9 +37,21 @@ export class PaymentInfoComponent extends Component {
 export class TitleComponent extends Component {
     render() {
         return (
-            <Container className={'m-2 p-2 border-primary'}>
+            <Container className={'m-2'}>
                 <Row>
-                    <h2>{this.props.compTitle}</h2>
+                    <h1>{this.props.compTitle}</h1>
+                </Row>
+            </Container>
+        )
+    }
+}
+
+export class HeadingComponent extends Component {
+    render() {
+        return (
+            <Container className={'m-2'}>
+                <Row>
+                    <h4>{this.props.compTitle}</h4>
                 </Row>
             </Container>
         )
@@ -49,16 +61,16 @@ export class TitleComponent extends Component {
 export class DisplayAttribute extends Component {
     render() {
         return (
-            <Container className={'m-2 p-2'}>
+            <div className={'m-2 border-bottom rounded border-2 border-dark'}>
                 <Row>
-                    <Col>
-                        {this.props.attName}
+                    <Col md={4}>
+                        <strong>{this.props.attName}:</strong>
                     </Col>
-                    <Col>
+                    <Col md={8}>
                         {this.props.attVal}
                     </Col>
                 </Row>
-            </Container>
+            </div>
         )
     }
 }
@@ -66,14 +78,14 @@ export class DisplayAttribute extends Component {
 export class FormAttribute extends Component {
     render() {
         return (
-            <Container className={'m-2 p-2 border-primary'}>
+            <div className={'m-2 bg-info bg-opacity-10'}>
                 <Form.Group controlId={this.props.attCtrl}>
-                    <Form.Label>{this.props.attLabel}</Form.Label>
+                    <Form.Label><strong>{this.props.attLabel}</strong></Form.Label>
                     <Form.Control type={this.props.attType}
                                   placeholder={this.props.attPlaceholder}
                                   value={this.props.attVal}/>
                 </Form.Group>
-            </Container>
+            </div>
         )
     }
 }

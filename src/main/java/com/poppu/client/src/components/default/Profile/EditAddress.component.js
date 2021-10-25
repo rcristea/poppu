@@ -4,32 +4,50 @@ import {TitleComponent} from "./ViewProfile.component";
 import {FormAttribute} from "./Utils.component";
 
 export class EditAddressComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = this.props.location.state
+
+        this.handleBack = this.handleBack.bind(this)
+        this.handleSubmitAddress = this.handleSubmitAddress.bind(this)
+    }
+
+    handleBack() {
+        this.props.history.push('/profile')
+    }
+
+    handleSubmitAddress() {
+        this.props.history.push('/profile')
+    }
+
     render() {
         return (
-            <Container 'm-2 p-2 border-primary'>
+            <div className={'my-2 bg-light'}>
                 <TitleComponent compTitle={'Edit Address'}/>
-                <Card 'm-2 p-2 border-primary'>
+                <Card className={'m-2'}>
                     <Form>
                         <FormAttribute attCtrl={'city'}
                                        attLabel={'City'}
                                        attType={'text'}
                                        attPlaceholder={'Enter the city you live in.'}
-                                       value={this.props.address.city}/>
+                                       attVal={this.state.address.city}/>
                         <FormAttribute attCtrl={'street'}
                                        attLabel={'City'}
                                        attType={'text'}
                                        attPlaceholder={'Enter your street address.'}
-                                       value={this.props.address.street}/>
+                                       attVal={this.state.address.street}/>
                         <FormAttribute attCtrl={'zipCode'}
                                        attLabel={'Zip Code'}
                                        attType={'text'}
                                        attPlaceholder={'Enter your zipcode!'}
-                                       value={this.props.address.zipCode}/>
-                        <Button type={'submit'} variant={'success'}>Submit Address</Button>
-                        <Button type={'submit'} variant={'warning'}>Go Back</Button>
+                                       attVal={this.state.address.zipCode}/>
+                        <Container>
+                            <Button type={'submit'} variant={'success'} onSubmit={this.handleSubmitAddress}>Submit Address</Button>
+                            <Button variant={'warning'} onClick={this.handleBack}>Go Back</Button>
+                        </Container>
                     </Form>
                 </Card>
-            </Container>
+            </div>
         )
     }
 }

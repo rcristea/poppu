@@ -1,7 +1,6 @@
 package com.poppu.server.controller;
 
 import com.poppu.server.model.ValidatorModel;
-import com.poppu.server.repository.PaymentInfoRepository;
 import com.poppu.server.repository.ValidatorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,20 +23,12 @@ public class ValidatorController {
         this.validatorRepository = validatorRepository;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ValidatorModel> getValidator(@PathVariable("id") String email) {
+    @PostMapping("/sendEmail")
+    public ResponseEntity<String> postValidator(@RequestParam("email") String email) throws URISyntaxException {
         Optional<ValidatorModel> getValidatorTest = this.validatorRepository.findById(email);
-        return getValidatorTest.map(response -> ResponseEntity.ok().body(response))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
-    @PostMapping("/")
-    public ResponseEntity<ValidatorModel> postValidator(@RequestParam("email") String email) throws URISyntaxException {
-        ValidatorModel res = this.validatorRepository.save(new ValidatorModel(email));
-        res.sendEmail();
-        return ResponseEntity
-                .created(new URI("/api/validator" + res.getEmail()))
-                .body(res);
+        return getValidatorTest.map(validatorModel -> {
+            return ResponseEntity.ok().body(validatorModel.sendEmail());
+        }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("/validate")
@@ -51,11 +42,5 @@ public class ValidatorController {
         return ResponseEntity
                 .created(new URI("/api/users/" + updatedValidator.getEmail()))
                 .body(updatedValidator);
-    }
-
-    @DeleteMapping("/{id}}")
-    public ResponseEntity<HttpStatus> deleteValidator(@PathVariable("id") String email) {
-        this.validatorRepository.deleteById(email);
-        return ResponseEntity.ok().build();
     }
 }

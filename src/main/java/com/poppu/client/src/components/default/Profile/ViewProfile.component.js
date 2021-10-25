@@ -2,45 +2,53 @@ import { Component } from 'react'
 import {Button, Card, Col, Container, Form, Row} from 'react-bootstrap'
 
 import 'react-bootstrap/'
-import AutoCard from '../../utils/AutoCard.component'
-import AutoList from '../../utils/AutoList.component'
-import {AddressComponent, DisplayAttribute, TitleComponent} from "./Utils.component";
+import {AddressComponent, DisplayAttribute, PaymentInfoComponent, TitleComponent} from "./Utils.component";
 
 export class ViewProfileComponent extends Component {
-    profile_name = 'Abhinav Singh'
-    profile_data = {
-        'first_name': 'Abhinav',
-        'last_name': 'Singh',
-        'user_ID': 2230832,
-        'Status': 'Registered and verified',
-        'E-mail': 'example@example.com',
-        'Address': '3333 Street Street',
-        'City': 'Marietta GA',
-        'ZIP': '33333'
-    }
-    payment_info = [
-        {
-            'card_name': 'MasterCard',
-            'card_type': 'Credit',
-            'card_number': 20839843,
-            'expires': '10/02/2029'
-        },
-        {
-            'card_name': 'Visa',
-            'card_type': 'Credit',
-            'card_number': 30931839,
-            'expires': '10/02/2031'
-        },
-        {
-            'card_name': 'MasterCard',
-            'card_type': 'Credit',
-            'card_number': 2083984,
-            'expires': '01/20/3030'
-        }
-    ]
-
     constructor(props) {
         super(props);
+        this.state = {
+            user: {
+                firstName: "Abhinav",
+                lastName: "Singh",
+                role: "user",
+                email: "abhinn@singh.com",
+                password: "bigPassword",
+                isSubscribed: "TRUE",
+                phoneNum: "1-909-909-9090",
+                status: "Active User",
+                address: {
+                    city: "Marietta",
+                    street: "Streets ahead",
+                    zipCode: "808080"
+                },
+                paymentCards: [
+                    {
+                        cardNum: "Marietta",
+                        cardType: "Peachtree St",
+                        expDate: "238909",
+                        address: {
+                            city: "Marietta",
+                            street: "Streets ahead",
+                            zipCode: "808080",
+                        }
+                    },
+                    {
+                        cardNum: "Marietta",
+                        cardType: "Peachtree St",
+                        expDate: "238909",
+                        address: {
+                            city: "Marietta",
+                            street: "Streets ahead",
+                            zipCode: "808080",
+                        }
+                    },
+                ]
+            }
+        }
+        this.handleEditProfileClick = this.handleEditProfileClick.bind(this)
+        this.handleEditAddressClick = this.handleEditAddressClick.bind(this)
+        this.handleEditPaymentInfoClick = this.handleEditPaymentInfoClick.bind(this)
 
         this.logOut = this.logOut.bind(this)
     }
@@ -61,28 +69,62 @@ export class ViewProfileComponent extends Component {
         }
     }
 
+    handleEditProfileClick() {
+        this.props.history.push({
+            pathname: '/profile/edit',
+            state: { user: this.state.user}
+        })
+    }
+
+    handleEditAddressClick() {
+        this.props.history.push({
+            pathname: '/address/edit',
+            state: { address: this.state.user.address}
+        })
+    }
+
+    handleEditPaymentInfoClick() {
+        this.props.history.push({
+            pathname: '/payment/edit',
+            state: { paymentInfo: this.state.user.paymentInfo}
+        })
+    }
+
     render() {
         return (
-            <Container classname={'m-2 p-2 border-primary'}>
-                <TitleComponent compTitle={this.props.user.Name.concat('\'s Profile')}/>
-                <Card classname={'m-2 p-2 border-primary'}>
-                    <DisplayAttribute attName={'First Name'} attVal={this.props.user.firstName}/>
-                    <DisplayAttribute attName={'Last Name'} attVal={this.props.user.cardType}/>
-                    <DisplayAttribute attName={'Role'} attVal={this.props.user.role}/>
-                    <DisplayAttribute attName={'Email'} attVal={this.props.user.email}/>
+            <Container className={'my-2 bg-light'}>
+                <TitleComponent compTitle={this.state.user.firstName.concat('\'s Profile')}/>
+                <Card className={'bg-primary bg-opacity-25'}>
+                    <DisplayAttribute attName={'First Name'} attVal={this.state.user.firstName}/>
+                    <DisplayAttribute attName={'Last Name'} attVal={this.state.user.lastName}/>
+                    <DisplayAttribute attName={'Role'} attVal={this.state.user.role}/>
+                    <DisplayAttribute attName={'Email'} attVal={this.state.user.email}/>
                     <DisplayAttribute attName={'Password'} attVal={'+++++++++++'}/>
-                    <DisplayAttribute attName={'Subscribed'} attVal={this.props.user.isSubscribed}/>
-                    <DisplayAttribute attName={'Phone Number'} attVal={this.props.user.phoneNum}/>
-                    <DisplayAttribute attName={'Status'} attVal={this.props.user.status}/>
-                    <Card classname={'m-2 p-2 border-primary'}>
-                        <AddressComponent compTitle={'Your Address'} address={this.props.user.address}/>
-                        <Button variant={"warning"}>Edit Your Address Information</Button>
+                    <DisplayAttribute attName={'Subscribed'} attVal={this.state.user.isSubscribed}/>
+                    <DisplayAttribute attName={'Phone Number'} attVal={this.state.user.phoneNum}/>
+                    <DisplayAttribute attName={'Status'} attVal={this.state.user.status}/>
+                    <Container>
+                        <Button variant={"warning"} className={'m-2'} size={'lg'} onClick={this.handleEditProfileClick}>Edit Your Profile Information</Button>
+                        <Button variant={"warning"} classname={'m-2'} size={'lg'} onClick={this.handleEditAddressClick}>Edit Your Address Information</Button>
+                    </Container>
+                    <Card className={'m-2'}>
+                        <AddressComponent compTitle={'Your Address'} address={this.state.user.address}/>
                     </Card>
-                    <Button>Edit Profile Information</Button>
+                    <Card className={'m-2'}>
+                        {this.state.user.paymentCards.map(paymentCard => {
+                            return (
+                                <Container>
+                                    <PaymentInfoComponent compTitle={'Card: '.concat(paymentCard.cardType)} paymentInfo={paymentCard}/>
+                                    <Button variant={"warning"} classname={'m-2'} size={'lg'} onClick={this.handleEditPaymentInfoClick}>Edit Card Information</Button>
+                                </Container>
+                            )
+                        })}
+                    </Card>
                 </Card>
             </Container>
         )
     }
 }
 
+export {TitleComponent, DisplayAttribute}
 export default ViewProfileComponent

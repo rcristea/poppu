@@ -22,6 +22,8 @@ import {ViewMovie} from '../admin/Movies/Index/ViewMovie.component'
 import ViewProfileComponent from '../default/Profile/ViewProfile.component'
 import Registration from '../default/Registration/Registration.component'
 import ForgotPassword from '../default/ForgotPassword/ForgotPassword.component'
+import EditPaymentInfoComponent from "../default/Profile/EditPaymentInfo.component";
+import EditAddressComponent from "../default/Profile/EditAddress.component";
 
 class App extends Component {
   constructor(props) {
@@ -51,6 +53,8 @@ class App extends Component {
           {/* User Routes */}
           <Route path='/profile' exact={true} component={ViewProfileComponent} />
           <Route path='/profile/edit' exact={true} component={EditProfileComponent} />
+          <Route path='/address/edit' exact={true} component={EditAddressComponent} />
+          <Route path='/payment/edit' exact={true} component={EditPaymentInfoComponent} />
 
           {/* Admin Routes */}
           <Route path='/admin' exact={true} component={Dashboard} />
