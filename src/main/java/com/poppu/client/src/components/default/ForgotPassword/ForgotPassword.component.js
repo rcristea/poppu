@@ -62,18 +62,14 @@ export class ForgotPassword extends Component {
   sendEmail() {
     let email = this.state.email
     return new Promise(function (resolve, reject) {
-      fetch('http://localhost:8080/api/validator/', {
+      fetch('http://localhost:8080/api/validator/sendEmail', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: `email=${encodeURIComponent(email)}`
       }).then(response => {
-        response.json().then(json => {
-          resolve(json)
-        }).catch(error => {
-          reject(error)
-        })
+        resolve(response)
       }).catch(error => {
         reject(error)
       })
@@ -88,12 +84,14 @@ export class ForgotPassword extends Component {
           hasError: false,
         })
       }).catch(error => {
+        console.log(error, '2')
         this.setState({
           hasSentEmail: false,
           hasError: true,
         })
       })
     }).catch(error => {
+      console.log(error, '1')
       this.setState({
         hasSentEmail: false,
         hasError: true,

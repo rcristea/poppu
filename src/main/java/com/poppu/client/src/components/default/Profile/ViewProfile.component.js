@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import {Button, Card, Col, Container, Form, Row} from 'react-bootstrap'
+import {Button, Card, Container} from 'react-bootstrap'
 
 import 'react-bootstrap/'
 import {AddressComponent, DisplayAttribute, PaymentInfoComponent, TitleComponent} from "./Utils.component";

@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import {Button, Card, Col, Container, Form, FormSelect, Row} from 'react-bootstrap'
+import {Button, Card, Container, Form} from 'react-bootstrap'
 
 import 'react-bootstrap/'
 import {DisplayAttribute, FormAttribute, TitleComponent} from "./Utils.component";

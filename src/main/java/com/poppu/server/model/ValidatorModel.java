@@ -71,7 +71,7 @@ public class ValidatorModel {
         props.setProperty("mail.smtp.port", "465");
         props.setProperty("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.debug", "true");
+        props.put("mail.debug", "false");
         props.put("mail.store.protocol", "pop3");
         props.put("mail.transport.protocol", "smtp");
         final String username = "poppuofficial@gmail.com";//
