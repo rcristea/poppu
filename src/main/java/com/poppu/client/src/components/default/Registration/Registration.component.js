@@ -44,6 +44,8 @@ class Registration extends Component {
     this.renderButtons = this.renderButtons.bind(this)
     this.renderErrors = this.renderErrors.bind(this)
     this.validateForm = this.validateForm.bind(this)
+    this.getUser = this.getUser.bind(this)
+    this.isUniqueEmail = this.isUniqueEmail.bind(this)
     this.postData = this.postData.bind(this)
     this.putData = this.putData.bind(this)
   }
@@ -124,6 +126,8 @@ class Registration extends Component {
       formErrors.push('The email field must be filled in.')
     } else if (!isEmail(this.state.email)) {
       formErrors.push('Please enter a valid email.')
+    } else if (!(await this.isUniqueEmail())) {
+      formErrors.push('The email you entered is already taken.')
     }
 
     if (this.state.phone.length === 0) {
@@ -181,6 +185,33 @@ class Registration extends Component {
       })
     }
   }
+
+  async getUser(email) {
+    return new Promise(function (resolve, reject) {
+      fetch(`http://localhost:8080/api/users/email?email=${email}`, {
+        method: 'GET',
+      }).then(response => {
+        response.json().then(json => {
+          resolve(json)
+        }).catch(error => {
+          reject(error)
+        })
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  }
+
+  async isUniqueEmail() {
+    let isUnique = await this.getUser(this.state.email).then(response => {
+      return false
+    }).catch(error => {
+      return true
+    })
+
+    return isUnique
+  }
+
 
   handleChange(event) {
     const {name, value} = event.target
