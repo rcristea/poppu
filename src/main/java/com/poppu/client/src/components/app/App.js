@@ -24,6 +24,8 @@ import Registration from '../default/Registration/Registration.component'
 import ForgotPassword from '../default/ForgotPassword/ForgotPassword.component'
 import EditPaymentInfoComponent from "../default/Profile/EditPaymentInfo.component";
 import EditAddressComponent from "../default/Profile/EditAddress.component";
+import EditPasswordComponent from "../default/Profile/EditPassword.component";
+import AddPaymentComponent from "../default/Profile/AddPayment.component";
 
 class App extends Component {
   constructor(props) {
@@ -53,8 +55,10 @@ class App extends Component {
           {/* User Routes */}
           <Route path='/profile' exact={true} component={ViewProfileComponent} />
           <Route path='/profile/edit' exact={true} component={EditProfileComponent} />
+          <Route path='/profile/edit/password' exact={true} component={EditPasswordComponent}/>
           <Route path='/address/edit' exact={true} component={EditAddressComponent} />
           <Route path='/payment/edit' exact={true} component={EditPaymentInfoComponent} />
+          <Route path='/payment/add' exact={true} component={AddPaymentComponent} />
 
           {/* Admin Routes */}
           <Route path='/admin' exact={true} component={Dashboard} />

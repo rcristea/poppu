@@ -1,17 +1,18 @@
 import {Button, Card, Container, Form} from "react-bootstrap";
-import {TitleComponent} from "./ViewProfile.component";
+import {TitleComponent} from "./Utils.component";
 import {FormAttribute} from "./Utils.component";
 import {Component} from "react";
 
-export class EditPaymentInfoComponent extends Component {
+export class AddPaymentComponent extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             paymentInfo: this.props.location.state.paymentInfo
-        };
+        }
 
-        this.handleBack = this.handleBack.bind(this);
-        this.handleSubmitPayment = this.handleSubmitPayment.bind(this);
+        this.handleBack = this.handleBack.bind(this)
+        this.handleSubmitPayment = this.handleSubmitPayment.bind(this)
     }
 
     handleBack() {
@@ -25,7 +26,7 @@ export class EditPaymentInfoComponent extends Component {
     render() {
         return (
             <Container className={'my-2 bg-light'}>
-                <TitleComponent compTitle={'Edit Payment Information'}/>
+                <TitleComponent compTitle={'Add Payment Information'}/>
                 <Card className={'m-2'}>
                     <Form onSubmit={this.handleSubmitPayment}>
                         <FormAttribute attCtrl={'cardNum'}
@@ -43,8 +44,10 @@ export class EditPaymentInfoComponent extends Component {
                                        attType={'date'}
                                        attPlaceholder={'Enter your card\'s expiration date'}
                                        attVal={this.state.paymentInfo.expDate}/>
-                        <Button type={'submit'} variant={'success'}>Submit Payment Information</Button>
-                        <Button variant={'warning'} onClick={this.handleBack}>Go Back</Button>
+                        <Container className={'m-2'}>
+                            <Button type={'submit'} variant={'success'}>Submit Payment Info</Button>
+                            <Button variant={'warning'} onClick={this.handleBack}>Go Back</Button>
+                        </Container>
                     </Form>
                 </Card>
             </Container>
@@ -52,4 +55,4 @@ export class EditPaymentInfoComponent extends Component {
     }
 }
 
-export default EditPaymentInfoComponent
+export default AddPaymentComponent
