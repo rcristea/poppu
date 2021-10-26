@@ -70,6 +70,7 @@ export class Login extends Component {
     try {
       let user = await this.getUser(this.state.email)
       let inputHash = await bcrypt.hash(this.state.password, this.state.salt)
+
       if (user['password'] === inputHash) {
         let role = user['role'].toLowerCase()
         sessionStorage.setItem('role', role)

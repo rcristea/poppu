@@ -3,6 +3,8 @@ package com.poppu.server.controller;
 import com.poppu.server.model.AddressModel;
 import com.poppu.server.model.UserModel;
 import com.poppu.server.repository.UserRepository;
+import com.poppu.server.util.Status;
+import org.apache.coyote.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -57,6 +59,19 @@ public class UserController {
                     return this.userRepository.save(user);
                 })
                 .orElseGet(() -> this.userRepository.save(newUserInfo));
+        return ResponseEntity
+                .created(new URI("/api/users/" + updatedUser.getId()))
+                .body(updatedUser);
+    }
+
+    @PutMapping("/{id}/setActive")
+    public ResponseEntity<UserModel> putActive(@PathVariable long id) throws URISyntaxException {
+        UserModel updatedUser = this.userRepository.findById(id)
+                .map(user -> {
+                    user.setStatus(Status.ACTIVE);
+                    return this.userRepository.save(user);
+                })
+                .orElseThrow(() -> new RuntimeException("Status not updated"));
         return ResponseEntity
                 .created(new URI("/api/users/" + updatedUser.getId()))
                 .body(updatedUser);

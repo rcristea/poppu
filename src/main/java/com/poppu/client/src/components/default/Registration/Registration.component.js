@@ -35,6 +35,7 @@ class Registration extends Component {
       homeState: '0',
       formErrors: [],
       confirmationCode: '',
+      userId: '',
       salt: '$2a$10$O1RbZIPCQCLr522HZUP51/', // for encryption
     }
 
@@ -48,6 +49,97 @@ class Registration extends Component {
     this.isUniqueEmail = this.isUniqueEmail.bind(this)
     this.postData = this.postData.bind(this)
     this.putData = this.putData.bind(this)
+    this.sendEmail = this.sendEmail.bind(this)
+    this.sendCustomEmail = this.sendCustomEmail.bind(this)
+    this.validateCode = this.validateCode.bind(this)
+    this.updateUserStatus = this.updateUserStatus.bind(this)
+  }
+
+  updateUserStatus() {
+    let id = this.state.userId
+    return new Promise(function (resolve, reject) {
+      fetch(`http://localhost:8080/api/users/${id}/setActive`, {
+        method: 'put',
+      }).then(response => {
+        resolve(response)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  }
+
+  sendCustomEmail() {
+    let email = this.state.email
+    let subject = 'Test email'
+    let contents = JSON.stringify(this.state)
+    return new Promise(function (resolve, reject) {
+      fetch('http://localhost:8080/api/validator/customEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `email=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&contents=${encodeURIComponent(contents)}`
+      }).then(response => {
+        resolve(response)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  }
+
+  createValidator() {
+    let email = this.state.email
+    return new Promise(function (resolve, reject) {
+      fetch('http://localhost:8080/api/validator/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `email=${encodeURIComponent(email)}`
+      }).then(response => {
+        resolve(response)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  }
+
+  sendEmail() {
+    this.createValidator().then(response => {
+      let email = this.state.email
+      return new Promise(function (resolve, reject) {
+        fetch('http://localhost:8080/api/validator/sendEmail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `email=${encodeURIComponent(email)}`
+        }).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    })
+  }
+
+  validateCode() {
+    let email = this.state.email
+    let code = this.state.confirmationCode
+    let params = `email=${encodeURIComponent(email)}&code=${encodeURIComponent(code)}`
+    return new Promise(function (resolve, reject) {
+      fetch(`http://localhost:8080/api/validator/validate?${params}`, {
+        method: 'PUT',
+      }).then(response => {
+        response.json().then(json => {
+          resolve(json)
+        }).catch(error => {
+          reject(error)
+        })
+      }).catch(error => {
+        reject(error)
+      })
+    })
   }
 
   prev() {
@@ -212,7 +304,6 @@ class Registration extends Component {
     return isUnique
   }
 
-
   handleChange(event) {
     const {name, value} = event.target
     this.setState({
@@ -337,6 +428,14 @@ class Registration extends Component {
       )
     }
 
+    // Set user id to put active later when confirmed email
+    this.setState({
+      userId: userJSON['id'],
+    })
+
+    // Send confirmation code email
+    this.sendEmail()
+
     this.setState({
       currentStep: 4,
     })
@@ -344,7 +443,23 @@ class Registration extends Component {
 
   handleSubmitConfirmation = e => {
     e.preventDefault()
-    alert('Handle confirmation code here')
+    this.validateCode().then(response => {
+      if (response['validated']) {
+        this.updateUserStatus().then(response => {
+          sessionStorage.setItem('role', 'user')
+          this.props.history.push('/profile')
+        }).catch(error =>{
+          console.error(error, 'handleSubmitConfirmation')
+          this.setState({
+            formErrors: ['An error has occurred.']
+          })
+        })
+      } else {
+        this.setState({
+          formErrors: ['The code you entered does not match.']
+        })
+      }
+    })
   }
 
   render() {
