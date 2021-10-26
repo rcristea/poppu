@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import {Button, Card, Container, Form} from 'react-bootstrap'
+import {Button, Card, Col, Container, Form, Row} from 'react-bootstrap'
 
 import 'react-bootstrap/'
 import {DisplayAttribute, FormAttribute, TitleComponent} from "./Utils.component";
@@ -7,7 +7,9 @@ import {DisplayAttribute, FormAttribute, TitleComponent} from "./Utils.component
 export class EditProfileComponent extends Component {
     constructor(props) {
         super(props);
-        this.state = this.props.location.state
+        this.state = {
+            user: this.props.location.state.user
+        }
 
         this.handleBack = this.handleBack.bind(this)
         this.handleSubmitProfile = this.handleSubmitProfile.bind(this)
@@ -33,7 +35,7 @@ export class EditProfileComponent extends Component {
             <Container className={'my-2 bg-light'}>
                 <TitleComponent compTitle={'Edit Profile Information'}/>
                 <Card className={'m-2'}>
-                    <Form>
+                    <Form onSubmit={this.handleSubmitProfile}>
                         <FormAttribute attCtrl={'firstName'}
                                        attLabel={'First Name'}
                                        attType={'text'}
@@ -45,20 +47,24 @@ export class EditProfileComponent extends Component {
                                        attPlaceholder={'Enter your last name.'}
                                        attVal={this.state.user.lastName}/>
                         <DisplayAttribute attName={'Email'} attVal={this.state.user.email}/>
-                        <FormAttribute attCtrl={'password'}
-                                       attLabel={'Password'}
-                                       attType={'password'}
-                                       attPlaceholder={'Enter a password.'}
-                                       attVal={this.state.user.password}/>
-                        <FormAttribute attCtrl={'isSubscribed'}
-                                       attLabel={'Subscribe for Promotions'}
-                                       attType={'checkbox'}
-                                       attPlaceholder={'Would you like to subscribe.'}
-                                       attVal={this.state.user.firstName}/>
-                        <DisplayAttribute attName={'Status'} attVal={this.state.user.status}/>
                         <Container className={'m-2'}>
-                            <Button type={'submit'} variant={'success'} onSubmit={this.handleSubmitProfile}>Submit Profile</Button>
-                            <Button type={'submit'} variant={'warning'} onSubmit={this.handleBack}>Go Back</Button>
+                            <Form.Group>
+                                <Row>
+                                    <Col md={2}>
+                                        <strong>Subscribed: </strong>
+                                    </Col>
+                                    <Col>
+                                        <Form.Check
+                                            type={'radio'}
+                                            id={`subscribed`}
+                                        />
+                                    </Col>
+                                </Row>
+                            </Form.Group>
+                        </Container>
+                        <Container className={'m-2'}>
+                            <Button type={'submit'} variant={'success'}>Submit Profile</Button>
+                            <Button variant={'warning'} onClick={this.handleBack}>Go Back</Button>
                         </Container>
                     </Form>
                 </Card>

@@ -1,7 +1,24 @@
 import {Component} from "react";
-import {Card, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
+import { withRouter } from 'react-router-dom';
 
-export class AddressComponent extends Component {
+
+
+export class addressComponent extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleEditAddress = this.handleEditAddress.bind(this)
+    }
+
+    handleEditAddress() {
+        console.log(this.props.history)
+        this.props.history.push({
+            pathname: '/address/edit',
+            state: { address: this.props.address}
+        })
+    }
+
     render() {
         return (
             <div className={'m-2 bg-info bg-opacity-25'}>
@@ -10,13 +27,31 @@ export class AddressComponent extends Component {
                     <DisplayAttribute attName={'City'} attVal={this.props.address.city}/>
                     <DisplayAttribute attName={'Street'} attVal={this.props.address.street}/>
                     <DisplayAttribute attName={'Zip Code'} attVal={this.props.address.zipCode}/>
+                    <Col md={3}>
+                        <Button variant={'warning'} size={'sm'} onClick={this.handleEditAddress}>Edit Address</Button>
+                    </Col>
                 </Card>
             </div>
         )
     }
 }
 
-export class PaymentInfoComponent extends Component {
+export const AddressComponent = withRouter(addressComponent)
+
+export class paymentInfoComponent extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleEditPayment = this.handleEditPayment.bind(this);
+    }
+
+    handleEditPayment() {
+        this.props.history.push({
+            pathname: '/payment/edit',
+            state: { paymentInfo: this.props.paymentInfo}
+        })
+    }
+
     render() {
         return (
             <div className={'m-2 bg-success bg-opacity-50'}>
@@ -28,11 +63,16 @@ export class PaymentInfoComponent extends Component {
                     <Card className={'m-2'}>
                         <AddressComponent compTitle={'Payment Address'} address={this.props.paymentInfo.address}/>
                     </Card>
+                    <Col md={3}>
+                        <Button variant={'warning'} size={'sm'} onClick={this.handleEditPayment}>Edit Payment</Button>
+                    </Col>
                 </Card>
             </div>
         )
     }
 }
+
+export const PaymentInfoComponent = withRouter(paymentInfoComponent)
 
 export class TitleComponent extends Component {
     render() {
@@ -61,12 +101,12 @@ export class HeadingComponent extends Component {
 export class DisplayAttribute extends Component {
     render() {
         return (
-            <div className={'m-2 border-bottom rounded border-2 border-dark'}>
+            <div className={'m-2 border-bottom rounded border-1 border-light'}>
                 <Row>
-                    <Col md={4}>
+                    <Col md={3}>
                         <strong>{this.props.attName}:</strong>
                     </Col>
-                    <Col md={8}>
+                    <Col md={9}>
                         {this.props.attVal}
                     </Col>
                 </Row>
@@ -76,6 +116,18 @@ export class DisplayAttribute extends Component {
 }
 
 export class FormAttribute extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            attVal: this.props.attVal
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(e) {
+        this.setState({attVal: e.target.value})
+    }
+
     render() {
         return (
             <div className={'m-2 bg-info bg-opacity-10'}>
@@ -83,7 +135,7 @@ export class FormAttribute extends Component {
                     <Form.Label><strong>{this.props.attLabel}</strong></Form.Label>
                     <Form.Control type={this.props.attType}
                                   placeholder={this.props.attPlaceholder}
-                                  value={this.props.attVal}/>
+                                  value={this.state.attVal} onChange={this.handleChange}/>
                 </Form.Group>
             </div>
         )

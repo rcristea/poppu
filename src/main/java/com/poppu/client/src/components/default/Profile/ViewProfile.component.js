@@ -3,6 +3,7 @@ import {Button, Card, Container} from 'react-bootstrap'
 
 import 'react-bootstrap/'
 import {AddressComponent, DisplayAttribute, PaymentInfoComponent, TitleComponent} from "./Utils.component";
+import './methods'
 
 export class ViewProfileComponent extends Component {
     constructor(props) {
@@ -47,8 +48,8 @@ export class ViewProfileComponent extends Component {
             }
         }
         this.handleEditProfileClick = this.handleEditProfileClick.bind(this)
-        this.handleEditAddressClick = this.handleEditAddressClick.bind(this)
-        this.handleEditPaymentInfoClick = this.handleEditPaymentInfoClick.bind(this)
+        this.handleAddPaymentClick = this.handleAddPaymentClick.bind(this)
+        this.handleEditPasswordClick = this.handleEditPasswordClick.bind(this)
 
         this.logOut = this.logOut.bind(this)
     }
@@ -63,6 +64,7 @@ export class ViewProfileComponent extends Component {
     }
 
     componentDidMount() {
+        sessionStorage.setItem('role', 'user')
         if (sessionStorage.getItem('role') !== 'user') {
             sessionStorage.setItem('alert', 'User does not have correct privileges.')
             this.props.history.push('/')
@@ -76,23 +78,23 @@ export class ViewProfileComponent extends Component {
         })
     }
 
-    handleEditAddressClick() {
+    handleEditPasswordClick() {
         this.props.history.push({
-            pathname: '/address/edit',
-            state: { address: this.state.user.address}
+            pathname: '/profile/edit/password',
+            state: { user: this.state.user}
         })
     }
 
-    handleEditPaymentInfoClick() {
+    handleAddPaymentClick() {
         this.props.history.push({
-            pathname: '/payment/edit',
-            state: { paymentInfo: this.state.user.paymentInfo}
+            pathname: '/payment/add',
+            state: { paymentInfo: this.state.user.paymentCards}
         })
     }
 
     render() {
         return (
-            <Container className={'my-2 bg-light'}>
+            <Container className={'my-2 bg-light col-8'}>
                 <TitleComponent compTitle={this.state.user.firstName.concat('\'s Profile')}/>
                 <Card className={'bg-primary bg-opacity-25'}>
                     <DisplayAttribute attName={'First Name'} attVal={this.state.user.firstName}/>
@@ -104,8 +106,9 @@ export class ViewProfileComponent extends Component {
                     <DisplayAttribute attName={'Phone Number'} attVal={this.state.user.phoneNum}/>
                     <DisplayAttribute attName={'Status'} attVal={this.state.user.status}/>
                     <Container>
-                        <Button variant={"warning"} className={'m-2'} size={'lg'} onClick={this.handleEditProfileClick}>Edit Your Profile Information</Button>
-                        <Button variant={"warning"} classname={'m-2'} size={'lg'} onClick={this.handleEditAddressClick}>Edit Your Address Information</Button>
+                        <Button variant={"warning"} className={'m-2'} onClick={this.handleEditProfileClick}>Edit Profile Information</Button>
+                        <Button variant={"outline-success"} className={'m-2'} onClick={this.handleAddPaymentClick}>Add Payment Method</Button>
+                        <Button variant={"danger"} className={'m-2'} onClick={this.handleEditPasswordClick}>Edit Password</Button>
                     </Container>
                     <Card className={'m-2'}>
                         <AddressComponent compTitle={'Your Address'} address={this.state.user.address}/>
@@ -115,7 +118,6 @@ export class ViewProfileComponent extends Component {
                             return (
                                 <Container>
                                     <PaymentInfoComponent compTitle={'Card: '.concat(paymentCard.cardType)} paymentInfo={paymentCard}/>
-                                    <Button variant={"warning"} classname={'m-2'} size={'lg'} onClick={this.handleEditPaymentInfoClick}>Edit Card Information</Button>
                                 </Container>
                             )
                         })}
