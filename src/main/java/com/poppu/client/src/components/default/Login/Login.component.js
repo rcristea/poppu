@@ -91,6 +91,13 @@ export class Login extends Component {
     }
   }
 
+  componentDidMount() {
+    if (sessionStorage.getItem('role')) {
+      let role = sessionStorage.getItem('role')
+      this.props.history.push(role === 'user' ? '/profile' : '/admin')
+    }
+  }
+
   render() {
     return (
       <>
