@@ -123,6 +123,7 @@ export class ViewProfileComponent extends Component {
                         })}
                     </Card>
                 </Card>
+                <Button variant={"danger"} className={'m-2'} onClick={this.logOut}>Log out</Button>
             </Container>
         )
     }

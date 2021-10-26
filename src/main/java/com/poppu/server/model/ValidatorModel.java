@@ -91,7 +91,7 @@ public class ValidatorModel {
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(this.email,false));
             msg.setSubject("Hello");
-            msg.setText("Your Code: ".concat(Integer.toString(this.code)));
+            msg.setText("Your Code: ".concat(Integer.toString(this.getCode())));
             msg.setSentDate(new Date());
             Transport.send(msg);
         }catch (MessagingException e){

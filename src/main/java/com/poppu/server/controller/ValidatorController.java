@@ -31,7 +31,7 @@ public class ValidatorController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<ValidatorModel> creteValidtor(@RequestParam("email") String email) throws URISyntaxException {
+    public ResponseEntity<ValidatorModel> createValidator(@RequestParam("email") String email) throws URISyntaxException {
         ValidatorModel newValidator = new ValidatorModel(email);
         ValidatorModel res = this.validatorRepository.save(newValidator);
         return ResponseEntity

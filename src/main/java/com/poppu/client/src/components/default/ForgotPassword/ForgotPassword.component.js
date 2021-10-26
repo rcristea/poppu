@@ -22,6 +22,7 @@ export class ForgotPassword extends Component {
     this.nextStep = this.nextStep.bind(this)
     this.renderHasSentEmail = this.renderHasSentEmail.bind(this)
     this.renderHasError = this.renderHasError.bind(this)
+    this.createValidator = this.createValidator.bind(this)
   }
 
   validateCode() {
@@ -59,10 +60,10 @@ export class ForgotPassword extends Component {
     })
   }
 
-  sendEmail() {
+  createValidator() {
     let email = this.state.email
     return new Promise(function (resolve, reject) {
-      fetch('http://localhost:8080/api/validator/sendEmail', {
+      fetch('http://localhost:8080/api/validator/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -76,22 +77,33 @@ export class ForgotPassword extends Component {
     })
   }
 
-  nextStep() {
-    this.getUser(this.state.email).then(response => {
-      this.sendEmail().then(response => {
-        this.setState({
-          hasSentEmail: true,
-          hasError: false,
-        })
-      }).catch(error => {
-        console.log(error, '2')
-        this.setState({
-          hasSentEmail: false,
-          hasError: true,
+  sendEmail() {
+    this.createValidator().then(response => {
+      let email = this.state.email
+      return new Promise(function (resolve, reject) {
+        fetch('http://localhost:8080/api/validator/sendEmail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `email=${encodeURIComponent(email)}`
+        }).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
         })
       })
+    })
+  }
+
+  nextStep() {
+    this.getUser(this.state.email).then(response => {
+      this.sendEmail()
+      this.setState({
+        hasSentEmail: true,
+        hasError: false,
+      })
     }).catch(error => {
-      console.log(error, '1')
       this.setState({
         hasSentEmail: false,
         hasError: true,

@@ -25,3 +25,5 @@ async function httpRequest(method, url = '', data = {}) {
     });
     return response.json(); // parses JSON response into native JavaScript objects
 }
+
+export default httpRequest
