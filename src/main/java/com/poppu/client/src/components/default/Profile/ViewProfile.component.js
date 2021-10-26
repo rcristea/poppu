@@ -64,7 +64,6 @@ export class ViewProfileComponent extends Component {
     }
 
     componentDidMount() {
-        sessionStorage.setItem('role', 'user')
         if (sessionStorage.getItem('role') !== 'user') {
             sessionStorage.setItem('alert', 'User does not have correct privileges.')
             this.props.history.push('/')

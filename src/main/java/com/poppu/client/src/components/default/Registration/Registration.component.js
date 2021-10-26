@@ -68,23 +68,14 @@ class Registration extends Component {
     })
   }
 
-  sendCustomEmail() {
-    let email = this.state.email
-    let subject = 'Test email'
-    let contents = JSON.stringify(this.state)
-    return new Promise(function (resolve, reject) {
-      fetch('http://localhost:8080/api/validator/customEmail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `email=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&contents=${encodeURIComponent(contents)}`
-      }).then(response => {
-        resolve(response)
-      }).catch(error => {
-        reject(error)
-      })
-    })
+  sendCustomEmail(email, subject, contents) {
+    fetch('http://localhost:8080/api/validator/customEmail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `email=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&contents=${encodeURIComponent(contents)}`
+    }).then(response => {console.log('Successfully sent Confirmation Email')})
   }
 
   createValidator() {
@@ -446,6 +437,32 @@ class Registration extends Component {
     this.validateCode().then(response => {
       if (response['validated']) {
         this.updateUserStatus().then(response => {
+          let subject = 'Thank you for creating an account with Poppu!'
+          let contents = `
+            Welcome to Poppu, ${this.state.name}! The cinema eBooking system.\n\n
+            Name: ${this.state.name}\n
+            Email: ${this.state.email}\n
+            Promotion Subscription: ${this.state.promo}\n\n\n
+            
+            Billing Information\n
+            Card Number: ${this.state.cardNumber}\n
+            Card Type: ${this.state.cardType}\n
+            Expiration Date: ${this.state.cardExpiry}\n
+            Billing Address:\n
+            Street: ${this.state.billingStreet}\n
+            City: ${this.state.billingCity}\n
+            State: ${this.state.billingState}\n
+            Zip: ${this.state.billingZip}\n\n\n
+            
+            Home Address\n
+            Street: ${this.state.homeStreet}\n
+            City: ${this.state.homeCity}\n
+            State: ${this.state.homeState}\n
+            Zip: ${this.state.homeZip}
+          `
+
+          this.sendCustomEmail(this.state.email, subject, contents)
+
           sessionStorage.setItem('role', 'user')
           this.props.history.push('/profile')
         }).catch(error =>{
