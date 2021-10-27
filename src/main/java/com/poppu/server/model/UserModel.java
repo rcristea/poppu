@@ -44,7 +44,7 @@ public class UserModel {
     @Column(name = "status", columnDefinition = "varchar(10) default 'ACTIVE'")
     private Status status = Status.ACTIVE;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", unique = true)
     private AddressModel address;
 
