@@ -40,6 +40,7 @@ class Registration extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
+    this.handleCheckChange = this.handleCheckChange.bind(this)
     this.prev = this.prev.bind(this)
     this.next = this.next.bind(this)
     this.renderButtons = this.renderButtons.bind(this)
@@ -302,6 +303,13 @@ class Registration extends Component {
     })
   }
 
+  handleCheckChange(event) {
+    let isChecked = event.target.checked
+    this.setState({
+      promo: isChecked
+    })
+  }
+
   async putData(data, destination) {
     return new Promise(function (resolve, reject) {
       fetch(destination, {
@@ -499,6 +507,7 @@ class Registration extends Component {
               <Step1
                 currentStep={this.state.currentStep}
                 handleChange={this.handleChange}
+                handleCheckChange={this.handleCheckChange}
                 name={this.state.name}
                 email={this.state.email}
                 phone={this.state.phone}
