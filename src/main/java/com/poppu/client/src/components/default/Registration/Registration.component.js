@@ -384,7 +384,7 @@ class Registration extends Component {
       'email': this.state.email,
       'password': bcrypt.hashSync(this.state.password, this.state.salt),
       'phoneNum': this.state.phone,
-      'isSubscribed': this.state.promo === 'true' ? true : false,
+      'isSubscribed': this.state.promo,
       'status': 'INACTIVE',
     }
 
