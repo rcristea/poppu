@@ -3,6 +3,7 @@ import {Button, Card, Col, Container, Form, Row} from 'react-bootstrap'
 
 import 'react-bootstrap/'
 import {DisplayAttribute, FormAttribute, TitleComponent} from "./Utils.component";
+import {putRequest} from "./methods";
 
 export class EditProfileComponent extends Component {
     constructor(props) {
@@ -13,6 +14,9 @@ export class EditProfileComponent extends Component {
 
         this.handleBack = this.handleBack.bind(this)
         this.handleSubmitProfile = this.handleSubmitProfile.bind(this)
+
+        this.subscribe = this.subscribe.bind(this)
+        this.unSubscribe = this.unSubscribe.bind(this)
     }
 
     componentDidMount() {
@@ -27,7 +31,24 @@ export class EditProfileComponent extends Component {
     }
 
     handleSubmitProfile() {
-        this.props.history.push('/profile')
+        if(this.state.user.firstName.trim().length === 0) {
+            alert("Please enter your first name!")
+        } else if(this.state.user.lastName.trim().length === 0) {
+            alert("Please enter your last name!")
+        } else {
+            console.log(putRequest('http://localhost:8080/users/'.concat(this.state.user.userId), this.state.user))
+            this.props.history.push('/profile')
+        }
+    }
+
+    subscribe() {
+        this.state.user.isSubscribed = true
+        alert("You are suscribed to promotions!")
+    }
+
+    unSubscribe() {
+        this.state.user.isSubscribed = false
+        alert("You are unsubscribed to promotions!")
     }
 
     render() {
@@ -54,10 +75,8 @@ export class EditProfileComponent extends Component {
                                         <strong>Subscribed: </strong>
                                     </Col>
                                     <Col>
-                                        <Form.Check
-                                            type={'radio'}
-                                            id={`subscribed`}
-                                        />
+                                        <Button variant={'success'} onClick={this.subscribe}>Subscribe</Button>
+                                        <Button variant={'danger'} onClick={this.unSubscribe}>Unsubscribe</Button>
                                     </Col>
                                 </Row>
                             </Form.Group>

@@ -12,18 +12,56 @@
 // const HTTP_DELETE = 'DELETE'
 
 
-async function httpRequest(method, url = '', data = {}) {
-    const response = await fetch(url, {
-        method: method,
-        mode: 'cors',
-        credentials: 'same-origin',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
+function getUser(email) {
+    return new Promise(function (resolve, reject) {
+        fetch(`http://localhost:8080/users/search/findDistinctByEmail?email=${email}`, {
+            method: 'GET',
+        }).then(response => {
+            response.json().then(json => {
+                resolve(json)
+            }).catch(error => {
+                reject(error)
+            })
+        }).catch(error => {
+            reject(error)
+        })
+    })
 }
 
-export default httpRequest
+function getAddress(address_link) {
+    return new Promise(function (resolve, reject) {
+        fetch(address_link, {
+            method: 'GET',
+        }).then(response => {
+            response.json().then(json => {
+                resolve(json)
+            }).catch(error => {
+                reject(error)
+            })
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+
+function getPaymentCards(paymentCard_link) {
+    return new Promise(function (resolve, reject) {
+        fetch(paymentCard_link, {
+            method: 'GET',
+        }).then(response => {
+            response.json().then(json => {
+                resolve(json)
+            }).catch(error => {
+                reject(error)
+            })
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+
+function putRequest(association_link) {
+
+}
+
+export {getUser, getPaymentCards, getAddress, putRequest}

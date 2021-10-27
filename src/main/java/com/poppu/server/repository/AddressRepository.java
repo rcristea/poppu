@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin(origins = "http://localhost:3000")
 @RepositoryRestResource(collectionResourceRel = "addresses", path = "addresses")
 public interface AddressRepository extends JpaRepository<AddressModel, Long> {
+
 }

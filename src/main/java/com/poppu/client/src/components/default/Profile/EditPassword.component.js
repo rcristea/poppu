@@ -3,13 +3,17 @@ import {Button, Card, Container, Form} from 'react-bootstrap'
 
 import 'react-bootstrap/'
 import {FormAttribute, TitleComponent} from "./Utils.component";
+import {putRequest} from "./methods";
 
 export class EditPasswordComponent extends Component {
     constructor(props) {
         super(props);
         console.log(this.props.location.state)
         this.state = {
-            user: this.props.location.state.user
+            user: this.props.location.state.user,
+            oldPassword: '',
+            newPassword: '',
+            confirmPassword: ''
         }
 
         this.handleBack = this.handleBack.bind(this)
@@ -28,7 +32,15 @@ export class EditPasswordComponent extends Component {
     }
 
     handleSubmitPassword() {
-        this.props.history.push('/profile')
+        if(this.state.oldPassword !== this.state.user.password) {
+            alert("Please enter your correct password!")
+        } else if(this.state.newPassword !== this.state.confirmPassword) {
+            alert("Please make sure that both the new and confirm passwords match!")
+        } else {
+            console.log(putRequest('http://localhost:8080/users/'.concat(this.state.user.userId), this.state.user))
+            this.props.history.push('/profile')
+        }
+
     }
 
     render() {
@@ -41,17 +53,17 @@ export class EditPasswordComponent extends Component {
                                        attLabel={'Current Password'}
                                        attType={'text'}
                                        attPlaceholder={'Enter your current password.'}
-                                       attVal={this.state.user.password}/>
+                                       attVal={this.state.oldPassword}/>
                         <FormAttribute attCtrl={'currentPassword'}
                                        attLabel={'New Password'}
-                                       attType={'password'}
+                                       attType={'text'}
                                        attPlaceholder={''}
-                                       attVal={''}/>
+                                       attVal={this.state.newPassword}/>
                         <FormAttribute attCtrl={'currentPassword'}
                                        attLabel={'Confirm Password'}
-                                       attType={'password'}
+                                       attType={'text'}
                                        attPlaceholder={''}
-                                       attVal={''}/>
+                                       attVal={this.state.confirmPassword}/>
                         <Container className={'m-2'}>
                             <Button type={'submit'} variant={'success'}>Submit New Password</Button>
                             <Button variant={'warning'} onClick={this.handleBack}>Go Back</Button>

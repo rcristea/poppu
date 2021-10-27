@@ -4,57 +4,56 @@ import {Button, Card, Container} from 'react-bootstrap'
 import 'react-bootstrap/'
 import {AddressComponent, DisplayAttribute, PaymentInfoComponent, TitleComponent} from "./Utils.component";
 import './methods'
+import {getAddress, getPaymentCards, getRequest, getUser} from "./methods";
 
 export class ViewProfileComponent extends Component {
     constructor(props) {
-        super(props);
+        super(props)
+
         this.state = {
-            user: {
-                firstName: "Abhinav",
-                lastName: "Singh",
-                role: "user",
-                email: "abhinn@singh.com",
-                password: "bigPassword",
-                isSubscribed: "TRUE",
-                phoneNum: "1-909-909-9090",
-                status: "Active User",
-                address: {
-                    city: "Marietta",
-                    street: "Streets ahead",
-                    zipCode: "808080"
-                },
-                paymentCards: [
-                    {
-                        cardNum: "Marietta",
-                        cardType: "Peachtree St",
-                        expDate: "238909",
-                        address: {
-                            city: "Marietta",
-                            street: "Streets ahead",
-                            zipCode: "808080",
-                        }
-                    },
-                    {
-                        cardNum: "Marietta",
-                        cardType: "Peachtree St",
-                        expDate: "238909",
-                        address: {
-                            city: "Marietta",
-                            street: "Streets ahead",
-                            zipCode: "808080",
-                        }
-                    },
-                ]
-            }
+            user: null,
+            address: null,
+            paymentCards: null,
         }
+
         this.handleEditProfileClick = this.handleEditProfileClick.bind(this)
         this.handleAddPaymentClick = this.handleAddPaymentClick.bind(this)
         this.handleEditPasswordClick = this.handleEditPasswordClick.bind(this)
-
+        this.renderContent = this.renderContent.bind(this)
+        this.initContent = this.initContent.bind(this)
         this.logOut = this.logOut.bind(this)
     }
 
+    async initContent() {
+        let email = "abhinavsingh0302@gmail.com"
+        let user = await getUser(email)
+        console.log(user)
+
+        let address_link = user._links.address.href
+        let address = await getAddress(address_link)
+        console.log(address)
+
+        let paymentCards_link = user._links.paymentCards.href
+        let paymentCards = await getPaymentCards(paymentCards_link)
+        console.log(paymentCards._embedded.paymentinfos)
+        let paymentinfos = paymentCards._embedded.paymentinfos
+
+        for (var i = 0; i < paymentinfos.length; i++) {
+            let paymentAddressLink = paymentinfos[i]._links.address.href
+            let paymentCardAddress = await getAddress(paymentAddressLink)
+            paymentinfos[i].address = paymentCardAddress
+        }
+
+
+        this.setState({
+            user: user,
+            address: address,
+            paymentCards: paymentCards._embedded.paymentinfos,
+        })
+    }
+
     logOut() {
+        sessionStorage.setItem('role', 'user')
         if (sessionStorage.getItem('role')) {
             sessionStorage.removeItem('role')
             sessionStorage.setItem('alert', 'Successfully logged out!')
@@ -68,6 +67,9 @@ export class ViewProfileComponent extends Component {
             sessionStorage.setItem('alert', 'User does not have correct privileges.')
             this.props.history.push('/')
         }
+
+        this.initContent()
+        console.log(this.state, '1')
     }
 
     handleEditProfileClick() {
@@ -85,45 +87,61 @@ export class ViewProfileComponent extends Component {
     }
 
     handleAddPaymentClick() {
-        this.props.history.push({
-            pathname: '/payment/add',
-            state: { paymentInfo: this.state.user.paymentCards}
-        })
+        if(this.state.user.paymentCards.length >= 3) {
+            alert("Cannot add more payment methods!")
+        } else {
+            this.props.history.push({
+                pathname: '/payment/add',
+                state: { paymentInfo: this.state.paymentCards}
+            })
+        }
+    }
+
+    renderContent() {
+        if (this.state.user) {
+            return (
+                <Container className={'my-2 bg-light col-8'}>
+                    <TitleComponent compTitle={this.state.user.firstName.concat('\'s Profile')}/>
+                    <Card className={'bg-primary bg-opacity-25'}>
+                        <DisplayAttribute attName={'First Name'} attVal={this.state.user.firstName}/>
+                        <DisplayAttribute attName={'Last Name'} attVal={this.state.user.lastName}/>
+                        <DisplayAttribute attName={'Role'} attVal={this.state.user.role}/>
+                        <DisplayAttribute attName={'Email'} attVal={this.state.user.email}/>
+                        <DisplayAttribute attName={'Password'} attVal={'+++++++++++'}/>
+                        <DisplayAttribute attName={'Phone Number'} attVal={this.state.user.phoneNum}/>
+                        <DisplayAttribute attName={'Subscribed'} attVal={this.state.user.isSubscribed.toString().toUpperCase()}/>
+                        <DisplayAttribute attName={'Status'} attVal={this.state.user.status}/>
+                        <Container>
+                            <Button variant={"warning"} className={'m-2'} onClick={this.handleEditProfileClick}>Edit Profile Information</Button>
+                            <Button variant={"outline-success"} className={'m-2'} onClick={this.handleAddPaymentClick}>Add Payment Method</Button>
+                            <Button variant={"danger"} className={'m-2'} onClick={this.handleEditPasswordClick}>Edit Password</Button>
+                        </Container>
+                        <Card className={'m-2'}>
+                            <AddressComponent compTitle={'Your Address'} address={this.state.address}/>
+                        </Card>
+                        <Card className={'m-2'}>
+                            {this.state.paymentCards.map(paymentCard => {
+                                return (
+                                    <Container>
+                                        <PaymentInfoComponent compTitle={'Card: '.concat(paymentCard.cardType)} paymentInfo={paymentCard}/>
+                                    </Container>
+                                )
+                            })}
+                        </Card>
+                    </Card>
+                    <Button variant={"danger"} className={'m-2'} onClick={this.logOut}>Log out</Button>
+                </Container>
+            )
+        } else {
+            return null
+        }
     }
 
     render() {
         return (
-            <Container className={'my-2 bg-light col-8'}>
-                <TitleComponent compTitle={this.state.user.firstName.concat('\'s Profile')}/>
-                <Card className={'bg-primary bg-opacity-25'}>
-                    <DisplayAttribute attName={'First Name'} attVal={this.state.user.firstName}/>
-                    <DisplayAttribute attName={'Last Name'} attVal={this.state.user.lastName}/>
-                    <DisplayAttribute attName={'Role'} attVal={this.state.user.role}/>
-                    <DisplayAttribute attName={'Email'} attVal={this.state.user.email}/>
-                    <DisplayAttribute attName={'Password'} attVal={'+++++++++++'}/>
-                    <DisplayAttribute attName={'Subscribed'} attVal={this.state.user.isSubscribed}/>
-                    <DisplayAttribute attName={'Phone Number'} attVal={this.state.user.phoneNum}/>
-                    <DisplayAttribute attName={'Status'} attVal={this.state.user.status}/>
-                    <Container>
-                        <Button variant={"warning"} className={'m-2'} onClick={this.handleEditProfileClick}>Edit Profile Information</Button>
-                        <Button variant={"outline-success"} className={'m-2'} onClick={this.handleAddPaymentClick}>Add Payment Method</Button>
-                        <Button variant={"danger"} className={'m-2'} onClick={this.handleEditPasswordClick}>Edit Password</Button>
-                    </Container>
-                    <Card className={'m-2'}>
-                        <AddressComponent compTitle={'Your Address'} address={this.state.user.address}/>
-                    </Card>
-                    <Card className={'m-2'}>
-                        {this.state.user.paymentCards.map(paymentCard => {
-                            return (
-                                <Container>
-                                    <PaymentInfoComponent compTitle={'Card: '.concat(paymentCard.cardType)} paymentInfo={paymentCard}/>
-                                </Container>
-                            )
-                        })}
-                    </Card>
-                </Card>
-                <Button variant={"danger"} className={'m-2'} onClick={this.logOut}>Log out</Button>
-            </Container>
+            <>
+                {this.renderContent()}
+            </>
         )
     }
 }

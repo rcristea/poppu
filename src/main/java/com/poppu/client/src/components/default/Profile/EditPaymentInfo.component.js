@@ -2,6 +2,7 @@ import {Button, Card, Container, Form} from "react-bootstrap";
 import {TitleComponent} from "./ViewProfile.component";
 import {FormAttribute} from "./Utils.component";
 import {Component} from "react";
+import {putRequest} from "./methods";
 
 export class EditPaymentInfoComponent extends Component {
     constructor(props) {
@@ -18,8 +19,23 @@ export class EditPaymentInfoComponent extends Component {
         this.props.history.push('/profile')
     }
 
+    handleOnChangePayment(e) {
+        let paymentInfo = this.state.paymentInfo
+
+    }
+
     handleSubmitPayment() {
-        this.props.history.push('/profile')
+        console.log(this.state.paymentInfo.cardType)
+        if(this.state.paymentInfo.cardNum.trim().length === 0) {
+            alert("Please enter a number for your payment card!")
+        } else if(this.state.paymentInfo.cardType.length === 0) {
+            alert("Please enter a number for your card type!")
+        } else if(this.state.paymentInfo.expDate.trim().length === 0) {
+            alert("Please enter a number for your card type!")
+        } else {
+            console.log(putRequest('http://localhost:8080/paymentinfos/'.concat(this.state.paymentInfo.payment_id), this.state.paymentInfo))
+            this.props.history.push('/profile')
+        }
     }
 
     render() {
@@ -40,7 +56,7 @@ export class EditPaymentInfoComponent extends Component {
                                        attVal={this.state.paymentInfo.cardType}/>
                         <FormAttribute attCtrl={'expDate'}
                                        attLabel={'Card Expiration Date'}
-                                       attType={'date'}
+                                       attType={'text'}
                                        attPlaceholder={'Enter your card\'s expiration date'}
                                        attVal={this.state.paymentInfo.expDate}/>
                         <Button type={'submit'} variant={'success'}>Submit Payment Information</Button>

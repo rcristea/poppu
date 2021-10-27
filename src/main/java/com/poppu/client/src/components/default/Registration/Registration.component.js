@@ -271,7 +271,7 @@ class Registration extends Component {
 
   async getUser(email) {
     return new Promise(function (resolve, reject) {
-      fetch(`http://localhost:8080/api/users/email?email=${email}`, {
+      fetch(`http://localhost:8080/api/zusers/email?email=${email}`, {
         method: 'GET',
       }).then(response => {
         response.json().then(json => {
@@ -383,6 +383,7 @@ class Registration extends Component {
     userJSON = await this.postData(userData, 'users')
 
     if (hasHomeAddress) {
+      console.log(userJSON)
       await this.putData(
         userHomeAddressJSON['_links']['self']['href'],
         userJSON['_links']['address']['href']
@@ -464,7 +465,10 @@ class Registration extends Component {
           this.sendCustomEmail(this.state.email, subject, contents)
 
           sessionStorage.setItem('role', 'user')
-          this.props.history.push('/profile')
+          this.props.history.push({
+            pathname: '/profile',
+            state: {email: this.state.email}
+          })
         }).catch(error =>{
           console.error(error, 'handleSubmitConfirmation')
           this.setState({
