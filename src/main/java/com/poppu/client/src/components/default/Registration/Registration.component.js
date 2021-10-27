@@ -40,6 +40,7 @@ class Registration extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
+    this.handleCheckChange = this.handleCheckChange.bind(this)
     this.prev = this.prev.bind(this)
     this.next = this.next.bind(this)
     this.renderButtons = this.renderButtons.bind(this)
@@ -302,6 +303,13 @@ class Registration extends Component {
     })
   }
 
+  handleCheckChange(event) {
+    let isChecked = event.target.checked
+    this.setState({
+      promo: isChecked
+    })
+  }
+
   async putData(data, destination) {
     return new Promise(function (resolve, reject) {
       fetch(destination, {
@@ -376,7 +384,7 @@ class Registration extends Component {
       'email': this.state.email,
       'password': bcrypt.hashSync(this.state.password, this.state.salt),
       'phoneNum': this.state.phone,
-      'isSubscribed': this.state.promo,
+      'isSubscribed': this.state.promo === 'true' ? true : false,
       'status': 'INACTIVE',
     }
 
@@ -495,6 +503,7 @@ class Registration extends Component {
               <Step1
                 currentStep={this.state.currentStep}
                 handleChange={this.handleChange}
+                handleCheckChange={this.handleCheckChange}
                 name={this.state.name}
                 email={this.state.email}
                 phone={this.state.phone}

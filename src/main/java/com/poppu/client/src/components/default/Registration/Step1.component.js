@@ -73,7 +73,7 @@ class Step1 extends Component {
               id='promo'
               name='promo'
               defaultChecked={this.props.promo}
-              onChange={this.props.handleChange}/>
+              onChange={this.props.handleCheckChange}/>
             <label htmlFor='promo'>Register for promotion emails</label>
           </div>
         </div>
