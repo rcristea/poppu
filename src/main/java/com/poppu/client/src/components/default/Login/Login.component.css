@@ -38,7 +38,7 @@
   flex-direction: column;
 }
 
-.form-login input {
+.form-login input[type='text'], .form-login input[type='password'] {
   margin: 15px 0;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -89,4 +89,15 @@
   margin: 0;
   font-size: 0.75rem;
   color:hsla(283, 92%, 63%, 1);
+}
+
+.remember-me-wrapper {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.remember-me-wrapper input {
+  margin-right: 5px;
 }

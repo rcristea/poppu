@@ -25,7 +25,7 @@ export class ViewProfileComponent extends Component {
     }
 
     async initContent() {
-        let email = "abhinavsingh0302@gmail.com"
+        let email = "rubencristea2009@yahoo.com"
         let user = await getUser(email)
         console.log(user)
 
@@ -53,6 +53,10 @@ export class ViewProfileComponent extends Component {
     }
 
     logOut() {
+        if (localStorage.getItem('remember_me')) {
+            localStorage.removeItem('remember_me')
+        }
+
         sessionStorage.setItem('role', 'user')
         if (sessionStorage.getItem('role')) {
             sessionStorage.removeItem('role')
