@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {BrowserRouter, Route, Switch, withRouter} from 'react-router-dom'
+import {Route, Switch, withRouter} from 'react-router-dom'
 import './App.css'
 import TestIndex from '../tests/TestIndex/TestIndex.component'
 import TestAdd from '../tests/TestAdd/TestAdd.component'

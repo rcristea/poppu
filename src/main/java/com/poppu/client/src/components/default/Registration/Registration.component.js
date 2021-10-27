@@ -272,7 +272,7 @@ class Registration extends Component {
 
   async getUser(email) {
     return new Promise(function (resolve, reject) {
-      fetch(`http://localhost:8080/api/zusers/email?email=${email}`, {
+      fetch(`http://localhost:8080/api/users/email?email=${email}`, {
         method: 'GET',
       }).then(response => {
         response.json().then(json => {
