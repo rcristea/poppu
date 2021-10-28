@@ -61,7 +61,6 @@ function getPaymentCards(paymentCard_link) {
 }
 
 function putData(data, destination) {
-    console.log(JSON.stringify(data, destination))
     return new Promise(function (resolve, reject) {
         fetch(destination, {
             method: 'PUT',

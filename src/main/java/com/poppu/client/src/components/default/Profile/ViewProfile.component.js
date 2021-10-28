@@ -25,7 +25,7 @@ export class ViewProfileComponent extends Component {
     }
 
     async initContent() {
-        let email = "rubencristea2009@yahoo.com"
+        let email = "abhinavsingh0302@gmail.com"
         let user = await getUser(email)
 
         let address_link = user._links.address.href
@@ -69,7 +69,6 @@ export class ViewProfileComponent extends Component {
         }
 
         this.initContent()
-        console.log(this.state, '1')
     }
 
     handleEditProfileClick() {

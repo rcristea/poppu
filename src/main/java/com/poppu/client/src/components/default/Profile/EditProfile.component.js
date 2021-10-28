@@ -14,6 +14,7 @@ export class EditProfileComponent extends Component {
 
         this.handleBack = this.handleBack.bind(this)
         this.handleSubmitProfile = this.handleSubmitProfile.bind(this)
+        this.updateDB = this.updateDB.bind(this)
 
         this.subscribe = this.subscribe.bind(this)
         this.unSubscribe = this.unSubscribe.bind(this)
@@ -30,7 +31,7 @@ export class EditProfileComponent extends Component {
         this.props.history.push('/profile')
     }
 
-    handleSubmitProfile() {
+    async handleSubmitProfile() {
         if(this.state.user.firstName.trim() === '') {
             alert("Please enter your first name!")
         } else if (this.state.user.lastName.trim() === '') {
@@ -38,9 +39,13 @@ export class EditProfileComponent extends Component {
         } else if (isNaN(this.state.user.phoneNum)) {
             alert("Please enter a number for a phone number!")
         } else {
-           console.log(putData(this.state.user, this.state.user._links.self.href))
+            this.updateDB()
             this.props.history.push('/profile')
         }
+    }
+
+    async updateDB() {
+        console.log(await putData(this.state.user, this.state.user._links.self.href))
     }
 
     subscribe() {
@@ -122,7 +127,8 @@ export class EditProfileComponent extends Component {
                             </Form.Group>
                         </Container>
                         <Container className={'m-2'}>
-                            <Button type={'submit'} variant={'success'} onClick={this.handleSubmitProfile}>Submit Profile</Button>
+                            <button disabled hidden={true}>Submit</button>
+                            <Button variant={'success'} onClick={this.handleSubmitProfile}>Submit Profile</Button>
                             <Button variant={'warning'} onClick={this.handleBack}>Go Back</Button>
                         </Container>
                     </Form>

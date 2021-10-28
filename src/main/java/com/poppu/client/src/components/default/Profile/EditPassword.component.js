@@ -4,6 +4,7 @@ import {Button, Card, Container, Form} from 'react-bootstrap'
 import 'react-bootstrap/'
 import {TitleComponent} from "./Utils.component";
 import {putData} from "./methods";
+import bcrypt from "bcryptjs";
 
 export class EditPasswordComponent extends Component {
     constructor(props) {
@@ -32,25 +33,22 @@ export class EditPasswordComponent extends Component {
     }
 
     handleSubmitPassword() {
-        // if( this.state.oldPassword !== this.state.user.password ) {
-        //     alert("Please enter your correct password!")
-        // } else if(this.state.newPassword.trim() === '') {
-        //     alert("Please enter a new password!")
-        // } else if(this.state.confirmPassword.trim() === '') {
-        //     alert("Please confirm your new password!")
-        // } else if(this.state.newPassword !== this.state.confirmPassword) {
-        //     alert("Please make sure that both the new and confirm passwords match!")
-        // } else {
-            this.setState({
-                ...this.state,
-                user: {
-                    ...this.state.user,
-                    password: this.state.newPassword
-                }})
+        let oldEncrypted = bcrypt.hashSync(this.state.oldPassword, this.state.salt)
+        if( oldEncrypted !== this.state.user.password ) {
+            alert("Please enter your correct password!")
+        } else if(this.state.newPassword.trim() === '') {
+            alert("Please enter a new password!")
+        } else if(this.state.confirmPassword.trim() === '') {
+            alert("Please confirm your new password!")
+        } else if(this.state.newPassword !== this.state.confirmPassword) {
+            alert("Please make sure that both the new and confirm passwords match!")
+        } else {
+            let newUser = this.state.user
+            newUser.password = bcrypt.hashSync(this.state.newPassword, this.state.salt)
+            console.log(this.newUser)
             console.log(putData(this.state.user, this.state.user._links.self.href))
             this.props.history.push('/profile')
-        // }
-        console.log(this.state)
+        }
     }
 
     render() {
