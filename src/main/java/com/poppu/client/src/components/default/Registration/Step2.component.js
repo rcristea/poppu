@@ -19,8 +19,11 @@ class Step2 extends Component {
             value={this.props.cardType}
             onChange={this.props.handleChange} >
             <option value='0' disabled={true}>Type: </option>
-            <option value='1'>Type 1</option>
-            <option value='2'>Type 2</option>
+            <option value='VISA'>VISA</option>
+            <option value='MasterCard'>MasterCard</option>
+            <option value='American Express'>American Express</option>
+            <option value='Discover'>Discover</option>
+            <option value='JCB'>JCB</option>
           </select>
           <input
             type='text'
