@@ -20,6 +20,7 @@ export class ViewProfileComponent extends Component {
         this.handleAddPaymentClick = this.handleAddPaymentClick.bind(this)
         this.handleEditPasswordClick = this.handleEditPasswordClick.bind(this)
         this.renderContent = this.renderContent.bind(this)
+        this.renderAddress = this.renderAddress.bind(this)
         this.initContent = this.initContent.bind(this)
         this.logOut = this.logOut.bind(this)
     }
@@ -100,6 +101,16 @@ export class ViewProfileComponent extends Component {
         }
     }
 
+    renderAddress() {
+        if (this.state.address) {
+            return (
+                <AddressComponent compTitle={'Your Address'} address={this.state.address}/>
+            )
+        } else {
+            return null
+        }
+    }
+
     renderContent() {
         if (this.state.user) {
             return (
@@ -120,7 +131,7 @@ export class ViewProfileComponent extends Component {
                             <Button variant={"danger"} className={'m-2'} onClick={this.handleEditPasswordClick}>Edit Password</Button>
                         </Container>
                         <Card className={'m-2'}>
-                            <AddressComponent compTitle={'Your Address'} address={this.state.address}/>
+                            {this.renderAddress()}
                         </Card>
                         <Card className={'m-2'}>
                             {this.state.paymentCards.map(paymentCard => {
