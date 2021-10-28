@@ -109,7 +109,7 @@ export class ViewProfileComponent extends Component {
         if (this.state.address === null) {
             alert("User doesn't have an address! Create one.")
         } else {
-            console.log(await deleteAssociation(this.props.user._links.address.href))
+            console.log(await deleteAssociation(this.state.user._links.address.href))
             this.props.history.push({
                 pathname: '/profile'
             })
@@ -156,7 +156,7 @@ export class ViewProfileComponent extends Component {
                         <Container>
                             <Button variant={"warning"} className={'m-2'} onClick={this.handleEditProfileClick}>Edit Profile Information</Button>
                             <Button variant={"outline-success"} className={'m-2'} onClick={this.handleAddAddressClick}>Add Address</Button>
-                            <Button variant={"outline-danger"} className={'m-2'} onClick={this.handleAddAddressClick}>Delete Address</Button>
+                            <Button variant={"outline-danger"} className={'m-2'} onClick={this.handleDeleteAddressClick}>Delete Address</Button>
                             <Button variant={"outline-success"} className={'m-2'} onClick={this.handleAddPaymentClick}>Add Payment Method</Button>
                             <Button variant={"danger"} className={'m-2'} onClick={this.handleEditPasswordClick}>Edit Password</Button>
                         </Container>
