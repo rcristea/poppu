@@ -25,7 +25,7 @@ export class ViewProfileComponent extends Component {
     }
 
     async initContent() {
-        let email = "abhinavsingh0302@gmail.com"
+        let email = sessionStorage.getItem('user_email')
         let user = await getUser(email)
 
         let address_link = user._links.address.href
@@ -51,6 +51,10 @@ export class ViewProfileComponent extends Component {
     logOut() {
         if (localStorage.getItem('remember_me')) {
             localStorage.removeItem('remember_me')
+        }
+
+        if (sessionStorage.getItem('user_email')) {
+            sessionStorage.removeItem('user_email')
         }
 
         sessionStorage.setItem('role', 'user')

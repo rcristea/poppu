@@ -36,6 +36,8 @@ export class EditProfileComponent extends Component {
             alert("Please enter your first name!")
         } else if (this.state.user.lastName.trim() === '') {
             alert("Please enter your last name!")
+        } else if (this.state.user.phoneNum.trim() ==='') {
+            alert("Please enter a number for a phone number!")
         } else if (isNaN(this.state.user.phoneNum)) {
             alert("Please enter a number for a phone number!")
         } else {

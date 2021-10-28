@@ -219,6 +219,10 @@ class Dashboard extends Component {
       localStorage.removeItem('remember_me')
     }
 
+    if (sessionStorage.getItem('user_email')) {
+      sessionStorage.removeItem('user_email')
+    }
+
     if (sessionStorage.getItem('role')) {
       sessionStorage.removeItem('role')
       sessionStorage.setItem('alert', 'Successfully logged out!')

@@ -473,10 +473,8 @@ class Registration extends Component {
           this.sendCustomEmail(this.state.email, subject, contents)
 
           sessionStorage.setItem('role', 'user')
-          this.props.history.push({
-            pathname: '/profile',
-            state: {email: this.state.email}
-          })
+          sessionStorage.setItem('user_email', this.state.email)
+          this.props.history.push('/profile')
         }).catch(error =>{
           console.error(error, 'handleSubmitConfirmation')
           this.setState({
