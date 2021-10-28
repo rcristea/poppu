@@ -27,6 +27,7 @@ import EditAddressComponent from "../default/Profile/EditAddress.component";
 import EditPasswordComponent from "../default/Profile/EditPassword.component";
 import AddPaymentComponent from "../default/Profile/AddPayment.component";
 import bcrypt from "bcryptjs";
+import AddAddressComponent from "../default/Profile/AddAddress.component";
 
 class App extends Component {
   constructor(props) {
@@ -93,6 +94,7 @@ class App extends Component {
         <Route path='/profile/edit' exact={true} component={EditProfileComponent} />
         <Route path='/profile/edit/password' exact={true} component={EditPasswordComponent}/>
         <Route path='/address/edit' exact={true} component={EditAddressComponent} />
+          <Route path='/address/add' exact={true} component={AddAddressComponent} />
         <Route path='/payment/edit' exact={true} component={EditPaymentInfoComponent} />
         <Route path='/payment/add' exact={true} component={AddPaymentComponent} />
 
