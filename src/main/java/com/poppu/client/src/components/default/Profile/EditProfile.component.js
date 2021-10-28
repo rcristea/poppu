@@ -43,6 +43,7 @@ export class EditProfileComponent extends Component {
         } else {
             this.updateDB()
             this.props.history.push('/profile')
+            window.location.reload();
         }
     }
 

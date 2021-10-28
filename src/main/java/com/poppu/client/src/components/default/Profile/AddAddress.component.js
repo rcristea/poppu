@@ -37,6 +37,7 @@ export class AddAddressComponent extends Component {
         } else {
             await this.updateDB()
             this.props.history.push('/profile')
+            window.location.reload();
         }
     }
 

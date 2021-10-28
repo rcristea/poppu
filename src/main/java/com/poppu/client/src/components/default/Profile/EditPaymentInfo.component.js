@@ -30,6 +30,7 @@ export class EditPaymentInfoComponent extends Component {
         } else {
             console.log(putData(this.state.paymentInfo, this.state.paymentInfo._links.self.href))
             this.props.history.push('/profile')
+            window.location.reload();
         }
     }
 

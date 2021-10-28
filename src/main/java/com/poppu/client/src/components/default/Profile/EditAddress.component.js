@@ -37,6 +37,7 @@ export class EditAddressComponent extends Component {
         } else {
             console.log(putData(this.state.address, this.state.address._links.self.href))
             this.props.history.push('/profile')
+            window.location.reload();
         }
     }
 
