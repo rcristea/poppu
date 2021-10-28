@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import './Login.component.css'
 import NavBar from '../NavBar/NavBar.component'
@@ -12,11 +12,13 @@ export class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      remember_me: true,
       isValid: true,
       salt: '$2a$10$O1RbZIPCQCLr522HZUP51/', // for encryption
     }
 
     this.handleChange = this.handleChange.bind(this)
+    this.handleCheckChange = this.handleCheckChange.bind(this)
     this.getUser = this.getUser.bind(this)
     this.renderIsValid = this.renderIsValid.bind(this)
   }
@@ -55,9 +57,18 @@ export class Login extends Component {
     })
   }
 
+  handleCheckChange(event) {
+    let isChecked = event.target.checked
+    this.setState({
+      remember_me: isChecked
+    })
+  }
+
 
   handleSubmit = async(e) => {
-    e.preventDefault()
+    if (e) {
+      e.preventDefault()
+    }
 
     if (this.state.email.length === 0 || this.state.password === 0) {
       this.setState({
@@ -72,6 +83,19 @@ export class Login extends Component {
       let inputHash = await bcrypt.hash(this.state.password, this.state.salt)
 
       if (user['password'] === inputHash) {
+        if (this.state.remember_me) {
+          let cookie = {
+            email: this.state.email,
+            password: this.state.password,
+          }
+
+          localStorage.setItem('remember_me', JSON.stringify(cookie))
+        } else {
+          localStorage.removeItem('remember_me')
+        }
+
+
+
         let role = user['role'].toLowerCase()
         sessionStorage.setItem('role', role)
         if (role === 'user') {
@@ -120,6 +144,16 @@ export class Login extends Component {
                   name='password'
                   autoComplete='password'
                   onChange={this.handleChange} />
+                <div className='remember-me-wrapper'>
+                  <input
+                    type='checkbox'
+                    className='registration-input'
+                    id='remember_me'
+                    name='remember_me'
+                    defaultChecked={this.state.remember_me}
+                    onChange={this.handleCheckChange}/>
+                  <label htmlFor='promo'>Remember me</label>
+                </div>
                 <button type='submit'>Login</button>
               </form>
               <p className='forgot-password'>Forgot your password? <Link to='/forgot_password'>Click here</Link></p>
