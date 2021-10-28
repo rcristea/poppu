@@ -4,7 +4,7 @@ import {Button, Card, Container} from 'react-bootstrap'
 import 'react-bootstrap/'
 import {AddressComponent, DisplayAttribute, PaymentInfoComponent, TitleComponent} from "./Utils.component";
 import './methods'
-import {getAddress, getPaymentCards, getUser} from "./methods";
+import {deleteAssociation, getAddress, getPaymentCards, getUser} from "./methods";
 import NavBar from "../NavBar/NavBar.component";
 
 export class ViewProfileComponent extends Component {
@@ -19,6 +19,7 @@ export class ViewProfileComponent extends Component {
 
         this.handleEditProfileClick = this.handleEditProfileClick.bind(this)
         this.handleAddAddressClick = this.handleAddAddressClick.bind(this)
+        this.handleDeleteAddressClick = this.handleDeleteAddressClick.bind(this)
         this.handleAddPaymentClick = this.handleAddPaymentClick.bind(this)
         this.handleEditPasswordClick = this.handleEditPasswordClick.bind(this)
         this.renderContent = this.renderContent.bind(this)
@@ -104,6 +105,19 @@ export class ViewProfileComponent extends Component {
         }
     }
 
+    async handleDeleteAddressClick() {
+        if (this.state.address === null) {
+            alert("User doesn't have an address! Create one.")
+        } else {
+            console.log(await deleteAssociation(this.props.user._links.address.href))
+            this.props.history.push({
+                pathname: '/profile'
+            })
+            window.location.reload();
+        }
+    }
+
+
     handleAddPaymentClick() {
         if(this.state.paymentCards.length >= 3) {
             alert("Cannot add more payment methods!")
@@ -142,6 +156,7 @@ export class ViewProfileComponent extends Component {
                         <Container>
                             <Button variant={"warning"} className={'m-2'} onClick={this.handleEditProfileClick}>Edit Profile Information</Button>
                             <Button variant={"outline-success"} className={'m-2'} onClick={this.handleAddAddressClick}>Add Address</Button>
+                            <Button variant={"outline-danger"} className={'m-2'} onClick={this.handleAddAddressClick}>Delete Address</Button>
                             <Button variant={"outline-success"} className={'m-2'} onClick={this.handleAddPaymentClick}>Add Payment Method</Button>
                             <Button variant={"danger"} className={'m-2'} onClick={this.handleEditPasswordClick}>Edit Password</Button>
                         </Container>
