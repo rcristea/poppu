@@ -179,6 +179,7 @@ export class ForgotPassword extends Component {
     this.validateCode().then(response => {
       if (response['validated']) {
         sessionStorage.setItem('role', 'user')
+        sessionStorage.setItem('user_email', this.state.email)
         this.props.history.push('/profile')
       } else {
         this.setState({
