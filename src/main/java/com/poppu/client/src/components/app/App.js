@@ -68,8 +68,8 @@ class App extends Component {
 
       if (user['password'] === inputHash) {
         let role = user['role'].toLowerCase()
-        console.log(role, '1')
         sessionStorage.setItem('role', role)
+        sessionStorage.setItem('user_email', this.state.email)
       }
     }
   }

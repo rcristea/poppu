@@ -5,6 +5,7 @@ import 'react-bootstrap/'
 import {AddressComponent, DisplayAttribute, PaymentInfoComponent, TitleComponent} from "./Utils.component";
 import './methods'
 import {getAddress, getPaymentCards, getUser} from "./methods";
+import NavBar from "../NavBar/NavBar.component";
 
 export class ViewProfileComponent extends Component {
     constructor(props) {
@@ -30,7 +31,7 @@ export class ViewProfileComponent extends Component {
         let user = await getUser(email)
 
         let address_link = user._links.address.href
-        let address = await getAddress(address_link)
+        let address = await getAddress(address_link).catch(error => {return null})
 
         let paymentCards_link = user._links.paymentCards.href
         let paymentCards = await getPaymentCards(paymentCards_link)
@@ -42,11 +43,13 @@ export class ViewProfileComponent extends Component {
             paymentinfos[i].address = paymentCardAddress
         }
 
-        this.setState({
+        await this.setState({
             user: user,
             address: address,
             paymentCards: paymentCards._embedded.paymentinfos,
         })
+
+        console.log(this.state)
     }
 
     logOut() {
@@ -147,14 +150,21 @@ export class ViewProfileComponent extends Component {
                 </Container>
             )
         } else {
-            return null
+            return (
+              <>
+                <p>An error has ocurred</p>
+              </>
+            )
         }
     }
 
     render() {
         return (
             <>
-                {this.renderContent()}
+                <NavBar />
+                <div style={{marginTop: 150 + 'px'}}>
+                    {this.renderContent()}
+                </div>
             </>
         )
     }
