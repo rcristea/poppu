@@ -56,7 +56,7 @@ export class AddAddressComponent extends Component {
                                 <Form.Label><strong>City</strong></Form.Label>
                                 <Form.Control type={'text'}
                                               placeholder={'Enter the city you live in.'}
-                                              value={this.state.paymentInfo.city}
+                                              value={this.state.address.city}
                                               onChange={e => this.setState({ ...this.state, address: {
                                                       ...this.state.address,
                                                       city: e.target.value
