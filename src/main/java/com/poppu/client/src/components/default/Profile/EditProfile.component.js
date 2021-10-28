@@ -2,8 +2,8 @@ import { Component } from 'react'
 import {Button, Card, Col, Container, Form, Row} from 'react-bootstrap'
 
 import 'react-bootstrap/'
-import {DisplayAttribute, FormAttribute, TitleComponent} from "./Utils.component";
-import {putRequest} from "./methods";
+import {DisplayAttribute, TitleComponent} from "./Utils.component";
+import {putData} from "./methods";
 
 export class EditProfileComponent extends Component {
     constructor(props) {
@@ -31,23 +31,37 @@ export class EditProfileComponent extends Component {
     }
 
     handleSubmitProfile() {
-        if(this.state.user.firstName.trim().length === 0) {
+        if(this.state.user.firstName.trim() === '') {
             alert("Please enter your first name!")
-        } else if(this.state.user.lastName.trim().length === 0) {
+        } else if (this.state.user.lastName.trim() === '') {
             alert("Please enter your last name!")
+        } else if (isNaN(this.state.user.phoneNum)) {
+            alert("Please enter a number for a phone number!")
         } else {
-            console.log(putRequest('http://localhost:8080/users/'.concat(this.state.user.userId), this.state.user))
+           console.log(putData(this.state.user, this.state.user._links.self.href))
             this.props.history.push('/profile')
         }
     }
 
     subscribe() {
-        this.state.user.isSubscribed = true
-        alert("You are suscribed to promotions!")
+        this.setState({
+            ...this.state,
+            user: {
+                ...this.state.user,
+                isSubscribed: true
+            }
+        })
+        alert("You are subscribed to promotions!")
     }
 
     unSubscribe() {
-        this.state.user.isSubscribed = false
+        this.setState({
+            ...this.state,
+            user: {
+                ...this.state.user,
+                isSubscribed: false
+            }
+        })
         alert("You are unsubscribed to promotions!")
     }
 
@@ -56,18 +70,44 @@ export class EditProfileComponent extends Component {
             <Container className={'my-2 bg-light'}>
                 <TitleComponent compTitle={'Edit Profile Information'}/>
                 <Card className={'m-2'}>
-                    <Form onSubmit={this.handleSubmitProfile}>
-                        <FormAttribute attCtrl={'firstName'}
-                                       attLabel={'First Name'}
-                                       attType={'text'}
-                                       attPlaceholder={'Enter your first name.'}
-                                       attVal={this.state.user.firstName}/>
-                        <FormAttribute attCtrl={'lastName'}
-                                       attLabel={'Last Name'}
-                                       attType={'text'}
-                                       attPlaceholder={'Enter your last name.'}
-                                       attVal={this.state.user.lastName}/>
+                    <Form>
                         <DisplayAttribute attName={'Email'} attVal={this.state.user.email}/>
+                        <div>
+                            <Form.Group>
+                                <Form.Label><strong>First Name</strong></Form.Label>
+                                <Form.Control type={'text'}
+                                              placeholder={'Enter your first name.'}
+                                              value={this.state.user.firstName}
+                                              onChange={e => this.setState({ user: {
+                                                      ...this.state.user,
+                                                      firstName: e.target.value
+                                                  }})}/>
+                            </Form.Group>
+                        </div>
+                        <div>
+                            <Form.Group>
+                                <Form.Label><strong>Last Name</strong></Form.Label>
+                                <Form.Control type={'text'}
+                                              placeholder={'Enter your last name.'}
+                                              value={this.state.user.lastName}
+                                              onChange={e => this.setState({ user: {
+                                                      ...this.state.user,
+                                                      lastName: e.target.value
+                                                  }})}/>
+                            </Form.Group>
+                        </div>
+                        <div>
+                            <Form.Group>
+                                <Form.Label><strong>Phone Number</strong></Form.Label>
+                                <Form.Control type={'text'}
+                                              placeholder={'nnnnnnnnnn'}
+                                              value={this.state.user.phoneNum}
+                                              onChange={e => this.setState({ user: {
+                                                      ...this.state.user,
+                                                      phoneNum: e.target.value
+                                                  }})}/>
+                            </Form.Group>
+                        </div>
                         <Container className={'m-2'}>
                             <Form.Group>
                                 <Row>
@@ -82,7 +122,7 @@ export class EditProfileComponent extends Component {
                             </Form.Group>
                         </Container>
                         <Container className={'m-2'}>
-                            <Button type={'submit'} variant={'success'}>Submit Profile</Button>
+                            <Button type={'submit'} variant={'success'} onClick={this.handleSubmitProfile}>Submit Profile</Button>
                             <Button variant={'warning'} onClick={this.handleBack}>Go Back</Button>
                         </Container>
                     </Form>

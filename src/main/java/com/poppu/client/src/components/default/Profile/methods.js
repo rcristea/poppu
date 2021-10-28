@@ -60,8 +60,71 @@ function getPaymentCards(paymentCard_link) {
     })
 }
 
-function putRequest(association_link) {
-
+function putData(data, destination) {
+    console.log(JSON.stringify(data, destination))
+    return new Promise(function (resolve, reject) {
+        fetch(destination, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        }).then(response => {
+            resolve(response)
+        }).catch(error => {
+            reject(error)
+        })
+    })
 }
 
-export {getUser, getPaymentCards, getAddress, putRequest}
+function postData(data, destination) {
+    return new Promise(function (resolve, reject) {
+        fetch(destination, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        }).then(response => {
+            response.json().then(json => {
+                resolve(json)
+            })
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+
+function putAssociation(data, destination) {
+    return new Promise(function (resolve, reject) {
+        fetch(destination, {
+            method: 'PUT',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Accept': 'text/uri-list',
+                'Content-Type': 'text/uri-list'
+            },
+            body: data,
+        }).then(response => {
+            resolve(response)
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+
+function deleteAssociation(destination) {
+    return new Promise(function (resolve, reject) {
+        fetch(destination, {
+            method: 'DELETE',
+        }).then(response => {
+            resolve(response)
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+
+export {getUser, getPaymentCards, getAddress, putData, postData, putAssociation, deleteAssociation}

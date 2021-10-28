@@ -1,6 +1,7 @@
 import {Component} from "react";
 import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
 import { withRouter } from 'react-router-dom';
+import {deleteAssociation} from "./methods";
 
 
 
@@ -43,13 +44,24 @@ export class paymentInfoComponent extends Component {
         super(props);
 
         this.handleEditPayment = this.handleEditPayment.bind(this);
+        this.handleDeletePayment = this.handleDeletePayment.bind(this);
     }
 
     handleEditPayment() {
         this.props.history.push({
             pathname: '/payment/edit',
-            state: { paymentInfo: this.props.paymentInfo}
+            state: {
+                paymentInfo: this.props.paymentInfo
+            }
         })
+    }
+
+    async handleDeletePayment() {
+        console.log(await deleteAssociation(this.props.paymentInfo._links.self.href))
+        this.props.history.push({
+            pathname: '/profile'
+        })
+        window.location.reload();
     }
 
     render() {
@@ -65,6 +77,9 @@ export class paymentInfoComponent extends Component {
                     </Card>
                     <Col md={3}>
                         <Button variant={'warning'} size={'sm'} onClick={this.handleEditPayment}>Edit Payment</Button>
+                    </Col>
+                    <Col md={3}>
+                        <Button variant={'danger'} size={'sm'} onClick={this.handleDeletePayment}>Delete Payment Method</Button>
                     </Col>
                 </Card>
             </div>

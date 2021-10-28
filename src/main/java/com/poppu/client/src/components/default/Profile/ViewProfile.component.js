@@ -4,7 +4,7 @@ import {Button, Card, Container} from 'react-bootstrap'
 import 'react-bootstrap/'
 import {AddressComponent, DisplayAttribute, PaymentInfoComponent, TitleComponent} from "./Utils.component";
 import './methods'
-import {getAddress, getPaymentCards, getRequest, getUser} from "./methods";
+import {getAddress, getPaymentCards, getUser} from "./methods";
 
 export class ViewProfileComponent extends Component {
     constructor(props) {
@@ -27,15 +27,12 @@ export class ViewProfileComponent extends Component {
     async initContent() {
         let email = "abhinavsingh0302@gmail.com"
         let user = await getUser(email)
-        console.log(user)
 
         let address_link = user._links.address.href
         let address = await getAddress(address_link)
-        console.log(address)
 
         let paymentCards_link = user._links.paymentCards.href
         let paymentCards = await getPaymentCards(paymentCards_link)
-        console.log(paymentCards._embedded.paymentinfos)
         let paymentinfos = paymentCards._embedded.paymentinfos
 
         for (var i = 0; i < paymentinfos.length; i++) {
@@ -43,7 +40,6 @@ export class ViewProfileComponent extends Component {
             let paymentCardAddress = await getAddress(paymentAddressLink)
             paymentinfos[i].address = paymentCardAddress
         }
-
 
         this.setState({
             user: user,
@@ -87,12 +83,12 @@ export class ViewProfileComponent extends Component {
     }
 
     handleAddPaymentClick() {
-        if(this.state.user.paymentCards.length >= 3) {
+        if(this.state.paymentCards.length >= 3) {
             alert("Cannot add more payment methods!")
         } else {
             this.props.history.push({
                 pathname: '/payment/add',
-                state: { paymentInfo: this.state.paymentCards}
+                state: { user: this.state.user}
             })
         }
     }
@@ -123,7 +119,7 @@ export class ViewProfileComponent extends Component {
                             {this.state.paymentCards.map(paymentCard => {
                                 return (
                                     <Container>
-                                        <PaymentInfoComponent compTitle={'Card: '.concat(paymentCard.cardType)} paymentInfo={paymentCard}/>
+                                        <PaymentInfoComponent compTitle={'Card: '.concat(paymentCard.cardType)} paymentInfo={paymentCard} user={this.state.user}/>
                                     </Container>
                                 )
                             })}

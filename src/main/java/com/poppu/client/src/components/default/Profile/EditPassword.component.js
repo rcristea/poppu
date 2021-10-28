@@ -2,18 +2,18 @@ import { Component } from 'react'
 import {Button, Card, Container, Form} from 'react-bootstrap'
 
 import 'react-bootstrap/'
-import {FormAttribute, TitleComponent} from "./Utils.component";
-import {putRequest} from "./methods";
+import {TitleComponent} from "./Utils.component";
+import {putData} from "./methods";
 
 export class EditPasswordComponent extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props.location.state)
         this.state = {
             user: this.props.location.state.user,
             oldPassword: '',
             newPassword: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            salt: '$2a$10$O1RbZIPCQCLr522HZUP51/'
         }
 
         this.handleBack = this.handleBack.bind(this)
@@ -32,15 +32,25 @@ export class EditPasswordComponent extends Component {
     }
 
     handleSubmitPassword() {
-        if(this.state.oldPassword !== this.state.user.password) {
-            alert("Please enter your correct password!")
-        } else if(this.state.newPassword !== this.state.confirmPassword) {
-            alert("Please make sure that both the new and confirm passwords match!")
-        } else {
-            console.log(putRequest('http://localhost:8080/users/'.concat(this.state.user.userId), this.state.user))
+        // if( this.state.oldPassword !== this.state.user.password ) {
+        //     alert("Please enter your correct password!")
+        // } else if(this.state.newPassword.trim() === '') {
+        //     alert("Please enter a new password!")
+        // } else if(this.state.confirmPassword.trim() === '') {
+        //     alert("Please confirm your new password!")
+        // } else if(this.state.newPassword !== this.state.confirmPassword) {
+        //     alert("Please make sure that both the new and confirm passwords match!")
+        // } else {
+            this.setState({
+                ...this.state,
+                user: {
+                    ...this.state.user,
+                    password: this.state.newPassword
+                }})
+            console.log(putData(this.state.user, this.state.user._links.self.href))
             this.props.history.push('/profile')
-        }
-
+        // }
+        console.log(this.state)
     }
 
     render() {
@@ -48,24 +58,36 @@ export class EditPasswordComponent extends Component {
             <Container className={'my-2 bg-light'}>
                 <TitleComponent compTitle={'Edit Password'}/>
                 <Card className={'m-2'}>
-                    <Form onSubmit={this.handleSubmitPassword}>
-                        <FormAttribute attCtrl={'currentPassword'}
-                                       attLabel={'Current Password'}
-                                       attType={'text'}
-                                       attPlaceholder={'Enter your current password.'}
-                                       attVal={this.state.oldPassword}/>
-                        <FormAttribute attCtrl={'currentPassword'}
-                                       attLabel={'New Password'}
-                                       attType={'text'}
-                                       attPlaceholder={''}
-                                       attVal={this.state.newPassword}/>
-                        <FormAttribute attCtrl={'currentPassword'}
-                                       attLabel={'Confirm Password'}
-                                       attType={'text'}
-                                       attPlaceholder={''}
-                                       attVal={this.state.confirmPassword}/>
+                    <Form>
+                        <div>
+                            <Form.Group>
+                                <Form.Label><strong>Old Password</strong></Form.Label>
+                                <Form.Control type={'text'}
+                                              placeholder={'Enter your old password!'}
+                                              value={this.state.oldPassword}
+                                              onChange={e => this.setState({...this.state, oldPassword: e.target.value})}/>
+                            </Form.Group>
+                        </div>
+                        <div>
+                            <Form.Group>
+                                <Form.Label><strong>New Password</strong></Form.Label>
+                                <Form.Control type={'text'}
+                                              placeholder={'Enter your new password!'}
+                                              value={this.state.newPassword}
+                                              onChange={e => this.setState({...this.state, newPassword: e.target.value})}/>
+                            </Form.Group>
+                        </div>
+                        <div>
+                            <Form.Group>
+                                <Form.Label><strong>Confirm Password</strong></Form.Label>
+                                <Form.Control type={'text'}
+                                              placeholder={'Confirm your new password!'}
+                                              value={this.state.confirmPassword}
+                                              onChange={e => this.setState({...this.state, confirmPassword: e.target.value})}/>
+                            </Form.Group>
+                        </div>
                         <Container className={'m-2'}>
-                            <Button type={'submit'} variant={'success'}>Submit New Password</Button>
+                            <Button variant={'success'} onClick={this.handleSubmitPassword}>Submit New Password</Button>
                             <Button variant={'warning'} onClick={this.handleBack}>Go Back</Button>
                         </Container>
                     </Form>
