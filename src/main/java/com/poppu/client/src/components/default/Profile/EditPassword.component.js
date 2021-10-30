@@ -48,6 +48,7 @@ export class EditPasswordComponent extends Component {
             console.log(this.newUser)
             console.log(putData(this.state.user, this.state.user._links.self.href))
             this.props.history.push('/profile')
+            window.location.reload();
         }
     }
 

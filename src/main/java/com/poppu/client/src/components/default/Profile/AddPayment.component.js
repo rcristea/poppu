@@ -64,6 +64,7 @@ export class AddPaymentComponent extends Component {
             await this.updateDB()
             console.log(this.state)
             this.props.history.push('/profile')
+            window.location.reload();
         }
     }
 
