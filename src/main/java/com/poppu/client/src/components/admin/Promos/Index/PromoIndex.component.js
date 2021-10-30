@@ -1,4 +1,4 @@
-import { React, Component } from 'react'
+import {React, Component} from 'react'
 import './PromoIndex.component.css'
 import Sidebar from '../../Sidebar/Sidebar.component'
 import SearchBar from '../SearchBar/SearchBar.component'
@@ -135,22 +135,22 @@ class PromoIndex extends Component {
               <div className='promos-card-heading'>
                 <div className='promos-card-title'>
                   <h1>Promotions</h1>
-                  <a href='/promos/add'>Add <BiPlus /></a>
+                  <a href='/promos/add'>Add <BiPlus/></a>
                 </div>
                 <div className='promos-card-subtitle'>
                   <h3>For more options, click the three dots on the right.</h3>
                 </div>
               </div>
               <div className='promos-card-content'>
-                <SearchBar />
+                <SearchBar/>
                 <Table responsive bordered className='promos-card-table text-black'>
                   <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Promo Code</th>
-                      <th>Amount</th>
-                      <th></th>
-                    </tr>
+                  <tr>
+                    <th>ID</th>
+                    <th>Promo Code</th>
+                    <th>Amount</th>
+                    <th></th>
+                  </tr>
                   </thead>
                   <tbody>
                   {this.state.promos.map(promo => (
@@ -160,12 +160,13 @@ class PromoIndex extends Component {
                       <td>{promo.amount}</td>
                       <td>
                         <Dropdown className='card-table-dropdown'>
-                          <DropdownToggle className='card-table-dropdown-button'><BiDotsVerticalRounded /></DropdownToggle>
+                          <DropdownToggle
+                            className='card-table-dropdown-button'><BiDotsVerticalRounded/></DropdownToggle>
 
                           <DropdownMenu>
                             <DropdownItem href={`/promos/${promo.id}`}>View</DropdownItem>
                             <DropdownItem href={`/promos/edit/${promo.id}`}>Edit</DropdownItem>
-                            <Dropdown.Divider />
+                            <Dropdown.Divider/>
                             <form onSubmit={this.handleDelete(promo.id)}>
                               <button className='delete-promo' type='submit'>Delete</button>
                             </form>

@@ -18,21 +18,22 @@ export class AutoTable extends Component {
             <Card.Body>
               <Table variant={'dark'} striped bordered hover style={{'width': '100%'}}>
                 <thead>
-                  <tr>
-                    {this.props.headings.split(',').map(heading => {
-                      return (
-                        <th key={heading.replaceAll('_', ' ')} style={{'textTransform': 'capitalize'}}>{heading.replaceAll('_', ' ')}</th>
-                      )
-                    })}
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.props.table_data.map(row => {
+                <tr>
+                  {this.props.headings.split(',').map(heading => {
                     return (
-                      <TableRow key={row.id} row_data={row} viewable={this.props.viewable} editable={this.props.editable}
-                                deletable={this.props.deletable}/>
+                      <th key={heading.replaceAll('_', ' ')}
+                          style={{'textTransform': 'capitalize'}}>{heading.replaceAll('_', ' ')}</th>
                     )
                   })}
+                </tr>
+                </thead>
+                <tbody>
+                {this.props.table_data.map(row => {
+                  return (
+                    <TableRow key={row.id} row_data={row} viewable={this.props.viewable} editable={this.props.editable}
+                              deletable={this.props.deletable}/>
+                  )
+                })}
                 </tbody>
               </Table>
               {this.props.addable && <AddButton/>}

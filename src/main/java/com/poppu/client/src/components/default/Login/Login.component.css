@@ -88,7 +88,7 @@
 .invalid-container p {
   margin: 0;
   font-size: 0.75rem;
-  color:hsla(283, 92%, 63%, 1);
+  color: hsla(283, 92%, 63%, 1);
 }
 
 .remember-me-wrapper {

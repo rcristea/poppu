@@ -1,5 +1,5 @@
-import { Component } from 'react'
-import { Link } from 'react-router-dom'
+import {Component} from 'react'
+import {Link} from 'react-router-dom'
 import './SignupPayment.component.css'
 import NavBar from '../NavBar/NavBar.component'
 
@@ -13,7 +13,7 @@ export class SignupPayment extends Component {
   render() {
     return (
       <>
-        <NavBar />
+        <NavBar/>
         <div className='signup-container'>
           <div className='signup-payment-form-border'>
             <div className='signup-payment-form-container'>
@@ -21,16 +21,16 @@ export class SignupPayment extends Component {
               <form className='form-signup' onSubmit={this.handleSubmit}>
                 <h3>Card Information</h3>
                 <select name='card_type'>
-                  <option value='00'>Type: </option>
+                  <option value='00'>Type:</option>
                   <option value='1'>Type 1</option>
                   <option value='2'>Type 2</option>
                 </select>
-                <input type='text' placeholder='Card Number' name='card_number' />
-                <input type='date' />
+                <input type='text' placeholder='Card Number' name='card_number'/>
+                <input type='date'/>
                 <h3>Billing Address</h3>
-                <input type='text' placeholder='Street' name='billing_street' />
-                <input type='text' placeholder='Town / City' name='billing_city' />
-                <input type='text' placeholder='Zipcode' name='billing_zip' />
+                <input type='text' placeholder='Street' name='billing_street'/>
+                <input type='text' placeholder='Town / City' name='billing_city'/>
+                <input type='text' placeholder='Zipcode' name='billing_zip'/>
                 <select name='billing_state'>
                   <option disabled={true} selected={true}>State</option>
                   <option value='AL'>Alabama</option>

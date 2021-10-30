@@ -3,13 +3,13 @@ import {Button} from 'react-bootstrap'
 import SuperButton from './SuperButton.component'
 
 export class ViewButton extends SuperButton {
-    render() {
-        return (
-            <Button variant={'success'}>
-                View
-            </Button>
-        )
-    }
+  render() {
+    return (
+      <Button variant={'success'}>
+        View
+      </Button>
+    )
+  }
 }
 
 export default ViewButton

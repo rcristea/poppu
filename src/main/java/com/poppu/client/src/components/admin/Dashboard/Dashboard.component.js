@@ -1,10 +1,10 @@
-import { React, Component } from 'react'
+import {React, Component} from 'react'
 import './Dashboard.component.css'
 import Sidebar from '../Sidebar/Sidebar.component'
-import { format } from 'date-fns'
+import {format} from 'date-fns'
 
-import { BiDotsVerticalRounded, BiPlus } from 'react-icons/bi'
-import { Table, Dropdown } from 'react-bootstrap'
+import {BiDotsVerticalRounded, BiPlus} from 'react-icons/bi'
+import {Table, Dropdown} from 'react-bootstrap'
 import DropdownToggle from 'react-bootstrap/DropdownToggle'
 import DropdownMenu from 'react-bootstrap/DropdownMenu'
 import DropdownItem from 'react-bootstrap/DropdownItem'
@@ -234,7 +234,7 @@ class Dashboard extends Component {
   render() {
     return (
       <>
-        <Sidebar logOut={this.logOut} />
+        <Sidebar logOut={this.logOut}/>
         <div className='dashboard-container'>
           <div className='dashboard-header'>
             <h1>Poppu Admin Dashboard</h1>
@@ -248,42 +248,42 @@ class Dashboard extends Component {
                   <h3>View details, create, edit, and delete Movies</h3>
                 </div>
                 <div className='right'>
-                  <a href='/movies/add'>Add <BiPlus /></a>
+                  <a href='/movies/add'>Add <BiPlus/></a>
                   <a href='/movies'>View All</a>
                 </div>
               </div>
               <div className='dashboard-card-content'>
                 <Table responsive bordered className={'text-black'}>
                   <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Movie Name</th>
-                      <th>Show Time</th>
-                      <th></th>
-                    </tr>
+                  <tr>
+                    <th>ID</th>
+                    <th>Movie Name</th>
+                    <th>Show Time</th>
+                    <th></th>
+                  </tr>
                   </thead>
                   <tbody>
-                    {this.state.movies.map(movie => (
-                      <tr key={movie.movie_id}>
-                        <td>{movie.movie_id}</td>
-                        <td>{movie.movie_name}</td>
-                        <td>{this.formatDateTime(movie.showtime)}</td>
-                        <td>
-                          <Dropdown className='card-table-dropdown'>
-                            <DropdownToggle><BiDotsVerticalRounded /></DropdownToggle>
+                  {this.state.movies.map(movie => (
+                    <tr key={movie.movie_id}>
+                      <td>{movie.movie_id}</td>
+                      <td>{movie.movie_name}</td>
+                      <td>{this.formatDateTime(movie.showtime)}</td>
+                      <td>
+                        <Dropdown className='card-table-dropdown'>
+                          <DropdownToggle><BiDotsVerticalRounded/></DropdownToggle>
 
-                            <DropdownMenu >
-                              <DropdownItem href={`/movies/${movie.movie_id}`}>View</DropdownItem>
-                              <DropdownItem href={`/movies/edit/${movie.movie_id}`}>Edit</DropdownItem>
-                              <Dropdown.Divider />
-                              <form onSubmit={this.handleMovieDelete(movie.movie_id)}>
-                                <button type='submit'>Delete</button>
-                              </form>
-                            </DropdownMenu>
-                          </Dropdown>
-                        </td>
-                      </tr>
-                    ))}
+                          <DropdownMenu>
+                            <DropdownItem href={`/movies/${movie.movie_id}`}>View</DropdownItem>
+                            <DropdownItem href={`/movies/edit/${movie.movie_id}`}>Edit</DropdownItem>
+                            <Dropdown.Divider/>
+                            <form onSubmit={this.handleMovieDelete(movie.movie_id)}>
+                              <button type='submit'>Delete</button>
+                            </form>
+                          </DropdownMenu>
+                        </Dropdown>
+                      </td>
+                    </tr>
+                  ))}
                   </tbody>
                 </Table>
               </div>
@@ -295,7 +295,7 @@ class Dashboard extends Component {
                   <h3>View details, create, edit, and delete promotions</h3>
                 </div>
                 <div className='right'>
-                  <a href='/promos/add'>Add <BiPlus /></a>
+                  <a href='/promos/add'>Add <BiPlus/></a>
                   <a href='/promos'>View All</a>
                 </div>
               </div>
@@ -317,12 +317,12 @@ class Dashboard extends Component {
                       <td>{promo.amount}</td>
                       <td>
                         <Dropdown className='card-table-dropdown'>
-                          <DropdownToggle><BiDotsVerticalRounded /></DropdownToggle>
+                          <DropdownToggle><BiDotsVerticalRounded/></DropdownToggle>
 
                           <DropdownMenu>
                             <DropdownItem href={`/promos/${promo.id}`}>View</DropdownItem>
                             <DropdownItem href={`/promos/edit/${promo.id}`}>Edit</DropdownItem>
-                            <Dropdown.Divider />
+                            <Dropdown.Divider/>
                             <form onSubmit={this.handlePromoDelete(promo.id)}>
                               <button type='submit'>Delete</button>
                             </form>

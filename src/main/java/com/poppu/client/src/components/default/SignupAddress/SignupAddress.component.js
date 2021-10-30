@@ -1,5 +1,5 @@
-import { Component } from 'react'
-import { Link } from 'react-router-dom'
+import {Component} from 'react'
+import {Link} from 'react-router-dom'
 import './SignupAddress.component.css'
 import NavBar from '../NavBar/NavBar.component'
 
@@ -13,15 +13,15 @@ export class SignupAddress extends Component {
   render() {
     return (
       <>
-        <NavBar />
+        <NavBar/>
         <div className='signup-container'>
           <div className='signup-address-form-border'>
             <div className='signup-address-form-container'>
               <h1 className='signup-form-header'>Enter Home Address</h1>
               <form className='form-signup' onSubmit={this.handleSubmit}>
-                <input type='text' placeholder='Street' name='address_street' />
-                <input type='text' placeholder='Town / City' name='address_city' />
-                <input type='text' placeholder='Zipcode' name='address_zip' />
+                <input type='text' placeholder='Street' name='address_street'/>
+                <input type='text' placeholder='Town / City' name='address_city'/>
+                <input type='text' placeholder='Zipcode' name='address_zip'/>
                 <select name='address_state'>
                   <option disabled={true} selected={true}>State</option>
                   <option value='AL'>Alabama</option>

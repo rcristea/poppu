@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import './Login.component.css'
 import NavBar from '../NavBar/NavBar.component'
@@ -65,7 +65,7 @@ export class Login extends Component {
   }
 
 
-  handleSubmit = async(e) => {
+  handleSubmit = async (e) => {
     if (e) {
       e.preventDefault()
     }
@@ -93,7 +93,6 @@ export class Login extends Component {
         } else {
           localStorage.removeItem('remember_me')
         }
-
 
 
         let role = user['role'].toLowerCase()
@@ -126,7 +125,7 @@ export class Login extends Component {
   render() {
     return (
       <>
-        <NavBar />
+        <NavBar/>
         <div className='login-container'>
           <div className='form-border'>
             <div className='form-container'>
@@ -138,13 +137,13 @@ export class Login extends Component {
                   placeholder='Email'
                   name='email'
                   autoComplete='email'
-                  onChange={this.handleChange} />
+                  onChange={this.handleChange}/>
                 <input
                   type='password'
                   placeholder='●●●●●●●●'
                   name='password'
                   autoComplete='password'
-                  onChange={this.handleChange} />
+                  onChange={this.handleChange}/>
                 <div className='remember-me-wrapper'>
                   <input
                     type='checkbox'

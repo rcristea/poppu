@@ -3,7 +3,7 @@ import './LandingPage.component.css'
 import NavBar from '../NavBar/NavBar.component'
 import HorizontalScrollSnap from '../HorizontalScrollSnap/HorizontalScrollSnap.component'
 import SearchMovie from '../SearchMovie/SearchMovie.component'
-import { IoIosClose } from 'react-icons/io'
+import {IoIosClose} from 'react-icons/io'
 
 export class LandingPage extends Component {
   constructor(props) {
@@ -140,22 +140,22 @@ export class LandingPage extends Component {
   render() {
     return (
       <div className='landing-container'>
-        <NavBar />
+        <NavBar/>
         {this.renderAlert()}
         <div className='landing-page-container'>
           <div className='landing-page-hero'>
-            <div className='background' />
+            <div className='background'/>
             <div className='custom-shape-divider-bottom-1630245566'>
               <svg data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'
                    preserveAspectRatio='none'>
-                <path d='M892.25 114.72L0 0 0 120 1200 120 1200 0 892.25 114.72z' className='shape-fill' />
+                <path d='M892.25 114.72L0 0 0 120 1200 120 1200 0 892.25 114.72z' className='shape-fill'/>
               </svg>
             </div>
           </div>
           <div className='landing-page-content'>
-            <SearchMovie />
+            <SearchMovie/>
             <HorizontalScrollSnap data={this.nowShowing} heading='Now Showing'/>
-            <div className='spacer' />
+            <div className='spacer'/>
             <HorizontalScrollSnap data={this.comingSoon} heading='Coming Soon'/>
           </div>
         </div>

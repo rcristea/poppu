@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
 class Step3 extends Component {
   render() {
@@ -18,7 +18,7 @@ class Step3 extends Component {
             name='homeStreet'
             placeholder='Street Address'
             value={this.props.homeStreet}
-            onChange={this.props.handleChange} />
+            onChange={this.props.handleChange}/>
           <input
             type='text'
             className='registration-input'
@@ -26,7 +26,7 @@ class Step3 extends Component {
             name='homeCity'
             placeholder='City'
             value={this.props.homeCity}
-            onChange={this.props.handleChange} />
+            onChange={this.props.handleChange}/>
           <input
             type='text'
             className='registration-input'
@@ -34,13 +34,13 @@ class Step3 extends Component {
             name='homeZip'
             placeholder='Zipcode'
             value={this.props.homeZip}
-            onChange={this.props.handleChange} />
+            onChange={this.props.handleChange}/>
           <select
             className='registration-input'
             id='home-state'
             name='homeState'
             value={this.props.homeState}
-            onChange={this.props.handleChange} >
+            onChange={this.props.handleChange}>
             <option value='0' disabled={true}>State</option>
             <option value='AL'>Alabama</option>
             <option value='AK'>Alaska</option>

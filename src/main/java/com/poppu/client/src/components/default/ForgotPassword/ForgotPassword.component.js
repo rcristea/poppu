@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import {Component} from 'react'
 import './ForgotPassword.component.css'
 import NavBar from '../NavBar/NavBar.component'
 
@@ -140,7 +140,7 @@ export class ForgotPassword extends Component {
             name='code'
             autoComplete='code'
             value={this.state.code}
-            onChange={this.handleChange} />
+            onChange={this.handleChange}/>
           <button type='submit'>Submit</button>
         </>
       )
@@ -154,7 +154,7 @@ export class ForgotPassword extends Component {
             name='email'
             autoComplete='email'
             value={this.state.email}
-            onChange={this.handleChange} />
+            onChange={this.handleChange}/>
           <button type='button' onClick={this.nextStep}>Send Email</button>
         </>
       )
@@ -193,7 +193,7 @@ export class ForgotPassword extends Component {
   render() {
     return (
       <>
-        <NavBar />
+        <NavBar/>
         <div className='login-container'>
           <div className='form-border-forgot-password'>
             <div className='form-container-forgot-password'>
