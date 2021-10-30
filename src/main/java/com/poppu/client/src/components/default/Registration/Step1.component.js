@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import InputMask from "react-input-mask";
 
 class Step1 extends Component {
@@ -19,7 +19,7 @@ class Step1 extends Component {
             placeholder='Name'
             autoComplete='name'
             value={this.props.name}
-            onChange={this.props.handleChange} />
+            onChange={this.props.handleChange}/>
           <input
             type='email'
             className='registration-input'
@@ -28,7 +28,7 @@ class Step1 extends Component {
             placeholder='Email'
             autoComplete='email'
             value={this.props.email}
-            onChange={this.props.handleChange} />
+            onChange={this.props.handleChange}/>
           <InputMask
             mask='(999) 999 - 9999'
             className='registration-input'
@@ -56,7 +56,7 @@ class Step1 extends Component {
             placeholder='Password'
             autoComplete='new-password'
             value={this.props.password}
-            onChange={this.props.handleChange} />
+            onChange={this.props.handleChange}/>
           <input
             type='password'
             className='registration-input'
@@ -65,7 +65,7 @@ class Step1 extends Component {
             placeholder='Confirm Password'
             autoComplete='off'
             value={this.props.confirmPassword}
-            onChange={this.props.handleChange} />
+            onChange={this.props.handleChange}/>
           <div className='registration-checkbox'>
             <input
               type='checkbox'

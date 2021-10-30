@@ -78,38 +78,38 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route path='/' exact={true} component={LandingPage} />
-        <Route path='/login' exact={true} component={Login} />
-        <Route path='/register' exact={true} component={Registration} />
-        <Route path='/forgot_password' exact={true} component={ForgotPassword} />
+        <Route path='/' exact={true} component={LandingPage}/>
+        <Route path='/login' exact={true} component={Login}/>
+        <Route path='/register' exact={true} component={Registration}/>
+        <Route path='/forgot_password' exact={true} component={ForgotPassword}/>
 
-        <Route path='/booking/times' exact={true} component={SelectTimeComponent} />
-        <Route path='/booking/seats' exact={true} component={SelectSeatComponent} />
-        <Route path='/booking/order/summary' exact={true} component={OrderSummaryComponent} />
-        <Route path='/booking/order/checkout' exact={true} component={OrderCheckoutComponent} />
-        <Route path='/booking/order/confirm' exact={true} component={OrderConfirmationComponent} />
+        <Route path='/booking/times' exact={true} component={SelectTimeComponent}/>
+        <Route path='/booking/seats' exact={true} component={SelectSeatComponent}/>
+        <Route path='/booking/order/summary' exact={true} component={OrderSummaryComponent}/>
+        <Route path='/booking/order/checkout' exact={true} component={OrderCheckoutComponent}/>
+        <Route path='/booking/order/confirm' exact={true} component={OrderConfirmationComponent}/>
 
         {/* User Routes */}
-        <Route path='/profile' exact={true} component={ViewProfileComponent} />
-        <Route path='/profile/edit' exact={true} component={EditProfileComponent} />
+        <Route path='/profile' exact={true} component={ViewProfileComponent}/>
+        <Route path='/profile/edit' exact={true} component={EditProfileComponent}/>
         <Route path='/profile/edit/password' exact={true} component={EditPasswordComponent}/>
-        <Route path='/address/edit' exact={true} component={EditAddressComponent} />
-          <Route path='/address/add' exact={true} component={AddAddressComponent} />
-        <Route path='/payment/edit' exact={true} component={EditPaymentInfoComponent} />
-        <Route path='/payment/add' exact={true} component={AddPaymentComponent} />
+        <Route path='/address/edit' exact={true} component={EditAddressComponent}/>
+        <Route path='/address/add' exact={true} component={AddAddressComponent}/>
+        <Route path='/payment/edit' exact={true} component={EditPaymentInfoComponent}/>
+        <Route path='/payment/add' exact={true} component={AddPaymentComponent}/>
 
         {/* Admin Routes */}
-        <Route path='/admin' exact={true} component={Dashboard} />
-        <Route path='/promos' exact={true} component={PromoIndex} />
-        <Route path='/promos/add' exact={true} component={PromoAdd} />
-        <Route path='/movies' exact={true} component={MovieIndex} />
-        <Route path='/movies/add' exact={true} component={AddMovie} />
-        <Route path='/movies/id' exact={true} component={ViewMovie} />
-        <Route path='/showtime/add' exact={true} component={AddShowTime} />
+        <Route path='/admin' exact={true} component={Dashboard}/>
+        <Route path='/promos' exact={true} component={PromoIndex}/>
+        <Route path='/promos/add' exact={true} component={PromoAdd}/>
+        <Route path='/movies' exact={true} component={MovieIndex}/>
+        <Route path='/movies/add' exact={true} component={AddMovie}/>
+        <Route path='/movies/id' exact={true} component={ViewMovie}/>
+        <Route path='/showtime/add' exact={true} component={AddShowTime}/>
 
-        <Route path='/tests' exact={true} component={TestIndex} />
-        <Route path='/tests/add' exact={true} component={TestAdd} />
-        <Route path='/tests/:id' component={TestEdit} />
+        <Route path='/tests' exact={true} component={TestIndex}/>
+        <Route path='/tests/add' exact={true} component={TestAdd}/>
+        <Route path='/tests/:id' component={TestEdit}/>
       </Switch>
     )
   }

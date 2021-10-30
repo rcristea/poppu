@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import InputMask from 'react-input-mask'
 
 class Step2 extends Component {
@@ -17,8 +17,8 @@ class Step2 extends Component {
             id='card-type'
             name='cardType'
             value={this.props.cardType}
-            onChange={this.props.handleChange} >
-            <option value='0' disabled={true}>Type: </option>
+            onChange={this.props.handleChange}>
+            <option value='0' disabled={true}>Type:</option>
             <option value='VISA'>VISA</option>
             <option value='MasterCard'>MasterCard</option>
             <option value='American Express'>American Express</option>
@@ -32,7 +32,7 @@ class Step2 extends Component {
             name='cardNumber'
             placeholder='Card Number'
             value={this.props.cardNumber}
-            onChange={this.props.handleChange} />
+            onChange={this.props.handleChange}/>
           <InputMask
             mask='99/99'
             className='registration-input'
@@ -49,7 +49,7 @@ class Step2 extends Component {
             name='billingStreet'
             placeholder='Street Address'
             value={this.props.billingStreet}
-            onChange={this.props.handleChange} />
+            onChange={this.props.handleChange}/>
           <input
             type='text'
             className='registration-input'
@@ -57,7 +57,7 @@ class Step2 extends Component {
             name='billingCity'
             placeholder='City'
             value={this.props.billingCity}
-            onChange={this.props.handleChange} />
+            onChange={this.props.handleChange}/>
           <InputMask
             mask='99999'
             className='registration-input'
@@ -71,7 +71,7 @@ class Step2 extends Component {
             id='billing-state'
             name='billingState'
             value={this.props.billingState}
-            onChange={this.props.handleChange} >
+            onChange={this.props.handleChange}>
             <option value='0' disabled={true}>State</option>
             <option value='AL'>Alabama</option>
             <option value='AK'>Alaska</option>

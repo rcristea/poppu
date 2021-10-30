@@ -3,13 +3,13 @@ import {Button} from 'react-bootstrap'
 import SuperButton from './SuperButton.component'
 
 export class AddButton extends SuperButton {
-    render() {
-        return (
-            <Button variant={'primary'}>
-                + Add
-            </Button>
-        )
-    }
+  render() {
+    return (
+      <Button variant={'primary'}>
+        + Add
+      </Button>
+    )
+  }
 }
 
 export default AddButton

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import './Registration.component.css'
 import NavBar from '../NavBar/NavBar.component'
 import Step1 from './Step1.component'
@@ -76,7 +76,9 @@ class Registration extends Component {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: `email=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&contents=${encodeURIComponent(contents)}`
-    }).then(response => {console.log('Successfully sent Confirmation Email')})
+    }).then(response => {
+      return
+    })
   }
 
   createValidator() {
@@ -160,23 +162,23 @@ class Registration extends Component {
     }
 
     let nextButton = <button
-        className='registration-button registration-next'
-        type='button'
-        onClick={this.next}
-      >Next</button>
+      className='registration-button registration-next'
+      type='button'
+      onClick={this.next}
+    >Next</button>
     let prevButton = <button
-        className='registration-button registration-prev'
-        type='button'
-        onClick={this.prev}
-      >Back</button>
+      className='registration-button registration-prev'
+      type='button'
+      onClick={this.prev}
+    >Back</button>
     let submitButton = <button
       className='registration-button registration-submit'
       type='submit'>Submit</button>
     return (
       <div>
-        { this.state.currentStep !== 1 ? prevButton : null }
-        { this.state.currentStep !== 3 ? nextButton : null }
-        { this.state.currentStep === 3 ? submitButton : null }
+        {this.state.currentStep !== 1 ? prevButton : null}
+        {this.state.currentStep !== 3 ? nextButton : null}
+        {this.state.currentStep === 3 ? submitButton : null}
       </div>
     )
   }
@@ -239,9 +241,9 @@ class Registration extends Component {
         formErrors.push('The expiration date must be filled out for your payment information.')
       } else if (
         this.state.billingStreet.length === 0 ||
-        this.state.billingState         === 0 ||
-        this.state.billingCity.length   === 0 ||
-        this.state.billingZip.length    === 0
+        this.state.billingState === 0 ||
+        this.state.billingCity.length === 0 ||
+        this.state.billingZip.length === 0
       ) {
         formErrors.push('The billing address cannot be empty if you are providing billing information.')
       }
@@ -347,7 +349,7 @@ class Registration extends Component {
     })
   }
 
-  handleSubmit = async(e) => {
+  handleSubmit = async (e) => {
     e.preventDefault()
 
     await this.validateForm()
@@ -391,7 +393,6 @@ class Registration extends Component {
     userJSON = await this.postData(userData, 'users')
 
     if (hasHomeAddress) {
-      console.log(userJSON)
       await this.putData(
         userHomeAddressJSON['_links']['self']['href'],
         userJSON['_links']['address']['href']
@@ -401,7 +402,7 @@ class Registration extends Component {
     // Create user's payment info
 
     if (hasUserPayment) {
-      let userBillingAddress =  {
+      let userBillingAddress = {
         'street': this.state.billingStreet,
         'city': this.state.billingCity,
         'zipCode': this.state.billingZip,
@@ -475,7 +476,7 @@ class Registration extends Component {
           sessionStorage.setItem('role', 'user')
           sessionStorage.setItem('user_email', this.state.email)
           this.props.history.push('/profile')
-        }).catch(error =>{
+        }).catch(error => {
           console.error(error, 'handleSubmitConfirmation')
           this.setState({
             formErrors: ['An error has occurred.']
@@ -492,11 +493,11 @@ class Registration extends Component {
   render() {
     return (
       <>
-        <NavBar />
+        <NavBar/>
         <div className='registration-container'>
           <div className='registration-form-container'>
             <h1>Registration</h1>
-            <div className='divider gradient-border' />
+            <div className='divider gradient-border'/>
             <form className='registration-form' onSubmit={this.handleSubmit}>
               <div className='registration-buttons'>
                 {this.renderButtons()}
@@ -511,7 +512,7 @@ class Registration extends Component {
                 phone={this.state.phone}
                 password={this.state.password}
                 confirmPassword={this.state.confirmPassword}
-                promo={this.state.promo} />
+                promo={this.state.promo}/>
               <Step2
                 currentStep={this.state.currentStep}
                 handleChange={this.handleChange}
@@ -521,21 +522,21 @@ class Registration extends Component {
                 billingStreet={this.state.billingStreet}
                 billingCity={this.state.billingCity}
                 billingZip={this.state.billingZip}
-                billingState={this.state.billingState} />
+                billingState={this.state.billingState}/>
               <Step3
                 currentStep={this.state.currentStep}
                 handleChange={this.handleChange}
                 homeStreet={this.state.homeStreet}
                 homeCity={this.state.homeCity}
                 homeZip={this.state.homeZip}
-                homeState={this.state.homeState} />
+                homeState={this.state.homeState}/>
             </form>
             <Confirmation
               currentStep={this.state.currentStep}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmitConfirmation}
               userEmail={this.state.email}
-              confirmationCode={this.state.confirmationCode} />
+              confirmationCode={this.state.confirmationCode}/>
           </div>
         </div>
       </>

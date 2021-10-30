@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import './SearchMovie.component.css'
 
-import { AiOutlineSearch } from 'react-icons/ai'
+import {AiOutlineSearch} from 'react-icons/ai'
 
 export class SearchMovie extends Component {
   constructor(props) {
