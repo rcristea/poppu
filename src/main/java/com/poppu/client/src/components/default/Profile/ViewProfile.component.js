@@ -51,8 +51,6 @@ export class ViewProfileComponent extends Component {
       address: address,
       paymentCards: paymentCards._embedded.paymentinfos,
     })
-
-    console.log(this.state)
   }
 
   logOut() {
@@ -111,7 +109,7 @@ export class ViewProfileComponent extends Component {
     if (this.state.address === null) {
       alert("User doesn't have an address! Create one.")
     } else {
-      console.log(await deleteAssociation(this.state.user._links.address.href))
+      await deleteAssociation(this.state.user._links.address.href)
       this.props.history.push({
         pathname: '/profile'
       })

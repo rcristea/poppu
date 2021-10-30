@@ -35,7 +35,7 @@ export class EditAddressComponent extends Component {
     } else if (this.state.address.zipCode.trim().length !== 5) {
       alert("A zip code is supposed to have 5 digits")
     } else {
-      console.log(putData(this.state.address, this.state.address._links.self.href))
+      putData(this.state.address, this.state.address._links.self.href)
       this.props.history.push('/profile')
       window.location.reload();
     }

@@ -55,7 +55,7 @@ export class paymentInfoComponent extends Component {
   }
 
   async handleDeletePayment() {
-    console.log(await deleteAssociation(this.props.paymentInfo._links.self.href))
+    await deleteAssociation(this.props.paymentInfo._links.self.href)
     this.props.history.push({
       pathname: '/profile'
     })

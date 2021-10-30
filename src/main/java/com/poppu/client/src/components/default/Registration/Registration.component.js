@@ -77,7 +77,7 @@ class Registration extends Component {
       },
       body: `email=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&contents=${encodeURIComponent(contents)}`
     }).then(response => {
-      console.log('Successfully sent Confirmation Email')
+      return
     })
   }
 
@@ -393,7 +393,6 @@ class Registration extends Component {
     userJSON = await this.postData(userData, 'users')
 
     if (hasHomeAddress) {
-      console.log(userJSON)
       await this.putData(
         userHomeAddressJSON['_links']['self']['href'],
         userJSON['_links']['address']['href']

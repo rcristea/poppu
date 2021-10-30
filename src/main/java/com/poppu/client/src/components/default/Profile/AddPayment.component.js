@@ -62,7 +62,6 @@ export class AddPaymentComponent extends Component {
         }
       })
       await this.updateDB()
-      console.log(this.state)
       this.props.history.push('/profile')
       window.location.reload();
     }
@@ -72,9 +71,8 @@ export class AddPaymentComponent extends Component {
 
     let addressJSON = await postData(this.state.address, 'http://localhost:8080/addresses')
     let paymentInfoJSON = await postData(this.state.paymentInfo, 'http://localhost:8080/paymentinfos')
-    console.log(paymentInfoJSON, addressJSON)
-    console.log(await putAssociation(paymentInfoJSON._links.self.href, this.state.user._links.paymentCards.href))
-    console.log(await putAssociation(addressJSON._links.self.href, paymentInfoJSON._links.address.href))
+    await putAssociation(paymentInfoJSON._links.self.href, this.state.user._links.paymentCards.href)
+    await putAssociation(addressJSON._links.self.href, paymentInfoJSON._links.address.href)
 
   }
 

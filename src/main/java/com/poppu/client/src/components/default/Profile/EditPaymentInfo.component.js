@@ -28,7 +28,7 @@ export class EditPaymentInfoComponent extends Component {
     } else if (!this.state.paymentInfo.expDate.match(/^(0[1-9]|1[0-2])\/([0-9]{2})$/)) {
       alert("Expiration date must match format mm/yy!")
     } else {
-      console.log(putData(this.state.paymentInfo, this.state.paymentInfo._links.self.href))
+      putData(this.state.paymentInfo, this.state.paymentInfo._links.self.href)
       this.props.history.push('/profile')
       window.location.reload();
     }

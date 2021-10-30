@@ -43,7 +43,7 @@ export class AddAddressComponent extends Component {
 
   async updateDB() {
     let addressJSON = await postData(this.state.address, 'http://localhost:8080/addresses')
-    console.log(await putAssociation(addressJSON._links.self.href, this.state.user._links.address.href))
+    await putAssociation(addressJSON._links.self.href, this.state.user._links.address.href)
   }
 
   render() {

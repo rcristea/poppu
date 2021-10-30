@@ -48,7 +48,7 @@ export class EditProfileComponent extends Component {
   }
 
   async updateDB() {
-    console.log(await putData(this.state.user, this.state.user._links.self.href))
+    await putData(this.state.user, this.state.user._links.self.href)
   }
 
   subscribe() {

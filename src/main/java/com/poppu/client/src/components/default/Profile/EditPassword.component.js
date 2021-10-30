@@ -45,8 +45,7 @@ export class EditPasswordComponent extends Component {
     } else {
       let newUser = this.state.user
       newUser.password = bcrypt.hashSync(this.state.newPassword, this.state.salt)
-      console.log(this.newUser)
-      console.log(putData(this.state.user, this.state.user._links.self.href))
+      putData(this.state.user, this.state.user._links.self.href)
       this.props.history.push('/profile')
       window.location.reload();
     }
