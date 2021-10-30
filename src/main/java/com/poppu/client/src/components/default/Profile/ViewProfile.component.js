@@ -170,7 +170,7 @@ export class ViewProfileComponent extends Component {
             <Card className={'m-2'}>
               {this.state.paymentCards.map(paymentCard => {
                 return (
-                  <Container>
+                  <Container key={paymentCard.cardNum}>
                     <PaymentInfoComponent compTitle={'Card: '.concat(paymentCard.cardType)} paymentInfo={paymentCard}
                                           user={this.state.user}/>
                   </Container>
