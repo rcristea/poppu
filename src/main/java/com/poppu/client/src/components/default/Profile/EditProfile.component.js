@@ -1,107 +1,140 @@
 import { Component } from 'react'
-import {Button, Card, Col, Container, Form, FormSelect, Row} from 'react-bootstrap'
+import {Button, Card, Col, Container, Form, Row} from 'react-bootstrap'
 
 import 'react-bootstrap/'
+import {DisplayAttribute, TitleComponent} from "./Utils.component";
+import {putData} from "./methods";
 
 export class EditProfileComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: this.props.location.state.user
+        }
+
+        this.handleBack = this.handleBack.bind(this)
+        this.handleSubmitProfile = this.handleSubmitProfile.bind(this)
+        this.updateDB = this.updateDB.bind(this)
+
+        this.subscribe = this.subscribe.bind(this)
+        this.unSubscribe = this.unSubscribe.bind(this)
+    }
+
+    componentDidMount() {
+        if (sessionStorage.getItem('role') !== 'user') {
+            sessionStorage.setItem('alert', 'User does not have correct privileges.')
+            this.props.history.push('/')
+        }
+    }
+
+    handleBack() {
+        this.props.history.push('/profile')
+    }
+
+    async handleSubmitProfile() {
+        if(this.state.user.firstName.trim() === '') {
+            alert("Please enter your first name!")
+        } else if (this.state.user.lastName.trim() === '') {
+            alert("Please enter your last name!")
+        } else if (this.state.user.phoneNum.trim() ==='') {
+            alert("Please enter a number for a phone number!")
+        } else if (isNaN(this.state.user.phoneNum)) {
+            alert("Please enter a number for a phone number!")
+        } else {
+            this.updateDB()
+            this.props.history.push('/profile')
+        }
+    }
+
+    async updateDB() {
+        console.log(await putData(this.state.user, this.state.user._links.self.href))
+    }
+
+    subscribe() {
+        this.setState({
+            ...this.state,
+            user: {
+                ...this.state.user,
+                isSubscribed: true
+            }
+        })
+        alert("You are subscribed to promotions!")
+    }
+
+    unSubscribe() {
+        this.setState({
+            ...this.state,
+            user: {
+                ...this.state.user,
+                isSubscribed: false
+            }
+        })
+        alert("You are unsubscribed to promotions!")
+    }
+
     render() {
         return (
-            <Container className='my-3'>
-                <Row>
-                    <h1>Edit Profile</h1>
-                </Row>
-                <Row>
+            <Container className={'my-2 bg-light'}>
+                <TitleComponent compTitle={'Edit Profile Information'}/>
+                <Card className={'m-2'}>
                     <Form>
-                        <Card className='my-3'>
-                            <Card.Body>1
-                                <Form.Label>
-                                    <h2>Enter Your Information:</h2>
-                                </Form.Label>
-                                <Row className='my-3'>
-                                    <Col md={2}><h5>Name</h5></Col>
-                                    <Col><Form.Control type='text' placeholder='First Name'/></Col>
-                                    <Col><Form.Control type='text' placeholder='Last Name'/></Col>
-                                </Row>
-                                <Row className='my-3'>
-                                    <Col md={2}><h5>Contact</h5></Col>
-                                    <Col md={3}><Form.Control type='number' placeholder='Phone Number'/></Col>
-                                    <Col md={7}><Form.Control type='email' placeholder='E-mail'/></Col>
-                                </Row>
-                                <Row className='my-3'>
-                                    <Col md={2}><h5>Address</h5>
-                                    </Col><Col>
-                                    <Form.Control className='my-3' type='text' placeholder='Street'/></Col>
-                                </Row>
-                                <Row className='my-3'>
-                                    <Col md={2}></Col>
-                                    <Col><Form.Control type='text' placeholder='Street Address'/></Col>
-                                    <Col md={2}><Form.Control type='text' placeholder='City'/></Col>
+                        <DisplayAttribute attName={'Email'} attVal={this.state.user.email}/>
+                        <div>
+                            <Form.Group>
+                                <Form.Label><strong>First Name</strong></Form.Label>
+                                <Form.Control type={'text'}
+                                              placeholder={'Enter your first name.'}
+                                              value={this.state.user.firstName}
+                                              onChange={e => this.setState({ user: {
+                                                      ...this.state.user,
+                                                      firstName: e.target.value
+                                                  }})}/>
+                            </Form.Group>
+                        </div>
+                        <div>
+                            <Form.Group>
+                                <Form.Label><strong>Last Name</strong></Form.Label>
+                                <Form.Control type={'text'}
+                                              placeholder={'Enter your last name.'}
+                                              value={this.state.user.lastName}
+                                              onChange={e => this.setState({ user: {
+                                                      ...this.state.user,
+                                                      lastName: e.target.value
+                                                  }})}/>
+                            </Form.Group>
+                        </div>
+                        <div>
+                            <Form.Group>
+                                <Form.Label><strong>Phone Number</strong></Form.Label>
+                                <Form.Control type={'text'}
+                                              placeholder={'nnnnnnnnnn'}
+                                              value={this.state.user.phoneNum}
+                                              onChange={e => this.setState({ user: {
+                                                      ...this.state.user,
+                                                      phoneNum: e.target.value
+                                                  }})}/>
+                            </Form.Group>
+                        </div>
+                        <Container className={'m-2'}>
+                            <Form.Group>
+                                <Row>
                                     <Col md={2}>
-                                        <FormSelect>
-                                            <option value='AL'>Alabama</option>
-                                            <option value='AK'>Alaska</option>
-                                            <option value='AZ'>Arizona</option>
-                                            <option value='AR'>Arkansas</option>
-                                            <option value='CA'>California</option>
-                                            <option value='CO'>Colorado</option>
-                                            <option value='CT'>Connecticut</option>
-                                            <option value='DE'>Delaware</option>
-                                            <option value='DC'>District Of Columbia</option>
-                                            <option value='FL'>Florida</option>
-                                            <option value='GA'>Georgia</option>
-                                            <option value='HI'>Hawaii</option>
-                                            <option value='ID'>Idaho</option>
-                                            <option value='IL'>Illinois</option>
-                                            <option value='IN'>Indiana</option>
-                                            <option value='IA'>Iowa</option>
-                                            <option value='KS'>Kansas</option>
-                                            <option value='KY'>Kentucky</option>
-                                            <option value='LA'>Louisiana</option>
-                                            <option value='ME'>Maine</option>
-                                            <option value='MD'>Maryland</option>
-                                            <option value='MA'>Massachusetts</option>
-                                            <option value='MI'>Michigan</option>
-                                            <option value='MN'>Minnesota</option>
-                                            <option value='MS'>Mississippi</option>
-                                            <option value='MO'>Missouri</option>
-                                            <option value='MT'>Montana</option>
-                                            <option value='NE'>Nebraska</option>
-                                            <option value='NV'>Nevada</option>
-                                            <option value='NH'>New Hampshire</option>
-                                            <option value='NJ'>New Jersey</option>
-                                            <option value='NM'>New Mexico</option>
-                                            <option value='NY'>New York</option>
-                                            <option value='NC'>North Carolina</option>
-                                            <option value='ND'>North Dakota</option>
-                                            <option value='OH'>Ohio</option>
-                                            <option value='OK'>Oklahoma</option>
-                                            <option value='OR'>Oregon</option>
-                                            <option value='PA'>Pennsylvania</option>
-                                            <option value='RI'>Rhode Island</option>
-                                            <option value='SC'>South Carolina</option>
-                                            <option value='SD'>South Dakota</option>
-                                            <option value='TN'>Tennessee</option>
-                                            <option value='TX'>Texas</option>
-                                            <option value='UT'>Utah</option>
-                                            <option value='VT'>Vermont</option>
-                                            <option value='VA'>Virginia</option>
-                                            <option value='WA'>Washington</option>
-                                            <option value='WV'>West Virginia</option>
-                                            <option value='WI'>Wisconsin</option>
-                                            <option value='WY'>Wyoming</option>
-                                        </FormSelect>
+                                        <strong>Subscribed: </strong>
                                     </Col>
-                                    <Col md={2}><Form.Control type='number' placeholder='ZIP'/></Col>
+                                    <Col>
+                                        <Button variant={'success'} onClick={this.subscribe}>Subscribe</Button>
+                                        <Button variant={'danger'} onClick={this.unSubscribe}>Unsubscribe</Button>
+                                    </Col>
                                 </Row>
-                            </Card.Body>
-                        </Card>
-                        <Card className='my-3'>
-                            <Card.Body>
-                                <Button className='mx-1' variant='primary' type='submit' href={'/profile'}>Update Profile</Button>
-                            </Card.Body>
-                        </Card>
+                            </Form.Group>
+                        </Container>
+                        <Container className={'m-2'}>
+                            <button disabled hidden={true}>Submit</button>
+                            <Button variant={'success'} onClick={this.handleSubmitProfile}>Submit Profile</Button>
+                            <Button variant={'warning'} onClick={this.handleBack}>Go Back</Button>
+                        </Container>
                     </Form>
-                </Row>
+                </Card>
             </Container>
         )
     }

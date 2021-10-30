@@ -38,7 +38,7 @@
   flex-direction: column;
 }
 
-.form-login input {
+.form-login input[type='text'], .form-login input[type='password'] {
   margin: 15px 0;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -47,7 +47,7 @@
   border: 1px solid #000;
   background-color: #131313;
   color: #fff;
-  padding: 15px;
+  padding: 5px;
   border-radius: 25px;
 }
 
@@ -69,17 +69,35 @@
   background: -webkit-linear-gradient(180deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
 }
 
-.signup {
+.signup, .forgot-password {
   color: #fff;
   margin-top: 15px;
   font-size: 0.625rem;
 }
 
-.signup a {
+.signup a, .forgot-password a {
   text-decoration: none;
   color: #fff;
 }
 
-.signup a:hover {
+.signup a:hover, .forgot-password a:hover {
+  color: hsla(180, 67%, 67%, 1);
   text-decoration: underline;
+}
+
+.invalid-container p {
+  margin: 0;
+  font-size: 0.75rem;
+  color:hsla(283, 92%, 63%, 1);
+}
+
+.remember-me-wrapper {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.remember-me-wrapper input {
+  margin-right: 5px;
 }

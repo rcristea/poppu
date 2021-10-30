@@ -8,6 +8,7 @@ import Confirmation from './Confirmation.component'
 import isEmail from 'validator/es/lib/isEmail'
 import isStrongPassword from 'validator/es/lib/isStrongPassword'
 import isCreditCard from 'validator/es/lib/isCreditCard'
+import bcrypt from 'bcryptjs'
 
 class Registration extends Component {
   constructor(props) {
@@ -34,14 +35,103 @@ class Registration extends Component {
       homeState: '0',
       formErrors: [],
       confirmationCode: '',
+      userId: '',
+      salt: '$2a$10$O1RbZIPCQCLr522HZUP51/', // for encryption
     }
 
     this.handleChange = this.handleChange.bind(this)
+    this.handleCheckChange = this.handleCheckChange.bind(this)
     this.prev = this.prev.bind(this)
     this.next = this.next.bind(this)
     this.renderButtons = this.renderButtons.bind(this)
     this.renderErrors = this.renderErrors.bind(this)
     this.validateForm = this.validateForm.bind(this)
+    this.getUser = this.getUser.bind(this)
+    this.isUniqueEmail = this.isUniqueEmail.bind(this)
+    this.postData = this.postData.bind(this)
+    this.putData = this.putData.bind(this)
+    this.sendEmail = this.sendEmail.bind(this)
+    this.sendCustomEmail = this.sendCustomEmail.bind(this)
+    this.validateCode = this.validateCode.bind(this)
+    this.updateUserStatus = this.updateUserStatus.bind(this)
+  }
+
+  updateUserStatus() {
+    let id = this.state.userId
+    return new Promise(function (resolve, reject) {
+      fetch(`http://localhost:8080/api/users/${id}/setActive`, {
+        method: 'put',
+      }).then(response => {
+        resolve(response)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  }
+
+  sendCustomEmail(email, subject, contents) {
+    fetch('http://localhost:8080/api/validator/customEmail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `email=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&contents=${encodeURIComponent(contents)}`
+    }).then(response => {console.log('Successfully sent Confirmation Email')})
+  }
+
+  createValidator() {
+    let email = this.state.email
+    return new Promise(function (resolve, reject) {
+      fetch('http://localhost:8080/api/validator/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `email=${encodeURIComponent(email)}`
+      }).then(response => {
+        resolve(response)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  }
+
+  sendEmail() {
+    this.createValidator().then(response => {
+      let email = this.state.email
+      return new Promise(function (resolve, reject) {
+        fetch('http://localhost:8080/api/validator/sendEmail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `email=${encodeURIComponent(email)}`
+        }).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    })
+  }
+
+  validateCode() {
+    let email = this.state.email
+    let code = this.state.confirmationCode
+    let params = `email=${encodeURIComponent(email)}&code=${encodeURIComponent(code)}`
+    return new Promise(function (resolve, reject) {
+      fetch(`http://localhost:8080/api/validator/validate?${params}`, {
+        method: 'PUT',
+      }).then(response => {
+        response.json().then(json => {
+          resolve(json)
+        }).catch(error => {
+          reject(error)
+        })
+      }).catch(error => {
+        reject(error)
+      })
+    })
   }
 
   prev() {
@@ -120,6 +210,8 @@ class Registration extends Component {
       formErrors.push('The email field must be filled in.')
     } else if (!isEmail(this.state.email)) {
       formErrors.push('Please enter a valid email.')
+    } else if (!(await this.isUniqueEmail())) {
+      formErrors.push('The email you entered is already taken.')
     }
 
     if (this.state.phone.length === 0) {
@@ -178,6 +270,32 @@ class Registration extends Component {
     }
   }
 
+  async getUser(email) {
+    return new Promise(function (resolve, reject) {
+      fetch(`http://localhost:8080/api/users/email?email=${email}`, {
+        method: 'GET',
+      }).then(response => {
+        response.json().then(json => {
+          resolve(json)
+        }).catch(error => {
+          reject(error)
+        })
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  }
+
+  async isUniqueEmail() {
+    let isUnique = await this.getUser(this.state.email).then(response => {
+      return false
+    }).catch(error => {
+      return true
+    })
+
+    return isUnique
+  }
+
   handleChange(event) {
     const {name, value} = event.target
     this.setState({
@@ -185,25 +303,190 @@ class Registration extends Component {
     })
   }
 
-  handleSubmit = e => {
+  handleCheckChange(event) {
+    let isChecked = event.target.checked
+    this.setState({
+      promo: isChecked
+    })
+  }
+
+  async putData(data, destination) {
+    return new Promise(function (resolve, reject) {
+      fetch(destination, {
+        method: 'PUT',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Accept': 'text/uri-list',
+          'Content-Type': 'text/uri-list'
+        },
+        body: data,
+      }).then(response => {
+        resolve(response)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  }
+
+  async postData(data, destination) {
+    return new Promise(function (resolve, reject) {
+      fetch(`http://localhost:8080/${destination}/`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+      }).then(response => {
+        response.json().then(json => {
+          resolve(json)
+        })
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  }
+
+  handleSubmit = async(e) => {
     e.preventDefault()
-    this.validateForm().then(response => {
-      if (this.state.formErrors.length !== 0) {
-        return
+
+    await this.validateForm()
+    if (this.state.formErrors.length !== 0) {
+      return
+    }
+
+    let userHomeAddressJSON
+    let userBillingAddressJSON
+    let userPaymentJSON
+    let userJSON
+
+    let hasHomeAddress = this.state.homeStreet.length > 0
+    let hasUserPayment = this.state.cardNumber.length > 0
+
+    // Create user's address
+
+    if (hasHomeAddress) {
+      let userHomeAddress = {
+        'city': this.state.homeCity,
+        'street': this.state.homeStreet,
+        'zipCode': this.state.homeZip,
       }
 
-      console.log('TODO - send request to backend to create an inactive user')
-      console.log('in the .then() of axios after the response is received, send another request to send an email with the confirmation code')
+      userHomeAddressJSON = await this.postData(userHomeAddress, 'addresses')
+    }
 
-      this.setState({
-        currentStep: 4,
-      })
+    // Create User
+
+    let userData = {
+      'firstName': this.state.name.split(' ')[0],
+      'lastName': this.state.name.split(' ')[1],
+      'role': 'USER',
+      'email': this.state.email,
+      'password': bcrypt.hashSync(this.state.password, this.state.salt),
+      'phoneNum': this.state.phone,
+      'isSubscribed': this.state.promo,
+      'status': 'INACTIVE',
+    }
+
+    userJSON = await this.postData(userData, 'users')
+
+    if (hasHomeAddress) {
+      console.log(userJSON)
+      await this.putData(
+        userHomeAddressJSON['_links']['self']['href'],
+        userJSON['_links']['address']['href']
+      )
+    }
+
+    // Create user's payment info
+
+    if (hasUserPayment) {
+      let userBillingAddress =  {
+        'street': this.state.billingStreet,
+        'city': this.state.billingCity,
+        'zipCode': this.state.billingZip,
+      }
+
+      userBillingAddressJSON = await this.postData(userBillingAddress, 'addresses')
+
+      let userPayment = {
+        'cardNum': bcrypt.hashSync(this.state.cardNumber, this.state.salt),
+        'cardType': this.state.cardType,
+        'expDate': this.state.cardExpiry,
+        'user': userJSON['_links']['self']['href']
+      }
+
+      userPaymentJSON = await this.postData(userPayment, 'paymentinfos')
+      await this.putData(
+        userBillingAddressJSON['_links']['self']['href'],
+        userPaymentJSON['_links']['address']['href']
+      )
+
+      await this.putData(
+        userPaymentJSON['_links']['self']['href'],
+        userJSON['_links']['paymentCards']['href']
+      )
+    }
+
+    // Set user id to put active later when confirmed email
+    this.setState({
+      userId: userJSON['id'],
+    })
+
+    // Send confirmation code email
+    this.sendEmail()
+
+    this.setState({
+      currentStep: 4,
     })
   }
 
   handleSubmitConfirmation = e => {
     e.preventDefault()
-    alert('Handle confirmation code here')
+    this.validateCode().then(response => {
+      if (response['validated']) {
+        this.updateUserStatus().then(response => {
+          let subject = 'Thank you for creating an account with Poppu!'
+          let contents = `
+            Welcome to Poppu, ${this.state.name}! The cinema eBooking system.\n\n
+            Name: ${this.state.name}\n
+            Email: ${this.state.email}\n
+            Promotion Subscription: ${this.state.promo}\n\n\n
+            
+            Billing Information\n
+            Card Number: ${this.state.cardNumber}\n
+            Card Type: ${this.state.cardType}\n
+            Expiration Date: ${this.state.cardExpiry}\n
+            Billing Address:\n
+            Street: ${this.state.billingStreet}\n
+            City: ${this.state.billingCity}\n
+            State: ${this.state.billingState}\n
+            Zip: ${this.state.billingZip}\n\n\n
+            
+            Home Address\n
+            Street: ${this.state.homeStreet}\n
+            City: ${this.state.homeCity}\n
+            State: ${this.state.homeState}\n
+            Zip: ${this.state.homeZip}
+          `
+
+          this.sendCustomEmail(this.state.email, subject, contents)
+
+          sessionStorage.setItem('role', 'user')
+          sessionStorage.setItem('user_email', this.state.email)
+          this.props.history.push('/profile')
+        }).catch(error =>{
+          console.error(error, 'handleSubmitConfirmation')
+          this.setState({
+            formErrors: ['An error has occurred.']
+          })
+        })
+      } else {
+        this.setState({
+          formErrors: ['The code you entered does not match.']
+        })
+      }
+    })
   }
 
   render() {
@@ -222,6 +505,7 @@ class Registration extends Component {
               <Step1
                 currentStep={this.state.currentStep}
                 handleChange={this.handleChange}
+                handleCheckChange={this.handleCheckChange}
                 name={this.state.name}
                 email={this.state.email}
                 phone={this.state.phone}

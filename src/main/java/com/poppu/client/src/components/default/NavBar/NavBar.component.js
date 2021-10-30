@@ -1,7 +1,6 @@
 import {Component} from 'react'
 import './NavBar.component.css'
 import {Link} from 'react-router-dom'
-import { BsFillCartFill } from 'react-icons/bs'
 
 export class NavBar extends Component {
   constructor(props) {
@@ -12,6 +11,7 @@ export class NavBar extends Component {
     }
 
     this.toggleMobileMenu = this.toggleMobileMenu.bind(this)
+    this.renderAuth = this.renderAuth.bind(this)
   }
 
   toggleMobileMenu() {
@@ -20,6 +20,29 @@ export class NavBar extends Component {
       window.scrollTo({top: 0})
     } else {
       this.setState({hasOpenedMobileMenu: true, isScrolled: true})
+    }
+  }
+
+  renderAuth() {
+    let role = sessionStorage.getItem('role')
+    if (role === 'user') {
+      return (
+        <Link to='/profile'>
+          <div className='login-button'>Profile</div>
+        </Link>
+      )
+    } else if (role === 'admin') {
+      return (
+        <Link to='/admin'>
+          <div className='login-button'>Dashboard</div>
+        </Link>
+      )
+    } else {
+      return (
+        <Link to='/login'>
+          <div className='login-button'>Login</div>
+        </Link>
+      )
     }
   }
 
@@ -45,14 +68,7 @@ export class NavBar extends Component {
               </div>
             </div>
             <div className='nav-right'>
-              <Link to='/cart'>
-                <div className='cart-icon'>
-                  <BsFillCartFill size='25px'/>
-                </div>
-              </Link>
-              <Link to='/login'>
-                <div className='login-button'>Login</div>
-              </Link>
+              {this.renderAuth()}
             </div>
           </nav>
         </header>

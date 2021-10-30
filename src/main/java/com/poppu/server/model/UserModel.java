@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import com.poppu.server.util.Role;
 import com.poppu.server.util.Status;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class UserModel {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password", nullable = false, length = 32)
+    @Column(name = "password", nullable = false, length = 128)
     private String password;
 
     @Column(name = "phone_num", nullable = false, length = 16)

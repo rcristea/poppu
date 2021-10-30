@@ -34,7 +34,12 @@ class Sidebar extends Component {
     return (
       <>
         <div className='topbar'>
-          <Link to='/admin'><h1 className='logo'>poppu</h1></Link>
+          <div className='topbar-left'>
+            <Link to='/admin'><h1 className='logo'>poppu</h1></Link>
+          </div>
+          <div className='topbar-right'>
+            <button onClick={this.props.logOut}>Log Out</button>
+          </div>
         </div>
         <div className='sidebar-container'>
           <div className='sidebar-nav-container'>
