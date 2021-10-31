@@ -11,17 +11,17 @@ public class SeatAvailabilityModel {
     @EmbeddedId
     private SeatAvailabilityKey id;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @MapsId("showId")
     @JoinColumn(name = "show_id", foreignKey = @ForeignKey(name = "FK_seat_availability_show"))
     private ShowModel show;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @MapsId("showroomId")
     @JoinColumn(name = "showroom_id", foreignKey = @ForeignKey(name = "FK_seat_availability_showroom"))
     private ShowroomModel showroom;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @MapsId("seatId")
     @JoinColumn(name = "seat_id", foreignKey = @ForeignKey(name = "FK_seat_availability_seat"))
     private SeatModel seat;

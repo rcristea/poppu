@@ -24,7 +24,7 @@ public class PaymentInfoModel {
     @JoinColumn (name = "address_id", foreignKey = @ForeignKey(name = "FK_payment_address"))
     private AddressModel address;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn (name = "user_id", foreignKey = @ForeignKey(name = "FK_payment_user"))
     private UserModel user;
 

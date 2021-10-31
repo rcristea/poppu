@@ -20,11 +20,11 @@ public class ShowModel {
     @Column(name = "duration", nullable = false, length = 16)
     private String duration;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "movie_id", foreignKey = @ForeignKey(name = "FK_show_movie"))
     private MovieModel movie;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "showroom_id", foreignKey = @ForeignKey(name = "FK_show_showroom"))
     private ShowroomModel showroom;
 

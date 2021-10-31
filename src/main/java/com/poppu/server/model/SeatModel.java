@@ -14,7 +14,7 @@ public class SeatModel {
     @Column(name = "seat", nullable = false, length = 5)
     private String seat;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "showroom_id", nullable = false, foreignKey = @ForeignKey(name = "FK_seat_showroom"))
     private ShowroomModel showroom;
 

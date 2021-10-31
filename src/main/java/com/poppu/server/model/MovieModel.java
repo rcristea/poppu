@@ -27,11 +27,11 @@ public class MovieModel {
     @Column(name = "category", nullable = false, length = 45)
     private String category;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "director_id", foreignKey = @ForeignKey(name = "FK_movie_director"))
     private DirectorModel director;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "producer_id", foreignKey = @ForeignKey(name = "FK_movie_producer"))
     private ProducerModel producer;
 

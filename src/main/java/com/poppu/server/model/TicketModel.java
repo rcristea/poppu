@@ -20,18 +20,18 @@ public class TicketModel {
     @Column(name = "price", nullable = false)
     private double price;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "show_id", foreignKey = @ForeignKey(name = "FK_ticket_show"))
     private ShowModel show;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "showroom_id", foreignKey = @ForeignKey(name = "FK_ticket_showroom"))
     private ShowroomModel showroom;
 
     @Column(name = "seat", length = 5, nullable = false)
     private String seat;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "booking_num", foreignKey = @ForeignKey(name = "FK_ticket_booking"))
     private BookingModel booking;
 
