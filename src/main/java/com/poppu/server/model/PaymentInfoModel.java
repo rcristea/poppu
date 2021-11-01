@@ -3,13 +3,13 @@ package com.poppu.server.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="payment_info")
+@Table(name="payment_infos")
 public class PaymentInfoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "payment_id", nullable = false)
-    private long payment_id;
+    @Column (name = "payment_id")
+    private long paymentID;
 
     @Column (name = "card_num", nullable = false, length = 128)
     private String cardNum;
@@ -20,15 +20,16 @@ public class PaymentInfoModel {
     @Column (name = "exp_date", nullable = false, length = 10)
     private String expDate;
 
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "address_id")
+    @OneToOne (cascade = CascadeType.ALL, optional = false)
+    @JoinColumn (name = "address_id", foreignKey = @ForeignKey(name = "FK_payment_address"))
     private AddressModel address;
 
     @ManyToOne(optional = false)
-    @JoinColumn (name = "user_id")
+    @JoinColumn (name = "user_id", foreignKey = @ForeignKey(name = "FK_payment_user"))
     private UserModel user;
 
     public PaymentInfoModel() {
+
     }
 
     public PaymentInfoModel(String cardNum, String cardType, String expDate, AddressModel address, UserModel user){

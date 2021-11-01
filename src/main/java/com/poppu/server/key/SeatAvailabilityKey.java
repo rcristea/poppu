@@ -7,45 +7,45 @@ import java.io.Serializable;
 public class SeatAvailabilityKey implements Serializable {
 
     @Column(name = "show_id")
-    private int showId;
-
-    @Column(name = "seat_id")
-    private int seatId;
+    private long showId;
 
     @Column(name = "showroom_id")
-    private int showroomId;
+    private long showroomId;
+
+    @Column(name = "seat_id")
+    private long seatId;
 
     public SeatAvailabilityKey() {
 
     }
 
-    public SeatAvailabilityKey(int showId, int seatId, int showroomId) {
+    public SeatAvailabilityKey(long showId, long showroomId, long seatId) {
         this.showId = showId;
-        this.seatId = seatId;
         this.showroomId = showroomId;
+        this.seatId = seatId;
     }
 
-    public int getShowId() {
+    public long getShowId() {
         return showId;
     }
 
-    public int getSeatId() {
-        return seatId;
-    }
-
-    public int getShowroomId() {
+    public long getShowroomId() {
         return showroomId;
     }
 
-    public void setShowId(int showId) {
+    public long getSeatId() {
+        return seatId;
+    }
+
+    public void setShowId(long showId) {
         this.showId = showId;
     }
 
-    public void setSeatId(int seatId) {
-        this.seatId = seatId;
+    public void setShowroomId(long showroomId) {
+        this.showroomId = showroomId;
     }
 
-    public void setShowroomId(int showroomId) {
-        this.showroomId = showroomId;
+    public void setSeatId(long seatId) {
+        this.seatId = seatId;
     }
 }

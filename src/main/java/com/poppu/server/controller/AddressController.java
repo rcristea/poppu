@@ -12,7 +12,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/address")
 public class AddressController {
@@ -30,6 +30,16 @@ public class AddressController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    /*
+    @GetMapping("/user/{id}")
+    public ResponseEntity<AddressModel> getAddressByUserId(@PathVariable("id") long userId) {
+        Optional<AddressModel> getAddressTest = this.addressRepository.findAll().stream().filter(addressModel ->
+            addressModel.getUser().getId() == userId
+        ).findAny();
+        return getAddressTest.map(response -> ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    */
     @PutMapping("/{id}")
     public ResponseEntity<AddressModel> putAddress(@RequestBody AddressModel newAddressInfo, @PathVariable("id") long id) throws URISyntaxException {
         AddressModel updatedAddress = this.addressRepository.findById(id)
