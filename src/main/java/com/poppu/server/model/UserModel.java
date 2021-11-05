@@ -34,7 +34,7 @@ public class UserModel {
     @Column(name = "password", nullable = false, length = 128)
     private String password;
 
-    @Column(name = "phone_num", nullable = false, length = 12)
+    @Column(name = "phone_num", nullable = false, length = 24)
     private String phoneNum;
 
     @Column(name = "is_subscribed", columnDefinition = "tinyint(1) default 0")
