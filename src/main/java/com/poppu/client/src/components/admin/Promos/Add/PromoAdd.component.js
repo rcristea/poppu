@@ -166,6 +166,14 @@ class PromoAdd extends Component {
                     <FormControl type='text' name='offer' onChange={this.handleChange}/>
                   </FormGroup>
                   <FormGroup>
+                    <FormLabel>Start Date</FormLabel>
+                    <FormControl type='datetime-local' name='start_date'/>
+                  </FormGroup>
+                  <FormGroup>
+                    <FormLabel>End Date</FormLabel>
+                    <FormControl type='datetime-local' name='end_date'/>
+                  </FormGroup>
+                  <FormGroup>
                     <button type='submit'>Submit</button>
                     <a className='cancel' href='/promos'>Cancel</a>
                   </FormGroup>
