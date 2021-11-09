@@ -22,6 +22,10 @@ public class PromotionModel {
         this.offer = offer;
     }
 
+    public void setPromotionId(long promotionId) {
+        this.promotionId = promotionId;
+    }
+
     public long getPromotionId() {
         return promotionId;
     }
