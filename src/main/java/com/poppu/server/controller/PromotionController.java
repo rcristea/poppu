@@ -36,6 +36,8 @@ public class PromotionController {
                 .map(promotion -> {
                     promotion.setPromotionId(promotionModel.getPromotionId());
                     promotion.setOffer(promotionModel.getOffer());
+                    promotion.setStartTime(promotionModel.getStartTime());
+                    promotion.setEndTime(promotionModel.getEndTime());
                     return this.promotionRepository.save(promotion);
                 }).orElseGet(() -> this.promotionRepository.save(promotionModel));
         return ResponseEntity

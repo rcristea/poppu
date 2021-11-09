@@ -1,6 +1,7 @@
 package com.poppu.server.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="promotions")
@@ -13,6 +14,12 @@ public class PromotionModel {
     @Column (name = "offer", nullable = false)
     private String offer;
 
+    @Column (name = "start_time")
+    private Timestamp startTime;
+
+    @Column(name = "end_time")
+    private Timestamp endTime;
+
     public PromotionModel() {
 
     }
@@ -21,12 +28,12 @@ public class PromotionModel {
         this.offer = offer;
     }
 
-    public void setPromotionId(long promotionId) {
-        this.promotionId = promotionId;
-    }
-
     public long getPromotionId() {
         return promotionId;
+    }
+
+    public void setPromotionId(long promotionId) {
+        this.promotionId = promotionId;
     }
 
     public String getOffer() {
@@ -35,5 +42,21 @@ public class PromotionModel {
 
     public void setOffer(String offer) {
         this.offer = offer;
+    }
+
+    public Timestamp getStartTime() {
+        return this.startTime;
+    }
+
+    public void setStartTime(Timestamp time) {
+        this.startTime = time;
+    }
+
+    public Timestamp getEndTime() {
+        return this.endTime;
+    }
+
+    public void setEndTime(Timestamp time) {
+        this.endTime = time;
     }
 }

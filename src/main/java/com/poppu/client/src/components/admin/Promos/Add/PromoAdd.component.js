@@ -10,6 +10,8 @@ class PromoAdd extends Component {
     this.state = {
       promotionId: '',
       offer: '',
+      startTime: '',
+      endTime: '',
       error: '',
     }
 
@@ -167,11 +169,11 @@ class PromoAdd extends Component {
                   </FormGroup>
                   <FormGroup>
                     <FormLabel>Start Date</FormLabel>
-                    <FormControl type='datetime-local' name='start_date'/>
+                    <FormControl type='datetime-local' name='startTime' onChange={this.handleChange}/>
                   </FormGroup>
                   <FormGroup>
                     <FormLabel>End Date</FormLabel>
-                    <FormControl type='datetime-local' name='end_date'/>
+                    <FormControl type='datetime-local' name='endTime' onChange={this.handleChange}/>
                   </FormGroup>
                   <FormGroup>
                     <button type='submit'>Submit</button>
