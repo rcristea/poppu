@@ -2,6 +2,7 @@ import {React, Component} from 'react'
 import './PromoIndex.component.css'
 import Sidebar from '../../Sidebar/Sidebar.component'
 import SearchBar from '../SearchBar/SearchBar.component'
+import Alert from '../../Alerts/Alert'
 import {BiDotsVerticalRounded, BiPlus} from 'react-icons/bi'
 import {Dropdown, Table} from 'react-bootstrap'
 import DropdownToggle from 'react-bootstrap/DropdownToggle'
@@ -92,6 +93,7 @@ class PromoIndex extends Component {
 
     this.handleDelete = this.handleDelete.bind(this)
     this.logOut = this.logOut.bind(this)
+    this.renderAlert = this.renderAlert.bind(this)
   }
 
   handleDelete(id) {
@@ -118,6 +120,25 @@ class PromoIndex extends Component {
     }
   }
 
+  renderAlert() {
+    let alertSuccess = sessionStorage.getItem('alert-success')
+    let alertError = sessionStorage.getItem('alert-error')
+
+    if (alertSuccess) {
+      sessionStorage.removeItem('alert-success')
+      return (
+        <Alert message={alertSuccess} type={'success'} />
+      )
+    } else if (alertError) {
+      sessionStorage.removeItem('alert-error')
+      return (
+        <Alert message={alertError} type={'error'} />
+      )
+    } else {
+      return null
+    }
+  }
+
   componentDidMount() {
     if (sessionStorage.getItem('role') !== 'admin') {
       sessionStorage.setItem('alert', 'User does not have correct privileges.')
@@ -129,6 +150,7 @@ class PromoIndex extends Component {
     return (
       <>
         <Sidebar logOut={this.logOut}/>
+        {this.renderAlert()}
         <div className='promos-container'>
           <div className='cover'>
             <div className='promos-card'>

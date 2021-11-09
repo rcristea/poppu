@@ -7,7 +7,6 @@ import javax.persistence.*;
 public class PromotionModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column (name = "promotion_id")
     private long promotionId;
 

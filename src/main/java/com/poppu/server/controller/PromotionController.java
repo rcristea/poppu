@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/promotions")
+@RequestMapping("/api/promotion")
 public class PromotionController {
     private final Logger log = LoggerFactory.getLogger(PromotionController.class);
     private PromotionRepository promotionRepository;
@@ -39,7 +39,7 @@ public class PromotionController {
                     return this.promotionRepository.save(promotion);
                 }).orElseGet(() -> this.promotionRepository.save(promotionModel));
         return ResponseEntity
-                .created(new URI("/api/promotions/" + updatedPromotion.getPromotionId()))
+                .created(new URI("/api/promotion/" + updatedPromotion.getPromotionId()))
                 .body(updatedPromotion);
     }
 
@@ -47,7 +47,7 @@ public class PromotionController {
     public ResponseEntity<PromotionModel> createPromotion(@RequestBody PromotionModel promotion) throws URISyntaxException {
         PromotionModel res = this.promotionRepository.save(promotion);
         return ResponseEntity
-                .created(new URI("/api/promotions/" + res.getPromotionId()))
+                .created(new URI("/api/promotion/" + res.getPromotionId()))
                 .body(res);
     }
 
