@@ -20,6 +20,9 @@ public class PromotionModel {
     @Column(name = "end_time")
     private Timestamp endTime;
 
+    @Column(name = "is_sent", columnDefinition = "tinyint(1) default 0")
+    private boolean isSent = false;
+
     public PromotionModel() {
 
     }
@@ -58,5 +61,13 @@ public class PromotionModel {
 
     public void setEndTime(Timestamp time) {
         this.endTime = time;
+    }
+
+    public boolean getIsSent() {
+        return this.isSent;
+    }
+
+    public void setIsSent(boolean isSent) {
+        this.isSent = isSent;
     }
 }

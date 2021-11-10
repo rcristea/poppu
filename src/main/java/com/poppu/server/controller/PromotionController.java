@@ -38,6 +38,7 @@ public class PromotionController {
                     promotion.setOffer(promotionModel.getOffer());
                     promotion.setStartTime(promotionModel.getStartTime());
                     promotion.setEndTime(promotionModel.getEndTime());
+                    promotion.setIsSent(promotionModel.getIsSent());
                     return this.promotionRepository.save(promotion);
                 }).orElseGet(() -> this.promotionRepository.save(promotionModel));
         return ResponseEntity

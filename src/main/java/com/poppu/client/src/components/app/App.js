@@ -15,6 +15,7 @@ import EditProfileComponent from '../default/Profile/EditProfile.component'
 import Dashboard from '../admin/Dashboard/Dashboard.component'
 import PromoIndex from '../admin/Promos/Index/PromoIndex.component'
 import PromoAdd from '../admin/Promos/Add/PromoAdd.component'
+import PromoEdit from '../admin/Promos/Edit/PromoEdit.component'
 import MovieIndex from '../admin/Movies/Index/MovieIndex.component'
 import AddMovie from '../admin/Movies/Index/AddMovie.component'
 import AddShowTime from '../admin/Movies/Index/AddShowtime.component'
@@ -102,6 +103,7 @@ class App extends Component {
         <Route path='/admin' exact={true} component={Dashboard}/>
         <Route path='/promos' exact={true} component={PromoIndex}/>
         <Route path='/promos/add' exact={true} component={PromoAdd}/>
+        <Route path='/promos/edit/:id' component={PromoEdit} />
         <Route path='/movies' exact={true} component={MovieIndex}/>
         <Route path='/movies/add' exact={true} component={AddMovie}/>
         <Route path='/movies/id' exact={true} component={ViewMovie}/>
