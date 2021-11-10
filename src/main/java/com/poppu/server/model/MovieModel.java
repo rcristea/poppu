@@ -28,13 +28,11 @@ public class MovieModel {
     @Column(name = "category", nullable = false, length = 45)
     private String category;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "director_id", foreignKey = @ForeignKey(name = "FK_movie_director"))
-    private DirectorModel director;
+    @Column(name = "director", nullable = false)
+    private String director;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "producer_id", foreignKey = @ForeignKey(name = "FK_movie_producer"))
-    private ProducerModel producer;
+    @Column(name = "producer", nullable = false)
+    private String producer;
 
     @Lob
     @Column(name = "synopsis", nullable = false)
@@ -63,7 +61,7 @@ public class MovieModel {
     }
 
     public MovieModel(String title, Date date, String category,
-                      DirectorModel director, ProducerModel producer,
+                      String director, String producer,
                       String synopsis, RatingCode rating, String trailerPhoto,
                       String trailerLink, boolean isShowing) {
         this.title = title;
@@ -94,11 +92,11 @@ public class MovieModel {
         return category;
     }
 
-    public DirectorModel getDirector() {
+    public String getDirector() {
         return director;
     }
 
-    public ProducerModel getProducer() {
+    public String getProducer() {
         return producer;
     }
 
@@ -135,11 +133,11 @@ public class MovieModel {
         this.category = category;
     }
 
-    public void setDirector(DirectorModel director) {
+    public void setDirector(String director) {
         this.director = director;
     }
 
-    public void setProducer(ProducerModel producer) {
+    public void setProducer(String producer) {
         this.producer = producer;
     }
 

@@ -39,6 +39,9 @@ class App extends Component {
       password: '',
     }
 
+    // TEMPORARY: DELETE AFTER
+    sessionStorage.setItem('role', 'admin')
+
     this.getUser = this.getUser.bind(this)
   }
 
