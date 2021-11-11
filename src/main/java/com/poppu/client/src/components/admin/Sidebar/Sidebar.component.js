@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import {BiMovie} from 'react-icons/bi'
 import {RiCoupon2Line} from 'react-icons/ri'
 import {RiDashboardLine} from 'react-icons/ri'
+import {AiOutlineSchedule} from 'react-icons/ai'
 
 class Sidebar extends Component {
   constructor(props) {
@@ -78,6 +79,12 @@ class Sidebar extends Component {
               <div className={`sidebar-nav-item ${this.state.active.includes('/promos') ? 'active' : ''} `}>
                 <RiCoupon2Line color='#fff'/>
                 <p className='sidebar-nav-item-title'>Promos</p>
+              </div>
+            </Link>
+            <Link to='/schedule'>
+              <div className={`sidebar-nav-item ${this.state.active.includes('/schedule') ? 'active' : ''} `}>
+                <AiOutlineSchedule color='#fff'/>
+                <p className='sidebar-nav-item-title'>Movie Schedule</p>
               </div>
             </Link>
           </div>
