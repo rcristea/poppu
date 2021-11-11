@@ -13,6 +13,25 @@ class Sidebar extends Component {
     this.state = {
       active: 'admin',
     }
+
+    this.logOut = this.logOut.bind(this)
+  }
+
+  logOut() {
+    if (localStorage.getItem('remember_me')) {
+      localStorage.removeItem('remember_me')
+    }
+
+    if (sessionStorage.getItem('user_email')) {
+      sessionStorage.removeItem('user_email')
+    }
+
+    if (sessionStorage.getItem('role')) {
+      sessionStorage.removeItem('role')
+      sessionStorage.setItem('alert', 'Successfully logged out!')
+
+      this.props.history.push('/')
+    }
   }
 
   componentDidMount() {
@@ -38,7 +57,7 @@ class Sidebar extends Component {
             <Link to='/admin'><h1 className='logo'>poppu</h1></Link>
           </div>
           <div className='topbar-right'>
-            <button onClick={this.props.logOut}>Log Out</button>
+            <button onClick={this.logOut}>Log Out</button>
           </div>
         </div>
         <div className='sidebar-container'>

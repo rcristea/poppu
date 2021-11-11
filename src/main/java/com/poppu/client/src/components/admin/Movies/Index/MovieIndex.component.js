@@ -6,25 +6,6 @@ import {ManageMoviesComponent} from './ManageMovies.component'
 class MovieIndex extends Component {
   constructor(props) {
     super(props);
-
-    this.logOut = this.logOut.bind(this)
-  }
-
-  logOut() {
-    if (localStorage.getItem('remember_me')) {
-      localStorage.removeItem('remember_me')
-    }
-
-    if (sessionStorage.getItem('user_email')) {
-      sessionStorage.removeItem('user_email')
-    }
-
-    if (sessionStorage.getItem('role')) {
-      sessionStorage.removeItem('role')
-      sessionStorage.setItem('alert', 'Successfully logged out!')
-
-      this.props.history.push('/')
-    }
   }
 
   componentDidMount() {
@@ -37,7 +18,7 @@ class MovieIndex extends Component {
   render() {
     return (
       <>
-        <Sidebar logOut={this.logOut}/>
+        <Sidebar />
         <div className='movies-container'>
           <ManageMoviesComponent/>
         </div>
