@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './PromoAdd.component.css'
 import Sidebar from '../../Sidebar/Sidebar.component'
-import {Form, FormLabel, FormGroup, FormControl} from 'react-bootstrap'
+import {Form, FormLabel, FormGroup, FormControl, FormCheck} from 'react-bootstrap'
 
 class PromoAdd extends Component {
   constructor(props) {
@@ -12,16 +12,19 @@ class PromoAdd extends Component {
       offer: '',
       startTime: '',
       endTime: '',
+      isSent: 0,
       error: '',
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleCheckChange = this.handleCheckChange.bind(this)
     this.logOut = this.logOut.bind(this)
     this.postData = this.postData.bind(this)
     this.getData = this.getData.bind(this)
     this.validateData = this.validateData.bind(this)
     this.isUniqueCode = this.isUniqueCode.bind(this)
+    this.sendPromotionEmails = this.sendPromotionEmails.bind(this)
   }
 
   logOut() {
@@ -96,6 +99,38 @@ class PromoAdd extends Component {
     }
   }
 
+  async sendPromotionEmails() {
+    // Get the users that are subscribed
+    let subscribedUsers = await fetch(`http://localhost:8080/users/search/findAllByIsSubscribed?isSubscribed=true`, {
+      method: 'GET',
+    }).then(response => {
+      return response.json().then(json => {
+        return json
+      })
+    }).catch(error => {
+      console.error(error)
+      return null
+    })
+
+    // build uri string with all the emails of the users that are subscribed
+    let uri = '?'
+    subscribedUsers._embedded.users.forEach(subscribedUser => {
+      uri += `&emails=${subscribedUser.email}`
+    })
+
+    uri += '&promo_id=' + this.state.promotionId
+    uri += '&promo_amount=' + this.state.offer
+
+    // Send post request to /api/promotion/send_promo_emails/ with the uri list
+    fetch('http://localhost:8080/api/promotion/send_promo_emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: uri
+    })
+  }
+
   handleChange(event) {
     this.setState({
       error: '',
@@ -107,13 +142,23 @@ class PromoAdd extends Component {
     })
   }
 
+  handleCheckChange(event) {
+    let isChecked = event.target.checked
+    this.setState({
+      isSent: isChecked
+    })
+  }
+
   async handleSubmit(e) {
     e.preventDefault()
 
     await this.validateData()
-    console.log(this.state.error)
     if (this.state.error.length !== 0) {
       return
+    }
+
+    if (this.state.isSent) {
+      await this.sendPromotionEmails()
     }
 
     this.postData(this.state, 'promotions').then(response => {
@@ -174,6 +219,10 @@ class PromoAdd extends Component {
                   <FormGroup>
                     <FormLabel>End Date</FormLabel>
                     <FormControl type='datetime-local' name='endTime' onChange={this.handleChange}/>
+                  </FormGroup>
+                  <FormGroup className={'d-flex'}>
+                    <FormCheck type='checkbox' name='isSent' defaultChecked={this.state.isSent} onChange={this.handleCheckChange}/>
+                    &nbsp;Send Promotion
                   </FormGroup>
                   <FormGroup>
                     <button type='submit'>Submit</button>

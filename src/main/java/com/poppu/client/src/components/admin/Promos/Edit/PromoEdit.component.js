@@ -18,9 +18,11 @@ class PromoEdit extends Component {
 
     this.getPromo = this.getPromo.bind(this)
     this.putPromo = this.putPromo.bind(this)
+    this.sendPromotionEmails = this.sendPromotionEmails.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleCheckChange = this.handleCheckChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.logOut = this.logOut.bind(this)
   }
 
   getPromo() {
@@ -64,6 +66,38 @@ class PromoEdit extends Component {
     })
   }
 
+  async sendPromotionEmails() {
+    // Get the users that are subscribed
+    let subscribedUsers = await fetch(`http://localhost:8080/users/search/findAllByIsSubscribed?isSubscribed=true`, {
+      method: 'GET',
+    }).then(response => {
+      return response.json().then(json => {
+        return json
+      })
+    }).catch(error => {
+      console.error(error)
+      return null
+    })
+
+    // build uri string with all the emails of the users that are subscribed
+    let uri = '?'
+    subscribedUsers._embedded.users.forEach(subscribedUser => {
+      uri += `&emails=${subscribedUser.email}`
+    })
+
+    uri += '&promo_id=' + this.state.promotionId
+    uri += '&promo_amount=' + this.state.offer
+
+    // Send post request to /api/promotion/send_promo_emails/ with the uri list
+    fetch('http://localhost:8080/api/promotion/send_promo_emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: uri
+    })
+  }
+
   logOut() {
     if (localStorage.getItem('remember_me')) {
       localStorage.removeItem('remember_me')
@@ -101,9 +135,8 @@ class PromoEdit extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-
-    if (this.state.isSent === 1) {
-      // Send the email to the users that want the promo emails
+    if (this.state.isSent) {
+      this.sendPromotionEmails()
     }
 
     this.putPromo(this.state);
@@ -127,8 +160,8 @@ class PromoEdit extends Component {
 
     this.setState({
       offer: promo.offer,
-      startTime: promo.startTime.substring(0, 19),
-      endTime: promo.endTime.substring(0,19),
+      startTime: promo.startTime !== null ? promo.startTime.substring(0, 19) : '',
+      endTime: promo.startTime !== null ? promo.endTime.substring(0,19) : '',
     })
   }
 
