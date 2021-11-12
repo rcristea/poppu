@@ -28,6 +28,8 @@ import EditPasswordComponent from "../default/Profile/EditPassword.component";
 import AddPaymentComponent from "../default/Profile/AddPayment.component";
 import bcrypt from "bcryptjs";
 import AddAddressComponent from "../default/Profile/AddAddress.component";
+import EditMovie from "../admin/Movies/Index/EditMovie.component";
+import AddActorComponent from "../admin/Movies/Index/AddActor.component";
 
 class App extends Component {
   constructor(props) {
@@ -104,6 +106,8 @@ class App extends Component {
         <Route path='/promos/add' exact={true} component={PromoAdd}/>
         <Route path='/movies' exact={true} component={MovieIndex}/>
         <Route path='/movies/add' exact={true} component={AddMovie}/>
+        <Route path='/movies/edit' exact={true} component={EditMovie}/>
+          <Route path='/actor/add' exact={true} component={AddActorComponent}/>
         <Route path='/movies/id' exact={true} component={ViewMovie}/>
         <Route path='/showtime/add' exact={true} component={AddShowTime}/>
 
