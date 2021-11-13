@@ -6,5 +6,6 @@ public enum RatingCode {
     PG13,
     R,
     NC17,
-    Unrated
+    TVMA,
+    Unrated,
 }
