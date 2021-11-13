@@ -27,6 +27,7 @@ class ScheduleAdd extends Component {
     this.createSeatAvailabilityModel = this.createSeatAvailabilityModel.bind(this)
     this.getMovieModel = this.getMovieModel.bind(this)
     this.getMovieModels = this.getMovieModels.bind(this)
+    this.getShowroomModel = this.getShowroomModel.bind(this)
   }
 
   componentDidMount() {
@@ -68,9 +69,11 @@ class ScheduleAdd extends Component {
     let data = {
       dateTime: dateTime,
       duration: duration,
-      movie: movie,
-      showroom: showroom,
+      movie: movie.movieId,
+      showroom: showroom.showroomId,
     }
+
+    console.log(data)
 
     return this.request('shows', 'POST', data).then(response => {
       console.log('createShowModel', response)
@@ -144,8 +147,8 @@ class ScheduleAdd extends Component {
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          console.log('getShowModels', json)
-          return json
+          console.log('getShowModels', json._embedded.shows)
+          return json._embedded.shows
         })
       } else {
         console.error('getShowModels', response)
@@ -153,6 +156,25 @@ class ScheduleAdd extends Component {
       }
     }).catch(error => {
       console.error('getShowModels', error)
+      return null
+    })
+  }
+
+  getShowroomModel(showroomId) {
+    return fetch(`http://localhost:8080/showrooms/${showroomId}`, {
+      method: 'GET',
+    }).then(response => {
+      if (response.ok) {
+        return response.json().then(json => {
+          console.log('showShowroomModel', json)
+          return json
+        })
+      } else {
+        console.error('getShowroomModel', response)
+        return null
+      }
+    }).catch(error => {
+      console.error('getShowroomModel', error)
       return null
     })
   }
@@ -166,6 +188,7 @@ class ScheduleAdd extends Component {
     thisEndTime.setMinutes(thisEndTime.getMinutes() + durationMinutes)
 
     let shows = await this.getShowModels();
+
     shows.forEach(show => {
       if (show.showroom === this.state.showroom) {
         let showStartTime = new Date(show.dateTime)
@@ -232,8 +255,11 @@ class ScheduleAdd extends Component {
     if(!await this.validate()) {
       return
     }
-    
-    let show = await this.createShowModel(this.state.dateTime, this.state.duration, this.state.movie, this.state.showroom)
+
+
+    let movie = await this.getMovieModel(this.state.movie)
+    let showroom = await this.getShowroomModel(this.state.showroom)
+    let show = await this.createShowModel(this.state.dateTime, this.state.duration, movie, showroom)
 
     let seatModels = await this.getSeatModels(this.state.showroom)
     seatModels.forEach(seatModel => {
@@ -256,6 +282,7 @@ class ScheduleAdd extends Component {
                   <h1>Schedule a new movie</h1>
                 </div>
                 <div className='schedule-card-subtitle'>
+                  {JSON.stringify(this.state)}
                   <h3>Fill out the form below to schedule a new movie</h3>
                 </div>
               </div>
@@ -279,7 +306,7 @@ class ScheduleAdd extends Component {
                       mask='9h 99m'
                       className='form-control'
                       name='duration'
-                      onChange={this.props.handleChange}
+                      onChange={this.handleChange}
                       ref={this.durationRef} />
                   </FormGroup>
                   <FormGroup>
