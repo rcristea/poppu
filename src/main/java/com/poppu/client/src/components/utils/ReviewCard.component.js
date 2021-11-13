@@ -6,7 +6,7 @@ export class ReviewCard extends Component {
     render() {
         return (
             <Container className={'my-2 p-3'} key={this.props.key}>
-                <Card className={'p-3'} bg={'secondary'} text={'white'} style={{width: '50rem'}}>
+                <Card className={'p-3'} text={'white'} style={{width: '50rem', background: 'plum'}}>
                     <Row>
                         <Col>
                             <Card.Title className={'flex-grow-1 mb-3'}>{this.props.comment_title}</Card.Title>
