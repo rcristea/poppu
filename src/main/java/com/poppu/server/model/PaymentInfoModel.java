@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class PaymentInfoModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_generator")
+    @SequenceGenerator(name="payment_generator")
     @Column (name = "payment_id")
     private long paymentID;
 
@@ -20,7 +21,7 @@ public class PaymentInfoModel {
     @Column (name = "exp_date", nullable = false, length = 10)
     private String expDate;
 
-    @OneToOne (cascade = CascadeType.ALL, optional = false)
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "address_id", foreignKey = @ForeignKey(name = "FK_payment_address"))
     private AddressModel address;
 

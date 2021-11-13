@@ -9,7 +9,8 @@ import javax.persistence.*;
 public class TicketModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket_generator")
+    @SequenceGenerator(name="ticket_generator")
     @Column(name = "ticket_id")
     private long ticketId;
 

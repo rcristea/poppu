@@ -22,13 +22,15 @@ import {ViewMovie} from '../admin/Movies/Index/ViewMovie.component'
 import ViewProfileComponent from '../default/Profile/ViewProfile.component'
 import Registration from '../default/Registration/Registration.component'
 import ForgotPassword from '../default/ForgotPassword/ForgotPassword.component'
-import EditPaymentInfoComponent from "../default/Profile/EditPaymentInfo.component";
-import EditAddressComponent from "../default/Profile/EditAddress.component";
-import EditPasswordComponent from "../default/Profile/EditPassword.component";
-import AddPaymentComponent from "../default/Profile/AddPayment.component";
-import bcrypt from "bcryptjs";
-import AddAddressComponent from "../default/Profile/AddAddress.component";
-import Schedule from "../admin/Schedules/Schedules.component";
+import EditPaymentInfoComponent from '../default/Profile/EditPaymentInfo.component'
+import EditAddressComponent from '../default/Profile/EditAddress.component'
+import EditPasswordComponent from '../default/Profile/EditPassword.component'
+import AddPaymentComponent from '../default/Profile/AddPayment.component'
+import bcrypt from 'bcryptjs'
+import AddAddressComponent from '../default/Profile/AddAddress.component'
+import Schedule from '../admin/Schedules/Schedules.component'
+import EditMovie from '../admin/Movies/Index/EditMovie.component'
+import AddActorComponent from '../admin/Movies/Index/AddActor.component'
 
 class App extends Component {
   constructor(props) {
@@ -39,6 +41,9 @@ class App extends Component {
       email: '',
       password: '',
     }
+
+    // TEMPORARY: DELETE AFTER
+    sessionStorage.setItem('role', 'admin')
 
     this.getUser = this.getUser.bind(this)
   }
@@ -105,7 +110,9 @@ class App extends Component {
         <Route path='/promos/add' exact={true} component={PromoAdd}/>
         <Route path='/movies' exact={true} component={MovieIndex}/>
         <Route path='/movies/add' exact={true} component={AddMovie}/>
-        <Route path='/movies/id' exact={true} component={ViewMovie}/>
+        <Route path='/movies/:id' component={ViewMovie}/>
+        <Route path='/movies/edit' exact={true} component={EditMovie}/>
+        <Route path='/actor/add' exact={true} component={AddActorComponent}/>
         <Route path='/showtime/add' exact={true} component={AddShowTime}/>
         <Route path='/schedule' exact={true} component={Schedule} />
 
