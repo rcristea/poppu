@@ -27,7 +27,7 @@ INSERT INTO actors VALUES
                           (17,'Tsai','Chin'),
                           (18,'Jodie','Long');
 
-INSERT INTO movies VALUES(1001, 'Action', '2021:09:07', 'Destin Cretton','2h 12m',true, 'Kevin Feige', 'PG13',8.8, 'Shang-Chi, the master of weaponry-based Kung Fu, is forced to confront his past after being drawn into the Ten Rings organization.', 'Shang-Chi and the Legend of the Ten Rings', 'HsX8pVqp_gg', 'assets/img/posters/shangchi_and_the_legend_of_the_ten_rings.jpeg');
+INSERT INTO movies VALUES(1001, 'Action', '2021:09:07', 'Destin Cretton','2h 12m',true, 'Kevin Feige', 'PG13',8.8, 'Shang-Chi, the master of weaponry-based Kung Fu, is forced to confront his past after being drawn into the Ten Rings organization.', 'Shang-Chi and the Legend of the Ten Rings', '8YjFbMbfXaQ', 'assets/img/posters/shangchi_and_the_legend_of_the_ten_rings.jpeg');
 INSERT INTO movie_actors VALUES (1,1001,'Shang-Chi'),(2,1001,'Katy'),(3,1001,'Xu Wenwu'),(4,1001,'Trevor Slattery'),(5,1001,'Xialing'),(6,1001,'Li'),(7,1001,'Ying Nan'),(8,1001,'Master Guang Bo'),(9,1001,'Razor Fist'),(10,1001,'Death Dealer'),(11,1001,'Chancellor Hui'),(12,1001,'Young Shang-Chi'),(13,1001,'Young Xialing'),(14,1001,'Teen Shang-Chi'),(15,1001,'Soo'),(16,1001,'John'),(17,1001,'Waipo'),(18,1001,'Mrs. Chen');
 INSERT INTO shows VALUES (1,'2021:11:18 09:00:00',1001,1),(2,'2021:11:18 19:00:00',1001,1),(3,'2021:11:18 22:15:00',1001,3);
 INSERT INTO reviews VALUES (1,'I really liked this movie. It was a movie',5.9,'Much Wow',1001), (2,'The music quality was on fleek',7.9,'I like hearing',1001),(3,'I found the movie to be sub-par.',5.5,'Movie okay',1001);

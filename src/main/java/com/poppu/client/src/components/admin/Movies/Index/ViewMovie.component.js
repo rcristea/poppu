@@ -22,7 +22,7 @@ export class ViewMovie extends Component {
         synopsis: "",
         score: "",
         trailerPhoto: "",
-        trailer_link: "",
+        trailerLink: "",
         isShowing: "",
         duration: "",
         rating: "",
@@ -51,37 +51,6 @@ export class ViewMovie extends Component {
   comment_rating = 5.9
   comment_description = 'I really hated this goddamn movie. It is a piece of shit.'
 
-  movie_data = {
-    'movie_id': 12,
-    'movie_name': 'SPIDER-MAN: INTO THE SPIDER-VERSE 2',
-    'movie_description': 'The untitled Spider-Man: Into the Spider-Verse sequel is an upcoming American computer-animated superhero film featuring the Marvel Comics character Miles Morales / Spider-Man, produced by Columbia Pictures and Sony Pictures Animation in association with Marvel, and distributed by Sony Pictures',
-    'movie_rating': 9.7,
-    'movie_trailer_link': 'HsX8pVqp_gg',
-    'movie_age_rating': 'PG-13',
-  }
-  showtime_data = [
-    {
-      'show_date': '10/02/2021',
-      'show_time': '4:30 pm'
-    },
-    {
-      'show_date': '10/03/2021',
-      'show_time': '4:30 pm'
-    },
-    {
-      'show_date': '10/04/2021',
-      'show_time': '4:30 pm'
-    },
-    {
-      'show_date': '10/05/2021',
-      'show_time': '4:30 pm'
-    },
-    {
-      'show_date': '10/05/2021',
-      'show_time': '6:00 pm'
-    },
-  ]
-
   async componentDidMount() {
     if (sessionStorage.getItem('role') !== 'admin') {
       sessionStorage.setItem('alert', 'User does not have correct privileges.')
@@ -99,7 +68,7 @@ export class ViewMovie extends Component {
         synopsis: movie.synopsis,
         score: movie.score,
         trailerPhoto: movie.trailerPhoto,
-        trailer_video: movie.trailer_video,
+        trailerLink: movie.trailerLink,
         isShowing: movie.isShowing,
         duration: movie.duration,
         rating: movie.rating,
@@ -109,6 +78,10 @@ export class ViewMovie extends Component {
 
   formatYear() {
     return this.state.movie.date.substr(0, 4)
+  }
+
+  formatYoutubeLink() {
+    return "https://www.youtube.com/embed/" + this.state.movie.trailerLink;
   }
 
   //use {JSON.stringify(this.state)} to look at all the data being passed in
@@ -136,10 +109,11 @@ export class ViewMovie extends Component {
                        width={'350px'} height={'518px'}/>
                 </ListGroupItem>
                 <ListGroupItem className={"ratio ratio-16x9"} style={{background: '#171717'}}>
-                  <iframe src="https://www.youtube.com/embed/YevtAMcy2cA"
+                  <iframe id="youtubeVid"
+                          src={this.formatYoutubeLink()}
                           title="YouTube video player" frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen></iframe>
+                          allowFullScreen/>
                 </ListGroupItem>
               </ListGroup>
             </Row>
@@ -204,34 +178,18 @@ export class ViewMovie extends Component {
             </Card>
           </Container>
         </>
-
-
-        /*
-              <Container className={'my-2'}>
-                <Row>
-                  <AutoCard component_title={this.movie_title} component_data={this.movie_data}/>
-                </Row>
-                <Row>
-                  <AutoList component_title={'Show Times'} component_data={this.showtime_data}/>
-                </Row>
-                <Row className={'mx-3'}>
-                  <Col md={4}><Button variant={'warning'}>Edit Movie</Button></Col>
-                  <Col md={4}><Button variant={'success'} href={'/movies'}>Back to Movies</Button></Col>
-                  <Col md={4}><Button variant={'danger'} href={'/movies'}>Delete Movie</Button></Col>
-                </Row>
-              </Container>
-        */
     )
   }
 }
 
 class ShowTimeComponent extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       date_time: "",
     }
   }
+
   formatTime() {
 
   }
