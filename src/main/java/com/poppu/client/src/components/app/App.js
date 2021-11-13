@@ -41,6 +41,9 @@ class App extends Component {
       password: '',
     }
 
+    // TEMPORARY: DELETE AFTER
+    sessionStorage.setItem('role', 'admin')
+
     this.getUser = this.getUser.bind(this)
   }
 
@@ -106,9 +109,9 @@ class App extends Component {
         <Route path='/promos/add' exact={true} component={PromoAdd}/>
         <Route path='/movies' exact={true} component={MovieIndex}/>
         <Route path='/movies/add' exact={true} component={AddMovie}/>
+        <Route path='/movies/:id' component={ViewMovie}/>
         <Route path='/movies/edit' exact={true} component={EditMovie}/>
-          <Route path='/actor/add' exact={true} component={AddActorComponent}/>
-        <Route path='/movies/id' exact={true} component={ViewMovie}/>
+        <Route path='/actor/add' exact={true} component={AddActorComponent}/>
         <Route path='/showtime/add' exact={true} component={AddShowTime}/>
 
         <Route path='/tests' exact={true} component={TestIndex}/>

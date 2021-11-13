@@ -10,7 +10,8 @@ import java.util.List;
 public class BookingModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_generator")
+    @SequenceGenerator(name="booking_generator")
     @Column (name = "booking_num", nullable = false)
     private long bookingNum;
 
