@@ -31,9 +31,11 @@ import EditPasswordComponent from '../default/Profile/EditPassword.component'
 import AddPaymentComponent from '../default/Profile/AddPayment.component'
 import bcrypt from 'bcryptjs'
 import AddAddressComponent from '../default/Profile/AddAddress.component'
-import Schedule from '../admin/Schedules/Schedules.component'
+import Schedule from '../admin/Schedules/Index/Schedules.component'
 import EditMovie from '../admin/Movies/Index/EditMovie.component'
 import AddActorComponent from '../admin/Movies/Index/AddActor.component'
+import ScheduleAdd from "../admin/Schedules/Add/ScheduleAdd.component";
+import ScheduleEdit from "../admin/Schedules/Edit/ScheduleEdit.component";
 
 class App extends Component {
   constructor(props) {
@@ -118,6 +120,8 @@ class App extends Component {
         <Route path='/actor/add' exact={true} component={AddActorComponent}/>
         <Route path='/showtime/add' exact={true} component={AddShowTime}/>
         <Route path='/schedule' exact={true} component={Schedule} />
+        <Route path='/schedule/add' exact={true} component={ScheduleAdd} />
+        <Route path='/schedule/edit/:id' component={ScheduleEdit} />
         <Route path='/users' exact = {true} component={UserIndex}/>
         <Route path='/users/edit/:id' component={UserEdit}/>
         <Route path='/users/view/:id' component={UserView}/>
