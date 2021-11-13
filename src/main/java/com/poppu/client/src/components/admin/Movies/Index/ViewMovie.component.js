@@ -19,11 +19,12 @@ export class ViewMovie extends Component {
         director: "",
         producer: "",
         synopsis: "",
-        rating_code: "",
-        rating: "",
-        trailer_photo: "",
+        score: "",
+        trailerPhoto: "",
         trailer_link: "",
         is_showing: "",
+        duration: "",
+        rating: "",
       }
     }
 
@@ -47,8 +48,6 @@ export class ViewMovie extends Component {
   comment_rating = 5.9
   comment_description = 'I really hated this goddamn movie. It is a piece of shit.'
 
-  movie_title = 'SPIDER-MAN: INTO THE SPIDER-VERSE 2'
-  movie_year = 2021
   movie_data = {
     'movie_id': 12,
     'movie_name': 'SPIDER-MAN: INTO THE SPIDER-VERSE 2',
@@ -92,8 +91,15 @@ export class ViewMovie extends Component {
         title : movie.title,
         date : movie.date,
         category: movie.category,
+        producer: movie.producer,
+        director: movie.director,
+        synopsis: movie.synopsis,
+        score: movie.score,
+        trailerPhoto: movie.trailerPhoto,
+        trailer_video: movie.trailer_video,
+        is_showing: movie.is_showing,
+        duration: movie.duration,
         rating: movie.rating,
-        rating_code: movie.rating_code,
       }
     })
   }
@@ -106,18 +112,19 @@ export class ViewMovie extends Component {
     return (
         <Container className={'my-2 bg-light'}>
           {JSON.stringify(this.state)}
-          <h1 className={'flex-grow-1'}>{this.state.movie.title}</h1>
-          <Row>
-            <ul className={'px-4 bg-light'}>
-              <h5 style={{color: 'blueviolet'}}>{this.formatYear()}</h5>
-              <h5 style={{color: 'blueviolet'}}>{this.movie_data.movie_age_rating}</h5>
-              <h5 style={{color: 'blueviolet'}}>1h 30 min</h5>
-            </ul>
-          </Row>
+          <div className={'d-flex'}>
+            <h1 className={'flex-grow-1'} style={{color: 'blueviolet'}}>{this.state.movie.title}</h1>
+            <h2 style={{color: 'deeppink'}}>{this.state.movie.score} / 10</h2>
+          </div>
+          <ListGroup horizontal className={'pb-2 bg-black'}>
+            <ListGroupItem><h5 style={{color: 'blueviolet'}}>{this.formatYear()}</h5></ListGroupItem>
+            <ListGroupItem><h5 style={{color: 'blueviolet'}}>{this.state.movie.rating}</h5></ListGroupItem>
+            <ListGroupItem><h5 style={{color: 'blueviolet'}}>{this.state.movie.duration}</h5></ListGroupItem>
+          </ListGroup>
           <Row>
             <ListGroup horizontal className={'bg-black'}>
               <ListGroupItem className={'bg-black'}>
-                <img src={`${process.env.PUBLIC_URL}/assets/img/posters/spider_man_into_the_spider_verse_2.jpeg`} alt={`Spiderman poster`}
+                <img src={`${process.env.PUBLIC_URL}/${this.state.movie.trailerPhoto}`} alt={'Movie Poster'}
                      width={'350px'} height={'518px'}/>
               </ListGroupItem>
               <ListGroupItem className={"ratio ratio-16x9 bg-black"}>

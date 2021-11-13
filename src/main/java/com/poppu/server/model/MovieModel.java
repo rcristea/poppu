@@ -6,7 +6,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -56,6 +58,15 @@ public class MovieModel {
     @OneToMany(mappedBy = "movie")
     private Set<MovieActorModel> cast = new HashSet<MovieActorModel>();
 
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private List<ReviewModel> reviews = new ArrayList<>();
+
+    @Column(name = "score", precision = 2, scale = 1)
+    private double score;
+
+    @Column(name = "duration")
+    private String duration;
+
     public MovieModel() {
 
     }
@@ -63,7 +74,7 @@ public class MovieModel {
     public MovieModel(String title, Date date, String category,
                       String director, String producer,
                       String synopsis, RatingCode rating, String trailerPhoto,
-                      String trailerLink, boolean isShowing) {
+                      String trailerLink, boolean isShowing, double score, String duration) {
         this.title = title;
         this.date = date;
         this.category = category;
@@ -74,6 +85,8 @@ public class MovieModel {
         this.trailerPhoto = trailerPhoto;
         this.trailerLink = trailerLink;
         this.isShowing = isShowing;
+        this.score = score;
+        this.duration = duration;
     }
 
     public long getMovieId() {
@@ -121,6 +134,14 @@ public class MovieModel {
         return isShowing;
     }
 
+    public double getScore() {
+        return score;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -159,6 +180,14 @@ public class MovieModel {
 
     public void setShowing(boolean showing) {
         isShowing = showing;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     // public Set<ActorModel> getActors() { }

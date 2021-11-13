@@ -21,15 +21,20 @@ public class ReviewModel {
     @Column(name = "description")
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "movie_id", nullable = false, foreignKey = @ForeignKey(name = "FK_review_movie"))
+    private MovieModel movie;
+
     public ReviewModel() {
 
     }
 
-    public ReviewModel(long reviewId, String title, double rating, String description) {
+    public ReviewModel(long reviewId, String title, double rating, String description, MovieModel movie) {
         this.reviewId = reviewId;
         this.title = title;
         this.rating = rating;
         this.description = description;
+        this.movie = movie;
     }
 
     public long getReviewId() {
@@ -48,6 +53,10 @@ public class ReviewModel {
         return description;
     }
 
+    public MovieModel getMovie() {
+        return movie;
+    }
+
     public void setReviewId(long reviewId) {
         this.reviewId = reviewId;
     }
@@ -62,5 +71,9 @@ public class ReviewModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setMovie(MovieModel movie) {
+        this.movie = movie;
     }
 }
