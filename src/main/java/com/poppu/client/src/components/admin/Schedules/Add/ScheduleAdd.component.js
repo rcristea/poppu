@@ -138,8 +138,51 @@ class ScheduleAdd extends Component {
     })
   }
 
+  getShowModels() {
+    return fetch(`http://localhost:8080/shows/`, {
+      method: 'GET',
+    }).then(response => {
+      if (response.ok) {
+        return response.json().then(json => {
+          console.log('getShowModels', json)
+          return json
+        })
+      } else {
+        console.error('getShowModels', response)
+        return null
+      }
+    }).catch(error => {
+      console.error('getShowModels', error)
+      return null
+    })
+  }
+
   async validate() {
-    
+    let thisStartTime = new Date(this.state.dateTime)
+    let durationHours = parseInt(this.state.duration.substring(0,1))
+    let durationMinutes = parseInt(this.state.duration.substring(3,5))
+    let thisEndTime = new Date(thisStartTime)
+    thisEndTime.setHours(thisEndTime.getHours() + durationHours)
+    thisEndTime.setMinutes(thisEndTime.getMinutes() + durationMinutes)
+
+    let shows = await this.getShowModels();
+    shows.forEach(show => {
+      if (show.showroom === this.state.showroom) {
+        let showStartTime = new Date(show.dateTime)
+        let showDurationHours = parseInt(show.duration.substring(0,1))
+        let showDurationMinutes = parseInt(show.duration.substring(3,5))
+        let showEndTime = new Date(showStartTime)
+        showEndTime.setHours(showEndTime.getHours() + showDurationHours)
+        showEndTime.setMinutes(showEndTime.getMinutes() + showDurationMinutes)
+
+        if (thisStartTime < showEndTime || thisEndTime > showStartTime) {
+          alert('This show room has another movie playing at this time.')
+          return false
+        }
+      }
+    })
+
+    return true
   }
 
   setDuration() {
