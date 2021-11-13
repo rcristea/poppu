@@ -1,6 +1,6 @@
-import {React, Component} from 'react'
+import React, {Component} from 'react'
 import './Sidebar.component.css'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 
 import {BiMovie} from 'react-icons/bi'
 import {RiCoupon2Line} from 'react-icons/ri'
@@ -94,4 +94,4 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar
+export default withRouter(Sidebar)
