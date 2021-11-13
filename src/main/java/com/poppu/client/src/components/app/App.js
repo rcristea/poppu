@@ -19,6 +19,9 @@ import MovieIndex from '../admin/Movies/Index/MovieIndex.component'
 import AddMovie from '../admin/Movies/Index/AddMovie.component'
 import AddShowTime from '../admin/Movies/Index/AddShowtime.component'
 import {ViewMovie} from '../admin/Movies/Index/ViewMovie.component'
+import UserIndex from "../admin/Users/Index/UserIndex.component";
+import UserEdit from "../admin/Users/Edit/UserEdit.component";
+import UserView from "../admin/Users/View/UserView.component";
 import ViewProfileComponent from '../default/Profile/ViewProfile.component'
 import Registration from '../default/Registration/Registration.component'
 import ForgotPassword from '../default/ForgotPassword/ForgotPassword.component'
@@ -115,6 +118,9 @@ class App extends Component {
         <Route path='/actor/add' exact={true} component={AddActorComponent}/>
         <Route path='/showtime/add' exact={true} component={AddShowTime}/>
         <Route path='/schedule' exact={true} component={Schedule} />
+        <Route path='/users' exact = {true} component={UserIndex}/>
+        <Route path='/users/edit/:id' component={UserEdit}/>
+        <Route path='/users/view/:id' component={UserView}/>
 
         <Route path='/tests' exact={true} component={TestIndex}/>
         <Route path='/tests/add' exact={true} component={TestAdd}/>

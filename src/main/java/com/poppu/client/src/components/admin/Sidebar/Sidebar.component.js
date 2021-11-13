@@ -6,6 +6,7 @@ import {BiMovie} from 'react-icons/bi'
 import {RiCoupon2Line} from 'react-icons/ri'
 import {RiDashboardLine} from 'react-icons/ri'
 import {AiOutlineSchedule} from 'react-icons/ai'
+import {RiProfileLine} from 'react-icons/ri'
 
 class Sidebar extends Component {
   constructor(props) {
@@ -85,6 +86,12 @@ class Sidebar extends Component {
               <div className={`sidebar-nav-item ${this.state.active.includes('/schedule') ? 'active' : ''} `}>
                 <AiOutlineSchedule color='#fff'/>
                 <p className='sidebar-nav-item-title'>Movie Schedule</p>
+              </div>
+            </Link>
+            <Link to='/users'>
+              <div className={`sidebar-nav-item ${this.state.active.includes('/users') ? 'active' : ''} `}>
+                <RiProfileLine color='#fff'/>
+                <p className='sidebar-nav-item-title'>Users</p>
               </div>
             </Link>
           </div>
