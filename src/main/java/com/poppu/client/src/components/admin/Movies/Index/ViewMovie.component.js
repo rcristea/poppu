@@ -148,7 +148,7 @@ export class ViewMovie extends Component {
                 <Card.Title style={{color: 'fuchsia', background: '#171717'}}>SHOWTIMES</Card.Title>
                 <Card.Text>
                   <ListGroup horizontal>
-                    <ShowTimeComponent>STILL NEED TO IMPLEMENT</ShowTimeComponent>
+                    <ShowTimeComponent/>
                     <ListGroupItem>STILL NEED TO IMPLEMENT</ListGroupItem>
                   </ListGroup>
                 </Card.Text>
@@ -226,7 +226,12 @@ export class ViewMovie extends Component {
 }
 
 class ShowTimeComponent extends Component {
-
+  constructor(props){
+    super(props);
+    this.state = {
+      date_time: "",
+    }
+  }
   formatTime() {
 
   }
@@ -234,7 +239,7 @@ class ShowTimeComponent extends Component {
   render() {
     return (
         <>
-          <ListGroupItem>{this.props.date_time}</ListGroupItem>
+          <div className={'m-3 p-2 border rounded-pill border-1 text-white'}>3:30pm</div>
         </>
     )
   }
