@@ -46,7 +46,6 @@ export class ViewMovie extends Component {
   }
 
 
-
   comment_id = 1
   comment_title = 'This movie sucks'
   comment_rating = 5.9
@@ -112,13 +111,13 @@ export class ViewMovie extends Component {
     return this.state.movie.date.substr(0, 4)
   }
 
+  //use {JSON.stringify(this.state)} to look at all the data being passed in
   render() {
     return (
         <>
           <NavBar/>
           <div className={'spacer'}/>
-          <Container className={'my-2 bg-light'}>
-            {JSON.stringify(this.state)}
+          <Container className={'my-2'} style={{background: '#171717', border: 0}}>
             <div className={'d-flex'}>
               <h1 className={'flex-grow-1'} style={{color: 'blueviolet'}}>{this.state.movie.title}</h1>
               <h2 style={{color: 'deeppink'}}>{this.state.movie.score} / 10</h2>
@@ -131,7 +130,7 @@ export class ViewMovie extends Component {
             </ListGroup>
             <Row>
               <ListGroup horizontal style={{background: '#171717'}}>
-                <ListGroupItem style={{background: '#171717'}}>
+                <ListGroupItem style={{background: '#171717', border: 0}}>
                   <img src={`${process.env.PUBLIC_URL}/${this.state.movie.trailerPhoto}`}
                        alt={'Movie Poster'}
                        width={'350px'} height={'518px'}/>
@@ -145,7 +144,7 @@ export class ViewMovie extends Component {
               </ListGroup>
             </Row>
             <Row style={{background: '#171717'}}>
-              <Card style={{background: '#171717'}}>
+              <Card style={{background: '#171717', border: 0}}>
                 <Card.Title style={{color: 'fuchsia', background: '#171717'}}>SHOWTIMES</Card.Title>
                 <Card.Text>
                   <ListGroup horizontal>
@@ -155,55 +154,54 @@ export class ViewMovie extends Component {
                 </Card.Text>
               </Card>
             </Row>
-            <Row>
-              <Card>
-                <Card.Body>
-                  <ListGroup>
-                    <ListGroupItem>
-                      <ListGroup horizontal>
-                        <ListGroupItem>{this.state.movie.category}</ListGroupItem>
-                        <ListGroupItem>{this.state.movie.isShowing ? 'Now Showing' : 'Coming Soon'}</ListGroupItem>
-                      </ListGroup>
-                    </ListGroupItem>
-                    <ListGroupItem>
-                      <Card.Text className="mb-2 p-3">
-                        {this.state.movie.synopsis}
-                      </Card.Text>
-                    </ListGroupItem>
-                    <ListGroupItem>
-                      <ListGroup horizontal>
-                        <ListGroupItem>Director</ListGroupItem>
-                        <ListGroupItem>{this.state.movie.director}</ListGroupItem>
-                      </ListGroup>
-                    </ListGroupItem>
-                    <ListGroupItem>
-                      <ListGroup horizontal>
-                        <ListGroupItem>Producer</ListGroupItem>
-                        <ListGroupItem>{this.state.movie.producer}</ListGroupItem>
-                      </ListGroup>
-                    </ListGroupItem>
-                    <ListGroupItem>
-                      <ListGroup horizontal>
-                        <ListGroupItem>
-                          Cast
-                        </ListGroupItem>
-                        <ListGroupItem>
-                          Need to implement cast still...
-                        </ListGroupItem>
-                      </ListGroup>
-                    </ListGroupItem>
-                  </ListGroup>
-                </Card.Body>
-              </Card>
-            </Row>
-            <Row>
+            <Card style={{background: '#171717'}}>
+              <Card.Body>
+                <ListGroup>
+                  <ListGroupItem>
+                    <ListGroup horizontal>
+                      <ListGroupItem>{this.state.movie.category}</ListGroupItem>
+                      <ListGroupItem>{this.state.movie.isShowing ? 'Now Showing' : 'Coming Soon'}</ListGroupItem>
+                    </ListGroup>
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <Card.Text className="mb-2 p-3">
+                      {this.state.movie.synopsis}
+                    </Card.Text>
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <ListGroup horizontal>
+                      <ListGroupItem>Director</ListGroupItem>
+                      <ListGroupItem>{this.state.movie.director}</ListGroupItem>
+                    </ListGroup>
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <ListGroup horizontal>
+                      <ListGroupItem>Producer</ListGroupItem>
+                      <ListGroupItem>{this.state.movie.producer}</ListGroupItem>
+                    </ListGroup>
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <ListGroup horizontal>
+                      <ListGroupItem>
+                        Cast
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        Need to implement cast still...
+                      </ListGroupItem>
+                    </ListGroup>
+                  </ListGroupItem>
+                </ListGroup>
+              </Card.Body>
+            </Card>
+            <Card className={'w-75'} border="secondary" style={{background: '#171717'}}>
+              <h2 style={{color: 'slateblue'}} className={'mt-1 px-3'}>Reviews</h2>
               <ReviewCard
                   comment_key={this.comment_id}
                   comment_title={this.comment_title}
                   comment_rating={this.comment_rating}
                   comment_description={this.comment_description}
               />
-            </Row>
+            </Card>
           </Container>
         </>
 
