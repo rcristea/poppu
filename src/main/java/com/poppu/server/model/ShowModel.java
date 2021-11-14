@@ -18,11 +18,11 @@ public class ShowModel {
     @Column(name = "date_time", nullable = false)
     private Timestamp dateTime;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "movie_id", foreignKey = @ForeignKey(name = "FK_show_movie"))
     private MovieModel movie;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "showroom_id", foreignKey = @ForeignKey(name = "FK_show_showroom"))
     private ShowroomModel showroom;
 

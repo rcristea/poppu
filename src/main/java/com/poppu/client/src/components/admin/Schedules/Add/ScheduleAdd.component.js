@@ -69,8 +69,8 @@ class ScheduleAdd extends Component {
     let data = {
       dateTime: dateTime,
       duration: duration,
-      movie: movie.movieId,
-      showroom: showroom.showroomId,
+      movie: movie,
+      showroom: showroom,
     }
 
     console.log(data)
