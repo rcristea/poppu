@@ -10,7 +10,6 @@ import NavBar from "../../../default/NavBar/NavBar.component";
 export class ViewMovie extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       movie: {
         id: this.props.match.params.id,
@@ -26,11 +25,11 @@ export class ViewMovie extends Component {
         isShowing: "",
         duration: "",
         rating: "",
-      }
+      },
+      shows: [],
     }
-
     this.getData = this.getData.bind(this)
-    //this.getShowTimes = this.getShowTimes(this)
+    this.getShowTimes = this.getShowTimes.bind(this)
   }
 
   getData() {
@@ -45,6 +44,24 @@ export class ViewMovie extends Component {
     })
   }
 
+  getShowModels() {
+    return fetch(`http://localhost:8080/shows`, {
+      method: 'GET',
+    }).then(response => {
+      if (response.ok) {
+        return response.json().then(json => {
+          console.log('getShowModels', json._embedded.shows)
+          return json._embedded.shows
+        })
+      } else {
+        console.error('getShowModels', response)
+        return null
+      }
+    }).catch(error => {
+      console.error('getShowModels', error)
+      return null
+    })
+  }
 
   comment_id = 1
   comment_title = 'This movie sucks'
@@ -57,6 +74,7 @@ export class ViewMovie extends Component {
       this.props.history.push('/')
     }
     let movie = await this.getData()
+    let shows = await this.getShowTimes()
     this.setState({
       movie: {
         id: this.state.movie.id,
@@ -72,7 +90,8 @@ export class ViewMovie extends Component {
         isShowing: movie.isShowing,
         duration: movie.duration,
         rating: movie.rating,
-      }
+      },
+      shows: shows,
     })
   }
 
@@ -82,6 +101,17 @@ export class ViewMovie extends Component {
 
   formatYoutubeLink() {
     return "https://www.youtube.com/embed/" + this.state.movie.trailerLink;
+  }
+
+  getShowTimes() {
+    return fetch(`http://localhost:8080/shows/`)
+        .then(response => {
+          return response.json().then(json => {
+            return json
+          })
+        }).catch(error => {
+          console.log(error)
+        })
   }
 
   //use {JSON.stringify(this.state)} to look at all the data being passed in
@@ -160,7 +190,7 @@ export class ViewMovie extends Component {
                         Cast
                       </ListGroupItem>
                       <ListGroupItem>
-                        Need to implement cast still...
+                        hi
                       </ListGroupItem>
                     </ListGroup>
                   </ListGroupItem>
