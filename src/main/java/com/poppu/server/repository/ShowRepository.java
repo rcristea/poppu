@@ -12,5 +12,5 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RepositoryRestResource(collectionResourceRel = "shows", path = "shows")
 public interface ShowRepository extends JpaRepository<ShowModel, Long> {
-    List<ShowModel> findAllByMovie(@Param("movie_id") int movieID);
+    List<ShowModel> findAllByMovie(@Param("movieId") long movieID);
 }

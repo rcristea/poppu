@@ -26,13 +26,14 @@ export class ViewMovie extends Component {
         duration: "",
         rating: "",
       },
-      shows: [],
+      shows: null,
     }
-    this.getData = this.getData.bind(this)
-    this.getShowTimes = this.getShowTimes.bind(this)
+    this.getMovie = this.getMovie.bind(this);
+    this.getShowModels = this.getShowModels.bind(this);
+    this.initContent = this.initContent.bind(this);
   }
 
-  getData() {
+  getMovie() {
     return fetch(`http://localhost:8080/movies/${this.state.movie.id}`, {
       method: 'GET',
     }).then(response => {
@@ -63,6 +64,22 @@ export class ViewMovie extends Component {
     })
   }
 
+  async initContent() {
+    let movie = await this.getMovie(this.props.match.params.id)
+    let shows = await this.getShowModels(this.props.match.params.id)
+    let shows2 = [];
+    shows.forEach(show => {
+      if (show.movieId === this.state.movie.id) {
+        shows2.concat(show)
+      }
+    })
+    this.setState({
+      movie: movie,
+      shows: shows2,
+    })
+    console.log('shows', shows)
+  }
+
   comment_id = 1
   comment_title = 'This movie sucks'
   comment_rating = 5.9
@@ -73,26 +90,7 @@ export class ViewMovie extends Component {
       sessionStorage.setItem('alert', 'User does not have correct privileges.')
       this.props.history.push('/')
     }
-    let movie = await this.getData()
-    let shows = await this.getShowTimes()
-    this.setState({
-      movie: {
-        id: this.state.movie.id,
-        title: movie.title,
-        date: movie.date,
-        category: movie.category,
-        producer: movie.producer,
-        director: movie.director,
-        synopsis: movie.synopsis,
-        score: movie.score,
-        trailerPhoto: movie.trailerPhoto,
-        trailerLink: movie.trailerLink,
-        isShowing: movie.isShowing,
-        duration: movie.duration,
-        rating: movie.rating,
-      },
-      shows: shows,
-    })
+    this.initContent()
   }
 
   formatYear() {
@@ -101,17 +99,6 @@ export class ViewMovie extends Component {
 
   formatYoutubeLink() {
     return "https://www.youtube.com/embed/" + this.state.movie.trailerLink;
-  }
-
-  getShowTimes() {
-    return fetch(`http://localhost:8080/shows/`)
-        .then(response => {
-          return response.json().then(json => {
-            return json
-          })
-        }).catch(error => {
-          console.log(error)
-        })
   }
 
   //use {JSON.stringify(this.state)} to look at all the data being passed in
