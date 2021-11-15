@@ -52,10 +52,6 @@ export class ViewMovie extends Component {
   comment_description = 'I really hated this goddamn movie. It is a piece of shit.'
 
   async componentDidMount() {
-    if (sessionStorage.getItem('role') !== 'admin') {
-      sessionStorage.setItem('alert', 'User does not have correct privileges.')
-      this.props.history.push('/')
-    }
     let movie = await this.getData()
     this.setState({
       movie: {
