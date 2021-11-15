@@ -33,7 +33,8 @@ import bcrypt from "bcryptjs";
 import AddAddressComponent from "../default/Profile/AddAddress.component";
 import EditMovie from "../admin/Movies/Index/EditMovie.component";
 import AddActorComponent from "../admin/Movies/Index/AddActor.component";
-import {SearchResults} from "../default/SearchResults/SearchResults.component";
+import {SearchResultsByTitle} from "../default/SearchResults/SearchResultsByTitle.component";
+import {SearchResultsByCategory} from "../default/SearchResults/SearchResultsByCategory.component";
 
 class App extends Component {
   constructor(props) {
@@ -106,8 +107,8 @@ class App extends Component {
         <Route path='/address/add' exact={true} component={AddAddressComponent}/>
         <Route path='/payment/edit' exact={true} component={EditPaymentInfoComponent}/>
         <Route path='/payment/add' exact={true} component={AddPaymentComponent}/>
-        <Route path='/search/movies' exact={true} component={SearchResults}/>
-        <Route path='/search/movies/:title' component={SearchResults}/>
+        <Route path='/search/movies/:title' component={SearchResultsByTitle}/>
+        <Route path='/search/movies/category/:category' component={SearchResultsByCategory}/>
 
         {/* Admin Routes */}
         <Route path='/admin' exact={true} component={Dashboard}/>
