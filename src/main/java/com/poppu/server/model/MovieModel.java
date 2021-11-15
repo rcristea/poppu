@@ -1,12 +1,13 @@
 package com.poppu.server.model;
 
-import com.poppu.server.util.RatingCode;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,7 +15,8 @@ import java.util.Set;
 public class MovieModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movie_generator")
+    @SequenceGenerator(name="movie_generator")
     @Column(name = "movie_id")
     private long movieId;
 
@@ -27,21 +29,18 @@ public class MovieModel {
     @Column(name = "category", nullable = false, length = 45)
     private String category;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "director_id", foreignKey = @ForeignKey(name = "FK_movie_director"))
-    private DirectorModel director;
+    @Column(name = "director", nullable = false)
+    private String director;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "producer_id", foreignKey = @ForeignKey(name = "FK_movie_producer"))
-    private ProducerModel producer;
+    @Column(name = "producer", nullable = false)
+    private String producer;
 
     @Lob
     @Column(name = "synopsis", nullable = false)
     private String synopsis;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "rating_code", nullable = false, columnDefinition = "varchar(10) default 'Unrated'")
-    private RatingCode rating;
+    private String rating;
 
     @Lob
     @Column(name = "trailer_photo", nullable = false)
@@ -57,14 +56,23 @@ public class MovieModel {
     @OneToMany(mappedBy = "movie")
     private Set<MovieActorModel> cast = new HashSet<MovieActorModel>();
 
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private List<ReviewModel> reviews = new ArrayList<>();
+
+    @Column(name = "score", precision = 2, scale = 1)
+    private double score;
+
+    @Column(name = "duration")
+    private String duration;
+
     public MovieModel() {
 
     }
 
     public MovieModel(String title, Date date, String category,
-                      DirectorModel director, ProducerModel producer,
-                      String synopsis, RatingCode rating, String trailerPhoto,
-                      String trailerLink, boolean isShowing) {
+                      String director, String producer,
+                      String synopsis, String rating, String trailerPhoto,
+                      String trailerLink, boolean isShowing, double score, String duration) {
         this.title = title;
         this.date = date;
         this.category = category;
@@ -75,6 +83,8 @@ public class MovieModel {
         this.trailerPhoto = trailerPhoto;
         this.trailerLink = trailerLink;
         this.isShowing = isShowing;
+        this.score = score;
+        this.duration = duration;
     }
 
     public long getMovieId() {
@@ -93,11 +103,11 @@ public class MovieModel {
         return category;
     }
 
-    public DirectorModel getDirector() {
+    public String getDirector() {
         return director;
     }
 
-    public ProducerModel getProducer() {
+    public String getProducer() {
         return producer;
     }
 
@@ -105,7 +115,7 @@ public class MovieModel {
         return synopsis;
     }
 
-    public RatingCode getRating() {
+    public String getRating() {
         return rating;
     }
 
@@ -122,6 +132,14 @@ public class MovieModel {
         return isShowing;
     }
 
+    public double getScore() {
+        return score;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -134,11 +152,11 @@ public class MovieModel {
         this.category = category;
     }
 
-    public void setDirector(DirectorModel director) {
+    public void setDirector(String director) {
         this.director = director;
     }
 
-    public void setProducer(ProducerModel producer) {
+    public void setProducer(String producer) {
         this.producer = producer;
     }
 
@@ -146,7 +164,7 @@ public class MovieModel {
         this.synopsis = synopsis;
     }
 
-    public void setRating(RatingCode rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
@@ -160,6 +178,14 @@ public class MovieModel {
 
     public void setShowing(boolean showing) {
         isShowing = showing;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     // public Set<ActorModel> getActors() { }

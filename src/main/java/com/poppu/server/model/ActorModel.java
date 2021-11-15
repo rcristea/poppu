@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class ActorModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "actor_generator")
+    @SequenceGenerator(name="actor_generator")
     @Column(name = "actor_id")
     private long actorId;
 

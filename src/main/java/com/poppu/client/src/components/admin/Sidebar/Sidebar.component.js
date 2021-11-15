@@ -1,10 +1,12 @@
-import {React, Component} from 'react'
+import React, {Component} from 'react'
 import './Sidebar.component.css'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 
 import {BiMovie} from 'react-icons/bi'
 import {RiCoupon2Line} from 'react-icons/ri'
 import {RiDashboardLine} from 'react-icons/ri'
+import {AiOutlineSchedule} from 'react-icons/ai'
+import {RiProfileLine} from 'react-icons/ri'
 
 class Sidebar extends Component {
   constructor(props) {
@@ -12,6 +14,25 @@ class Sidebar extends Component {
 
     this.state = {
       active: 'admin',
+    }
+
+    this.logOut = this.logOut.bind(this)
+  }
+
+  logOut() {
+    if (localStorage.getItem('remember_me')) {
+      localStorage.removeItem('remember_me')
+    }
+
+    if (sessionStorage.getItem('user_email')) {
+      sessionStorage.removeItem('user_email')
+    }
+
+    if (sessionStorage.getItem('role')) {
+      sessionStorage.removeItem('role')
+      sessionStorage.setItem('alert', 'Successfully logged out!')
+
+      this.props.history.push('/')
     }
   }
 
@@ -38,7 +59,7 @@ class Sidebar extends Component {
             <Link to='/admin'><h1 className='logo'>poppu</h1></Link>
           </div>
           <div className='topbar-right'>
-            <button onClick={this.props.logOut}>Log Out</button>
+            <button onClick={this.logOut}>Log Out</button>
           </div>
         </div>
         <div className='sidebar-container'>
@@ -61,6 +82,18 @@ class Sidebar extends Component {
                 <p className='sidebar-nav-item-title'>Promos</p>
               </div>
             </Link>
+            <Link to='/schedule'>
+              <div className={`sidebar-nav-item ${this.state.active.includes('/schedule') ? 'active' : ''} `}>
+                <AiOutlineSchedule color='#fff'/>
+                <p className='sidebar-nav-item-title'>Movie Schedule</p>
+              </div>
+            </Link>
+            <Link to='/users'>
+              <div className={`sidebar-nav-item ${this.state.active.includes('/users') ? 'active' : ''} `}>
+                <RiProfileLine color='#fff'/>
+                <p className='sidebar-nav-item-title'>Users</p>
+              </div>
+            </Link>
           </div>
         </div>
       </>
@@ -68,4 +101,4 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar
+export default withRouter(Sidebar)

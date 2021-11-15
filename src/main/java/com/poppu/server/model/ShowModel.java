@@ -10,21 +10,19 @@ import java.util.Set;
 public class ShowModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "show_generator")
+    @SequenceGenerator(name="show_generator", initialValue = 19)
     @Column(name = "show_id")
     private long showID;
 
     @Column(name = "date_time", nullable = false)
     private Timestamp dateTime;
 
-    @Column(name = "duration", nullable = false, length = 16)
-    private String duration;
-
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "movie_id", foreignKey = @ForeignKey(name = "FK_show_movie"))
     private MovieModel movie;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "showroom_id", foreignKey = @ForeignKey(name = "FK_show_showroom"))
     private ShowroomModel showroom;
 
@@ -35,9 +33,8 @@ public class ShowModel {
 
     }
 
-    public ShowModel(Timestamp dateTime, String duration, MovieModel movie, ShowroomModel showroom) {
+    public ShowModel(Timestamp dateTime, MovieModel movie, ShowroomModel showroom) {
         this.dateTime = dateTime;
-        this.duration = duration;
         this.movie = movie;
         this.showroom = showroom;
     }
@@ -50,10 +47,6 @@ public class ShowModel {
         return dateTime;
     }
 
-    public String getDuration() {
-        return duration;
-    }
-
     public MovieModel getMovie() {
         return movie;
     }
@@ -64,10 +57,6 @@ public class ShowModel {
 
     public void setDateTime(Timestamp dateTime) {
         this.dateTime = dateTime;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
     }
 
     public void setMovie(MovieModel movie) {
