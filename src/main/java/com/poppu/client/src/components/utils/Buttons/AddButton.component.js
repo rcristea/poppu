@@ -5,7 +5,7 @@ import SuperButton from './SuperButton.component'
 export class AddButton extends SuperButton {
   render() {
     return (
-      <Button variant={'primary'}>
+      <Button variant={'primary'} href='/movies/add'>
         + Add
       </Button>
     )
