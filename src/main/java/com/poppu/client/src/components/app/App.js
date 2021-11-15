@@ -33,6 +33,7 @@ import bcrypt from "bcryptjs";
 import AddAddressComponent from "../default/Profile/AddAddress.component";
 import EditMovie from "../admin/Movies/Index/EditMovie.component";
 import AddActorComponent from "../admin/Movies/Index/AddActor.component";
+import {SearchResults} from "../default/SearchResults/SearchResults.component";
 
 class App extends Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class App extends Component {
     }
 
     // TEMPORARY: DELETE AFTER
-    sessionStorage.setItem('role', 'admin')
+    //sessionStorage.setItem('role', 'admin')
 
     this.getUser = this.getUser.bind(this)
   }
@@ -85,7 +86,7 @@ class App extends Component {
 
   render() {
     return (
-      <Switch>
+      <>
         <Route path='/' exact={true} component={LandingPage}/>
         <Route path='/login' exact={true} component={Login}/>
         <Route path='/register' exact={true} component={Registration}/>
@@ -105,6 +106,8 @@ class App extends Component {
         <Route path='/address/add' exact={true} component={AddAddressComponent}/>
         <Route path='/payment/edit' exact={true} component={EditPaymentInfoComponent}/>
         <Route path='/payment/add' exact={true} component={AddPaymentComponent}/>
+        <Route path='/search/movies' exact={true} component={SearchResults}/>
+        <Route path='/search/movies/:title' component={SearchResults}/>
 
         {/* Admin Routes */}
         <Route path='/admin' exact={true} component={Dashboard}/>
@@ -123,7 +126,7 @@ class App extends Component {
         <Route path='/tests' exact={true} component={TestIndex}/>
         <Route path='/tests/add' exact={true} component={TestAdd}/>
         <Route path='/tests/:id' component={TestEdit}/>
-      </Switch>
+      </>
     )
   }
 }
