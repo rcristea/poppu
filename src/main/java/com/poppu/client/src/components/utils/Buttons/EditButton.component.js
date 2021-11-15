@@ -5,7 +5,7 @@ import SuperButton from './SuperButton.component'
 export class EditButton extends SuperButton {
   render() {
     return (
-      <Button variant={'warning'}>
+      <Button variant={'warning'} href='/movies/edit'>
         ✎ Edit
       </Button>
     )
