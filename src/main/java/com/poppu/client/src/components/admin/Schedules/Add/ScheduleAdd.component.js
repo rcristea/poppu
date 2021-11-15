@@ -51,7 +51,7 @@ class ScheduleAdd extends Component {
   createSeatAvailabilityModel(showID, showroom, seatId, isAvailable) {
     let data = {
       showID: showID,
-      showroom: showroom,
+      showroomId: showroom,
       seatId: seatId,
       isAvailable: isAvailable,
     }
@@ -246,31 +246,6 @@ class ScheduleAdd extends Component {
     })
   }
 
-  /*
-      TODO
-        1) form should have the fields:
-          - movieId
-          - showroomId
-          - dateTime (which is the start time)
-          - duration:
-            * Should be auto filled from movie supplied with movieId
-        2) When the form is submitted
-          a) Validate
-            - Make sure the start time and duration does not conflict
-              with another start time and duration
-          b) get SeatModels from showroomModel with showroomId
-          c) create a ShowModel with data:
-            - dateTime (start date)
-            - duration (comes from movieModel from movieId)
-            - movie (movieId from form)
-            - showroom (comes from showroomId)
-          d) foreach seatModel, create a seatAvailabilityModel with:
-            - showID
-            - showroomId
-            - seatId (from seatModel's id)
-            - isAvailable (default to true)
-     */
-
   handleSubmit = async(e) => {
     e.preventDefault()
 
@@ -283,10 +258,11 @@ class ScheduleAdd extends Component {
     let showroom = await this.getShowroomModel(this.state.showroom)
     let show = await this.createShowModel(this.state.dateTime, this.state.duration, movie, showroom)
 
-    let seatModels = await this.getSeatModels(this.state.showroom)
-    seatModels.forEach(seatModel => {
-      this.createSeatAvailabilityModel(show.showID, this.state.showroom, seatModel.seatId, true)
-    })
+    // TODO Create SeatAvailabilityModels (not required for this demo)
+    // let seatModels = await this.getSeatModels(this.state.showroom)
+    // seatModels.forEach(seatModel => {
+    //   this.createSeatAvailabilityModel(show.showID, this.state.showroom, seatModel.seatId, true)
+    // })
 
     this.props.history.push('/schedule')
     alert('The show time has been added successfully!')
@@ -304,7 +280,6 @@ class ScheduleAdd extends Component {
                   <h1>Schedule a new movie</h1>
                 </div>
                 <div className='schedule-card-subtitle'>
-                  {JSON.stringify(this.state)}
                   <h3>Fill out the form below to schedule a new movie</h3>
                 </div>
               </div>

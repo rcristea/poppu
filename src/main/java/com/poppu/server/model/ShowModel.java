@@ -1,6 +1,7 @@
 package com.poppu.server.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,8 +16,9 @@ public class ShowModel {
     @Column(name = "show_id")
     private long showID;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_time", nullable = false)
-    private Timestamp dateTime;
+    private Date dateTime;
 
     @ManyToOne
     @JoinColumn(name = "movie_id", foreignKey = @ForeignKey(name = "FK_show_movie"))
@@ -33,7 +35,7 @@ public class ShowModel {
 
     }
 
-    public ShowModel(Timestamp dateTime, MovieModel movie, ShowroomModel showroom) {
+    public ShowModel(Date dateTime, MovieModel movie, ShowroomModel showroom) {
         this.dateTime = dateTime;
         this.movie = movie;
         this.showroom = showroom;
@@ -43,7 +45,7 @@ public class ShowModel {
         return showID;
     }
 
-    public Timestamp getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
@@ -55,7 +57,7 @@ public class ShowModel {
         return showroom;
     }
 
-    public void setDateTime(Timestamp dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
