@@ -1,4 +1,4 @@
-package com.poppu.server.util;
+package com.poppu.server;
 
 import com.poppu.server.model.MovieModel;
 import com.poppu.server.model.ShowroomModel;
