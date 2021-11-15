@@ -1,6 +1,5 @@
 package com.poppu.server.model;
 
-import com.poppu.server.util.RatingCode;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Type;
 
@@ -40,9 +39,8 @@ public class MovieModel {
     @Column(name = "synopsis", nullable = false)
     private String synopsis;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "rating_code", nullable = false, columnDefinition = "varchar(10) default 'Unrated'")
-    private RatingCode rating;
+    private String rating;
 
     @Lob
     @Column(name = "trailer_photo", nullable = false)
@@ -73,7 +71,7 @@ public class MovieModel {
 
     public MovieModel(String title, Date date, String category,
                       String director, String producer,
-                      String synopsis, RatingCode rating, String trailerPhoto,
+                      String synopsis, String rating, String trailerPhoto,
                       String trailerLink, boolean isShowing, double score, String duration) {
         this.title = title;
         this.date = date;
@@ -117,7 +115,7 @@ public class MovieModel {
         return synopsis;
     }
 
-    public RatingCode getRating() {
+    public String getRating() {
         return rating;
     }
 
@@ -166,7 +164,7 @@ public class MovieModel {
         this.synopsis = synopsis;
     }
 
-    public void setRating(RatingCode rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
