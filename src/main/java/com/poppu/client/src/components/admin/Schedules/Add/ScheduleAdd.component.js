@@ -75,6 +75,7 @@ class ScheduleAdd extends Component {
 
     let showModelResponse = this.request('shows', 'POST', data).then(response => {
       return response.json().then(json => {
+        console.log('createShowModel', json)
         return json
       })
     }).catch(error => {
@@ -101,6 +102,8 @@ class ScheduleAdd extends Component {
       },
       body: `http://localhost:8080/showrooms/${showroom.showroomId}`
     })
+
+    return showModelResponse
   }
 
   getSeatModels(showroomId) {
@@ -185,7 +188,7 @@ class ScheduleAdd extends Component {
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          console.log('showShowroomModel', json)
+          console.log('getShowroomModel', json)
           return json
         })
       } else {
