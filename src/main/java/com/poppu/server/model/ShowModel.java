@@ -11,18 +11,18 @@ public class ShowModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "show_generator")
-    @SequenceGenerator(name="show_generator")
+    @SequenceGenerator(name="show_generator", initialValue = 19)
     @Column(name = "show_id")
     private long showID;
 
     @Column(name = "date_time", nullable = false)
     private Timestamp dateTime;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "movie_id", foreignKey = @ForeignKey(name = "FK_show_movie"))
     private MovieModel movie;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "showroom_id", foreignKey = @ForeignKey(name = "FK_show_showroom"))
     private ShowroomModel showroom;
 

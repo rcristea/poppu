@@ -8,24 +8,6 @@ class PromoAdd extends Component {
     super(props)
 
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.logOut = this.logOut.bind(this)
-  }
-
-  logOut() {
-    if (localStorage.getItem('remember_me')) {
-      localStorage.removeItem('remember_me')
-    }
-
-    if (sessionStorage.getItem('user_email')) {
-      sessionStorage.removeItem('user_email')
-    }
-
-    if (sessionStorage.getItem('role')) {
-      sessionStorage.removeItem('role')
-      sessionStorage.setItem('alert', 'Successfully logged out!')
-
-      this.props.history.push('/')
-    }
   }
 
   handleSubmit(e) {
@@ -43,7 +25,7 @@ class PromoAdd extends Component {
   render() {
     return (
       <>
-        <Sidebar logOut={this.logOut}/>
+        <Sidebar />
         <div className='promos-container'>
           <div className='cover'>
             <div className='promos-card'>

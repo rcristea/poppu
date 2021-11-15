@@ -19,17 +19,25 @@ import MovieIndex from '../admin/Movies/Index/MovieIndex.component'
 import AddMovie from '../admin/Movies/Index/AddMovie.component'
 import AddShowTime from '../admin/Movies/Index/AddShowtime.component'
 import {ViewMovie} from '../admin/Movies/Index/ViewMovie.component'
+import UserIndex from "../admin/Users/Index/UserIndex.component";
+import UserEdit from "../admin/Users/Edit/UserEdit.component";
+import UserView from "../admin/Users/View/UserView.component";
 import ViewProfileComponent from '../default/Profile/ViewProfile.component'
 import Registration from '../default/Registration/Registration.component'
 import ForgotPassword from '../default/ForgotPassword/ForgotPassword.component'
-import EditPaymentInfoComponent from "../default/Profile/EditPaymentInfo.component";
-import EditAddressComponent from "../default/Profile/EditAddress.component";
-import EditPasswordComponent from "../default/Profile/EditPassword.component";
-import AddPaymentComponent from "../default/Profile/AddPayment.component";
-import bcrypt from "bcryptjs";
-import AddAddressComponent from "../default/Profile/AddAddress.component";
-import EditMovie from "../admin/Movies/Index/EditMovie.component";
-import AddActorComponent from "../admin/Movies/Index/AddActor.component";
+import EditPaymentInfoComponent from '../default/Profile/EditPaymentInfo.component'
+import EditAddressComponent from '../default/Profile/EditAddress.component'
+import EditPasswordComponent from '../default/Profile/EditPassword.component'
+import AddPaymentComponent from '../default/Profile/AddPayment.component'
+import bcrypt from 'bcryptjs'
+import AddAddressComponent from '../default/Profile/AddAddress.component'
+import Schedule from '../admin/Schedules/Index/Schedules.component'
+import EditMovie from '../admin/Movies/Index/EditMovie.component'
+import AddActorComponent from '../admin/Movies/Index/AddActor.component'
+import ScheduleAdd from '../admin/Schedules/Add/ScheduleAdd.component'
+import ScheduleEdit from '../admin/Schedules/Edit/ScheduleEdit.component'
+import {SearchResultsByTitle} from '../default/SearchResults/SearchResultsByTitle.component'
+import {SearchResultsByCategory} from '../default/SearchResults/SearchResultsByCategory.component'
 
 class App extends Component {
   constructor(props) {
@@ -42,7 +50,7 @@ class App extends Component {
     }
 
     // TEMPORARY: DELETE AFTER
-    sessionStorage.setItem('role', 'admin')
+    //sessionStorage.setItem('role', 'admin')
 
     this.getUser = this.getUser.bind(this)
   }
@@ -82,7 +90,7 @@ class App extends Component {
 
   render() {
     return (
-      <Switch>
+      <>
         <Route path='/' exact={true} component={LandingPage}/>
         <Route path='/login' exact={true} component={Login}/>
         <Route path='/register' exact={true} component={Registration}/>
@@ -102,6 +110,8 @@ class App extends Component {
         <Route path='/address/add' exact={true} component={AddAddressComponent}/>
         <Route path='/payment/edit' exact={true} component={EditPaymentInfoComponent}/>
         <Route path='/payment/add' exact={true} component={AddPaymentComponent}/>
+        <Route path='/search/movies/:title' component={SearchResultsByTitle}/>
+        <Route path='/search/movies/category/:category' component={SearchResultsByCategory}/>
 
         {/* Admin Routes */}
         <Route path='/admin' exact={true} component={Dashboard}/>
@@ -113,11 +123,17 @@ class App extends Component {
         <Route path='/movies/edit' exact={true} component={EditMovie}/>
         <Route path='/actor/add' exact={true} component={AddActorComponent}/>
         <Route path='/showtime/add' exact={true} component={AddShowTime}/>
+        <Route path='/schedule' exact={true} component={Schedule} />
+        <Route path='/schedule/add' exact={true} component={ScheduleAdd} />
+        <Route path='/schedule/edit/:id' component={ScheduleEdit} />
+        <Route path='/users' exact = {true} component={UserIndex}/>
+        <Route path='/users/edit/:id' component={UserEdit}/>
+        <Route path='/users/view/:id' component={UserView}/>
 
         <Route path='/tests' exact={true} component={TestIndex}/>
         <Route path='/tests/add' exact={true} component={TestAdd}/>
         <Route path='/tests/:id' component={TestEdit}/>
-      </Switch>
+      </>
     )
   }
 }

@@ -1,3 +1,14 @@
+DELETE FROM movie_actors;
+DELETE FROM actors;
+DELETE FROM shows;
+DELETE FROM reviews;
+DELETE FROM movies;
+DELETE FROM showrooms;
+DELETE FROM users;
+
+INSERT INTO users VALUES (1, 'poppuofficial@gmail.com', 'poppu', true, 'admin', '$2a$10$O1RbZIPCQCLr522HZUP51.E43Zn4oYSnjIrMeKTUaLqmI46jBM74m', '(123) 456 - 7890', 'ADMIN', 'ACTIVE', null);
+INSERT INTO users VALUES (2, 'poppucustomer@gmail.com', 'poppu', true, 'customer', '$2a$10$O1RbZIPCQCLr522HZUP51.E43Zn4oYSnjIrMeKTUaLqmI46jBM74m', '(123) 456 - 7890', 'USER', 'ACTIVE', null);
+
 INSERT INTO showrooms VALUES (1,'A'),(2,'B'),(3,'C');
 INSERT INTO seats VALUES (1,'A1',1),(2,'A2',1),(3,'A3',1),(4,'A4',1),(5,'A5',1),(6,'B1',1),(7,'B2',1),(8,'B3',1),(9,'B4',1),(10,'B5',1),(11,'C1',1),(12,'C2',1),(13,'C3',1),(14,'C4',1),(15,'C5',1),(16,'D1',1),(17,'D2',1),(18,'D3',1),(19,'D4',1),(20,'D5',1);
 INSERT INTO seats VALUES (21,'A1',2),(22,'A2',2),(23,'A3',2),(24,'A4',2),(25,'A5',2),(26,'B1',2),(27,'B2',2),(28,'B3',2),(29,'B4',2),(30,'B5',2),(31,'C1',2),(32,'C2',2),(33,'C3',2),(34,'C4',2),(35,'C5',2),(36,'D1',2),(37,'D2',2),(38,'D3',2),(39,'D4',2),(40,'D5',2);
