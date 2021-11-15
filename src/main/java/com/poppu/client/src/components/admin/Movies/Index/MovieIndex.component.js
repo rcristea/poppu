@@ -4,9 +4,6 @@ import Sidebar from '../../Sidebar/Sidebar.component'
 import {ManageMoviesComponent} from './ManageMovies.component'
 
 class MovieIndex extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     if (sessionStorage.getItem('role') !== 'admin') {

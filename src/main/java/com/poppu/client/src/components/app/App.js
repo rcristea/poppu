@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Route, Switch, withRouter} from 'react-router-dom'
+import {Route, withRouter} from 'react-router-dom'
 import './App.css'
 import TestIndex from '../tests/TestIndex/TestIndex.component'
 import TestAdd from '../tests/TestAdd/TestAdd.component'
@@ -119,7 +119,7 @@ class App extends Component {
         <Route path='/promos/add' exact={true} component={PromoAdd}/>
         <Route path='/movies' exact={true} component={MovieIndex}/>
         <Route path='/movies/add' exact={true} component={AddMovie}/>
-        <Route path='/movies/:id' component={ViewMovie}/>
+        <Route path='/movies/view/:id' component={ViewMovie}/>
         <Route path='/movies/edit' exact={true} component={EditMovie}/>
         <Route path='/actor/add' exact={true} component={AddActorComponent}/>
         <Route path='/showtime/add' exact={true} component={AddShowTime}/>
