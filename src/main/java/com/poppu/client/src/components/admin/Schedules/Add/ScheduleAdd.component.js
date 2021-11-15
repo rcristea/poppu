@@ -65,7 +65,7 @@ class ScheduleAdd extends Component {
     })
   }
   
-  createShowModel(dateTime, duration, movie, showroom) {
+  async createShowModel(dateTime, duration, movie, showroom) {
     let data = {
       dateTime: dateTime,
       duration: duration,
@@ -73,25 +73,44 @@ class ScheduleAdd extends Component {
       showroom: showroom,
     }
 
-    console.log(data)
-
-    return this.request('shows', 'POST', data).then(response => {
-      console.log('createShowModel', response)
-      return response.ok
+    let showModelResponse = this.request('shows', 'POST', data).then(response => {
+      return response.json().then(json => {
+        return json
+      })
     }).catch(error => {
       console.error('createShowModel', error)
       return false
     })
+
+    let links = await showModelResponse.then(response => {
+      return response._links
+    })
+
+    await fetch(links.movie.href, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'text/uri-list'
+      },
+      body: `http://localhost:8080/movies/${movie.movieId}`
+    })
+
+    await fetch(links.showroom.href, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'text/uri-list'
+      },
+      body: `http://localhost:8080/showrooms/${showroom.showroomId}`
+    })
   }
 
   getSeatModels(showroomId) {
-    return fetch(`http://localhost:8080/seats/${showroomId}`, {
+    return fetch(`http://localhost:8080/seats?showroom=${showroomId}`, {
       method: 'GET',
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          console.log('getSeatModels', json)
-          return json
+          console.log('getSeatModels', json._embedded.seats)
+          return json._embedded.seats
         })
       } else {
         console.error('getSeatModels', response)
