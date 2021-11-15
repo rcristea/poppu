@@ -91,30 +91,12 @@ class PromoIndex extends Component {
     }
 
     this.handleDelete = this.handleDelete.bind(this)
-    this.logOut = this.logOut.bind(this)
   }
 
   handleDelete(id) {
     return e => {
       e.preventDefault()
       alert('Attempted to delete promo with id: ' + id)
-    }
-  }
-
-  logOut() {
-    if (localStorage.getItem('remember_me')) {
-      localStorage.removeItem('remember_me')
-    }
-
-    if (sessionStorage.getItem('user_email')) {
-      sessionStorage.removeItem('user_email')
-    }
-
-    if (sessionStorage.getItem('role')) {
-      sessionStorage.removeItem('role')
-      sessionStorage.setItem('alert', 'Successfully logged out!')
-
-      this.props.history.push('/')
     }
   }
 
@@ -128,7 +110,7 @@ class PromoIndex extends Component {
   render() {
     return (
       <>
-        <Sidebar logOut={this.logOut}/>
+        <Sidebar />
         <div className='promos-container'>
           <div className='cover'>
             <div className='promos-card'>
@@ -162,7 +144,6 @@ class PromoIndex extends Component {
                         <Dropdown className='card-table-dropdown'>
                           <DropdownToggle
                             className='card-table-dropdown-button'><BiDotsVerticalRounded/></DropdownToggle>
-
                           <DropdownMenu>
                             <DropdownItem href={`/promos/${promo.id}`}>View</DropdownItem>
                             <DropdownItem href={`/promos/edit/${promo.id}`}>Edit</DropdownItem>
