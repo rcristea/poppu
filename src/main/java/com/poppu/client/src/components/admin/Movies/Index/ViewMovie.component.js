@@ -10,7 +10,6 @@ import NavBar from "../../../default/NavBar/NavBar.component";
 export class ViewMovie extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       movie: {
         id: this.props.match.params.id,
@@ -26,14 +25,15 @@ export class ViewMovie extends Component {
         isShowing: "",
         duration: "",
         rating: "",
-      }
+      },
+      shows: null,
     }
-
-    this.getData = this.getData.bind(this)
-    //this.getShowTimes = this.getShowTimes(this)
+    this.getMovie = this.getMovie.bind(this);
+    this.getShowModels = this.getShowModels.bind(this);
+    this.initContent = this.initContent.bind(this);
   }
 
-  getData() {
+  getMovie() {
     return fetch(`http://localhost:8080/movies/${this.state.movie.id}`, {
       method: 'GET',
     }).then(response => {
@@ -45,6 +45,40 @@ export class ViewMovie extends Component {
     })
   }
 
+  getShowModels() {
+    return fetch(`http://localhost:8080/shows`, {
+      method: 'GET',
+    }).then(response => {
+      if (response.ok) {
+        return response.json().then(json => {
+          console.log('getShowModels', json._embedded.shows)
+          return json._embedded.shows
+        })
+      } else {
+        console.error('getShowModels', response)
+        return null
+      }
+    }).catch(error => {
+      console.error('getShowModels', error)
+      return null
+    })
+  }
+
+  async initContent() {
+    let movie = await this.getMovie(this.props.match.params.id)
+    let shows = await this.getShowModels(this.props.match.params.id)
+    let shows2 = [];
+    shows.forEach(show => {
+      if (show.movieId === this.state.movie.id) {
+        shows2.concat(show)
+      }
+    })
+    this.setState({
+      movie: movie,
+      shows: shows2,
+    })
+    console.log('shows', shows)
+  }
 
   comment_id = 1
   comment_title = 'This movie sucks'
@@ -52,24 +86,11 @@ export class ViewMovie extends Component {
   comment_description = 'I really hated this goddamn movie. It is a piece of shit.'
 
   async componentDidMount() {
-    let movie = await this.getData()
-    this.setState({
-      movie: {
-        id: this.state.movie.id,
-        title: movie.title,
-        date: movie.date,
-        category: movie.category,
-        producer: movie.producer,
-        director: movie.director,
-        synopsis: movie.synopsis,
-        score: movie.score,
-        trailerPhoto: movie.trailerPhoto,
-        trailerLink: movie.trailerLink,
-        isShowing: movie.isShowing,
-        duration: movie.duration,
-        rating: movie.rating,
-      }
-    })
+    if (sessionStorage.getItem('role') !== 'admin') {
+      sessionStorage.setItem('alert', 'User does not have correct privileges.')
+      this.props.history.push('/')
+    }
+    this.initContent()
   }
 
   formatYear() {
@@ -156,7 +177,7 @@ export class ViewMovie extends Component {
                         Cast
                       </ListGroupItem>
                       <ListGroupItem>
-                        Need to implement cast still...
+                        hi
                       </ListGroupItem>
                     </ListGroup>
                   </ListGroupItem>
