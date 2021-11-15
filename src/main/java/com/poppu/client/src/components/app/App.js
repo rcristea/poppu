@@ -25,16 +25,19 @@ import UserView from "../admin/Users/View/UserView.component";
 import ViewProfileComponent from '../default/Profile/ViewProfile.component'
 import Registration from '../default/Registration/Registration.component'
 import ForgotPassword from '../default/ForgotPassword/ForgotPassword.component'
-import EditPaymentInfoComponent from "../default/Profile/EditPaymentInfo.component";
-import EditAddressComponent from "../default/Profile/EditAddress.component";
-import EditPasswordComponent from "../default/Profile/EditPassword.component";
-import AddPaymentComponent from "../default/Profile/AddPayment.component";
-import bcrypt from "bcryptjs";
-import AddAddressComponent from "../default/Profile/AddAddress.component";
-import EditMovie from "../admin/Movies/Index/EditMovie.component";
-import AddActorComponent from "../admin/Movies/Index/AddActor.component";
-import {SearchResultsByTitle} from "../default/SearchResults/SearchResultsByTitle.component";
-import {SearchResultsByCategory} from "../default/SearchResults/SearchResultsByCategory.component";
+import EditPaymentInfoComponent from '../default/Profile/EditPaymentInfo.component'
+import EditAddressComponent from '../default/Profile/EditAddress.component'
+import EditPasswordComponent from '../default/Profile/EditPassword.component'
+import AddPaymentComponent from '../default/Profile/AddPayment.component'
+import bcrypt from 'bcryptjs'
+import AddAddressComponent from '../default/Profile/AddAddress.component'
+import Schedule from '../admin/Schedules/Index/Schedules.component'
+import EditMovie from '../admin/Movies/Index/EditMovie.component'
+import AddActorComponent from '../admin/Movies/Index/AddActor.component'
+import ScheduleAdd from '../admin/Schedules/Add/ScheduleAdd.component'
+import ScheduleEdit from '../admin/Schedules/Edit/ScheduleEdit.component'
+import {SearchResultsByTitle} from '../default/SearchResults/SearchResultsByTitle.component'
+import {SearchResultsByCategory} from '../default/SearchResults/SearchResultsByCategory.component'
 
 class App extends Component {
   constructor(props) {
@@ -120,9 +123,12 @@ class App extends Component {
         <Route path='/movies/edit' exact={true} component={EditMovie}/>
         <Route path='/actor/add' exact={true} component={AddActorComponent}/>
         <Route path='/showtime/add' exact={true} component={AddShowTime}/>
-          <Route path='/users' exact = {true} component={UserIndex}/>
-          <Route path='/users/edit/:id' component={UserEdit}/>
-          <Route path='/users/view/:id' component={UserView}/>
+        <Route path='/schedule' exact={true} component={Schedule} />
+        <Route path='/schedule/add' exact={true} component={ScheduleAdd} />
+        <Route path='/schedule/edit/:id' component={ScheduleEdit} />
+        <Route path='/users' exact = {true} component={UserIndex}/>
+        <Route path='/users/edit/:id' component={UserEdit}/>
+        <Route path='/users/view/:id' component={UserView}/>
 
         <Route path='/tests' exact={true} component={TestIndex}/>
         <Route path='/tests/add' exact={true} component={TestAdd}/>
