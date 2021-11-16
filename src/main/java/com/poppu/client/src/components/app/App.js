@@ -11,6 +11,7 @@ import SelectSeatComponent from '../default/TicketBooking/SelectSeat.component'
 import OrderSummaryComponent from '../default/TicketBooking/OrderSummary.component'
 import OrderCheckoutComponent from '../default/TicketBooking/OrderCheckout.component'
 import OrderConfirmationComponent from '../default/TicketBooking/OrderConfirmation.component'
+import Shows from '../default/Shows/Shows.component'
 import EditProfileComponent from '../default/Profile/EditProfile.component'
 import Dashboard from '../admin/Dashboard/Dashboard.component'
 import PromoIndex from '../admin/Promos/Index/PromoIndex.component'
@@ -112,6 +113,7 @@ class App extends Component {
         <Route path='/payment/add' exact={true} component={AddPaymentComponent}/>
         <Route path='/search/movies/:title' component={SearchResultsByTitle}/>
         <Route path='/search/movies/category/:category' component={SearchResultsByCategory}/>
+          <Route path='/shows/movie=:id' component={Shows}/>
 
         {/* Admin Routes */}
         <Route path='/admin' exact={true} component={Dashboard}/>
