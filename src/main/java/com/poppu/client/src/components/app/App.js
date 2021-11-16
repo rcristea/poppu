@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Route, Switch, withRouter} from 'react-router-dom'
+import {Route, withRouter} from 'react-router-dom'
 import './App.css'
 import TestIndex from '../tests/TestIndex/TestIndex.component'
 import TestAdd from '../tests/TestAdd/TestAdd.component'
@@ -11,6 +11,7 @@ import SelectSeatComponent from '../default/TicketBooking/SelectSeat.component'
 import OrderSummaryComponent from '../default/TicketBooking/OrderSummary.component'
 import OrderCheckoutComponent from '../default/TicketBooking/OrderCheckout.component'
 import OrderConfirmationComponent from '../default/TicketBooking/OrderConfirmation.component'
+import Shows from '../default/Shows/Shows.component'
 import EditProfileComponent from '../default/Profile/EditProfile.component'
 import Dashboard from '../admin/Dashboard/Dashboard.component'
 import PromoIndex from '../admin/Promos/Index/PromoIndex.component'
@@ -112,6 +113,7 @@ class App extends Component {
         <Route path='/payment/add' exact={true} component={AddPaymentComponent}/>
         <Route path='/search/movies/:title' component={SearchResultsByTitle}/>
         <Route path='/search/movies/category/:category' component={SearchResultsByCategory}/>
+          <Route path='/shows/movie=:id' component={Shows}/>
 
         {/* Admin Routes */}
         <Route path='/admin' exact={true} component={Dashboard}/>
@@ -119,7 +121,7 @@ class App extends Component {
         <Route path='/promos/add' exact={true} component={PromoAdd}/>
         <Route path='/movies' exact={true} component={MovieIndex}/>
         <Route path='/movies/add' exact={true} component={AddMovie}/>
-        <Route path='/movies/:id' component={ViewMovie}/>
+        <Route path='/movies/view/:id' component={ViewMovie}/>
         <Route path='/movies/edit' exact={true} component={EditMovie}/>
         <Route path='/actor/add' exact={true} component={AddActorComponent}/>
         <Route path='/showtime/add' exact={true} component={AddShowTime}/>

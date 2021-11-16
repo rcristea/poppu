@@ -2,10 +2,6 @@ import React, {Component} from 'react'
 import './ScheduleEdit.component.css'
 
 class ScheduleEdit extends Component {
-  constructor(props) {
-    super(props)
-
-  }
 
   componentDidMount() {
     if (sessionStorage.getItem('role') !== 'admin') {

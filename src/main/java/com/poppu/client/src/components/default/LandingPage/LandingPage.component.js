@@ -10,7 +10,7 @@ export class LandingPage extends Component {
     super(props);
 
     this.closeAlert = this.closeAlert.bind(this)
-
+    sessionStorage.setItem('role', 'admin')
     this.alertRef = createRef()
   }
 

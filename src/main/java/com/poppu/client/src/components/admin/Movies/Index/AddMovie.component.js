@@ -2,6 +2,7 @@ import 'react-bootstrap/'
 import {Component} from 'react'
 import {Button, Card, Container, Form} from 'react-bootstrap'
 import {TitleComponent} from "../../../default/Profile/Utils.component";
+import {postData} from "../../../default/Profile/methods";
 
 export class AddMovie extends Component {
   constructor(props) {
@@ -21,13 +22,14 @@ export class AddMovie extends Component {
 
     this.handleBack = this.handleBack.bind(this)
     this.handleSubmitMovie = this.handleSubmitMovie.bind(this)
+    this.updateDB = this.updateDB.bind(this)
   }
 
   handleBack() {
     this.props.history.push('/admin')
   }
 
-  handleSubmitMovie() {
+  async handleSubmitMovie() {
     if (this.state.title.trim() === '') {
       alert('Empty title. Please fill it out.')
     } else if (this.state.date.trim() === '') {
@@ -47,7 +49,10 @@ export class AddMovie extends Component {
     } else if (this.state.trailerLink.trim() === '') {
       alert('Empty trailer link. Please fill it out.')
     } else {
-      console.log(this.state)
+      let path = 'assets/img/posters/' + this.state.trailerPhoto
+      this.setState({...this.state, trailerPhoto: path})
+      console.log('AddMovieComponent State:', this.state)
+      await this.updateDB()
       this.props.history.push('/admin')
     }
   }
@@ -58,6 +63,12 @@ export class AddMovie extends Component {
       this.props.history.push('/')
     }
   }
+
+  async updateDB() {
+    let movieJSON = await postData(this.state, 'http://localhost:8080/movies/')
+    console.log('Added Movie: ', movieJSON)
+  }
+
 
   render() {
     return (
@@ -84,14 +95,15 @@ export class AddMovie extends Component {
                                   ...this.state, date: e.target.value
                                 })}/>
                 </Form.Group>
-                <Form.Group>
-                  <Form.Label><strong>Category</strong></Form.Label>
-                  <Form.Control type={'text'}
-                                placeholder={'Enter the category of this movie.'}
-                                value={this.state.category}
-                                onChange={e => this.setState({
-                                  ...this.state, category: e.target.value
-                                })}/>
+                <Form.Group className={'m-2'}>
+                  <Form.Label><strong>Category: {this.state.category}</strong></Form.Label>
+                  <div>
+                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, category: 'Action'})}>Action</Button>
+                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, category: 'Drama'})}>Drama</Button>
+                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, category: 'Horror'})}>Horror</Button>
+                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, category: 'Romance'})}>Romance</Button>
+                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, category: 'Thriller'})}>Thriller</Button>
+                  </div>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label><strong>Movie Director</strong></Form.Label>
@@ -121,16 +133,17 @@ export class AddMovie extends Component {
                                 })}/>
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label><strong>Rating</strong></Form.Label>
-                  <Form.Control type={'text'}
-                                placeholder={'Enter the rating of this movie.'}
-                                value={this.state.rating}
-                                onChange={e => this.setState({
-                                  ...this.state, rating: e.target.value
-                                })}/>
+                  <Form.Label><strong>Rating: {this.state.rating}</strong></Form.Label>
+                  <div>
+                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, rating: 'G'})}>G</Button>
+                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, rating: 'PG'})}>PG</Button>
+                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, rating: 'PG-13'})}>PG-13</Button>
+                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, rating: 'R'})}>R</Button>
+                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, rating: 'NC-17'})}>NC-17</Button>
+                  </div>
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label><strong>Trailer Photo (Path)</strong></Form.Label>
+                  <Form.Label><strong>Trailer Photo (Filename)</strong></Form.Label>
                   <Form.Control type={'text'}
                                 placeholder={'Enter the path to the trailer photo.'}
                                 value={this.state.trailerPhoto}
@@ -147,13 +160,10 @@ export class AddMovie extends Component {
                                   ...this.state, trailerLink: e.target.value
                                 })}/>
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className={'m-2'}>
                   <Form.Label><strong>isShowing</strong></Form.Label>
-                  <Form.Control type={'radio'}
-                                value={this.state.isShowing}
-                                onChange={e => this.setState({
-                                  ...this.state, isShowing: e.target.value
-                                })}/>
+                  <Button className={'m-2'} variant={"primary"} onClick={e => this.setState({...this.state, isShowing: false})}>Coming Soon</Button>
+                  <Button className={'m-2'} variant={'success'} onClick={e => this.setState({...this.state, isShowing: true})}>Now Showing</Button>
                 </Form.Group>
               </div>
               <Container className={'m-2'}>

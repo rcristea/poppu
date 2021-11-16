@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -28,6 +27,11 @@ public class ShowController {
         return this.showRepository.findAll();
     }
 
+    @GetMapping("/movie/{id}")
+    public List<ShowModel> getByMovieId(@PathVariable("id") long movieId) {
+        return this.showRepository.findAllByMovie(movieId);
+    }
+  
     @PutMapping("/{id}")
     public ResponseEntity<ShowModel> putShow(@RequestBody ShowModel newShowInfo, @PathVariable("id") long id) throws URISyntaxException {
         ShowModel updatedShow = this.showRepository.findById(id)
