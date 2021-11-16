@@ -1,7 +1,7 @@
 import React, {Component, createRef} from 'react'
 import './ScheduleAdd.component.css'
 import Sidebar from "../../Sidebar/Sidebar.component";
-import {Form, FormControl, FormGroup, FormLabel} from "react-bootstrap";
+import {Form, FormControl, FormGroup, FormLabel, FormSelect} from "react-bootstrap";
 import InputMask from "react-input-mask";
 
 class ScheduleAdd extends Component {
@@ -12,8 +12,9 @@ class ScheduleAdd extends Component {
       dateTime: null,
       duration: null,
       movie: null,
-      showroom: null,
+      showroom: 1,
       seats: null,
+      error: null,
     }
 
     this.durationRef = createRef()
@@ -28,6 +29,7 @@ class ScheduleAdd extends Component {
     this.getMovieModel = this.getMovieModel.bind(this)
     this.getMovieModels = this.getMovieModels.bind(this)
     this.getShowroomModel = this.getShowroomModel.bind(this)
+    this.getShowModels = this.getShowModels.bind(this)
   }
 
   componentDidMount() {
@@ -51,7 +53,7 @@ class ScheduleAdd extends Component {
   createSeatAvailabilityModel(showID, showroom, seatId, isAvailable) {
     let data = {
       showID: showID,
-      showroom: showroom,
+      showroomId: showroom,
       seatId: seatId,
       isAvailable: isAvailable,
     }
@@ -67,7 +69,7 @@ class ScheduleAdd extends Component {
   
   async createShowModel(dateTime, duration, movie, showroom) {
     let data = {
-      dateTime: dateTime,
+      dateTime: new Date(dateTime),
       duration: duration,
       movie: movie,
       showroom: showroom,
@@ -136,11 +138,11 @@ class ScheduleAdd extends Component {
         })
       } else {
         console.error('getMovieModel', response)
-        return null
+        return response
       }
     }).catch(error => {
       console.error('getMovieModel', error)
-      return null
+      return error
     })
   }
 
@@ -193,15 +195,35 @@ class ScheduleAdd extends Component {
         })
       } else {
         console.error('getShowroomModel', response)
-        return null
+        return response
       }
     }).catch(error => {
       console.error('getShowroomModel', error)
-      return null
+      return error
     })
   }
 
   async validate() {
+    let movie = await this.getMovieModel(this.state.movie)
+    if (movie.ok === false) {
+      this.setState({
+        error: 'Oops! That movie ID was not found.'
+      })
+
+      return !this.state.error
+    }
+
+    let showroom = await this.getShowroomModel(this.state.showroom)
+    console.log(showroom)
+    console.log(this.state)
+    if (showroom.ok === false) {
+      this.setState({
+        error: 'Oops! That showroom seems to not exist.'
+      })
+
+      return !this.state.error
+    }
+
     let thisStartTime = new Date(this.state.dateTime)
     let durationHours = parseInt(this.state.duration.substring(0,1))
     let durationMinutes = parseInt(this.state.duration.substring(3,5))
@@ -212,64 +234,61 @@ class ScheduleAdd extends Component {
     let shows = await this.getShowModels();
 
     shows.forEach(show => {
-      if (show.showroom === this.state.showroom) {
+      if (show.showroom.showroomId === parseInt(this.state.showroom)) {
         let showStartTime = new Date(show.dateTime)
-        let showDurationHours = parseInt(show.duration.substring(0,1))
-        let showDurationMinutes = parseInt(show.duration.substring(3,5))
+        let showDurationHours = parseInt(show.movie.duration.substring(0,1))
+        let showDurationMinutes = parseInt(show.movie.duration.substring(3,5))
         let showEndTime = new Date(showStartTime)
         showEndTime.setHours(showEndTime.getHours() + showDurationHours)
         showEndTime.setMinutes(showEndTime.getMinutes() + showDurationMinutes)
 
-        if (thisStartTime < showEndTime || thisEndTime > showStartTime) {
-          alert('This show room has another movie playing at this time.')
-          return false
+        if (
+          (thisStartTime < showStartTime && showStartTime < thisEndTime) ||
+          (thisStartTime < showEndTime && showEndTime < thisEndTime) ||
+          (showStartTime < thisStartTime && thisEndTime < showEndTime)
+        ) {
+          this.setState({
+            error: 'This show room has another movie playing at the selected time.'
+          })
         }
       }
     })
 
-    return true
+    return !this.state.error;
   }
 
-  setDuration() {
+  async setDuration() {
+    if (this.state.movie) {
+      let movie = await this.getMovieModel(this.state.movie)
+      if (movie.duration) {
+        this.durationRef.current.value = movie.duration
+      } else {
+        this.durationRef.current.value = ''
+      }
 
+      this.setState({
+        duration: movie.duration,
+      })
+
+      this.forceUpdate()
+    }
   }
 
-  handleChange(event) {
+  async handleChange(event) {
+    this.setState({
+      error: null,
+    })
+
     const {name, value} = event.target
+
+    await this.setState({
+      [name]: value,
+    })
 
     if (name === 'movie') {
       this.setDuration()
     }
-
-    this.setState({
-      [name]: value,
-    })
   }
-
-  /*
-      TODO
-        1) form should have the fields:
-          - movieId
-          - showroomId
-          - dateTime (which is the start time)
-          - duration:
-            * Should be auto filled from movie supplied with movieId
-        2) When the form is submitted
-          a) Validate
-            - Make sure the start time and duration does not conflict
-              with another start time and duration
-          b) get SeatModels from showroomModel with showroomId
-          c) create a ShowModel with data:
-            - dateTime (start date)
-            - duration (comes from movieModel from movieId)
-            - movie (movieId from form)
-            - showroom (comes from showroomId)
-          d) foreach seatModel, create a seatAvailabilityModel with:
-            - showID
-            - showroomId
-            - seatId (from seatModel's id)
-            - isAvailable (default to true)
-     */
 
   handleSubmit = async(e) => {
     e.preventDefault()
@@ -281,15 +300,26 @@ class ScheduleAdd extends Component {
 
     let movie = await this.getMovieModel(this.state.movie)
     let showroom = await this.getShowroomModel(this.state.showroom)
-    let show = await this.createShowModel(this.state.dateTime, this.state.duration, movie, showroom)
+    await this.createShowModel(this.state.dateTime, this.state.duration, movie, showroom)
 
-    let seatModels = await this.getSeatModels(this.state.showroom)
-    seatModels.forEach(seatModel => {
-      this.createSeatAvailabilityModel(show.showID, this.state.showroom, seatModel.seatId, true)
-    })
+    // TODO Create SeatAvailabilityModels (not required for this demo)
+    // let seatModels = await this.getSeatModels(this.state.showroom)
+    // seatModels.forEach(seatModel => {
+    //   this.createSeatAvailabilityModel(show.showID, this.state.showroom, seatModel.seatId, true)
+    // })
 
     this.props.history.push('/schedule')
-    alert('The show time has been added successfully!')
+    sessionStorage.setItem('alert-success', 'The show time has been added successfully!')
+  }
+
+  renderError() {
+    if (this.state.error) {
+      return (
+        <div className='form-error'>
+          <p>{this.state.error}</p>
+        </div>
+      )
+    }
   }
 
   render() {
@@ -304,11 +334,11 @@ class ScheduleAdd extends Component {
                   <h1>Schedule a new movie</h1>
                 </div>
                 <div className='schedule-card-subtitle'>
-                  {JSON.stringify(this.state)}
                   <h3>Fill out the form below to schedule a new movie</h3>
                 </div>
               </div>
               <div className='schedule-card-content'>
+                {this.renderError()}
                 <Form className='schedule-add' onSubmit={this.handleSubmit}>
                   <FormGroup>
                     <FormLabel>Movie Id</FormLabel>
@@ -316,7 +346,11 @@ class ScheduleAdd extends Component {
                   </FormGroup>
                   <FormGroup>
                     <FormLabel>showroom Id</FormLabel>
-                    <FormControl type='text' name='showroom' onChange={this.handleChange}/>
+                    <FormSelect name='showroom' onChange={this.handleChange}>
+                      <option value='1'>1: Showroom A</option>
+                      <option value='2'>2: Showroom B</option>
+                      <option value='3'>3: Showroom C</option>
+                    </FormSelect>
                   </FormGroup>
                   <FormGroup>
                     <FormLabel>Start Date</FormLabel>
