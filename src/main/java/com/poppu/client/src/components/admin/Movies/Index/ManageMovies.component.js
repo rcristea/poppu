@@ -50,7 +50,7 @@ export class ManageMoviesComponent extends Component {
     console.log(movies[1])
     movies.forEach(movie => {
       formattedMovies.push({
-        id: movie.movie_id,
+        id: movie.movieId,
         movieName: movie.title,
         movieRating: movie.score,
         movieRatingCode: movie.rating,
