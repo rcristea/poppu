@@ -24,7 +24,7 @@ class Alert extends Component {
     return (
       <>
         <div className={`admin-alert ${this.state.type}`} ref={this.alertRef}>
-          <p>{this.state.message}</p><IoIosClose size='25px' color='#fff' onClick={this.closeAlert}/>
+          <p>{this.state.message}</p><IoIosClose size='25px' color={`${this.state.type === 'success' ? '#155724' : '#721c24'}`} onClick={this.closeAlert}/>
         </div>
       </>
     )

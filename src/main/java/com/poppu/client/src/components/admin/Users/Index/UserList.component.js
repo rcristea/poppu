@@ -43,7 +43,7 @@ class UserList extends Component{
         event.preventDefault();
         const {item} = this.state;
 
-        await fetch('/api/users' + ('/' + item.id), {
+        await fetch(`/api/users/${item.id}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
