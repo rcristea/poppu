@@ -1,8 +1,11 @@
 import React, {Component} from 'react'
 import './Schedules.component.css'
 import Sidebar from '../../Sidebar/Sidebar.component'
-import {BiPlus} from 'react-icons/bi'
-import {Table} from 'react-bootstrap'
+import {BiDotsVerticalRounded, BiPlus} from 'react-icons/bi'
+import {Dropdown, Table} from 'react-bootstrap'
+import DropdownToggle from 'react-bootstrap/DropdownToggle'
+import DropdownMenu from 'react-bootstrap/DropdownMenu'
+import DropdownItem from 'react-bootstrap/DropdownItem'
 
 
 class Schedule extends Component {
