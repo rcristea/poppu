@@ -44,3 +44,8 @@
 .promos-card-content-noscroll .form-control:focus {
   background-color: #fff;
 }
+
+.promos-card-error {
+  color: #f00;
+  font-size: 0.625rem;
+}

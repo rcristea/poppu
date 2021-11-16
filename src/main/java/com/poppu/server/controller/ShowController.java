@@ -24,7 +24,7 @@ public class ShowController {
 
     @GetMapping("/")
     public List<ShowModel> getShows() {
-      return this.showRepository.findAll();
+        return this.showRepository.findAll();
     }
 
     @GetMapping("/movie/{id}")
