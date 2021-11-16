@@ -1,7 +1,7 @@
 import React, {Component, createRef} from 'react'
 import './ScheduleAdd.component.css'
 import Sidebar from "../../Sidebar/Sidebar.component";
-import {Form, FormControl, FormGroup, FormLabel} from "react-bootstrap";
+import {Form, FormControl, FormGroup, FormLabel, FormSelect} from "react-bootstrap";
 import InputMask from "react-input-mask";
 
 class ScheduleAdd extends Component {
@@ -138,11 +138,11 @@ class ScheduleAdd extends Component {
         })
       } else {
         console.error('getMovieModel', response)
-        return null
+        return response
       }
     }).catch(error => {
       console.error('getMovieModel', error)
-      return null
+      return error
     })
   }
 
@@ -195,15 +195,18 @@ class ScheduleAdd extends Component {
         })
       } else {
         console.error('getShowroomModel', response)
-        return null
+        return response
       }
     }).catch(error => {
       console.error('getShowroomModel', error)
-      return null
+      return error
     })
   }
 
   async validate() {
+    let movie = await this.getMovieModel(this.state.movie)
+    console.log('validate', movie)
+
     let thisStartTime = new Date(this.state.dateTime)
     let durationHours = parseInt(this.state.duration.substring(0,1))
     let durationMinutes = parseInt(this.state.duration.substring(3,5))
@@ -222,8 +225,6 @@ class ScheduleAdd extends Component {
         showEndTime.setHours(showEndTime.getHours() + showDurationHours)
         showEndTime.setMinutes(showEndTime.getMinutes() + showDurationMinutes)
 
-        console.log(showStartTime, showEndTime)
-
         if (
           (thisStartTime < showStartTime && showStartTime < thisEndTime) ||
           (thisStartTime < showEndTime && showEndTime < thisEndTime) ||
@@ -239,24 +240,37 @@ class ScheduleAdd extends Component {
     return !this.state.error;
   }
 
-  setDuration() {
+  async setDuration() {
+    if (this.state.movie) {
+      let movie = await this.getMovieModel(this.state.movie)
+      if (movie.duration) {
+        this.durationRef.current.value = movie.duration
+      } else {
+        this.durationRef.current.value = ''
+      }
 
+      this.setState({
+        duration: movie.duration,
+      })
+
+      this.forceUpdate()
+    }
   }
 
-  handleChange(event) {
+  async handleChange(event) {
     this.setState({
       error: null,
     })
 
     const {name, value} = event.target
 
+    await this.setState({
+      [name]: value,
+    })
+
     if (name === 'movie') {
       this.setDuration()
     }
-
-    this.setState({
-      [name]: value,
-    })
   }
 
   handleSubmit = async(e) => {
@@ -315,7 +329,11 @@ class ScheduleAdd extends Component {
                   </FormGroup>
                   <FormGroup>
                     <FormLabel>showroom Id</FormLabel>
-                    <FormControl type='text' name='showroom' onChange={this.handleChange}/>
+                    <FormSelect name='showroom' onChange={this.handleChange}>
+                      <option value='1'>1: Showroom A</option>
+                      <option value='2'>2: Showroom B</option>
+                      <option value='3'>3: Showroom C</option>
+                    </FormSelect>
                   </FormGroup>
                   <FormGroup>
                     <FormLabel>Start Date</FormLabel>
