@@ -1,9 +1,6 @@
 package com.poppu.server;
 
-import com.poppu.server.model.MovieModel;
-import com.poppu.server.model.SeatModel;
-import com.poppu.server.model.ShowModel;
-import com.poppu.server.model.ShowroomModel;
+import com.poppu.server.model.*;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.http.MediaType;
@@ -18,5 +15,6 @@ public class RestConfiguration implements RepositoryRestConfigurer {
         config.exposeIdsFor(MovieModel.class);
         config.exposeIdsFor(ShowModel.class);
         config.exposeIdsFor(SeatModel.class);
+        config.exposeIdsFor(PromotionModel.class);
     }
 }
