@@ -14,6 +14,7 @@ class ScheduleAdd extends Component {
       movie: null,
       showroom: null,
       seats: null,
+      error: null,
     }
 
     this.durationRef = createRef()
@@ -28,6 +29,7 @@ class ScheduleAdd extends Component {
     this.getMovieModel = this.getMovieModel.bind(this)
     this.getMovieModels = this.getMovieModels.bind(this)
     this.getShowroomModel = this.getShowroomModel.bind(this)
+    this.getShowModels = this.getShowModels.bind(this)
   }
 
   componentDidMount() {
@@ -67,7 +69,7 @@ class ScheduleAdd extends Component {
   
   async createShowModel(dateTime, duration, movie, showroom) {
     let data = {
-      dateTime: dateTime,
+      dateTime: new Date(dateTime),
       duration: duration,
       movie: movie,
       showroom: showroom,
@@ -212,22 +214,29 @@ class ScheduleAdd extends Component {
     let shows = await this.getShowModels();
 
     shows.forEach(show => {
-      if (show.showroom === this.state.showroom) {
+      if (show.showroom.showroomId === parseInt(this.state.showroom)) {
         let showStartTime = new Date(show.dateTime)
-        let showDurationHours = parseInt(show.duration.substring(0,1))
-        let showDurationMinutes = parseInt(show.duration.substring(3,5))
+        let showDurationHours = parseInt(show.movie.duration.substring(0,1))
+        let showDurationMinutes = parseInt(show.movie.duration.substring(3,5))
         let showEndTime = new Date(showStartTime)
         showEndTime.setHours(showEndTime.getHours() + showDurationHours)
         showEndTime.setMinutes(showEndTime.getMinutes() + showDurationMinutes)
 
-        if (thisStartTime < showEndTime || thisEndTime > showStartTime) {
-          alert('This show room has another movie playing at this time.')
-          return false
+        console.log(showStartTime, showEndTime)
+
+        if (
+          (thisStartTime < showStartTime && showStartTime < thisEndTime) ||
+          (thisStartTime < showEndTime && showEndTime < thisEndTime) ||
+          (showStartTime < thisStartTime && thisEndTime < showEndTime)
+        ) {
+          this.setState({
+            error: 'This show room has another movie playing at the selected time.'
+          })
         }
       }
     })
 
-    return true
+    return !this.state.error;
   }
 
   setDuration() {
@@ -235,6 +244,10 @@ class ScheduleAdd extends Component {
   }
 
   handleChange(event) {
+    this.setState({
+      error: null,
+    })
+
     const {name, value} = event.target
 
     if (name === 'movie') {
@@ -268,6 +281,16 @@ class ScheduleAdd extends Component {
     alert('The show time has been added successfully!')
   }
 
+  renderError() {
+    if (this.state.error) {
+      return (
+        <div className='form-error'>
+          <p>{this.state.error}</p>
+        </div>
+      )
+    }
+  }
+
   render() {
     return (
       <>
@@ -284,6 +307,7 @@ class ScheduleAdd extends Component {
                 </div>
               </div>
               <div className='schedule-card-content'>
+                {this.renderError()}
                 <Form className='schedule-add' onSubmit={this.handleSubmit}>
                   <FormGroup>
                     <FormLabel>Movie Id</FormLabel>
