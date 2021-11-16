@@ -5,7 +5,6 @@ import {BiDotsVerticalRounded, BiPlus} from 'react-icons/bi'
 import {Dropdown, Table} from 'react-bootstrap'
 import DropdownToggle from 'react-bootstrap/DropdownToggle'
 import DropdownMenu from 'react-bootstrap/DropdownMenu'
-import DropdownItem from 'react-bootstrap/DropdownItem'
 import Alert from "../../Alerts/Alert";
 
 
@@ -116,8 +115,6 @@ class Schedule extends Component {
                 <DropdownToggle
                   className='card-table-dropdown-button'><BiDotsVerticalRounded/></DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem href={`/schedule/edit/${show.showID}`}>Edit</DropdownItem>
-                  <Dropdown.Divider/>
                   <form onSubmit={this.deleteShow(show.showID)}>
                     <button className='delete-schedule' type='submit'>Delete</button>
                   </form>
