@@ -38,21 +38,6 @@ class UserEdit extends Component {
         this.setState({item})
     }
 
-    async handleSubmit(event) {
-        event.preventDefault();
-        const {item} = this.state;
-
-        await fetch(`/api/users/${item.id}`, {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item),
-        });
-        this.props.history.push('/users');
-    }
-
     render() {
         const {item} = this.state;
         const title = <h2>Edit User</h2>;
