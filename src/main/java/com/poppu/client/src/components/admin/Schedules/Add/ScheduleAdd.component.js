@@ -12,7 +12,7 @@ class ScheduleAdd extends Component {
       dateTime: null,
       duration: null,
       movie: null,
-      showroom: null,
+      showroom: 1,
       seats: null,
       error: null,
     }
@@ -205,7 +205,24 @@ class ScheduleAdd extends Component {
 
   async validate() {
     let movie = await this.getMovieModel(this.state.movie)
-    console.log('validate', movie)
+    if (movie.ok === false) {
+      this.setState({
+        error: 'Oops! That movie ID was not found.'
+      })
+
+      return !this.state.error
+    }
+
+    let showroom = await this.getShowroomModel(this.state.showroom)
+    console.log(showroom)
+    console.log(this.state)
+    if (showroom.ok === false) {
+      this.setState({
+        error: 'Oops! That showroom seems to not exist.'
+      })
+
+      return !this.state.error
+    }
 
     let thisStartTime = new Date(this.state.dateTime)
     let durationHours = parseInt(this.state.duration.substring(0,1))
