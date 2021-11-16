@@ -1,9 +1,8 @@
-import {React, Component} from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
-/*import AppNavbar from './AppNavbar';*/
+import React, {Component} from 'react'
+import { Link, withRouter } from 'react-router-dom'
+import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap'
 
-class UserEdit extends Component{
+class UserEdit extends Component {
 
     emptyItem = {
         id: null,
@@ -21,29 +20,29 @@ class UserEdit extends Component{
         this.state = {
             item: this.emptyItem
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     async componentDidMount() {
-        const user = await (await fetch(`/api/users/${this.props.match.params.id}`)).json();
-        this.setState({item: user});
+        const user = await (await fetch(`/api/users/${this.props.match.params.id}`)).json()
+        this.setState({item: user})
     }
 
     handleChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        let item = {...this.state.item};
-        item[name] = value;
-        this.setState({item});
+        const target = event.target
+        const value = target.type === 'checkbox' ? target.checked : target.value
+        const name = target.name
+        let item = {...this.state.item}
+        item[name] = value
+        this.setState({item})
     }
 
     async handleSubmit(event) {
         event.preventDefault();
         const {item} = this.state;
 
-        await fetch('/api/users' + ('/' + item.id), {
+        await fetch(`/api/users/${item.id}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -98,4 +97,4 @@ class UserEdit extends Component{
 
 }
 
-export default withRouter(UserEdit);
+export default withRouter(UserEdit)
