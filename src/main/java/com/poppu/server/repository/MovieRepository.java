@@ -12,7 +12,8 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "movies", path = "movies")
 public interface MovieRepository extends JpaRepository<MovieModel, Long> {
     List<MovieModel> findAllByCategory(@Param("category") String category);
-    List<MovieModel> findAllByRating(@Param("rating") String ratingCode);
+    List<MovieModel> findAllByRating(@Param("rating") String rating);
+    List<MovieModel> findAllByCategoryAndRating(@Param("category") String category, @Param("rating") String rating);
     List<MovieModel> findAllByProducer(@Param("producer") String producer);
     List<MovieModel> findAllByDirector(@Param("director") String director);
     MovieModel findDistinctByTitle(@Param("title") String title);

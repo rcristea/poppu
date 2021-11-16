@@ -137,9 +137,9 @@ export class AddMovie extends Component {
                   <div>
                     <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, rating: 'G'})}>G</Button>
                     <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, rating: 'PG'})}>PG</Button>
-                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, rating: 'PG-13'})}>PG-13</Button>
+                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, rating: 'PG13'})}>PG13</Button>
                     <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, rating: 'R'})}>R</Button>
-                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, rating: 'NC-17'})}>NC-17</Button>
+                    <Button className={'m-2'} variant={'outline-warning'} onClick={e => this.setState({...this.state, rating: 'NC17'})}>NC17</Button>
                   </div>
                 </Form.Group>
                 <Form.Group>
