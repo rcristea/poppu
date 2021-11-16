@@ -18,6 +18,7 @@ class Schedule extends Component {
     this.getShows = this.getShows.bind(this)
     this.getEndTime = this.getEndTime.bind(this)
     this.renderShows = this.renderShows.bind(this)
+    this.deleteShow = this.deleteShow.bind(this)
   }
 
   getEndTime(dateTime, duration) {
@@ -54,7 +55,6 @@ class Schedule extends Component {
       if (response.ok) {
         return response.json().then(async(json) => {
           let shows = json._embedded.shows
-          console.log('getShows', shows)
           return shows
         })
       } else {
@@ -67,6 +67,17 @@ class Schedule extends Component {
     })
   }
 
+  deleteShow(showID) {
+    return e => {
+      e.preventDefault()
+      fetch(`/shows/${showID}`, {
+        method: 'DELETE',
+      });
+
+      window.location.reload()
+    }
+  }
+
   renderShows() {
     if (this.state.shows) {
       return this.state.shows.map(show => {
@@ -77,18 +88,17 @@ class Schedule extends Component {
           <tr key={show.showID}>
             <td>{show.movie.title}</td>
             <td>{show.showroom.showroomId}</td>
-            <td>{startTime.toLocaleString("en-US")}</td>
-            <td>{endTime.toLocaleString("en-US")}</td>
+            <td>{startTime.toLocaleString('en-US')}</td>
+            <td>{endTime.toLocaleString('en-US')}</td>
             <td>
               <Dropdown className='card-table-dropdown'>
                 <DropdownToggle
                   className='card-table-dropdown-button'><BiDotsVerticalRounded/></DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem href={`/`}>TODO</DropdownItem>
-                  <DropdownItem href={`/`}>TODO</DropdownItem>
+                  <DropdownItem href={`/schedule/edit/${show.showID}`}>Edit</DropdownItem>
                   <Dropdown.Divider/>
-                  <form onSubmit={null}>TODO
-                    <button className='delete-schedule' type='submit'>TODO</button>
+                  <form onSubmit={this.deleteShow(show.showID)}>
+                    <button className='delete-schedule' type='submit'>Delete</button>
                   </form>
                 </DropdownMenu>
               </Dropdown>
@@ -106,8 +116,6 @@ class Schedule extends Component {
     }
 
     let shows = await this.getShows()
-
-    console.log('componentDidMount', shows)
 
     this.setState({
       shows: shows

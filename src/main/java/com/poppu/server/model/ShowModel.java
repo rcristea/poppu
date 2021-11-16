@@ -2,7 +2,6 @@ package com.poppu.server.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
