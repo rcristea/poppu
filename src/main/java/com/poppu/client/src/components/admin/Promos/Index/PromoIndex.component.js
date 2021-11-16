@@ -133,6 +133,7 @@ class PromoIndex extends Component {
       fetch('http://localhost:8080/promotions/'+id, { method: 'DELETE' })
           .then(() => this.setState({ status: 'Delete successful' }))
           .then(window.location.reload(false))
+
     }
   }
 
