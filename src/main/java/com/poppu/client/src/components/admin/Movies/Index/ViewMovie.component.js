@@ -1,10 +1,7 @@
 import 'react-bootstrap/'
 import {Component} from 'react'
-import {Button, Card, CardGroup, Col, Container, ListGroup, ListGroupItem, Row} from 'react-bootstrap'
+import { Card, Container, ListGroup, ListGroupItem, Row} from 'react-bootstrap'
 import ReviewCard from "../../../utils/ReviewCard.component";
-import AutoCard from '../../../utils/AutoCard.component'
-import AutoList from '../../../utils/AutoList.component'
-import {CardSubtitle, CardText, CardTitle} from "reactstrap";
 import NavBar from "../../../default/NavBar/NavBar.component";
 
 export class ViewMovie extends Component {
