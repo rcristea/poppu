@@ -33,4 +33,9 @@ public class MovieController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable("id") long id) {
+        this.movieRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }

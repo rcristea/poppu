@@ -15,7 +15,7 @@ export class ManageMoviesComponent extends Component {
           movie_name: "",
           movie_rating: "",
           movie_ratingCode: "",
-          movie_isShowing: "",
+          movie_showing: "",
         },]
     }
     this.getMovies = this.getMovies.bind(this)
@@ -27,7 +27,6 @@ export class ManageMoviesComponent extends Component {
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          console.log('getMovies', json._embedded.movies)
           return json._embedded.movies
         })
       } else {
@@ -47,21 +46,20 @@ export class ManageMoviesComponent extends Component {
   async componentDidMount() {
     let movies = await this.getMovies()
     let formattedMovies = []
-    console.log(movies[1])
     movies.forEach(movie => {
       formattedMovies.push({
         id: movie.movieId,
         movieName: movie.title,
         movieRating: movie.score,
         movieRatingCode: movie.rating,
-        movieIsShowing: movie.isShowing,
+        movieIsShowing: movie.showing,
       })
     })
     formattedMovies.slice(1, formattedMovies.length)
     this.setState({
       movies: formattedMovies,
     })
-    console.log(formattedMovies)
+    console.log(this.state.movies)
   }
 
   formatMovies() {

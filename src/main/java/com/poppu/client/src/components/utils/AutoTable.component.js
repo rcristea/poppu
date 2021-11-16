@@ -56,9 +56,9 @@ export class TableRow extends Component {
         })}
         <td>
           <ButtonGroup>
-            {this.props.viewable && <ViewButton/>}
-            {this.props.editable && <EditButton/>}
-            {this.props.deletable && <DeleteButton/>}
+            {this.props.viewable && <ViewButton movieId={this.props.row_data.id}/>}
+            {this.props.editable && <EditButton movieId={this.props.row_data.id}/>}
+            {this.props.deletable && <DeleteButton movieId={this.props.row_data.id}/>}
           </ButtonGroup>
         </td>
       </tr>

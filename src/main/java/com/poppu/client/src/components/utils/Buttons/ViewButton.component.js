@@ -5,7 +5,7 @@ import SuperButton from './SuperButton.component'
 export class ViewButton extends SuperButton {
   render() {
     return (
-      <Button variant={'success'}>
+      <Button variant={'success'} href={'/movies/view/'+this.props.movieId}>
         View
       </Button>
     )
