@@ -3,7 +3,7 @@ import {Container, Form} from 'react-bootstrap'
 import './SearchResults.component.css'
 import NavBar from '../NavBar/NavBar.component'
 import {AiOutlineClose} from 'react-icons/ai'
-
+import TrailerModal from './TrailerModal'
 
 export class SearchResultsComponent extends Component {
   constructor(props) {
@@ -78,8 +78,8 @@ export class SearchResultsComponent extends Component {
 
             if (render) {
               return (
-                <section className='search-result-item' key={m.id}>
-                  <img src={`${process.env.PUBLIC_URL}/${m.trailerPhoto}`} alt={m.title} width={'350px'} height={'518px'} />
+                <section className='search-result-item' key={m.movieId}>
+                  <TrailerModal trailerLink={m.trailerLink} trailerPhoto={m.trailerPhoto}/>
                   <div className='search-result-item-footer'>
                     <div className='search-result-item-info'>
                       <h2 className='grow-1'>{m.title.length > 30 ? `${m.title.substring(0, 30)}...` : m.title }</h2>
