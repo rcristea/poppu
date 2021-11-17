@@ -46,12 +46,12 @@ export class ViewMovie extends Component {
   }
 
   getCast() {
-    return fetch(`http://localhost:8080/movieActors?size=200`, {
+    return fetch(`http://localhost:8080/movieActors?size=300`, {
       method: 'GET',
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          return this.filterCast(json._embedded.movieactors)
+          return json._embedded.movieActors
         })
       } else {
         console.error('getMovieActors', response)
@@ -131,6 +131,7 @@ export class ViewMovie extends Component {
     console.log(movie, shows, reviews, cast)
     shows = this.filterShows(shows)
     reviews = this.filterReviews(reviews)
+    cast = this.filterCast(cast)
     this.setState({
       movie: movie,
       shows: shows,
@@ -227,7 +228,7 @@ export class ViewMovie extends Component {
             <Row style={{background: '#171717'}} className={"m-1"}>
               <ListGroup horizontal className={"border-bottom border-info rounded-0"}>
                 <ListGroupItem className={"text-primary border-0"} style={{background: '#171717'}}>{this.state.movie.category}</ListGroupItem>
-                <ListGroupItem className={"text-white border-0"} style={{background: '#171717'}}>{this.state.movie.isShowing ? 'Now Showing' : 'Coming Soon'}</ListGroupItem>
+                <ListGroupItem className={"text-white border-0"} style={{background: '#171717'}}>{this.state.movie.showing ? 'Now Showing' : 'Coming Soon'}</ListGroupItem>
               </ListGroup>
               <Card.Text className="mb-2 p-3 text-white">
                 {this.state.movie.synopsis}

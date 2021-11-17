@@ -3,6 +3,7 @@ import {Component} from 'react'
 import {Button, Card, Container, Form} from 'react-bootstrap'
 import {TitleComponent} from "../../../default/Profile/Utils.component";
 import {getData, postData, putData} from "../../../default/Profile/methods";
+import ActorComponent from "./ActorComponent.component";
 
 export class AddMovie extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export class AddMovie extends Component {
     this.state = {
       title: '',
       date: '',
+      duration: '',
       category: '',
       director: '',
       producer: '',
@@ -18,7 +20,7 @@ export class AddMovie extends Component {
       photoName: '',
       trailerPhoto: '',
       trailerLink: '',
-      isShowing: '',
+      showing: false,
       _actors: [],
       _actorsText: ''
     }
@@ -112,6 +114,15 @@ export class AddMovie extends Component {
                                   ...this.state, date: e.target.value
                                 })}/>
                 </Form.Group>
+                <Form.Group>
+                  <Form.Label><strong>Duration</strong></Form.Label>
+                  <Form.Control type={'text'}
+                                placeholder={'Enter the duration of the movie.'}
+                                value={this.state.duration}
+                                onChange={e => this.setState({
+                                  ...this.state, duration: e.target.value
+                                })}/>
+                </Form.Group>
                 <Form.Group className={'m-2'}>
                   <Form.Label><strong>Category: {this.state.category}</strong></Form.Label>
                   <div>
@@ -196,8 +207,8 @@ export class AddMovie extends Component {
                 </div>
                 <Form.Group className={'m-2'}>
                   <Form.Label><strong>isShowing</strong></Form.Label>
-                  <Button className={'m-2'} variant={"primary"} onClick={e => this.setState({...this.state, isShowing: false})}>Coming Soon</Button>
-                  <Button className={'m-2'} variant={'success'} onClick={e => this.setState({...this.state, isShowing: true})}>Now Showing</Button>
+                  <Button className={'m-2'} variant={"primary"} onClick={e => this.setState({...this.state, showing: false})}>Coming Soon</Button>
+                  <Button className={'m-2'} variant={'success'} onClick={e => this.setState({...this.state, showing: true})}>Now Showing</Button>
                 </Form.Group>
               </div>
               <Container className={'m-2'}>
@@ -206,6 +217,7 @@ export class AddMovie extends Component {
               </Container>
             </Form>
           </Card>
+          <ActorComponent/>
         </Container>
     )
   }

@@ -14,6 +14,7 @@ export class SearchResultsComponent extends Component {
       category: 'N/A',
       movies: [],
       filterHelpText: '',
+      showing: null,
     }
 
     this.getMovies = this.getMovies.bind(this)
@@ -72,6 +73,8 @@ export class SearchResultsComponent extends Component {
             let render = false
             if (this.state.searchTerm.trim() !== '') {
               render = m.title.toLowerCase().includes(this.state.searchTerm.toLowerCase().trim())
+            } else if(this.state.showing !== null && m.showing !== this.state.showing) {
+              render = false
             } else {
               render = true
             }
@@ -136,6 +139,21 @@ export class SearchResultsComponent extends Component {
               <button className={'search-button'} size={'lg'} onClick={e => this.getMovies()}>Search</button>
             </div>
             <div className='search-bar-buttons'>
+              <div className='search-bar-button-group'>
+                <p className='search-bar-button-group-heading'>Showing</p>
+                <button
+                    className={`${this.state.showing === true ? 'button-active' : ''}`}
+                    onClick={e => this.setState({...this.state, showing: true})}>Now Showing
+                </button>
+                <button
+                    className={`${this.state.showing === false ? 'button-active' : ''}`}
+                    onClick={e => this.setState({...this.state, showing: false})}>Coming Soon
+                </button>
+                <button
+                    className={`${this.state.showing === null ? 'button-active' : ''}`}
+                    onClick={e => this.setState({...this.state, showing: null})}>All
+                </button>
+              </div>
               <div className='search-bar-button-group'>
                 <p className='search-bar-button-group-heading'>Rating</p>
                 <button
