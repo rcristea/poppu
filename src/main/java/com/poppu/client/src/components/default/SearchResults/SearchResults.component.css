@@ -74,5 +74,11 @@
 .no-results {
   display: flex;
   color: #898989;
-  align-items: center;
+  justify-content: center;
+  margin: 50px auto;
+}
+
+.no-results h2 {
+  font-style: italic;
+  font-size: 1rem;
 }

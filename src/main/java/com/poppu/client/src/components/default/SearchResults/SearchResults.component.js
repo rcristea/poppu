@@ -234,9 +234,6 @@ export class SearchResultsComponent extends Component {
             </div>
           </div>
           <Row>
-            <h3 className='filter-help-text'>{this.state.filterHelpText}</h3>
-          </Row>
-          <Row>
             {this.renderMovies()}
           </Row>
         </Container>
