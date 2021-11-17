@@ -14,3 +14,14 @@
     border: 1px solid #898989;
     color: #898989;
 }
+
+.date-container input[type=date] {
+    border: 1px solid #000;
+    color: #fff;
+    background-color: #131313;
+    padding: 6px;
+    border-radius: 50px;
+    outline: none;
+    -webkit-appearance: none;
+    width: auto;
+}

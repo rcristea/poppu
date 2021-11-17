@@ -37,6 +37,7 @@ export class ViewMovie extends Component {
       cast: [{
         actor: "",
       }],
+      date: null,
     }
     this.getMovie = this.getMovie.bind(this);
     this.getShows = this.getShows.bind(this);
@@ -151,9 +152,8 @@ export class ViewMovie extends Component {
       shows: shows,
       reviews: reviews,
       cast: cast,
+      date: new Date().toISOString().substr(0,10),
     })
-    console.log('movie', this.state.movie)
-    console.log(this.state.movie.showing)
   }
 
   async componentDidMount() {
@@ -185,12 +185,23 @@ export class ViewMovie extends Component {
 
   renderShows() {
     if (this.state.shows) {
-      return this.state.shows.map(show => {
+      console.log(this.state.shows)
+      return this.state.shows
+          .filter(show => show.dateTime.substr(0,10) === this.state.date)
+          .map(show => {
         const startTime = new Date(show.dateTime)
         let formattedStartTime = startTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit',})
         return <ShowTimeComponent time={formattedStartTime}/>
       })
     }
+  }
+
+  handleShowChange(event) {
+    this.setState({
+      ...this.state,
+      date: new Date(event.target.value).toISOString().substr(0,10),
+    })
+    console.log(this.state.date)
   }
 
   //use {JSON.stringify(this.state)} to look at all the data being passed in
@@ -236,7 +247,16 @@ export class ViewMovie extends Component {
                 <Row style={{background: '#171717'}}>
                   <Card style={{background: '#171717', border: 0}}>
                     <Card.Title style={{color: 'fuchsia', background: '#171717'}}
-                                className={'mt-3'}>SHOWTIMES</Card.Title>
+                                className={'mt-3'}>
+                        <Col>
+                          SHOWTIMES
+                        </Col>
+                        <Col>
+                          <div className='date-container' style={{width: '50%'}}>
+                            <input type='date' id='shows' name = 'shows' value={this.state.date} onChange={e => this.handleShowChange(e)}/>
+                          </div>
+                        </Col>
+                    </Card.Title>
                     <Card.Text>
                       <ListGroup horizontal>
                         {this.renderShows()}
