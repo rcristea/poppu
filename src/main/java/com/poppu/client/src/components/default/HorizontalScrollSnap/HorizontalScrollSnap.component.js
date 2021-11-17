@@ -49,7 +49,7 @@ export class HorizontalSnapScroll extends Component {
             {this.state.movies.map(movie => {
               return (
                 <section className='horizontal-scroll-snap-child' key={movie.movieId}>
-                  <a href={`/movie/${movie.movieId}`}>
+                  <a href={`/movies/view/${movie.movieId}`}>
                     <img src={`${process.env.PUBLIC_URL}/${movie.trailerPhoto}`} alt={`${movie.title} poster`}
                          width={'350px'} height={'518px'}/>
                     <div className='horizontal-scroll-snap-child-info'>

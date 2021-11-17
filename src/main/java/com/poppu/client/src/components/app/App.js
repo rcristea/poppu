@@ -108,7 +108,7 @@ class App extends Component {
         <Route path='/payment/edit' exact={true} component={EditPaymentInfoComponent}/>
         <Route path='/payment/add' exact={true} component={AddPaymentComponent}/>
         <Route path='/search' component={SearchResultsComponent}/>
-          <Route path='/shows/movie=:id' component={Shows}/>
+        <Route path='/shows/movie=:id' component={Shows}/>
 
         {/* Admin Routes */}
         <Route path='/admin' exact={true} component={Dashboard}/>
