@@ -300,7 +300,7 @@ class ScheduleAdd extends Component {
 
     let movie = await this.getMovieModel(this.state.movie)
     let showroom = await this.getShowroomModel(this.state.showroom)
-    let show = await this.createShowModel(this.state.dateTime, this.state.duration, movie, showroom)
+    await this.createShowModel(this.state.dateTime, this.state.duration, movie, showroom)
 
     // TODO Create SeatAvailabilityModels (not required for this demo)
     // let seatModels = await this.getSeatModels(this.state.showroom)
@@ -309,7 +309,7 @@ class ScheduleAdd extends Component {
     // })
 
     this.props.history.push('/schedule')
-    alert('The show time has been added successfully!')
+    sessionStorage.setItem('alert-success', 'The show time has been added successfully!')
   }
 
   renderError() {

@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Button, Card, Col, Container, Form, Row} from 'react-bootstrap'
+import {Button, Card, Container, Form, Row} from 'react-bootstrap'
 
 class Shows extends Component{
 
@@ -47,7 +47,6 @@ class Shows extends Component{
     }
 
     selectTime(){
-        return;
     }
 
     render(){

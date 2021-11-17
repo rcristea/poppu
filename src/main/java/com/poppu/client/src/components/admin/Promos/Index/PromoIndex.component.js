@@ -1,4 +1,4 @@
-import {React, Component} from 'react'
+import React, {Component} from 'react'
 import './PromoIndex.component.css'
 import Sidebar from '../../Sidebar/Sidebar.component'
 import SearchBar from '../SearchBar/SearchBar.component'
@@ -8,89 +8,11 @@ import {Dropdown, Table} from 'react-bootstrap'
 import DropdownToggle from 'react-bootstrap/DropdownToggle'
 import DropdownMenu from 'react-bootstrap/DropdownMenu'
 import DropdownItem from 'react-bootstrap/DropdownItem'
-import AutoTable from "../../../utils/AutoTable.component";
 
 class PromoIndex extends Component {
   constructor(props) {
     super(props);
 
-    /* Testing data for promos. TODO: set up promo indexing from database -> frontend */
-    /*const promos = [
-      {
-        'id': 1,
-        'code': 'one',
-        'amount': 0,
-        'start_date': '2022-01-01T00:00:00',
-        'end_date': '2022-01-02T00:00:00',
-      },
-      {
-        'id': 2,
-        'code': 'two',
-        'amount': 0,
-        'start_date': '2022-01-01T00:00:00',
-        'end_date': '2022-01-02T00:00:00',
-      },
-      {
-        'id': 3,
-        'code': 'three',
-        'amount': 0,
-        'start_date': '2022-01-01T00:00:00',
-        'end_date': '2022-01-02T00:00:00',
-      }
-      ,
-      {
-        'id': 4,
-        'code': 'four',
-        'amount': 0,
-        'start_date': '2022-01-01T00:00:00',
-        'end_date': '2022-01-02T00:00:00',
-      },
-      {
-        'id': 5,
-        'code': 'five',
-        'amount': 0,
-        'start_date': '2022-01-01T00:00:00',
-        'end_date': '2022-01-02T00:00:00',
-      },
-      {
-        'id': 6,
-        'code': 'six',
-        'amount': 0,
-        'start_date': '2022-01-01T00:00:00',
-        'end_date': '2022-01-02T00:00:00',
-      },
-      {
-        'id': 7,
-        'code': 'seven',
-        'amount': 0,
-        'start_date': '2022-01-01T00:00:00',
-        'end_date': '2022-01-02T00:00:00',
-      },
-      {
-        'id': 8,
-        'code': 'eight',
-        'amount': 0,
-        'start_date': '2022-01-01T00:00:00',
-        'end_date': '2022-01-02T00:00:00',
-      },
-      {
-        'id': 9,
-        'code': 'nine',
-        'amount': 0,
-        'start_date': '2022-01-01T00:00:00',
-        'end_date': '2022-01-02T00:00:00',
-      },
-      {
-        'id': 10,
-        'code': 'ten',
-        'amount': 0,
-        'start_date': '2022-01-01T00:00:00',
-        'end_date': '2022-01-02T00:00:00',
-      }
-
-
-    ]
-     */
     /* Matching the state of the indexer to the shape of the promotions table. */
     this.state = {
       promotions: [{
@@ -109,7 +31,7 @@ class PromoIndex extends Component {
   }
 
   getPromotions() {
-    return fetch('http://localhost:8080/promotions/',  {
+    return fetch('http://localhost:8080/promotions/', {
       method: 'GET',
     }).then(response => {
       if (response.ok) {
@@ -130,9 +52,9 @@ class PromoIndex extends Component {
   handleDelete(id) {
     return e => {
       e.preventDefault()
-      fetch('http://localhost:8080/promotions/'+id, { method: 'DELETE' })
-          .then(() => this.setState({ status: 'Delete successful' }))
-          .then(window.location.reload(false))
+      fetch('http://localhost:8080/promotions/' + id, {method: 'DELETE'})
+        .then(() => this.setState({status: 'Delete successful'}))
+        .then(window.location.reload(false))
 
     }
   }
@@ -161,12 +83,12 @@ class PromoIndex extends Component {
     if (alertSuccess) {
       sessionStorage.removeItem('alert-success')
       return (
-        <Alert message={alertSuccess} type={'success'} />
+        <Alert message={alertSuccess} type={'success'}/>
       )
     } else if (alertError) {
       sessionStorage.removeItem('alert-error')
       return (
-        <Alert message={alertError} type={'error'} />
+        <Alert message={alertError} type={'error'}/>
       )
     } else {
       return null
@@ -197,7 +119,6 @@ class PromoIndex extends Component {
       console.log(formattedPromotions)
     }
   }
-
 
 
   render() {
@@ -232,31 +153,29 @@ class PromoIndex extends Component {
                   <tbody>
 
                   {this.state.promotions.map(promo => (
-                      <tr key={promo.promotionId}>
-                        <td>{promo.promotionId}</td>
-                        <td>{promo.offer}</td>
-                        <td>{promo.startTime}</td>
-                        <td>{promo.endTime}</td>
-                        <td>
-                          <Dropdown className='card-table-dropdown'>
-                            <DropdownToggle
-                                className='card-table-dropdown-button'><BiDotsVerticalRounded/></DropdownToggle>
-
-                            <DropdownMenu>
-                              <DropdownItem href={`/promos/${promo.promotionId}`}>View</DropdownItem>
-                              <DropdownItem href={`/promos/edit/${promo.promotionId}`}>Edit</DropdownItem>
-                              <Dropdown.Divider/>
-                              <form onSubmit={this.handleDelete(promo.promotionId)}>
-                                <button className='delete-promo' type='submit'>Delete</button>
-                              </form>
-                            </DropdownMenu>
-                          </Dropdown>
-                        </td>
-                      </tr>
+                    <tr key={promo.promotionId}>
+                      <td>{promo.promotionId}</td>
+                      <td>{promo.offer}</td>
+                      <td>{promo.startTime}</td>
+                      <td>{promo.endTime}</td>
+                      <td>
+                        <Dropdown className='card-table-dropdown'>
+                          <DropdownToggle
+                            className='card-table-dropdown-button'><BiDotsVerticalRounded/></DropdownToggle>
+                          <DropdownMenu>
+                            <DropdownItem href={`/promos/${promo.promotionId}`}>View</DropdownItem>
+                            <DropdownItem href={`/promos/edit/${promo.promotionId}`}>Edit</DropdownItem>
+                            <Dropdown.Divider/>
+                            <form onSubmit={this.handleDelete(promo.promotionId)}>
+                              <button className='delete-promo' type='submit'>Delete</button>
+                            </form>
+                          </DropdownMenu>
+                        </Dropdown>
+                      </td>
+                    </tr>
                   ))}
                   </tbody>
                 </Table>
-
               </div>
             </div>
           </div>
@@ -265,4 +184,5 @@ class PromoIndex extends Component {
     )
   }
 }
+
 export default PromoIndex

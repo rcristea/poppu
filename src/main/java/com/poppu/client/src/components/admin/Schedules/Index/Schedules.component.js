@@ -5,7 +5,7 @@ import {BiDotsVerticalRounded, BiPlus} from 'react-icons/bi'
 import {Dropdown, Table} from 'react-bootstrap'
 import DropdownToggle from 'react-bootstrap/DropdownToggle'
 import DropdownMenu from 'react-bootstrap/DropdownMenu'
-import DropdownItem from 'react-bootstrap/DropdownItem'
+import Alert from "../../Alerts/Alert";
 
 
 class Schedule extends Component {
@@ -79,6 +79,25 @@ class Schedule extends Component {
     }
   }
 
+  renderAlert() {
+    let alertSuccess = sessionStorage.getItem('alert-success')
+    let alertError = sessionStorage.getItem('alert-error')
+
+    if (alertSuccess) {
+      sessionStorage.removeItem('alert-success')
+      return (
+        <Alert message={alertSuccess} type={'success'}/>
+      )
+    } else if (alertError) {
+      sessionStorage.removeItem('alert-error')
+      return (
+        <Alert message={alertError} type={'error'}/>
+      )
+    } else {
+      return null
+    }
+  }
+
   renderShows() {
     if (this.state.shows) {
       return this.state.shows.map(show => {
@@ -96,8 +115,6 @@ class Schedule extends Component {
                 <DropdownToggle
                   className='card-table-dropdown-button'><BiDotsVerticalRounded/></DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem href={`/schedule/edit/${show.showID}`}>Edit</DropdownItem>
-                  <Dropdown.Divider/>
                   <form onSubmit={this.deleteShow(show.showID)}>
                     <button className='delete-schedule' type='submit'>Delete</button>
                   </form>
@@ -128,6 +145,7 @@ class Schedule extends Component {
     return (
       <>
         <Sidebar />
+        {this.renderAlert()}
         <div className='schedule-container'>
           <div className='cover'>
             <div className='schedule-card'>

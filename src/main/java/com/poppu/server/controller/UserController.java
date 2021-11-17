@@ -56,6 +56,7 @@ public class UserController {
                     user.setPassword(newUserInfo.getPassword());
                     user.setIsSubscribed(newUserInfo.getIsSubscribed());
                     user.setRole(newUserInfo.getRole());
+                    user.setStatus(newUserInfo.getStatus());
                     return this.userRepository.save(user);
                 })
                 .orElseGet(() -> this.userRepository.save(newUserInfo));
