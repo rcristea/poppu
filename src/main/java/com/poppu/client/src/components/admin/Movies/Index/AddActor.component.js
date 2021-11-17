@@ -2,6 +2,8 @@ import 'react-bootstrap/'
 import {Component} from 'react'
 import {Button, Card, Container, Form} from 'react-bootstrap'
 import {TitleComponent} from "../../../default/Profile/Utils.component";
+import ActorComponent from "./ActorComponent.component";
+import {postData} from "../../../default/Profile/methods";
 
 export class AddActorComponent extends Component{
     constructor(props) {
@@ -15,25 +17,31 @@ export class AddActorComponent extends Component{
 
         this.handleBack = this.handleBack.bind(this)
         this.handleSubmitActor = this.handleSubmitActor.bind(this)
+        this.handleReload = this.handleReload.bind(this)
     }
 
     handleBack() {
         this.props.history.push('/admin')
     }
 
-    handleSubmitActor() {
-        if (this.state.movieID.trim() === '') {
-            alert('Empty movieID. Please fill it out.')
-        } else if (this.state.firstName.trim() === '') {
+    handleReload() {
+        window.location.reload()
+    }
+
+    async handleSubmitActor() {
+        if (this.state.firstName.trim() === '') {
             alert('Empty first name. Please fill it out.')
         } else if (this.state.lastName.trim() === '') {
             alert('Empty last name. Please fill it out.')
-        } else if (this.state.role.trim() === '') {
-            alert('Empty role. Please fill it out.')
         } else {
             console.log(this.state)
-            this.props.history.push('/admin')
+            await this.updateDB()
         }
+    }
+
+    async updateDB() {
+        let res = await postData(this.state, 'http://localhost:8080/actors/')
+        console.log(res)
     }
 
     componentDidMount() {
@@ -50,15 +58,6 @@ export class AddActorComponent extends Component{
                 <Card className={'m-2'}>
                     <Form>
                         <div>
-                            <Form.Group>
-                                <Form.Label><strong>Movie ID</strong></Form.Label>
-                                <Form.Control type={'text'}
-                                              placeholder={'Enter the id of the movie.'}
-                                              value={this.state.movieID}
-                                              onChange={e => this.setState({
-                                                  ...this.state, movieID: e.target.value
-                                              })}/>
-                            </Form.Group>
                             <Form.Group>
                                 <Form.Label><strong>First Name</strong></Form.Label>
                                 <Form.Control type={'text'}
@@ -77,22 +76,15 @@ export class AddActorComponent extends Component{
                                                   ...this.state, lastName: e.target.value
                                               })}/>
                             </Form.Group>
-                            <Form.Group>
-                                <Form.Label><strong>Role</strong></Form.Label>
-                                <Form.Control type={'text'}
-                                              placeholder={'Enter the role in the movie of this actor'}
-                                              value={this.state.role}
-                                              onChange={e => this.setState({
-                                                  ...this.state, role: e.target.value
-                                              })}/>
-                            </Form.Group>
                         </div>
                         <Container className={'m-2'}>
                             <Button variant={'success'} onClick={this.handleSubmitActor}>Submit Actor</Button>
                             <Button variant={'warning'} onClick={this.handleBack}>Go Back</Button>
+                            <Button variant={'success'} onClick={this.handleReload}>Refresh Page</Button>
                         </Container>
                     </Form>
                 </Card>
+                <ActorComponent />
             </Container>
         )
     }
