@@ -57,7 +57,7 @@ export class AddMovie extends Component {
       let path = 'assets/img/posters/' + this.state.trailerPhoto
       this.setState({...this.state, trailerPhoto: path})
       console.log('AddMovieComponent State:', this.state)
-      await this.updateDB()
+      await this.updateDB().then((() => {this.updateActors()}))
       this.props.history.push('/admin')
     }
   }
@@ -72,13 +72,17 @@ export class AddMovie extends Component {
   async updateDB() {
     let movieJSON = await postData(this.state, 'http://localhost:8080/movies/')
     console.log('Added Movie: ', movieJSON)
-    this.updateActors(movieJSON=movieJSON)
+    this.setState({
+      ...this.state,
+      _movieJSON: movieJSON
+    })
   }
 
-  async updateActors(movieJSON) {
+  async updateActors() {
+    console.log(this.state._movieJSON)
     const actorsResult = await Promise.all(this.state._actors.map(async (actor: string) => {
       let actorJSON = await getData(`http://localhost:8080/actors/${actor}`)
-      let movieActorRes = await getData( `http://localhost:8080/api/movieActors/${movieJSON.movieID}/${actor}`)
+      let movieActorRes = await getData( `http://localhost:8080/api/movieActors/${this.state._movieJSON.movieId}/${actor}`)
       console.log('Added Actor', movieActorRes)
     }));
   }

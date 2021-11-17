@@ -46,12 +46,12 @@ export class ViewMovie extends Component {
   }
 
   getCast() {
-    return fetch(`http://localhost:8080/movieActors?size=300`, {
+    return fetch(`http://localhost:8080/movieActors?size=200`, {
       method: 'GET',
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          return json._embedded.movieactors
+          return this.filterCast(json._embedded.movieactors)
         })
       } else {
         console.error('getMovieActors', response)
@@ -131,9 +131,6 @@ export class ViewMovie extends Component {
     console.log(movie, shows, reviews, cast)
     shows = this.filterShows(shows)
     reviews = this.filterReviews(reviews)
-    console.log('before filter', cast)
-    cast = this.filterCast(cast)
-    console.log('after filter', cast)
     this.setState({
       movie: movie,
       shows: shows,
