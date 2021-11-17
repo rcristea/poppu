@@ -1,7 +1,9 @@
 package com.poppu.server.controller;
 
 import com.poppu.server.model.MovieModel;
+import com.poppu.server.model.ShowModel;
 import com.poppu.server.repository.MovieRepository;
+import com.poppu.server.repository.ShowRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +17,12 @@ import java.util.Optional;
 @RequestMapping("/api/movies")
 public class MovieController {
     private MovieRepository movieRepository;
+    private ShowRepository showRepository;
 
-    public MovieController(MovieRepository movieRepository) {this.movieRepository = movieRepository;}
+    public MovieController(MovieRepository movieRepository, ShowRepository showRepository) {
+        this.movieRepository = movieRepository;
+        this.showRepository = showRepository;
+    }
 
     @GetMapping("/")
     public List<MovieModel> getMovies() {return this.movieRepository.findAll();}
@@ -33,4 +39,11 @@ public class MovieController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable("id") long id) {
+        List<ShowModel> list = this.showRepository.findAllByMovie(id);
+        list.forEach(show -> { this.showRepository.deleteById(show.getShowID()); });
+        this.movieRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }
