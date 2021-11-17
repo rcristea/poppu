@@ -1,6 +1,6 @@
 import 'react-bootstrap/'
 import {Component} from 'react'
-import { Card, Container, ListGroup, ListGroupItem, Row} from 'react-bootstrap'
+import {Card, Container, ListGroup, ListGroupItem, Row} from 'react-bootstrap'
 import ReviewCard from "../../../utils/ReviewCard.component";
 import NavBar from "../../../default/NavBar/NavBar.component";
 import {format} from "date-fns";
@@ -33,16 +33,34 @@ export class ViewMovie extends Component {
         rating: "",
         description: "",
       }],
+      cast: [{
+        actor: "",
+      }],
     }
     this.getMovie = this.getMovie.bind(this);
     this.getShows = this.getShows.bind(this);
     this.initContent = this.initContent.bind(this);
     this.filterShows = this.filterShows.bind(this);
     this.getReviews = this.getReviews.bind(this);
+    this.getCast = this.getCast.bind(this)
   }
 
   getCast() {
-    
+    return fetch(`http://localhost:8080/movieactors?size=300`, {
+      method: 'GET',
+    }).then(response => {
+      if (response.ok) {
+        return response.json().then(json => {
+          return json._embedded.movieactors
+        })
+      } else {
+        console.error('getMovieActors', response)
+        return null
+      }
+    }).catch(error => {
+      console.error('getMovieActors', error)
+      return null
+    })
   }
 
   getMovie() {
@@ -101,16 +119,25 @@ export class ViewMovie extends Component {
     return reviews.filter(review => review.movie.movieId == this.props.match.params.id)
   }
 
+  filterCast(cast) {
+    return cast.filter(movieActor => movieActor.movie.movieId == this.props.match.params.id).map(movieactor => movieactor.actor)
+  }
+
   async initContent() {
     let movie = await this.getMovie(this.props.match.params.id)
     let shows = await this.getShows(this.props.match.params.id)
     let reviews = await this.getReviews(this.props.match.params.id)
+    let cast = await this.getCast(this.props.match.params.id)
     shows = this.filterShows(shows)
     reviews = this.filterReviews(reviews)
+    console.log ('before filter', cast)
+    cast = this.filterCast(cast)
+    console.log ('after filter', cast)
     this.setState({
       movie: movie,
       shows: shows,
-      reviews: reviews
+      reviews: reviews,
+      cast: cast,
     })
   }
 
@@ -130,11 +157,22 @@ export class ViewMovie extends Component {
     return "https://www.youtube.com/embed/" + this.state.movie.trailerLink;
   }
 
+  renderCast() {
+    if (this.state.cast) {
+      let result = ""
+      this.state.cast.map(actor => {
+        result+= actor.firstName + " " + actor.lastName + ", "
+      })
+      return result.substr(0,result.length-2)
+    }
+    return null
+  }
+
   renderShows() {
     if (this.state.shows) {
       return this.state.shows.map(show => {
         const startTime = new Date(show.dateTime)
-        let formattedStartTime = startTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', })
+        let formattedStartTime = startTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit',})
         return <ShowTimeComponent time={formattedStartTime}/>
       })
     }
@@ -220,7 +258,7 @@ export class ViewMovie extends Component {
                         Cast
                       </ListGroupItem>
                       <ListGroupItem>
-                        hi
+                        {this.renderCast()}
                       </ListGroupItem>
                     </ListGroup>
                   </ListGroupItem>
@@ -231,11 +269,11 @@ export class ViewMovie extends Component {
               <h2 style={{color: 'slateblue'}} className={'mt-1 px-3'}>Reviews</h2>
               {this.state.reviews.map(review => {
                 return <ReviewCard
-                  comment_key={review.id}
-                  comment_title={review.title}
-                  comment_rating={review.rating}
-                  comment_description={review.description}
-                  />
+                    comment_key={review.id}
+                    comment_title={review.title}
+                    comment_rating={review.rating}
+                    comment_description={review.description}
+                />
               })}
             </Card>
           </Container>

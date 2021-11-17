@@ -39,10 +39,6 @@ export class ManageMoviesComponent extends Component {
     })
   }
 
-  getMovieId() {
-
-  }
-
   async componentDidMount() {
     let movies = await this.getMovies()
     let formattedMovies = []
@@ -60,10 +56,6 @@ export class ManageMoviesComponent extends Component {
       movies: formattedMovies,
     })
     console.log(this.state.movies)
-  }
-
-  formatMovies() {
-
   }
 
   render() {

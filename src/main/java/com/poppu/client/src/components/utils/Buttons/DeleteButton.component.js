@@ -15,7 +15,7 @@ export class DeleteButton extends SuperButton {
     return e => {
       e.preventDefault()
       console.log(movieId)
-      fetch(`http://localhost:8080/movies/${movieId}`, {
+      fetch(`http://localhost:8080/api/movies/${movieId}`, {
         method: 'DELETE',
       });
 
