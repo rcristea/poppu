@@ -1,6 +1,8 @@
 import {Component} from 'react'
 import {Button, Card, Col, Container, Form, Row} from 'react-bootstrap'
-import {TitleComponent} from '../Profile/Utils.component'
+import './SearchResults.component.css'
+import NavBar from '../NavBar/NavBar.component'
+import {AiOutlineClose} from 'react-icons/ai'
 
 
 export class SearchResultsComponent extends Component {
@@ -59,9 +61,9 @@ export class SearchResultsComponent extends Component {
   renderMovies() {
     if (this.state.movies.length === 0) {
       return (
-        <Row className={'m-2 bg-danger bg-opacity-25'}>
-          <h2>No movie came up!</h2>
-        </Row>
+        <div className='no-results'>
+          <h2>No movies came up!</h2>
+        </div>
       )
     } else {
       return (
@@ -106,7 +108,7 @@ export class SearchResultsComponent extends Component {
 
             if (render) {
               return (
-                <Row className={'m-2 bg-opacity-25'}>
+                <Row key={m.movieId} className={'m-2 bg-opacity-25'}>
                   <Col>
                     <Card.Img variant="top"
                               src={`${process.env.PUBLIC_URL}/${m.trailerPhoto}`}/>
@@ -171,64 +173,74 @@ export class SearchResultsComponent extends Component {
 
   render() {
     return (
-      <Container className={'my-2 bg-light'}>
-        <TitleComponent compTitle={'Search Movies'}/>
-        <Row className={'m-2'}>
-          <Form.Label><strong><strong><h2>Search By Title: {this.state.searchTerm}</h2></strong></strong></Form.Label>
-          <Form.Control size={"lg"} type={'text'}
-                        onChange={e => this.setState({...this.state, searchTerm: e.target.value})}
-                        value={this.state.searchTerm}/>
-        </Row>
-        <Row className={'m-2 bg-success bg-opacity-10'}>
-          <div>
-            <Form.Label><strong><h3>Search By Rating: {this.state.rating}</h3></strong></Form.Label>
-            <div>
-              <Button className={'m-2'} variant={"warning"}
-                      onClick={e => this.setState({...this.state, rating: "G"})}>G</Button>
-              <Button className={'m-2'} variant={"warning"}
-                      onClick={e => this.setState({...this.state, rating: "PG"})}>PG</Button>
-              <Button className={'m-2'} variant={"warning"}
-                      onClick={e => this.setState({...this.state, rating: "PG13"})}>PG13</Button>
-              <Button className={'m-2'} variant={"warning"}
-                      onClick={e => this.setState({...this.state, rating: "R"})}>R</Button>
-              <Button className={'m-2'} variant={"warning"}
-                      onClick={e => this.setState({...this.state, rating: "NC17"})}>NC17</Button>
-              <Button className={'m-2'} variant={"outline-warning"}
-                      onClick={e => this.setState({...this.state, rating: "N/A"})}>❌</Button>
+      <>
+        <NavBar />
+        <div className='spacer' />
+        <Container className='search-results'>
+          <div className='header'>
+            <div className='search-bar'>
+              <Form.Control
+                type={'text'}
+                placeholder={'Search by Title'}
+                className={'input-title'}
+                onChange={e => this.setState({...this.state, searchTerm: e.target.value})}
+                value={this.state.searchTerm} />
+              <button className={'search-button'} size={'lg'} onClick={e => this.getMovies()}>Search</button>
+            </div>
+            <div className='search-bar-buttons'>
+              <div className='search-bar-button-group'>
+                <p className='search-bar-button-group-heading'>Rating</p>
+                <button
+                  className={`${this.state.rating === 'G' ? 'button-active' : ''}`}
+                  onClick={e => this.setState({...this.state, rating: 'G'})}>G</button>
+                <button
+                  className={`${this.state.rating === 'PG' ? 'button-active' : ''}`}
+                  onClick={e => this.setState({...this.state, rating: 'PG'})}>PG</button>
+                <button
+                  className={`${this.state.rating === 'PG13' ? 'button-active' : ''}`}
+                  onClick={e => this.setState({...this.state, rating: 'PG13'})}>PG-13</button>
+                <button
+                  className={`${this.state.rating === 'R' ? 'button-active' : ''}`}
+                  onClick={e => this.setState({...this.state, rating: 'R'})}>R</button>
+                <button
+                  className={`${this.state.rating === 'NC17' ? 'button-active' : ''}`}
+                  onClick={e => this.setState({...this.state, rating: 'NC17'})}>NC-17</button>
+                <button
+                  onClick={e => this.setState({...this.state, rating: 'N/A'})}><AiOutlineClose /></button>
+              </div>
+              <div className='search-bar-button-group'>
+                <p className='search-bar-button-group-heading'>Category</p>
+                <button
+                  className={`${this.state.category === 'Action' ? 'button-active' : ''}`}
+                  onClick={e => this.setState({...this.state, category: 'Action'})}>Action</button>
+                <button
+                  className={`${this.state.category === 'Drama' ? 'button-active' : ''}`}
+                  onClick={e => this.setState({...this.state, category: 'Drama'})}>Drama</button>
+                <button
+                  className={`${this.state.category === 'Horror' ? 'button-active' : ''}`}
+                  onClick={e => this.setState({...this.state, category: 'Horror'})}>Horror</button>
+                <button
+                  className={`${this.state.category === 'Romance' ? 'button-active' : ''}`}
+                  onClick={e => this.setState({...this.state, category: 'Romance'})}>Romance</button>
+                <button
+                  className={`${this.state.category === 'Thriller' ? 'button-active' : ''}`}
+                  onClick={e => this.setState({...this.state, category: 'Thriller'})}>Thriller</button>
+                <button
+                  className={`${this.state.category === 'Animation' ? 'button-active' : ''}`}
+                  onClick={e => this.setState({...this.state, category: 'Animation'})}>Animation</button>
+                <button
+                  onClick={e => this.setState({...this.state, category: 'N/A'})}><AiOutlineClose /></button>
+              </div>
             </div>
           </div>
-        </Row>
-        <Row className={'m-2 bg-success bg-opacity-10'}>
-          <div>
-            <Form.Label><strong><h3>Search By Category: {this.state.category}</h3></strong></Form.Label>
-            <div>
-              <Button className={'m-2'} variant={'warning'}
-                      onClick={e => this.setState({...this.state, category: 'Action'})}>Action</Button>
-              <Button className={'m-2'} variant={'warning'}
-                      onClick={e => this.setState({...this.state, category: 'Drama'})}>Drama</Button>
-              <Button className={'m-2'} variant={'warning'}
-                      onClick={e => this.setState({...this.state, category: 'Horror'})}>Horror</Button>
-              <Button className={'m-2'} variant={'warning'}
-                      onClick={e => this.setState({...this.state, category: 'Romance'})}>Romance</Button>
-              <Button className={'m-2'} variant={'warning'}
-                      onClick={e => this.setState({...this.state, category: 'Thriller'})}>Thriller</Button>
-              <Button className={'m-2'} variant={"outline-warning"}
-                      onClick={e => this.setState({...this.state, category: 'N/A'})}>❌</Button>
-            </div>
-          </div>
-        </Row>
-        <Row>
-          <div>
-            <Button variant={'warning'} className={'m-2'} size={'lg'} onClick={e => this.getMovies()}>Search</Button>
-          </div>
-        </Row>
-        <Row>
-          <TitleComponent compTitle={this.state.filterHelpText}/>
-        </Row>
-        <Row>
-          {this.renderMovies()}
-        </Row>
-      </Container>
+          <Row>
+            <h3 className='filter-help-text'>{this.state.filterHelpText}</h3>
+          </Row>
+          <Row>
+            {this.renderMovies()}
+          </Row>
+        </Container>
+      </>
     )
   }
 }
