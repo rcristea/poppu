@@ -152,7 +152,7 @@ export class ViewMovie extends Component {
       shows: shows,
       reviews: reviews,
       cast: cast,
-      date: new Date().toISOString().substr(0,10),
+      date: new Date().toISOString().substr(0, 10),
     })
   }
 
@@ -185,21 +185,20 @@ export class ViewMovie extends Component {
 
   renderShows() {
     if (this.state.shows) {
-      console.log(this.state.shows)
       return this.state.shows
-          .filter(show => show.dateTime.substr(0,10) === this.state.date)
+          .filter(show => show.dateTime.substr(0, 10) === this.state.date)
           .map(show => {
-        const startTime = new Date(show.dateTime)
-        let formattedStartTime = startTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit',})
-        return <ShowTimeComponent time={formattedStartTime}/>
-      })
+            const startTime = new Date(show.dateTime)
+            let formattedStartTime = startTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit',})
+            return <ShowTimeComponent time={formattedStartTime}/>
+          })
     }
   }
 
   handleShowChange(event) {
     this.setState({
       ...this.state,
-      date: new Date(event.target.value).toISOString().substr(0,10),
+      date: new Date(event.target.value).toISOString().substr(0, 10),
     })
     console.log(this.state.date)
   }
@@ -248,14 +247,17 @@ export class ViewMovie extends Component {
                   <Card style={{background: '#171717', border: 0}}>
                     <Card.Title style={{color: 'fuchsia', background: '#171717'}}
                                 className={'mt-3'}>
-                        <Col>
+                      <Row>
+                        <Col className={'col-4'}>
                           SHOWTIMES
                         </Col>
                         <Col>
-                          <div className='date-container' style={{width: '50%'}}>
-                            <input type='date' id='shows' name = 'shows' value={this.state.date} onChange={e => this.handleShowChange(e)}/>
+                          <div className='date-container' style={{width: '70%'}}>
+                            <input type='date' id='shows' name='shows' value={this.state.date}
+                                   onChange={e => this.handleShowChange(e)}/>
                           </div>
                         </Col>
+                      </Row>
                     </Card.Title>
                     <Card.Text>
                       <ListGroup horizontal>
