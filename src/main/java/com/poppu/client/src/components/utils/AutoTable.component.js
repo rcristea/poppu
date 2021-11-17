@@ -1,6 +1,5 @@
 import {Component} from 'react'
 import {ButtonGroup, Card, Container, Row, Table} from 'react-bootstrap'
-import EditButton from './Buttons/EditButton.component'
 import ViewButton from './Buttons/ViewButton.component'
 import DeleteButton from './Buttons/DeleteButton.component'
 import AddButton from './Buttons/AddButton.component'
@@ -30,7 +29,7 @@ export class AutoTable extends Component {
                 <tbody>
                 {this.props.table_data.map(row => {
                   return (
-                    <TableRow key={row.id} row_data={row} viewable={this.props.viewable} editable={this.props.editable}
+                    <TableRow key={row.id} row_data={row} viewable={this.props.viewable}
                               deletable={this.props.deletable}/>
                   )
                 })}
@@ -49,16 +48,15 @@ export class TableRow extends Component {
   render() {
     return (
       <tr>
-        {Object.entries(this.props.row_data).map(entry => {
-          return (
-            <td key={entry[1]}>{entry[1]}</td>
-          )
-        })}
+        <td key={this.props.row_data.id}>{this.props.row_data.id}</td>
+        <td key={this.props.row_data.movieName}>{this.props.row_data.movieName}</td>
+        <td key={this.props.row_data.movieRating}>{this.props.row_data.movieRating}</td>
+        <td key={this.props.row_data.movieRatingCode}>{this.props.row_data.movieRatingCode}</td>
+        <td key={this.props.row_data.movieIsShowing}>{(this.props.row_data.movieIsShowing) ? "Now Showing" : "Coming Soon"}</td>
         <td>
           <ButtonGroup>
-            {this.props.viewable && <ViewButton/>}
-            {this.props.editable && <EditButton/>}
-            {this.props.deletable && <DeleteButton/>}
+            {this.props.viewable && <ViewButton movieId={this.props.row_data.id}/>}
+            {this.props.deletable && <DeleteButton movieId={this.props.row_data.id}/>}
           </ButtonGroup>
         </td>
       </tr>

@@ -1,8 +1,9 @@
 import 'react-bootstrap/'
 import {Component} from 'react'
-import { Card, Container, ListGroup, ListGroupItem, Row} from 'react-bootstrap'
+import {Card, Container, ListGroup, ListGroupItem, Row} from 'react-bootstrap'
 import ReviewCard from "../../../utils/ReviewCard.component";
 import NavBar from "../../../default/NavBar/NavBar.component";
+import {format} from "date-fns";
 
 export class ViewMovie extends Component {
   constructor(props) {
@@ -23,11 +24,43 @@ export class ViewMovie extends Component {
         duration: "",
         rating: "",
       },
-      shows: null,
+      shows: [{
+        dateTime: "",
+      }],
+      reviews: [{
+        id: "",
+        title: "",
+        rating: "",
+        description: "",
+      }],
+      cast: [{
+        actor: "",
+      }],
     }
     this.getMovie = this.getMovie.bind(this);
-    this.getShowModels = this.getShowModels.bind(this);
+    this.getShows = this.getShows.bind(this);
     this.initContent = this.initContent.bind(this);
+    this.filterShows = this.filterShows.bind(this);
+    this.getReviews = this.getReviews.bind(this);
+    this.getCast = this.getCast.bind(this)
+  }
+
+  getCast() {
+    return fetch(`http://localhost:8080/movieactors?size=300`, {
+      method: 'GET',
+    }).then(response => {
+      if (response.ok) {
+        return response.json().then(json => {
+          return json._embedded.movieactors
+        })
+      } else {
+        console.error('getMovieActors', response)
+        return null
+      }
+    }).catch(error => {
+      console.error('getMovieActors', error)
+      return null
+    })
   }
 
   getMovie() {
@@ -42,13 +75,30 @@ export class ViewMovie extends Component {
     })
   }
 
-  getShowModels() {
+  getReviews() {
+    return fetch(`http://localhost:8080/reviews`, {
+      method: 'GET',
+    }).then(response => {
+      if (response.ok) {
+        return response.json().then(json => {
+          return json._embedded.reviews
+        })
+      } else {
+        console.error('getReviews', response)
+        return null
+      }
+    }).catch(error => {
+      console.error('getReviews', error)
+      return null
+    })
+  }
+
+  getShows() {
     return fetch(`http://localhost:8080/shows`, {
       method: 'GET',
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          console.log('getShowModels', json._embedded.shows)
           return json._embedded.shows
         })
       } else {
@@ -61,33 +111,42 @@ export class ViewMovie extends Component {
     })
   }
 
-  async initContent() {
-    let movie = await this.getMovie(this.props.match.params.id)
-    let shows = await this.getShowModels(this.props.match.params.id)
-    let shows2 = [];
-    shows.forEach(show => {
-      if (show.movieId === this.state.movie.id) {
-        shows2.concat(show)
-      }
-    })
-    this.setState({
-      movie: movie,
-      shows: shows2,
-    })
-    console.log('shows', shows)
+  filterShows(shows) {
+    return shows.filter(show => show.movie.movieId == this.props.match.params.id)
   }
 
-  comment_id = 1
-  comment_title = 'This movie sucks'
-  comment_rating = 5.9
-  comment_description = 'I really hated this goddamn movie. It is a piece of shit.'
+  filterReviews(reviews) {
+    return reviews.filter(review => review.movie.movieId == this.props.match.params.id)
+  }
+
+  filterCast(cast) {
+    return cast.filter(movieActor => movieActor.movie.movieId == this.props.match.params.id).map(movieactor => movieactor.actor)
+  }
+
+  async initContent() {
+    let movie = await this.getMovie(this.props.match.params.id)
+    let shows = await this.getShows(this.props.match.params.id)
+    let reviews = await this.getReviews(this.props.match.params.id)
+    let cast = await this.getCast(this.props.match.params.id)
+    shows = this.filterShows(shows)
+    reviews = this.filterReviews(reviews)
+    console.log ('before filter', cast)
+    cast = this.filterCast(cast)
+    console.log ('after filter', cast)
+    this.setState({
+      movie: movie,
+      shows: shows,
+      reviews: reviews,
+      cast: cast,
+    })
+  }
 
   async componentDidMount() {
     if (sessionStorage.getItem('role') !== 'admin') {
       sessionStorage.setItem('alert', 'User does not have correct privileges.')
       this.props.history.push('/')
     }
-    this.initContent()
+    await this.initContent()
   }
 
   formatYear() {
@@ -96,6 +155,27 @@ export class ViewMovie extends Component {
 
   formatYoutubeLink() {
     return "https://www.youtube.com/embed/" + this.state.movie.trailerLink;
+  }
+
+  renderCast() {
+    if (this.state.cast) {
+      let result = ""
+      this.state.cast.map(actor => {
+        result+= actor.firstName + " " + actor.lastName + ", "
+      })
+      return result.substr(0,result.length-2)
+    }
+    return null
+  }
+
+  renderShows() {
+    if (this.state.shows) {
+      return this.state.shows.map(show => {
+        const startTime = new Date(show.dateTime)
+        let formattedStartTime = startTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit',})
+        return <ShowTimeComponent time={formattedStartTime}/>
+      })
+    }
   }
 
   //use {JSON.stringify(this.state)} to look at all the data being passed in
@@ -110,9 +190,14 @@ export class ViewMovie extends Component {
               <h2 style={{color: 'deeppink'}}>{this.state.movie.score} / 10</h2>
             </div>
             <ListGroup horizontal className={'pb-2'} style={{background: '#171717'}}>
-              <ListGroupItem><h5 style={{color: 'blueviolet'}}>{this.formatYear()}</h5></ListGroupItem>
-              <ListGroupItem><h5 style={{color: 'blueviolet'}}>{this.state.movie.rating}</h5></ListGroupItem>
-              <ListGroupItem><h5 style={{color: 'blueviolet'}}>{this.state.movie.duration}</h5>
+              <ListGroupItem className={'border-0 border-end'} style={{background: '#171717'}}>
+                <h5 style={{color: 'blueviolet'}}>{this.formatYear()}</h5>
+              </ListGroupItem>
+              <ListGroupItem style={{background: '#171717'}} className={'border-0 border-end'}>
+                <h5 style={{color: 'blueviolet'}}>{this.state.movie.rating}</h5>
+              </ListGroupItem>
+              <ListGroupItem style={{background: '#171717'}} className={'border-0'}>
+                <h5 style={{color: 'blueviolet'}}>{this.state.movie.duration}</h5>
               </ListGroupItem>
             </ListGroup>
             <Row>
@@ -133,11 +218,10 @@ export class ViewMovie extends Component {
             </Row>
             <Row style={{background: '#171717'}}>
               <Card style={{background: '#171717', border: 0}}>
-                <Card.Title style={{color: 'fuchsia', background: '#171717'}}>SHOWTIMES</Card.Title>
+                <Card.Title style={{color: 'fuchsia', background: '#171717'}} className={'mt-3'}>SHOWTIMES</Card.Title>
                 <Card.Text>
                   <ListGroup horizontal>
-                    <ShowTimeComponent/>
-                    <ListGroupItem>STILL NEED TO IMPLEMENT</ListGroupItem>
+                    {this.renderShows()}
                   </ListGroup>
                 </Card.Text>
               </Card>
@@ -174,7 +258,7 @@ export class ViewMovie extends Component {
                         Cast
                       </ListGroupItem>
                       <ListGroupItem>
-                        hi
+                        {this.renderCast()}
                       </ListGroupItem>
                     </ListGroup>
                   </ListGroupItem>
@@ -183,12 +267,14 @@ export class ViewMovie extends Component {
             </Card>
             <Card className={'w-75'} border="secondary" style={{background: '#171717'}}>
               <h2 style={{color: 'slateblue'}} className={'mt-1 px-3'}>Reviews</h2>
-              <ReviewCard
-                  comment_key={this.comment_id}
-                  comment_title={this.comment_title}
-                  comment_rating={this.comment_rating}
-                  comment_description={this.comment_description}
-              />
+              {this.state.reviews.map(review => {
+                return <ReviewCard
+                    comment_key={review.id}
+                    comment_title={review.title}
+                    comment_rating={review.rating}
+                    comment_description={review.description}
+                />
+              })}
             </Card>
           </Container>
         </>
@@ -197,21 +283,10 @@ export class ViewMovie extends Component {
 }
 
 class ShowTimeComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      date_time: "",
-    }
-  }
-
-  formatTime() {
-
-  }
-
   render() {
     return (
         <>
-          <div className={'m-3 p-2 border rounded-pill border-1 text-white'}>3:30pm</div>
+          <div className={'m-3 p-2 border rounded-pill border-1 text-white'}>{this.props.time}</div>
         </>
     )
   }

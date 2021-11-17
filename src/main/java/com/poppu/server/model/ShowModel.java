@@ -1,5 +1,8 @@
 package com.poppu.server.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -24,6 +27,7 @@ public class ShowModel {
     private MovieModel movie;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "showroom_id", foreignKey = @ForeignKey(name = "FK_show_showroom"))
     private ShowroomModel showroom;
 
