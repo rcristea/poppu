@@ -55,7 +55,7 @@ export class ManageMoviesComponent extends Component {
     this.setState({
       movies: formattedMovies,
     })
-    console.log(this.state.movies)
+    console.log('movies', this.state.movies)
   }
 
   render() {
@@ -70,7 +70,6 @@ export class ManageMoviesComponent extends Component {
           widths={[1, 5, 1, 1, 2]}
           table_data={this.state.movies}
           viewable={true}
-          editable={true}
           deletable={true}
           addable={true}
         />
