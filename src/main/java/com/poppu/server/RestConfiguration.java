@@ -16,5 +16,7 @@ public class RestConfiguration implements RepositoryRestConfigurer {
         config.exposeIdsFor(ShowModel.class);
         config.exposeIdsFor(SeatModel.class);
         config.exposeIdsFor(PromotionModel.class);
+        config.exposeIdsFor(ActorModel.class);
+        config.exposeIdsFor(MovieActorModel.class);
     }
 }

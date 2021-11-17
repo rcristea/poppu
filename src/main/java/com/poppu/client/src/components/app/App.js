@@ -22,6 +22,7 @@ import {ViewMovie} from '../admin/Movies/Index/ViewMovie.component'
 import UserIndex from '../admin/Users/Index/UserIndex.component'
 import UserEdit from '../admin/Users/Edit/UserEdit.component'
 import UserView from '../admin/Users/View/UserView.component'
+import Shows from '../default/Shows/Shows.component'
 import ViewProfileComponent from '../default/Profile/ViewProfile.component'
 import Registration from '../default/Registration/Registration.component'
 import ForgotPassword from '../default/ForgotPassword/ForgotPassword.component'
@@ -32,11 +33,11 @@ import AddPaymentComponent from '../default/Profile/AddPayment.component'
 import bcrypt from 'bcryptjs'
 import AddAddressComponent from '../default/Profile/AddAddress.component'
 import Schedule from '../admin/Schedules/Index/Schedules.component'
-import EditMovie from '../admin/Movies/Index/EditMovie.component'
 import AddActorComponent from '../admin/Movies/Index/AddActor.component'
 import ScheduleAdd from '../admin/Schedules/Add/ScheduleAdd.component'
 import ScheduleEdit from '../admin/Schedules/Edit/ScheduleEdit.component'
 import {SearchResultsComponent} from '../default/SearchResults/SearchResults.component'
+import ActorComponent from "../admin/Movies/Index/ActorComponent.component";
 
 class App extends Component {
   constructor(props) {
@@ -107,6 +108,7 @@ class App extends Component {
         <Route path='/payment/edit' exact={true} component={EditPaymentInfoComponent}/>
         <Route path='/payment/add' exact={true} component={AddPaymentComponent}/>
         <Route path='/search' component={SearchResultsComponent}/>
+          <Route path='/shows/movie=:id' component={Shows}/>
 
         {/* Admin Routes */}
         <Route path='/admin' exact={true} component={Dashboard}/>
@@ -115,7 +117,6 @@ class App extends Component {
         <Route path='/movies' exact={true} component={MovieIndex}/>
         <Route path='/movies/add' exact={true} component={AddMovie}/>
         <Route path='/movies/view/:id' component={ViewMovie}/>
-        <Route path='/movies/edit' exact={true} component={EditMovie}/>
         <Route path='/actor/add' exact={true} component={AddActorComponent}/>
         <Route path='/showtime/add' exact={true} component={AddShowTime}/>
         <Route path='/schedule' exact={true} component={Schedule} />

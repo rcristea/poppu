@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -27,8 +28,15 @@ public class ShowController {
         return this.showRepository.findAll();
     }
 
+    @GetMapping("/byMovie/{movieID}")
+    public List<ShowModel> getShows(@PathVariable("movieID") long movieID) {
+        return this.showRepository.findAll().stream().filter(showModel -> {
+            return showModel.getMovie().getMovieId() == movieID;
+        }).collect(Collectors.toList());
+    }
+
     @GetMapping("/movie/{id}")
-    public List<ShowModel> getByMovieId(@PathVariable("id") long movieId) {
+    public List<ShowModel> getByMovieId(@PathVariable("movieId") long movieId) {
         return this.showRepository.findAllByMovie(movieId);
     }
   

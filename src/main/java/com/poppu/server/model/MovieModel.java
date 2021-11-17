@@ -53,7 +53,7 @@ public class MovieModel {
     @Column(name = "is_showing", nullable = false, columnDefinition = "tinyint(1) default 0")
     private boolean isShowing;
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private Set<MovieActorModel> cast = new HashSet<MovieActorModel>();
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
