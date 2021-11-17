@@ -46,7 +46,7 @@ export class ViewMovie extends Component {
   }
 
   getCast() {
-    return fetch(`http://localhost:8080/movieactors?size=300`, {
+    return fetch(`http://localhost:8080/movieActors?size=300`, {
       method: 'GET',
     }).then(response => {
       if (response.ok) {
@@ -128,6 +128,7 @@ export class ViewMovie extends Component {
     let shows = await this.getShows(this.props.match.params.id)
     let reviews = await this.getReviews(this.props.match.params.id)
     let cast = await this.getCast(this.props.match.params.id)
+    console.log(movie, shows, reviews, cast)
     shows = this.filterShows(shows)
     reviews = this.filterReviews(reviews)
     console.log('before filter', cast)

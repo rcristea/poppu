@@ -2,7 +2,7 @@ import 'react-bootstrap/'
 import {Component} from 'react'
 import {Button, Card, Container, Form} from 'react-bootstrap'
 import {TitleComponent} from "../../../default/Profile/Utils.component";
-import {postData, putData} from "../../../default/Profile/methods";
+import {getData, postData, putData} from "../../../default/Profile/methods";
 
 export class AddMovie extends Component {
   constructor(props) {
@@ -71,16 +71,16 @@ export class AddMovie extends Component {
 
   async updateDB() {
     let movieJSON = await postData(this.state, 'http://localhost:8080/movies/')
-    const actorsResult = await Promise.all(this.state._actors.map(async (actor: string) => {
-      let movieActor = await putData( {
-        movie_id: 1,
-        actor_id: parseInt(actor),
-        role: 'N/A'
-      }, `http://localhost:8080/movieActors`)
-      console.log('Added Actor', movieActor)
-    }));
     console.log('Added Movie: ', movieJSON)
-    console.log('Actors Result: ', actorsResult)
+    this.updateActors(movieJSON=movieJSON)
+  }
+
+  async updateActors(movieJSON) {
+    const actorsResult = await Promise.all(this.state._actors.map(async (actor: string) => {
+      let actorJSON = await getData(`http://localhost:8080/actors/${actor}`)
+      let movieActorRes = await getData( `http://localhost:8080/api/movieActors/${movieJSON.movieID}/${actor}`)
+      console.log('Added Actor', movieActorRes)
+    }));
   }
 
   render() {
