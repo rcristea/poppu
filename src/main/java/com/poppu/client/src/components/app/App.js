@@ -22,6 +22,7 @@ import {ViewMovie} from '../admin/Movies/Index/ViewMovie.component'
 import UserIndex from '../admin/Users/Index/UserIndex.component'
 import UserEdit from '../admin/Users/Edit/UserEdit.component'
 import UserView from '../admin/Users/View/UserView.component'
+import Shows from '../default/Shows/Shows.component'
 import ViewProfileComponent from '../default/Profile/ViewProfile.component'
 import Registration from '../default/Registration/Registration.component'
 import ForgotPassword from '../default/ForgotPassword/ForgotPassword.component'
@@ -107,6 +108,7 @@ class App extends Component {
         <Route path='/payment/edit' exact={true} component={EditPaymentInfoComponent}/>
         <Route path='/payment/add' exact={true} component={AddPaymentComponent}/>
         <Route path='/search' component={SearchResultsComponent}/>
+          <Route path='/shows/movie=:id' component={Shows}/>
 
         {/* Admin Routes */}
         <Route path='/admin' exact={true} component={Dashboard}/>

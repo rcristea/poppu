@@ -36,7 +36,7 @@ public class ShowController {
     }
 
     @GetMapping("/movie/{id}")
-    public List<ShowModel> getByMovieId(@PathVariable("id") long movieId) {
+    public List<ShowModel> getByMovieId(@PathVariable("movieId") long movieId) {
         return this.showRepository.findAllByMovie(movieId);
     }
   
