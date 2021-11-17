@@ -183,7 +183,9 @@ export class SearchResultsComponent extends Component {
                             <Button className={'m-2'} variant={"warning"} onClick={e => this.setState({...this.state, rating: "PG13"})}>PG13</Button>
                             <Button className={'m-2'} variant={"warning"} onClick={e => this.setState({...this.state, rating: "R"})}>R</Button>
                             <Button className={'m-2'} variant={"warning"} onClick={e => this.setState({...this.state, rating: "NC17"})}>NC17</Button>
-                            <Button className={'m-2'} variant={"outline-warning"} onClick={e => this.setState({...this.state, rating: "N/A"})}>❌</Button>
+                            <Button className={'m-2'} variant={"outline-warning"} onClick={e => {
+                                this.setState({...this.state, rating: "N/A"})
+                            }}>❌</Button>
                         </div>
                     </div>
                 </Row>
@@ -196,7 +198,9 @@ export class SearchResultsComponent extends Component {
                             <Button className={'m-2'} variant={'warning'} onClick={e => this.setState({...this.state, category: 'Horror'})}>Horror</Button>
                             <Button className={'m-2'} variant={'warning'} onClick={e => this.setState({...this.state, category: 'Romance'})}>Romance</Button>
                             <Button className={'m-2'} variant={'warning'} onClick={e => this.setState({...this.state, category: 'Thriller'})}>Thriller</Button>
-                            <Button className={'m-2'} variant={"outline-warning"} onClick={e => this.setState({...this.state, category: 'N/A'})}>❌</Button>
+                            <Button className={'m-2'} variant={"outline-warning"} onClick={e => {
+                                this.setState({...this.state, category: 'N/A'})
+                            }}>❌</Button>
                         </div>
                     </div>
                 </Row>
