@@ -130,9 +130,9 @@ export class ViewMovie extends Component {
     let cast = await this.getCast(this.props.match.params.id)
     shows = this.filterShows(shows)
     reviews = this.filterReviews(reviews)
-    console.log ('before filter', cast)
+    console.log('before filter', cast)
     cast = this.filterCast(cast)
-    console.log ('after filter', cast)
+    console.log('after filter', cast)
     this.setState({
       movie: movie,
       shows: shows,
@@ -161,9 +161,9 @@ export class ViewMovie extends Component {
     if (this.state.cast) {
       let result = ""
       this.state.cast.map(actor => {
-        result+= actor.firstName + " " + actor.lastName + ", "
+        result += actor.firstName + " " + actor.lastName + ", "
       })
-      return result.substr(0,result.length-2)
+      return result.substr(0, result.length - 2)
     }
     return null
   }
@@ -226,45 +226,31 @@ export class ViewMovie extends Component {
                 </Card.Text>
               </Card>
             </Row>
-            <Card style={{background: '#171717'}}>
-              <Card.Body>
-                <ListGroup>
-                  <ListGroupItem>
-                    <ListGroup horizontal>
-                      <ListGroupItem>{this.state.movie.category}</ListGroupItem>
-                      <ListGroupItem>{this.state.movie.isShowing ? 'Now Showing' : 'Coming Soon'}</ListGroupItem>
-                    </ListGroup>
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    <Card.Text className="mb-2 p-3">
-                      {this.state.movie.synopsis}
-                    </Card.Text>
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    <ListGroup horizontal>
-                      <ListGroupItem>Director</ListGroupItem>
-                      <ListGroupItem>{this.state.movie.director}</ListGroupItem>
-                    </ListGroup>
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    <ListGroup horizontal>
-                      <ListGroupItem>Producer</ListGroupItem>
-                      <ListGroupItem>{this.state.movie.producer}</ListGroupItem>
-                    </ListGroup>
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    <ListGroup horizontal>
-                      <ListGroupItem>
-                        Cast
-                      </ListGroupItem>
-                      <ListGroupItem>
-                        {this.renderCast()}
-                      </ListGroupItem>
-                    </ListGroup>
-                  </ListGroupItem>
-                </ListGroup>
-              </Card.Body>
-            </Card>
+            <Row style={{background: '#171717'}} className={"m-1"}>
+              <ListGroup horizontal className={"border-bottom border-info rounded-0"}>
+                <ListGroupItem className={"text-primary border-0"} style={{background: '#171717'}}>{this.state.movie.category}</ListGroupItem>
+                <ListGroupItem className={"text-white border-0"} style={{background: '#171717'}}>{this.state.movie.isShowing ? 'Now Showing' : 'Coming Soon'}</ListGroupItem>
+              </ListGroup>
+              <Card.Text className="mb-2 p-3 text-white">
+                {this.state.movie.synopsis}
+              </Card.Text>
+              <ListGroup horizontal>
+                <ListGroupItem>Director</ListGroupItem>
+                <ListGroupItem>{this.state.movie.director}</ListGroupItem>
+              </ListGroup>
+              <ListGroup horizontal>
+                <ListGroupItem>Producer</ListGroupItem>
+                <ListGroupItem>{this.state.movie.producer}</ListGroupItem>
+              </ListGroup>
+              <ListGroup horizontal>
+                <ListGroupItem>
+                  Cast
+                </ListGroupItem>
+                <ListGroupItem>
+                  {this.renderCast()}
+                </ListGroupItem>
+              </ListGroup>
+            </Row>
             <Card className={'w-75'} border="secondary" style={{background: '#171717'}}>
               <h2 style={{color: 'slateblue'}} className={'mt-1 px-3'}>Reviews</h2>
               {this.state.reviews.map(review => {
