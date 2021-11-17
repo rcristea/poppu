@@ -16,5 +16,7 @@ public interface MovieRepository extends JpaRepository<MovieModel, Long> {
     List<MovieModel> findAllByCategoryAndRating(@Param("category") String category, @Param("rating") String rating);
     List<MovieModel> findAllByProducer(@Param("producer") String producer);
     List<MovieModel> findAllByDirector(@Param("director") String director);
+    List<MovieModel> findByIsShowingTrue();
+    List<MovieModel> findByIsShowingFalse();
     MovieModel findDistinctByTitle(@Param("title") String title);
 }
