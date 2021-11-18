@@ -1,8 +1,10 @@
 import 'react-bootstrap/'
 import {Component} from 'react'
-import {Card, Container, ListGroup, ListGroupItem, Row} from 'react-bootstrap'
+import {Button, Card, Col, Container, ListGroup, ListGroupItem, Row} from 'react-bootstrap'
 import ReviewCard from "../../../utils/ReviewCard.component";
 import NavBar from "../../../default/NavBar/NavBar.component";
+import './ViewMovie.component.css'
+import {format} from "date-fns";
 
 export class ViewMovie extends Component {
   constructor(props) {
@@ -19,7 +21,7 @@ export class ViewMovie extends Component {
         score: "",
         trailerPhoto: "",
         trailerLink: "",
-        isShowing: "",
+        showing: "",
         duration: "",
         rating: "",
       },
@@ -35,6 +37,7 @@ export class ViewMovie extends Component {
       cast: [{
         actor: "",
       }],
+      date: null,
     }
     this.getMovie = this.getMovie.bind(this);
     this.getShows = this.getShows.bind(this);
@@ -132,10 +135,25 @@ export class ViewMovie extends Component {
     reviews = this.filterReviews(reviews)
     cast = this.filterCast(cast)
     this.setState({
-      movie: movie,
+      movie: {
+        id: movie.movieId,
+        title: movie.title,
+        date: movie.date,
+        category: movie.category,
+        director: movie.director,
+        producer: movie.producer,
+        synopsis: movie.synopsis,
+        score: movie.score,
+        trailerPhoto: movie.trailerPhoto,
+        trailerLink: movie.trailerLink,
+        showing: movie.showing,
+        duration: movie.duration,
+        rating: movie.rating,
+      },
       shows: shows,
       reviews: reviews,
       cast: cast,
+      date: new Date().toISOString().substr(0, 10),
     })
   }
 
@@ -169,12 +187,27 @@ export class ViewMovie extends Component {
 
   renderShows() {
     if (this.state.shows) {
-      return this.state.shows.map(show => {
-        const startTime = new Date(show.dateTime)
-        let formattedStartTime = startTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit',})
-        return <ShowTimeComponent time={formattedStartTime}/>
-      })
+      let uniqueShowTimes = []
+      console.log('shows', this.state.shows)
+      return this.state.shows
+          .filter(show => show.dateTime.substr(0, 10) === this.state.date)
+          .map(show => {
+            if (!uniqueShowTimes.includes(show.dateTime)) {
+              uniqueShowTimes.push(show.dateTime)
+              const startTime = new Date(show.dateTime)
+              let formattedStartTime = startTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit',})
+              return <ShowTimeComponent time={formattedStartTime}/>
+            }
+          })
     }
+  }
+
+  handleShowChange(event) {
+    this.setState({
+      ...this.state,
+      date: new Date(event.target.value).toISOString().substr(0, 10),
+    })
+    console.log(this.state.date)
   }
 
   //use {JSON.stringify(this.state)} to look at all the data being passed in
@@ -215,40 +248,64 @@ export class ViewMovie extends Component {
                 </ListGroupItem>
               </ListGroup>
             </Row>
-            <Row style={{background: '#171717'}}>
-              <Card style={{background: '#171717', border: 0}}>
-                <Card.Title style={{color: 'fuchsia', background: '#171717'}} className={'mt-3'}>SHOWTIMES</Card.Title>
-                <Card.Text>
-                  <ListGroup horizontal>
-                    {this.renderShows()}
+            <Row className={'m-2'}>
+              <Col className={"col-4"}>
+                <Row style={{background: '#171717'}}>
+                  <Card style={{background: '#171717', border: 0}}>
+                    <Card.Title style={{color: 'fuchsia', background: '#171717'}}
+                                className={'mt-3'}>
+                      <Row>
+                        <Col className={'col-4'}>
+                          SHOWTIMES
+                        </Col>
+                        <Col>
+                          <div className='date-container' style={{width: '70%'}}>
+                            <input type='date' id='shows' name='shows' value={this.state.date}
+                                   onChange={e => this.handleShowChange(e)}/>
+                          </div>
+                        </Col>
+                      </Row>
+                    </Card.Title>
+                    <Card.Text>
+                      <ListGroup horizontal>
+                        {this.renderShows()}
+                      </ListGroup>
+                      <button disabled={!this.state.movie.showing} className="view-movie-button">Book Tickets</button>
+                    </Card.Text>
+                  </Card>
+                </Row>
+              </Col>
+              <Col>
+                <Row style={{background: '#171717'}}>
+                  <ListGroup horizontal className={"border-bottom border-info rounded-0"}>
+                    <ListGroupItem className={"text-primary border-0"}
+                                   style={{background: '#171717'}}>{this.state.movie.category}</ListGroupItem>
+                    <ListGroupItem className={"text-white border-0"}
+                                   style={{background: '#171717'}}>{this.state.movie.isShowing ? 'Now Showing' : 'Coming Soon'}</ListGroupItem>
                   </ListGroup>
-                </Card.Text>
-              </Card>
-            </Row>
-            <Row style={{background: '#171717'}} className={"m-1"}>
-              <ListGroup horizontal className={"border-bottom border-info rounded-0"}>
-                <ListGroupItem className={"text-primary border-0"} style={{background: '#171717'}}>{this.state.movie.category}</ListGroupItem>
-                <ListGroupItem className={"text-white border-0"} style={{background: '#171717'}}>{this.state.movie.showing ? 'Now Showing' : 'Coming Soon'}</ListGroupItem>
-              </ListGroup>
-              <Card.Text className="mb-2 p-3 text-white">
-                {this.state.movie.synopsis}
-              </Card.Text>
-              <ListGroup horizontal>
-                <ListGroupItem>Director</ListGroupItem>
-                <ListGroupItem>{this.state.movie.director}</ListGroupItem>
-              </ListGroup>
-              <ListGroup horizontal>
-                <ListGroupItem>Producer</ListGroupItem>
-                <ListGroupItem>{this.state.movie.producer}</ListGroupItem>
-              </ListGroup>
-              <ListGroup horizontal>
-                <ListGroupItem>
-                  Cast
-                </ListGroupItem>
-                <ListGroupItem>
-                  {this.renderCast()}
-                </ListGroupItem>
-              </ListGroup>
+                  <Card.Text className="mb-2 p-3 text-white border-bottom border-info rounded-0">
+                    {this.state.movie.synopsis}
+                  </Card.Text>
+                  <ListGroup horizontal className={"border-bottom border-info rounded-0"}>
+                    <ListGroupItem className={"text-primary border-0"}
+                                   style={{background: '#171717'}}>Director</ListGroupItem>
+                    <ListGroupItem className={"text-white border-0"}
+                                   style={{background: '#171717'}}>{this.state.movie.director}</ListGroupItem>
+                  </ListGroup>
+                  <ListGroup horizontal className={"border-bottom border-info rounded-0"}>
+                    <ListGroupItem className={"text-primary border-0"}
+                                   style={{background: '#171717'}}>Producer</ListGroupItem>
+                    <ListGroupItem className={"text-white border-0"}
+                                   style={{background: '#171717'}}>{this.state.movie.producer}</ListGroupItem>
+                  </ListGroup>
+                  <ListGroup horizontal>
+                    <ListGroupItem className={"text-primary border-0"}
+                                   style={{background: '#171717'}}>Cast</ListGroupItem>
+                    <ListGroupItem className={"text-white border-0"}
+                                   style={{background: '#171717'}}>{this.renderCast()}</ListGroupItem>
+                  </ListGroup>
+                </Row>
+              </Col>
             </Row>
             <Card className={'w-75'} border="secondary" style={{background: '#171717'}}>
               <h2 style={{color: 'slateblue'}} className={'mt-1 px-3'}>Reviews</h2>
