@@ -185,12 +185,17 @@ export class ViewMovie extends Component {
 
   renderShows() {
     if (this.state.shows) {
+      let uniqueShowTimes = []
+      console.log('shows', this.state.shows)
       return this.state.shows
           .filter(show => show.dateTime.substr(0, 10) === this.state.date)
           .map(show => {
-            const startTime = new Date(show.dateTime)
-            let formattedStartTime = startTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit',})
-            return <ShowTimeComponent time={formattedStartTime}/>
+            if (!uniqueShowTimes.includes(show.dateTime)) {
+              uniqueShowTimes.push(show.dateTime)
+              const startTime = new Date(show.dateTime)
+              let formattedStartTime = startTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit',})
+              return <ShowTimeComponent time={formattedStartTime}/>
+            }
           })
     }
   }
