@@ -76,6 +76,22 @@ function putData(data, destination) {
   })
 }
 
+function getData(destination) {
+  return new Promise(function (resolve, reject) {
+    fetch(destination, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    }).then(response => {
+      resolve(response)
+    }).catch(error => {
+      reject(error)
+    })
+  })
+}
+
 function postData(data, destination) {
   return new Promise(function (resolve, reject) {
     fetch(destination, {
@@ -125,4 +141,4 @@ function deleteAssociation(destination) {
   })
 }
 
-export {getUser, getPaymentCards, getAddress, putData, postData, putAssociation, deleteAssociation}
+export {getUser, getPaymentCards, getAddress, putData, postData, putAssociation, deleteAssociation, getData}
