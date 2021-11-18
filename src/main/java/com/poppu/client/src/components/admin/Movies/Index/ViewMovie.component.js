@@ -140,10 +140,6 @@ export class ViewMovie extends Component {
   }
 
   async componentDidMount() {
-    if (sessionStorage.getItem('role') !== 'admin') {
-      sessionStorage.setItem('alert', 'User does not have correct privileges.')
-      this.props.history.push('/')
-    }
     await this.initContent()
   }
 
