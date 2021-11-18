@@ -17,7 +17,9 @@ class MovieIndex extends Component {
       <>
         <Sidebar />
         <div className='movies-container'>
-          <ManageMoviesComponent/>
+          <div className='cover'>
+            <ManageMoviesComponent/>
+          </div>
         </div>
       </>
     )
