@@ -1,7 +1,12 @@
 package com.poppu.server.controller;
 
+import com.poppu.server.key.MovieActorKey;
+import com.poppu.server.model.ActorModel;
 import com.poppu.server.model.MovieActorModel;
+import com.poppu.server.model.MovieModel;
+import com.poppu.server.repository.ActorRepository;
 import com.poppu.server.repository.MovieActorRepository;
+import com.poppu.server.repository.MovieRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,13 +19,17 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/movieactors")
+@RequestMapping("/api/movieActors")
 public class MovieActorController {
     private final Logger log = LoggerFactory.getLogger(ShowController.class);
     private MovieActorRepository movieActorRepository;
+    private MovieRepository movieRepository;
+    private ActorRepository actorRepository;
 
-    public MovieActorController(MovieActorRepository movieActorRepository) {
+    public MovieActorController(MovieActorRepository movieActorRepository, MovieRepository movieRepository, ActorRepository actorRepository) {
         this.movieActorRepository = movieActorRepository;
+        this.movieRepository = movieRepository;
+        this.actorRepository = actorRepository;
     }
 
     @GetMapping("/")
@@ -28,17 +37,16 @@ public class MovieActorController {
         return this.movieActorRepository.findAll();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<MovieActorModel> putMovieActor(@RequestBody MovieActorModel newMovieActorInfo, @PathVariable("id") long id) throws URISyntaxException {
-        MovieActorModel updatedMovieActor = this.movieActorRepository.findById(id)
-                .map(movieActor -> {
-                    movieActor.setRole(newMovieActorInfo.getRole());
-                    return this.movieActorRepository.save(movieActor);
-                })
-                .orElseGet(() -> this.movieActorRepository.save(newMovieActorInfo));
-        return ResponseEntity
-                .created(new URI("/api/movieactor/" + updatedMovieActor.getId()))
-                .body(updatedMovieActor);
+    @GetMapping("/{movieID}/{actorID}")
+    public MovieActorModel postMovieActor(@PathVariable("movieID") long movieID, @PathVariable("actorID") long actorID) {
+        MovieModel movie = this.movieRepository.getById(movieID);
+        ActorModel actor = this.actorRepository.getById(actorID);
+        MovieActorModel m = new MovieActorModel(movie, actor, "N/A");
+        MovieActorKey mkey = new MovieActorKey(movieID, actorID);
+        m.setId(mkey);
+        log.warn(m.toString());
+        MovieActorModel res = this.movieActorRepository.save(m);
+        return res;
     }
 
     @PostMapping("/")
@@ -47,11 +55,5 @@ public class MovieActorController {
         return ResponseEntity
                 .created(new URI("/api/movieactors/" + res.getId()))
                 .body(res);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteMovieActor(@PathVariable("id") long id) {
-        this.movieActorRepository.deleteById(id);
-        return ResponseEntity.ok().build();
     }
 }

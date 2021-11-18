@@ -2,7 +2,8 @@ import 'react-bootstrap/'
 import {Component} from 'react'
 import {Button, Card, Container, Form} from 'react-bootstrap'
 import {TitleComponent} from "../../../default/Profile/Utils.component";
-import {postData, putData} from "../../../default/Profile/methods";
+import {getData, postData} from "../../../default/Profile/methods";
+import ActorComponent from "./ActorComponent.component";
 
 export class AddMovie extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export class AddMovie extends Component {
     this.state = {
       title: '',
       date: '',
+      duration: '',
       category: '',
       director: '',
       producer: '',
@@ -18,7 +20,7 @@ export class AddMovie extends Component {
       photoName: '',
       trailerPhoto: '',
       trailerLink: '',
-      isShowing: '',
+      showing: false,
       _actors: [],
       _actorsText: ''
     }
@@ -57,7 +59,7 @@ export class AddMovie extends Component {
       let path = 'assets/img/posters/' + this.state.trailerPhoto
       this.setState({...this.state, trailerPhoto: path})
       console.log('AddMovieComponent State:', this.state)
-      await this.updateDB()
+      await this.updateDB().then((() => {this.updateActors()}))
       this.props.history.push('/admin')
     }
   }
@@ -71,16 +73,20 @@ export class AddMovie extends Component {
 
   async updateDB() {
     let movieJSON = await postData(this.state, 'http://localhost:8080/movies/')
-    const actorsResult = await Promise.all(this.state._actors.map(async (actor: string) => {
-      let movieActor = await putData( {
-        movie_id: 1,
-        actor_id: parseInt(actor),
-        role: 'N/A'
-      }, `http://localhost:8080/movieActors`)
-      console.log('Added Actor', movieActor)
-    }));
     console.log('Added Movie: ', movieJSON)
-    console.log('Actors Result: ', actorsResult)
+    this.setState({
+      ...this.state,
+      _movieJSON: movieJSON
+    })
+  }
+
+  async updateActors() {
+    console.log(this.state._movieJSON)
+    await Promise.all(this.state._actors.map(async (actor: string) => {
+      await getData(`http://localhost:8080/actors/${actor}`)
+      let movieActorRes = await getData( `http://localhost:8080/api/movieActors/${this.state._movieJSON.movieId}/${actor}`)
+      console.log('Added Actor', movieActorRes)
+    }));
   }
 
   render() {
@@ -106,6 +112,15 @@ export class AddMovie extends Component {
                                 value={this.state.date}
                                 onChange={e => this.setState({
                                   ...this.state, date: e.target.value
+                                })}/>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label><strong>Duration</strong></Form.Label>
+                  <Form.Control type={'text'}
+                                placeholder={'Enter the duration of the movie.'}
+                                value={this.state.duration}
+                                onChange={e => this.setState({
+                                  ...this.state, duration: e.target.value
                                 })}/>
                 </Form.Group>
                 <Form.Group className={'m-2'}>
@@ -192,8 +207,8 @@ export class AddMovie extends Component {
                 </div>
                 <Form.Group className={'m-2'}>
                   <Form.Label><strong>isShowing</strong></Form.Label>
-                  <Button className={'m-2'} variant={"primary"} onClick={e => this.setState({...this.state, isShowing: false})}>Coming Soon</Button>
-                  <Button className={'m-2'} variant={'success'} onClick={e => this.setState({...this.state, isShowing: true})}>Now Showing</Button>
+                  <Button className={'m-2'} variant={"primary"} onClick={e => this.setState({...this.state, showing: false})}>Coming Soon</Button>
+                  <Button className={'m-2'} variant={'success'} onClick={e => this.setState({...this.state, showing: true})}>Now Showing</Button>
                 </Form.Group>
               </div>
               <Container className={'m-2'}>
@@ -202,6 +217,7 @@ export class AddMovie extends Component {
               </Container>
             </Form>
           </Card>
+          <ActorComponent/>
         </Container>
     )
   }

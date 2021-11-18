@@ -58,7 +58,7 @@ export class NavBar extends Component {
             </div>
             <div className='nav-center'>
               <div className='nav-link'>
-                <a href='/#'>Movies</a>
+                <a href='/search'>Movies</a>
               </div>
               <div className='nav-link'>
                 <a href='/#'>Theaters</a>

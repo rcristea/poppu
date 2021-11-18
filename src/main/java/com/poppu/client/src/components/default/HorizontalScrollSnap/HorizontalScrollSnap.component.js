@@ -48,13 +48,13 @@ export class HorizontalSnapScroll extends Component {
           <div className='horizontal-scroll-snap-container' ref={this.containerRef}>
             {this.state.movies.map(movie => {
               return (
-                <section className='horizontal-scroll-snap-child' key={movie.movie_id}>
-                  <a href={`/movie/${movie.movie_id}`}>
-                    <img src={`${process.env.PUBLIC_URL}/${movie.movie_poster}`} alt={`${movie.movie_name} poster`}
+                <section className='horizontal-scroll-snap-child' key={movie.movieId}>
+                  <a href={`/movies/view/${movie.movieId}`}>
+                    <img src={`${process.env.PUBLIC_URL}/${movie.trailerPhoto}`} alt={`${movie.title} poster`}
                          width={'350px'} height={'518px'}/>
                     <div className='horizontal-scroll-snap-child-info'>
-                      <h2 className='grow-1'>{movie.movie_name}</h2>
-                      <h2>{movie.movie_rating} / 10</h2>
+                      <h2 className='grow-1'>{movie.title.length > 30 ? `${movie.title.substring(0, 30)}...` : movie.title}</h2>
+                      <h2>{movie.rating}</h2>
                     </div>
                   </a>
                 </section>

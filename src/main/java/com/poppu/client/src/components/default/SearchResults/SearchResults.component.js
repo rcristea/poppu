@@ -14,6 +14,7 @@ export class SearchResultsComponent extends Component {
       category: 'N/A',
       movies: [],
       filterHelpText: '',
+      showing: null,
     }
 
     this.getMovies = this.getMovies.bind(this)
@@ -72,6 +73,8 @@ export class SearchResultsComponent extends Component {
             let render = false
             if (this.state.searchTerm.trim() !== '') {
               render = m.title.toLowerCase().includes(this.state.searchTerm.toLowerCase().trim())
+            } else if(this.state.showing !== null && m.showing !== this.state.showing) {
+              render = false
             } else {
               render = true
             }
@@ -86,7 +89,7 @@ export class SearchResultsComponent extends Component {
                       <h2>{m.rating}</h2>
                     </div>
                     <div className='search-result-item-buttons'>
-                      <button disabled={!m.showing}>Book Tickets</button>
+                      <button disabled={!m.showing} onClick={e => {this.props.history.push(`/shows/movie=${m.movieId}`)}}>Book Tickets</button>
                       <button
                         onClick={e => {this.props.history.push('/movies/view/' + m.movieId)}}
                       >View Movie</button>
@@ -137,7 +140,22 @@ export class SearchResultsComponent extends Component {
             </div>
             <div className='search-bar-buttons'>
               <div className='search-bar-button-group'>
-                <p className='search-bar-button-group-heading'>Rating</p>
+                <button
+                    className={`${this.state.showing === true ? 'button-active' : ''}`}
+                    style={{width: '150px'}}
+                    onClick={e => this.setState({...this.state, showing: true})}>Now Showing
+                </button>
+                <button
+                    className={`${this.state.showing === false ? 'button-active' : ''}`}
+                    style={{width: '150px'}}
+                    onClick={e => this.setState({...this.state, showing: false})}>Coming Soon
+                </button>
+                <button
+                    className={`${this.state.showing === null ? 'button-active' : ''}`}
+                    onClick={e => this.setState({...this.state, showing: null})}>All
+                </button>
+              </div>
+              <div className='search-bar-button-group'>
                 <button
                   className={`${this.state.rating === 'G' ? 'button-active' : ''}`}
                   onClick={e => this.setState({...this.state, rating: 'G'})}>G
@@ -162,7 +180,6 @@ export class SearchResultsComponent extends Component {
                   onClick={e => this.setState({...this.state, rating: 'N/A'})}><AiOutlineClose/></button>
               </div>
               <div className='search-bar-button-group'>
-                <p className='search-bar-button-group-heading'>Category</p>
                 <button
                   className={`${this.state.category === 'Action' ? 'button-active' : ''}`}
                   onClick={e => this.setState({...this.state, category: 'Action'})}>Action

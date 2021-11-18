@@ -48,12 +48,12 @@ export class ViewMovie extends Component {
   }
 
   getCast() {
-    return fetch(`http://localhost:8080/movieactors?size=300`, {
+    return fetch(`http://localhost:8080/movieActors?size=300`, {
       method: 'GET',
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          return json._embedded.movieactors
+          return json._embedded.movieActors
         })
       } else {
         console.error('getMovieActors', response)
@@ -114,15 +114,15 @@ export class ViewMovie extends Component {
   }
 
   filterShows(shows) {
-    return shows.filter(show => show.movie.movieId == this.props.match.params.id)
+    return shows.filter(show => show.movie.movieId === this.props.match.params.id)
   }
 
   filterReviews(reviews) {
-    return reviews.filter(review => review.movie.movieId == this.props.match.params.id)
+    return reviews.filter(review => review.movie.movieId === this.props.match.params.id)
   }
 
   filterCast(cast) {
-    return cast.filter(movieActor => movieActor.movie.movieId == this.props.match.params.id).map(movieactor => movieactor.actor)
+    return cast.filter(movieActor => movieActor.movie.movieId === this.props.match.params.id).map(movieactor => movieactor.actor)
   }
 
   async initContent() {
@@ -130,6 +130,7 @@ export class ViewMovie extends Component {
     let shows = await this.getShows(this.props.match.params.id)
     let reviews = await this.getReviews(this.props.match.params.id)
     let cast = await this.getCast(this.props.match.params.id)
+    console.log(movie, shows, reviews, cast)
     shows = this.filterShows(shows)
     reviews = this.filterReviews(reviews)
     cast = this.filterCast(cast)
@@ -177,6 +178,7 @@ export class ViewMovie extends Component {
       let result = ""
       this.state.cast.map(actor => {
         result += actor.firstName + " " + actor.lastName + ", "
+        return result
       })
       return result.substr(0, result.length - 2)
     }

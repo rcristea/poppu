@@ -5,7 +5,7 @@ import {BiDotsVerticalRounded, BiPlus} from 'react-icons/bi'
 import {Dropdown, Table} from 'react-bootstrap'
 import DropdownToggle from 'react-bootstrap/DropdownToggle'
 import DropdownMenu from 'react-bootstrap/DropdownMenu'
-import Alert from "../../Alerts/Alert";
+import Alert from '../../Alerts/Alert'
 
 
 class Schedule extends Component {

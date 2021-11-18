@@ -245,7 +245,8 @@ class ScheduleAdd extends Component {
         if (
           (thisStartTime < showStartTime && showStartTime < thisEndTime) ||
           (thisStartTime < showEndTime && showEndTime < thisEndTime) ||
-          (showStartTime < thisStartTime && thisEndTime < showEndTime)
+          (showStartTime < thisStartTime && thisEndTime < showEndTime) ||
+          (thisStartTime.toString() === showStartTime.toString())
         ) {
           this.setState({
             error: 'This show room has another movie playing at the selected time.'
