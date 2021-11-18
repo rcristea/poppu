@@ -2,7 +2,7 @@ import 'react-bootstrap/'
 import {Component} from 'react'
 import {Button, Card, Container, Form} from 'react-bootstrap'
 import {TitleComponent} from "../../../default/Profile/Utils.component";
-import {getData, postData, putData} from "../../../default/Profile/methods";
+import {getData, postData} from "../../../default/Profile/methods";
 import ActorComponent from "./ActorComponent.component";
 
 export class AddMovie extends Component {
@@ -82,8 +82,8 @@ export class AddMovie extends Component {
 
   async updateActors() {
     console.log(this.state._movieJSON)
-    const actorsResult = await Promise.all(this.state._actors.map(async (actor: string) => {
-      let actorJSON = await getData(`http://localhost:8080/actors/${actor}`)
+    await Promise.all(this.state._actors.map(async (actor: string) => {
+      await getData(`http://localhost:8080/actors/${actor}`)
       let movieActorRes = await getData( `http://localhost:8080/api/movieActors/${this.state._movieJSON.movieId}/${actor}`)
       console.log('Added Actor', movieActorRes)
     }));

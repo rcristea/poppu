@@ -2,7 +2,6 @@ import {Component, createRef} from 'react'
 import './LandingPage.component.css'
 import NavBar from '../NavBar/NavBar.component'
 import HorizontalScrollSnap from '../HorizontalScrollSnap/HorizontalScrollSnap.component'
-import SearchMovie from '../SearchMovie/SearchMovie.component'
 import {IoIosClose} from 'react-icons/io'
 
 export class LandingPage extends Component {
@@ -74,7 +73,6 @@ export class LandingPage extends Component {
             </div>
           </div>
           <div className='landing-page-content'>
-            <SearchMovie/>
             {this.state.nowShowing !== null ? <HorizontalScrollSnap data={this.state.nowShowing} heading='Now Showing'/> : null}
             <div className='spacer'/>
             {this.state.comingSoon !== null ? <HorizontalScrollSnap data={this.state.comingSoon} heading='Coming Soon'/> : null }

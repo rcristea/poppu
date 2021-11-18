@@ -140,13 +140,14 @@ export class SearchResultsComponent extends Component {
             </div>
             <div className='search-bar-buttons'>
               <div className='search-bar-button-group'>
-                <p className='search-bar-button-group-heading'>Showing</p>
                 <button
                     className={`${this.state.showing === true ? 'button-active' : ''}`}
+                    style={{width: '150px'}}
                     onClick={e => this.setState({...this.state, showing: true})}>Now Showing
                 </button>
                 <button
                     className={`${this.state.showing === false ? 'button-active' : ''}`}
+                    style={{width: '150px'}}
                     onClick={e => this.setState({...this.state, showing: false})}>Coming Soon
                 </button>
                 <button
@@ -155,7 +156,6 @@ export class SearchResultsComponent extends Component {
                 </button>
               </div>
               <div className='search-bar-button-group'>
-                <p className='search-bar-button-group-heading'>Rating</p>
                 <button
                   className={`${this.state.rating === 'G' ? 'button-active' : ''}`}
                   onClick={e => this.setState({...this.state, rating: 'G'})}>G
@@ -180,7 +180,6 @@ export class SearchResultsComponent extends Component {
                   onClick={e => this.setState({...this.state, rating: 'N/A'})}><AiOutlineClose/></button>
               </div>
               <div className='search-bar-button-group'>
-                <p className='search-bar-button-group-heading'>Category</p>
                 <button
                   className={`${this.state.category === 'Action' ? 'button-active' : ''}`}
                   onClick={e => this.setState({...this.state, category: 'Action'})}>Action
@@ -207,21 +206,6 @@ export class SearchResultsComponent extends Component {
                 </button>
                 <button
                   onClick={e => this.setState({...this.state, category: 'N/A'})}><AiOutlineClose/></button>
-              </div>
-              <div className='search-bar-button-group'>
-                <p className='search-bar-button-group-heading'>Showing</p>
-                <button
-                  className={`${this.state.showing === 'Now Showing' ? 'button-active' : ''}`}
-                  style={{width: '150px'}}
-                  onClick={e => this.setState({...this.state, showing: 'Now Showing'})}>Now Showing
-                </button>
-                <button
-                  className={`${this.state.showing === 'Coming Soon' ? 'button-active' : ''}`}
-                  style={{width: '150px'}}
-                  onClick={e => this.setState({...this.state, showing: 'Coming Soon'})}>Coming Soon
-                </button>
-                <button
-                  onClick={e => this.setState({...this.state, showing: 'N/A'})}><AiOutlineClose/></button>
               </div>
             </div>
           </div>

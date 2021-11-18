@@ -3,7 +3,6 @@ import {Component} from 'react'
 import {Card, Container, ListGroup, ListGroupItem, Row} from 'react-bootstrap'
 import ReviewCard from "../../../utils/ReviewCard.component";
 import NavBar from "../../../default/NavBar/NavBar.component";
-import {format} from "date-fns";
 
 export class ViewMovie extends Component {
   constructor(props) {
@@ -112,15 +111,15 @@ export class ViewMovie extends Component {
   }
 
   filterShows(shows) {
-    return shows.filter(show => show.movie.movieId == this.props.match.params.id)
+    return shows.filter(show => show.movie.movieId === this.props.match.params.id)
   }
 
   filterReviews(reviews) {
-    return reviews.filter(review => review.movie.movieId == this.props.match.params.id)
+    return reviews.filter(review => review.movie.movieId === this.props.match.params.id)
   }
 
   filterCast(cast) {
-    return cast.filter(movieActor => movieActor.movie.movieId == this.props.match.params.id).map(movieactor => movieactor.actor)
+    return cast.filter(movieActor => movieActor.movie.movieId === this.props.match.params.id).map(movieactor => movieactor.actor)
   }
 
   async initContent() {
@@ -161,6 +160,7 @@ export class ViewMovie extends Component {
       let result = ""
       this.state.cast.map(actor => {
         result += actor.firstName + " " + actor.lastName + ", "
+        return result
       })
       return result.substr(0, result.length - 2)
     }
