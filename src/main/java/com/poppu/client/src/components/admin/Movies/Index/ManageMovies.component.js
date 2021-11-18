@@ -1,9 +1,8 @@
-import {Component} from 'react'
-import {Container, Row} from 'react-bootstrap'
-
+import React, {Component} from 'react'
 import 'react-bootstrap/'
 import AutoTable from '../../../utils/AutoTable.component'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import {BiPlus} from "react-icons/bi";
 
 export class ManageMoviesComponent extends Component {
   constructor(props) {
@@ -60,20 +59,27 @@ export class ManageMoviesComponent extends Component {
 
   render() {
     return (
-      <Container>
-        <Row className={'my-3'}>
-          <h1>Manage Movies</h1>
-        </Row>
-        <AutoTable
-          card_title={'Movies'}
-          headings={'id,movie_name,movie_rating,movie_rating_code,status,'}
-          widths={[1, 5, 1, 1, 2]}
-          table_data={this.state.movies}
-          viewable={true}
-          deletable={true}
-          addable={true}
-        />
-      </Container>
+      <div className='movies-card'>
+        <div className='movies-card-heading'>
+          <div className='movies-card-title'>
+            <h1>Movies</h1>
+            <a href='/movies/add'>Add <BiPlus/></a>
+          </div>
+          <div className='movies-card-subtitle'>
+            <h3>For more options, click the three dots on the right.</h3>
+          </div>
+        </div>
+        <div className='movies-card-content'>
+          <AutoTable
+            headings={'id,movie_name,movie_rating,movie_rating_code,status,'}
+            widths={[1, 5, 1, 1, 2]}
+            table_data={this.state.movies}
+            viewable={true}
+            deletable={true}
+            addable={true}
+          />
+        </div>
+      </div>
     )
   }
 }
