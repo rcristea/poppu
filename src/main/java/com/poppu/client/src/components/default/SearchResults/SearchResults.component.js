@@ -89,7 +89,7 @@ export class SearchResultsComponent extends Component {
                       <h2>{m.rating}</h2>
                     </div>
                     <div className='search-result-item-buttons'>
-                      <button disabled={!m.showing}>Book Tickets</button>
+                      <button disabled={!m.showing} onClick={e => {this.props.history.push(`/shows/movie=${m.movieId}`)}}>Book Tickets</button>
                       <button
                         onClick={e => {this.props.history.push('/movies/view/' + m.movieId)}}
                       >View Movie</button>
