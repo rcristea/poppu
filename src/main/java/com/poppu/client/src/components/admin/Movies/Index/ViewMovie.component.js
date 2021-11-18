@@ -111,15 +111,15 @@ export class ViewMovie extends Component {
   }
 
   filterShows(shows) {
-    return shows.filter(show => show.movie.movieId === this.props.match.params.id)
+    return shows.filter(show => show.movie.movieId == this.props.match.params.id)
   }
 
   filterReviews(reviews) {
-    return reviews.filter(review => review.movie.movieId === this.props.match.params.id)
+    return reviews.filter(review => review.movie.movieId == this.props.match.params.id)
   }
 
   filterCast(cast) {
-    return cast.filter(movieActor => movieActor.movie.movieId === this.props.match.params.id).map(movieactor => movieactor.actor)
+    return cast.filter(movieActor => movieActor.movie.movieId == this.props.match.params.id).map(movieactor => movieactor.actor)
   }
 
   async initContent() {
