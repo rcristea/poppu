@@ -208,6 +208,21 @@ export class SearchResultsComponent extends Component {
                 <button
                   onClick={e => this.setState({...this.state, category: 'N/A'})}><AiOutlineClose/></button>
               </div>
+              <div className='search-bar-button-group'>
+                <p className='search-bar-button-group-heading'>Showing</p>
+                <button
+                  className={`${this.state.showing === 'Now Showing' ? 'button-active' : ''}`}
+                  style={{width: '150px'}}
+                  onClick={e => this.setState({...this.state, showing: 'Now Showing'})}>Now Showing
+                </button>
+                <button
+                  className={`${this.state.showing === 'Coming Soon' ? 'button-active' : ''}`}
+                  style={{width: '150px'}}
+                  onClick={e => this.setState({...this.state, showing: 'Coming Soon'})}>Coming Soon
+                </button>
+                <button
+                  onClick={e => this.setState({...this.state, showing: 'N/A'})}><AiOutlineClose/></button>
+              </div>
             </div>
           </div>
           <div className='search-results-container'>
