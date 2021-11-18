@@ -265,7 +265,7 @@ export class ViewMovie extends Component {
                     <ListGroup horizontal>
                       {this.renderShows()}
                     </ListGroup>
-                    <button disabled={!this.state.movie.showing} className="view-movie-button">Book Tickets</button>
+                    <button disabled={!this.state.movie.showing} className="view-movie-button" onClick={() => this.props.history.push(`/shows/movie=${this.state.movie.id}`)}>Book Tickets</button>
                   </Card.Text>
                 </Card>
               </Row>

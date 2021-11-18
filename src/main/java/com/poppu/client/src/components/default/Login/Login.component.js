@@ -99,7 +99,7 @@ export class Login extends Component {
         sessionStorage.setItem('role', role)
         sessionStorage.setItem('user_email', this.state.email)
         if (role === 'user') {
-          this.props.history.push('/profile')
+          this.props.history.push('/')
         } else if (role === 'admin') {
           this.props.history.push('/admin')
         }
