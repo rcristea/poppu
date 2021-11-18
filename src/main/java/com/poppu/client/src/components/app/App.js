@@ -37,7 +37,6 @@ import AddActorComponent from '../admin/Movies/Index/AddActor.component'
 import ScheduleAdd from '../admin/Schedules/Add/ScheduleAdd.component'
 import ScheduleEdit from '../admin/Schedules/Edit/ScheduleEdit.component'
 import {SearchResultsComponent} from '../default/SearchResults/SearchResults.component'
-import ActorComponent from "../admin/Movies/Index/ActorComponent.component";
 
 class App extends Component {
   constructor(props) {
