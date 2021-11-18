@@ -15,7 +15,6 @@ export class LandingPage extends Component {
 
     this.closeAlert = this.closeAlert.bind(this)
     this.alertRef = createRef()
-    sessionStorage.setItem('role', 'admin')
   }
 
   getMovieByShowing(isShowing) {
