@@ -1,130 +1,133 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'react-bootstrap/'
 import {Component} from 'react'
-import {Button, Card, Col, Container, Form, Row} from 'react-bootstrap'
+import {Button, Card, Container, Form, Row} from 'react-bootstrap'
 
-export class SelectTimeComponent extends Component {
+class Shows extends Component {
+
   constructor(props) {
-    super(props)
+    super(props);
+
     this.state = {
-      dates: [
-        {
-          'date': '10/02/2021',
-          'times': [
-            {
-              'showtime': '4:30 pm',
-              'availableSeats': 25
-            },
-            {
-              'showtime': '6:00 pm',
-              'availableSeats': 34
-            },
-            {
-              'showtime': '7:30 pm',
-              'availableSeats': 22
-            },
-            {
-              'showtime': '9:00 pm',
-              'availableSeats': 34
-            }
-          ]
-        },
-        {
-          'date': '10/05/2021',
-          'times': [
-            {
-              'showtime': '4:30 pm',
-              'availableSeats': 25
-            },
-            {
-              'showtime': '6:00 pm',
-              'availableSeats': 34
-            },
-            {
-              'showtime': '7:30 pm',
-              'availableSeats': 22
-            },
-            {
-              'showtime': '9:00 pm',
-              'availableSeats': 34
-            },
-            {
-              'showtime': '10:30 pm',
-              'availableSeats': 34
-            }
-          ]
-        },
-        {
-          'date': '10/07/2021',
-          'times': [
-            {
-              'showtime': '7:30 pm',
-              'availableSeats': 22
-            },
-            {
-              'showtime': '9:00 pm',
-              'availableSeats': 34
-            }
-          ]
-        }
-      ]
-    }
+      shows: [{
+        showID: null,
+        dateTime: null,
+        movie: null,
+        showroom: null,
+      },],
+      movie: {
+        movieId: null,
+        title: "",
+        rating: "",
+        trailerPhoto: "",
+      },
+      selectedShow: null,
+      selectedMovie: null,
+      adultTickets: 0,
+      childTickets: 0,
+      seniorTickets: 0,
+    };
+
+    this.renderButtons = this.renderButtons.bind(this);
+    this.getDate = this.getDate.bind(this);
+    this.goNext = this.goNext.bind(this);
+  }
+
+  goNext() {
+    this.props.history.push({
+      pathname: '/booking/seats',
+      state: {
+        selectedShow: this.state.selectedShow,
+        selectedMovie: this.state.selectedMovie,
+        adultTickets: this.state.adultTickets,
+        childTickets: this.state.childTickets,
+        seniorTickets: this.state.seniorTickets,
+      }
+    })
+  }
+
+  async componentDidMount() {
+    this.getShows(this.props.match.params.id)
+  }
+
+  async getShows(movieId) {
+    let res = await fetch(`http://localhost:8080/movies/${movieId}`);
+    const movie = await res.json();
+    console.log(movie);
+
+    res = await fetch(`/api/shows/byMovie/${movieId}`);
+    const shows = await res.json();
+    console.log(shows);
+
+    this.setState({
+      shows: shows,
+      movie: {
+        movieId: movie.movieId,
+        title: movie.title,
+        rating: movie.rating,
+        trailerPhoto: movie.trailerPhoto,
+      },
+      selectedMovie: movie,
+    })
+  }
+
+  getDate(timestamp){
+    const milliseconds = timestamp
+    const dateObject = new Date(milliseconds)
+    const humanDateFormat = dateObject.toLocaleString('en-US', {timeZone: 'EST'})
+    return humanDateFormat
+  }
+
+
+  renderButtons(movieId){
+    return this.state.shows.map(show => {
+      return <>
+        <Button type="button"
+                name="dateTime"
+                id="dateTime"
+                onClick={event => this.setState({...this.state, selectedShow: show})}>
+          {this.getDate((show.dateTime))}
+        </Button>{' '}
+      </>
+    });
   }
 
   render() {
     return (
-      <Container className='my-3'>
-        <Row>
-          <h1>Ticket Selection</h1>
-        </Row>
-        <Row>
-          <Form>
-            <Card className='my-3'>
-              <Card.Body>
-                <Form.Label>
-                  <h2>Select Your Date and Time:</h2>
-                </Form.Label>
-                {
-                  this.state.dates.map(movieDate => {
-                    return (
-                      <Row className='my-3'>
-                        <Col>{movieDate.date}</Col>
-                        {
-                          movieDate.times.map(showTime => {
-                            return (
-                              <Col md={2}>
-                                <Button className='container btn-secondary' name='dateTime'>{showTime.showtime}</Button>
-                              </Col>
-                            )
-                          })
-                        }
-                      </Row>
-                    )
-                  })
-                }
-              </Card.Body>
-            </Card>
-            <Card className='my-3'>
-              <Card.Body>
-                <Form.Label>
-                  <h2>Select The Number of Tickets:</h2>
-                </Form.Label>
-                <Form.Control className='my-3' type='number' placeholder='Adult Tickets'/>
-                <Form.Control className='my-3' type='number' placeholder='Child Tickets'/>
-                <Form.Control className='my-3' type='number' placeholder='Senior Tickets'/>
-              </Card.Body>
-            </Card>
-            <Card className='my-3'>
-              <Card.Body>
-                <Button className='mx-1' variant='primary' type='submit' href={'/booking/seats'}>Select Seats</Button>
-                <Button className='mx-1' variant='danger' href={'/'}>Cancel</Button>
-              </Card.Body>
-            </Card>
-          </Form>
-        </Row>
-      </Container>
+        <Container className='my-3'>
+          <Row>
+            <h1>Ticket Selection</h1>
+          </Row>
+          <Row>
+            <Form>
+              <Card className='my-3'>
+                <Card.Body>
+                  <Form.Label>
+                    <h2>Select Your Date and Time:</h2>
+                      {this.renderButtons(this.state.movieId)}
+                  </Form.Label>
+                </Card.Body>
+              </Card>
+              <Card className='my-3'>
+                <Card.Body>
+                  <Form.Label>
+                    <h2>Select The Number of Tickets:</h2>
+                  </Form.Label>
+                  <Form.Control className='my-3' type='number' placeholder='Adult Tickets' value={this.state.adultTickets} onChange={e => this.setState({...this.state, adultTickets: e.target.value})}/>
+                  <Form.Control className='my-3' type='number' placeholder='Child Tickets' value={this.state.childTickets} onChange={e => this.setState({...this.state, childTickets: e.target.value})}/>
+                  <Form.Control className='my-3' type='number' placeholder='Senior Tickets' value={this.state.seniorTickets} onChange={e => this.setState({...this.state, seniorTickets: e.target.value})}/>
+                </Card.Body>
+              </Card>
+              <Card className='my-3'>
+                <Card.Body>
+                  <Button className='mx-1' variant='primary' type='submit' onClick={event => this.goNext()}>Select
+                    Seats</Button>
+                  <Button className='mx-1' variant='danger' href={'/'}>Cancel</Button>
+                </Card.Body>
+              </Card>
+            </Form>
+          </Row>
+        </Container>
     )
   }
 }
 
-export default SelectTimeComponent
+export default Shows

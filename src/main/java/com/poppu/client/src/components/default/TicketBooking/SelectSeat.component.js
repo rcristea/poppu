@@ -7,6 +7,32 @@ import seat2 from '../../../assets/seats/Seat(2).png'
 
 
 export class SelectSeatComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = this.props.history.location.state
+    this.setState({
+      ...this.state,
+      selectedSeats: []
+    })
+    console.log(this.state)
+
+    this.goNext = this.goNext.bind(this)
+  }
+
+  goNext() {
+    this.props.history.push({
+      pathname: '/booking/order/summary',
+      state: {
+        selectedShow: this.state.selectedShow,
+        selectedMovie: this.state.selectedMovie,
+        adultTickets: this.state.adultTickets,
+        childTickets: this.state.childTickets,
+        seniorTickets: this.state.seniorTickets,
+        selectedSeats: this.state.selectedSeats,
+      }
+    })
+  }
+
   render() {
     return (
       <Container className='my-3'>
@@ -25,7 +51,7 @@ export class SelectSeatComponent extends Component {
             </Card>
             <Card className='my-3'>
               <Card.Body>
-                <Button className='mx-1' variant='primary' type='submit' href={'/booking/order/summary'}>Next</Button>
+                <Button className='mx-1' variant='primary' type='submit' onClick={event => this.goNext()}>Next</Button>
                 <Button className='mx-1' variant='danger' href={'/'}>Cancel</Button>
               </Card.Body>
             </Card>
