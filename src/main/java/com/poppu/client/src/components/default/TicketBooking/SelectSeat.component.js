@@ -17,7 +17,12 @@ export class SelectSeatComponent extends Component {
         console.log(this.state)
 
         this.goNext = this.goNext.bind(this)
-        this.goBack = this.goNext.bind(this)
+        this.getTakenSeats = this.getTakenSeats.bind(this)
+
+    }
+
+    getTakenSeats() {
+        //fetch all seats that are unavaiable
     }
 
     goNext() {

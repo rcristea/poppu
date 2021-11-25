@@ -10,6 +10,8 @@ export class OrderCheckoutComponent extends Component {
             addresses: null,
             paymentInfos: null,
             userProfile: null,
+            selectedAddress: null,
+            selectedPayment: null,
         }
         this.setState({
             ...this.state,
@@ -41,6 +43,23 @@ export class OrderCheckoutComponent extends Component {
 
     setAddress() {
         //Set current address
+    }
+
+    goNext() {
+        this.props.history.push({
+            pathname: '/booking/order/confirm',
+            state: {
+                userProfile: this.state.userProfile,
+                selectedAddress: this.state.selectedAddress,
+                selectedPayment: this.state.selectedPayment,
+                selectedShow: this.state.selectedShow,
+                selectedMovie: this.state.selectedMovie,
+                adultTickets: this.state.adultTickets,
+                childTickets: this.state.childTickets,
+                seniorTickets: this.state.seniorTickets,
+                selectedSeats: this.state.selectedSeats,
+            }
+        })
     }
 
     render() {
