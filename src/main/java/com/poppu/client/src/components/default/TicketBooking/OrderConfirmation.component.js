@@ -4,6 +4,11 @@ import {Button, Card, Col, Container, Row} from 'react-bootstrap'
 import 'react-bootstrap/'
 
 export class OrderConfirmationComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = this.props.history.location.state
+    console.log(this.state)
+  }
   render() {
     return (
       <Container>

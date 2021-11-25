@@ -40,6 +40,7 @@ class Shows extends Component {
         adultTickets: this.state.adultTickets,
         childTickets: this.state.childTickets,
         seniorTickets: this.state.seniorTickets,
+        selectedSeats: this.state.selectedSeats,
       }
     })
   }
