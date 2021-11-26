@@ -1,0 +1,20 @@
+.seats {
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.seat {
+  font-weight: 900;
+  flex: 0 1 calc(20% - 8px);
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.selected-seat {
+  color: #72e3e3;
+  filter: invert(81%) sepia(68%) saturate(290%) hue-rotate(122deg) brightness(91%) contrast(94%);
+}
