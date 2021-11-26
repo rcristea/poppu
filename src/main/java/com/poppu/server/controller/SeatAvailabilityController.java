@@ -49,11 +49,11 @@ public class SeatAvailabilityController {
                 .body(res);
     }
 
-    @PostMapping("/{showID}/{showroomID}/{seatID}")
-    public SeatAvailabilityModel putSeatAvailibilityModel(@PathVariable("showID") long showID, @PathVariable("showroomID") long showroomID, @PathVariable("seatID") long seatID) {
-        ShowModel show = this.showRepository.getById(showID);
-        ShowroomModel showroom = this.showroomRepository.getById(showroomID);
-        SeatModel seat = this.seatRepository.getById(seatID);
+    @GetMapping("/{showID}/{showroomID}/{seatID}")
+    public SeatAvailabilityModel getSeatAvailabilityModel(@PathVariable("showID") long showID, @PathVariable("showroomID") long showroomID, @PathVariable("seatID") long seatID) {
+        ShowModel show = this.showRepository.findById(showID).get();
+        ShowroomModel showroom = this.showroomRepository.findById(showroomID).get();
+        SeatModel seat = this.seatRepository.findById(seatID).get();
         SeatAvailabilityKey key = new SeatAvailabilityKey(showID, showroomID, seatID);
         SeatAvailabilityModel model = new SeatAvailabilityModel(show, showroom, seat, true);
         model.setId(key);

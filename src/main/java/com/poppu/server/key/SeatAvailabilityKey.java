@@ -7,13 +7,13 @@ import java.io.Serializable;
 public class SeatAvailabilityKey implements Serializable {
 
     @Column(name = "show_id")
-    private long showId;
+    private Long showId;
 
     @Column(name = "showroom_id")
-    private long showroomId;
+    private Long showroomId;
 
     @Column(name = "seat_id")
-    private long seatId;
+    private Long seatId;
 
     public SeatAvailabilityKey() {
 
@@ -25,27 +25,27 @@ public class SeatAvailabilityKey implements Serializable {
         this.seatId = seatId;
     }
 
-    public long getShowId() {
+    public Long getShowId() {
         return showId;
     }
 
-    public long getShowroomId() {
-        return showroomId;
-    }
-
-    public long getSeatId() {
-        return seatId;
-    }
-
-    public void setShowId(long showId) {
+    public void setShowId(Long showId) {
         this.showId = showId;
     }
 
-    public void setShowroomId(long showroomId) {
+    public Long getShowroomId() {
+        return showroomId;
+    }
+
+    public void setShowroomId(Long showroomId) {
         this.showroomId = showroomId;
     }
 
-    public void setSeatId(long seatId) {
+    public Long getSeatId() {
+        return seatId;
+    }
+
+    public void setSeatId(Long seatId) {
         this.seatId = seatId;
     }
 }
