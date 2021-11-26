@@ -1,5 +1,6 @@
 package com.poppu.server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.poppu.server.key.SeatAvailabilityKey;
 
 import javax.persistence.*;
@@ -14,16 +15,19 @@ public class SeatAvailabilityModel {
     @ManyToOne(optional = false)
     @MapsId("showId")
     @JoinColumn(name = "show_id", foreignKey = @ForeignKey(name = "FK_seat_availability_show"))
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private ShowModel show;
 
     @ManyToOne(optional = false)
     @MapsId("showroomId")
     @JoinColumn(name = "showroom_id", foreignKey = @ForeignKey(name = "FK_seat_availability_showroom"))
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private ShowroomModel showroom;
 
     @ManyToOne(optional = false)
     @MapsId("seatId")
     @JoinColumn(name = "seat_id", foreignKey = @ForeignKey(name = "FK_seat_availability_seat"))
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private SeatModel seat;
 
     @Column(name = "is_available", nullable = false)
@@ -78,5 +82,16 @@ public class SeatAvailabilityModel {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    @Override
+    public String toString() {
+        return "SeatAvailabilityModel{" +
+                "id=" + id +
+                ", show=" + show +
+                ", showroom=" + showroom +
+                ", seat=" + seat +
+                ", isAvailable=" + isAvailable +
+                '}';
     }
 }
