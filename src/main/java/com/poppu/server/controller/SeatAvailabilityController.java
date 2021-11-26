@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -47,6 +48,19 @@ public class SeatAvailabilityController {
         return ResponseEntity
                 .created(new URI("/api/seatAvailabilities/" + res.getId()))
                 .body(res);
+    }
+
+    @GetMapping("/show/{showID}")
+    public List<SeatAvailabilityModel> getAllWithShowId(@PathVariable("showID") long showID) {
+        List<SeatAvailabilityModel> allSeatAvailabilities = this.getSeatAvailabilities();
+        List<SeatAvailabilityModel> allSeatAvailabilitiesWithShowId = new ArrayList<>();
+        for (SeatAvailabilityModel seatAvailability : allSeatAvailabilities) {
+            if (seatAvailability.getId().getShowId() == showID) {
+                allSeatAvailabilitiesWithShowId.add(seatAvailability);
+            }
+        }
+
+        return allSeatAvailabilitiesWithShowId;
     }
 
     @GetMapping("/{showID}/{showroomID}/{seatID}")

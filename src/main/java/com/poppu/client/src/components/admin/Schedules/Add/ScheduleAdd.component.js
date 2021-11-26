@@ -53,8 +53,6 @@ class ScheduleAdd extends Component {
   createSeatAvailabilityModel(showID, showroom, seatId, isAvailable) {
     fetch(`http://localhost:8080/api/seatAvailabilities/${showID}/${showroom}/${seatId}`, {
       method: 'GET',
-    }).then(response => {
-      console.log('createSeatAvailabilityModel - response', response)
     })
   }
   
@@ -99,12 +97,12 @@ class ScheduleAdd extends Component {
   }
 
   getSeatModels(showroomId) {
-    return fetch(`http://localhost:8080/seats?showroom=${showroomId}`, {
+    return fetch(`http://localhost:8080/api/seats/showroom/${showroomId}`, {
       method: 'GET',
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          return json._embedded.seats
+          return json
         })
       } else {
         console.error('getSeatModels', response)

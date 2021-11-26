@@ -15,24 +15,13 @@ export class SelectSeatComponent extends Component {
       selectedSeats: [],
       seats: null,
     })
-    console.log(this.state)
 
     this.goNext = this.goNext.bind(this)
   }
 
-  getSeatAvailability() {
-    return fetch(`http://localhost:8080/movies/`, {
+  getShowsWithShowID(showID) {
+    return fetch(`http://localhost:8080/api/seatAvailabilities/show/${showID}`, {
       method: 'GET',
-    }).then(response => {
-      if (response.ok) {
-        return response.json().then(json => {
-          return json
-        })
-      } else {
-        return response
-      }
-    }).catch(error => {
-      return error
     })
   }
 
@@ -48,6 +37,16 @@ export class SelectSeatComponent extends Component {
         selectedSeats: this.state.selectedSeats,
       }
     })
+  }
+
+  async componentDidMount() {
+    console.log(this.state)
+    let seats = await this.getShowsWithShowID(this.state.selectedShow.showID).then(response => {
+      return response.json().then(json => {
+        return json
+      })
+    })
+    console.log('SelectSeat componentDidMount - seats', seats)
   }
 
   render() {
