@@ -35,13 +35,13 @@ export class SelectSeatComponent extends Component {
     })
   }
 
-  toggleSeat(e, seatId) {
+  toggleSeat(e, seatAvailabilityId) {
     let totalTickets = parseInt(this.state.adultTickets) + parseInt(this.state.childTickets) + parseInt(this.state.seniorTickets)
 
-    if (this.state.selectedSeats.includes(seatId)) {
+    if (this.state.selectedSeats.includes(seatAvailabilityId)) {
       e.currentTarget.classList.remove('selected-seat')
 
-      let index = this.state.selectedSeats.indexOf(seatId)
+      let index = this.state.selectedSeats.indexOf(seatAvailabilityId)
       if (index !== -1) {
         this.state.selectedSeats.splice(index, 1)
       }
@@ -50,7 +50,7 @@ export class SelectSeatComponent extends Component {
     } else {
       e.currentTarget.classList.add('selected-seat')
 
-      this.state.selectedSeats.push(seatId)
+      this.state.selectedSeats.push(seatAvailabilityId)
     }
   }
 
@@ -79,7 +79,7 @@ export class SelectSeatComponent extends Component {
         let color = '#000'
         if (!seat.available) {
           color = '#eaeaea'
-        } else if (this.state.selectedSeats && this.state.selectedSeats.includes(seat.seat.seatId)) {
+        } else if (this.state.selectedSeats && this.state.selectedSeats.includes(seat.id)) {
           color = '#72e3e3'
         }
 
