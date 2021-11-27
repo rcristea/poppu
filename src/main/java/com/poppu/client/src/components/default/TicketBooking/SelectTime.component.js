@@ -1,5 +1,6 @@
-import {Component} from 'react'
+import React, {Component} from 'react'
 import {Button, Card, Container, Form, Row} from 'react-bootstrap'
+import './SelectSeats.component.css'
 
 class Shows extends Component {
 
@@ -81,12 +82,13 @@ class Shows extends Component {
   renderButtons(movieId){
     return this.state.shows.map(show => {
       return <>
-        <Button type="button"
+        <button type="button"
+                className={`select-time ${this.state.selectedShow === show ? 'active-time' : ''}`}
                 name="dateTime"
                 id="dateTime"
                 onClick={event => this.setState({...this.state, selectedShow: show})}>
           {this.getDate((show.dateTime))}
-        </Button>{' '}
+        </button>
       </>
     });
   }
@@ -110,11 +112,17 @@ class Shows extends Component {
               <Card className='my-3'>
                 <Card.Body>
                   <Form.Label>
-                    <h2>Select The Number of Tickets:</h2>
+                    Adult Tickets
                   </Form.Label>
-                  <Form.Control className='my-3' type='number' placeholder='Adult Tickets' value={this.state.adultTickets} onChange={e => this.setState({...this.state, adultTickets: e.target.value})}/>
-                  <Form.Control className='my-3' type='number' placeholder='Child Tickets' value={this.state.childTickets} onChange={e => this.setState({...this.state, childTickets: e.target.value})}/>
-                  <Form.Control className='my-3' type='number' placeholder='Senior Tickets' value={this.state.seniorTickets} onChange={e => this.setState({...this.state, seniorTickets: e.target.value})}/>
+                  <Form.Control type='number' placeholder='Adult Tickets' value={this.state.adultTickets} onChange={e => this.setState({...this.state, adultTickets: e.target.value})}/>
+                  <Form.Label>
+                    Child Tickets
+                  </Form.Label>
+                  <Form.Control type='number' placeholder='Child Tickets' value={this.state.childTickets} onChange={e => this.setState({...this.state, childTickets: e.target.value})}/>
+                  <Form.Label>
+                    Senior Tickets
+                  </Form.Label>
+                  <Form.Control type='number' placeholder='Senior Tickets' value={this.state.seniorTickets} onChange={e => this.setState({...this.state, seniorTickets: e.target.value})}/>
                 </Card.Body>
               </Card>
               <Card className='my-3'>

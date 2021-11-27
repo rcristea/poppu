@@ -18,3 +18,17 @@
   color: #72e3e3;
   filter: invert(81%) sepia(68%) saturate(290%) hue-rotate(122deg) brightness(91%) contrast(94%);
 }
+
+.select-time {
+  border: 2px solid hsla(245, 58%, 60%, 1) !important;
+  background-color: #fff !important;
+  color: hsla(245, 58%, 60%, 1) !important;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 50px;
+}
+
+.active-time {
+  background-color: hsla(245, 58%, 60%, 1) !important;
+  color: #fff !important;
+}

@@ -55,6 +55,7 @@
   border-bottom: 1px solid transparent;
   border-image: linear-gradient(90deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
   border-image-slice: 1;
+  color: #fff;
 }
 
 .sidebar-nav-item-title {

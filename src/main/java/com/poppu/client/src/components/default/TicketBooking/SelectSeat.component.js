@@ -36,6 +36,8 @@ export class SelectSeatComponent extends Component {
   }
 
   toggleSeat(e, seatId) {
+    let totalTickets = parseInt(this.state.adultTickets) + parseInt(this.state.childTickets) + parseInt(this.state.seniorTickets)
+
     if (this.state.selectedSeats.includes(seatId)) {
       e.currentTarget.classList.remove('selected-seat')
 
@@ -43,6 +45,8 @@ export class SelectSeatComponent extends Component {
       if (index !== -1) {
         this.state.selectedSeats.splice(index, 1)
       }
+    } else if (totalTickets === this.state.selectedSeats.length) {
+      return
     } else {
       e.currentTarget.classList.add('selected-seat')
 
