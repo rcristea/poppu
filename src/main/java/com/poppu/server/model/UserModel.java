@@ -25,8 +25,8 @@ public class UserModel {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "role", nullable = false)
-    private Role role;
+    @Column(name = "role", nullable = false, columnDefinition = "varchar(25) default 'Default'")
+    private Role role = Role.DEFAULT;
 
     @Column(name = "email", nullable = false)
     private String email;
