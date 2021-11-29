@@ -1,6 +1,7 @@
 import {Component} from "react";
 import {Container} from "react-bootstrap";
 import {TitleComponent} from "../../../default/Profile/Utils.component";
+import './MovieIndex.component.css'
 
 export class ActorComponent extends Component {
     constructor(props) {
@@ -43,9 +44,9 @@ export class ActorComponent extends Component {
 
     render() {
         return (
-            <Container className={'my-2 p-2 bg-light'}>
+            <div className={'m-5 p-3 bg-light'}>
                 <TitleComponent compTitle={'Actor List'}/>
-                <table>
+                <table className={'actor-list-table'}>
                     <tr>
                         <th width={'50'}>ID</th>
                         <th width={'100'}>First Name</th>
@@ -61,7 +62,7 @@ export class ActorComponent extends Component {
                         )
                     })}
                 </table>
-            </Container>
+            </div>
         )
     }
 }
