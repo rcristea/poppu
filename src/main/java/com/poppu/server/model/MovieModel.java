@@ -1,5 +1,6 @@
 package com.poppu.server.model;
 
+import com.poppu.server.util.Category;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Type;
 
@@ -26,8 +27,8 @@ public class MovieModel {
     @Column(name = "date", nullable = false)
     private Date date;
 
-    @Column(name = "category", nullable = false, length = 45)
-    private String category;
+    @Column(name = "category", nullable = false)
+    private Category category;
 
     @Column(name = "director", nullable = false)
     private String director;
@@ -69,7 +70,7 @@ public class MovieModel {
 
     }
 
-    public MovieModel(String title, Date date, String category,
+    public MovieModel(String title, Date date, Category category,
                       String director, String producer,
                       String synopsis, String rating, String trailerPhoto,
                       String trailerLink, boolean isShowing, double score, String duration) {
@@ -99,7 +100,7 @@ public class MovieModel {
         return date;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
@@ -148,7 +149,7 @@ public class MovieModel {
         this.date = date;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
