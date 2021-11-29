@@ -74,4 +74,16 @@ public class SeatAvailabilityController {
         log.warn(model.toString());
         return this.seatAvailabilityRepository.save(model);
     }
+
+    @GetMapping("booked/{showID}/{showroomID}/{seatID}")
+    public SeatAvailabilityModel getSeatAvailabilityModelBooked(@PathVariable("showID") long showID, @PathVariable("showroomID") long showroomID, @PathVariable("seatID") long seatID) {
+        ShowModel show = this.showRepository.findById(showID).get();
+        ShowroomModel showroom = this.showroomRepository.findById(showroomID).get();
+        SeatModel seat = this.seatRepository.findById(seatID).get();
+        SeatAvailabilityKey key = new SeatAvailabilityKey(showID, showroomID, seatID);
+        SeatAvailabilityModel model = new SeatAvailabilityModel(show, showroom, seat, false);
+        model.setId(key);
+        log.warn(model.toString());
+        return this.seatAvailabilityRepository.save(model);
+    }
 }
