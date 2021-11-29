@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
-@RepositoryRestResource(collectionResourceRel = "users", path = "users")
+@RepositoryRestResource(collectionResourceRel = "users", path = "users", excerptProjection = InlineUserProfile.class)
 public interface UserRepository extends JpaRepository<UserModel, Long> {
     UserModel findDistinctByEmail(@Param("email") String email);
     List<UserModel> findAllByIsSubscribed(@Param("isSubscribed") boolean isSubscribed);

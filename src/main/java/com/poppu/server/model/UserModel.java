@@ -149,19 +149,20 @@ public class UserModel {
         this.status = status;
     }
 
-    // public boolean addAddress(AddressModel a) { return false; }
-    // public boolean deleteAddress(AddressModel a) { return false; }
-    // public boolean addPayment(PaymentModel p) { return false; }
-    // public boolean deletePayment(PaymentModel p) { return false; }
-    // public List<PaymentModel> getPayments() { return null; }
+    public AddressModel getAddress() {
+        return address;
+    }
 
-    // NOTE: FUNCTION COULD EITHER BE CREATEBOOKING OR ADDBOOKING
-    // public boolean createBooking() { return false; }
+    public void setAddress(AddressModel address) {
+        this.address = address;
+    }
 
-    // public List<BookingModel> getBookings() { return null; }
+    public List<PaymentInfoModel> getPaymentCards() {
+        return paymentCards;
+    }
 
-    // **** Admin-only operations
-    // private boolean isAdmin() { return false; }
-    // public boolean setStatus(UserModel u, StatusType s) { return false; }
+    public void setPaymentCards(List<PaymentInfoModel> paymentCards) {
+        this.paymentCards = paymentCards;
+    }
 }
 
