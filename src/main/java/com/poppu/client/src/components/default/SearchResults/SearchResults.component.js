@@ -122,6 +122,12 @@ export class SearchResultsComponent extends Component {
     })
   }
 
+  componentDidMount() {
+    this.getMovies().then(response => {
+      console.log('rendered movies')
+    })
+  }
+
   render() {
     return (
       <>
