@@ -164,5 +164,22 @@ public class UserModel {
     public void setPaymentCards(List<PaymentInfoModel> paymentCards) {
         this.paymentCards = paymentCards;
     }
+
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", role=" + role +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNum='" + phoneNum + '\'' +
+                ", isSubscribed=" + isSubscribed +
+                ", status=" + status +
+                ", address=" + address +
+                ", paymentCards=" + paymentCards +
+                '}';
+    }
 }
 
