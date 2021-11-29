@@ -14,7 +14,7 @@ public class TicketModel {
     @Column(name = "ticket_id")
     private long ticketId;
 
-    @Column(name = "type", nullable = false)
+    @Column(name = "type")
     private TicketType type;
 
     @Column(name = "price", nullable = false)
