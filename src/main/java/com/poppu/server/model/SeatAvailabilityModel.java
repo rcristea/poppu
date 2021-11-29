@@ -30,7 +30,7 @@ public class SeatAvailabilityModel {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private SeatModel seat;
 
-    @Column(name = "is_available", nullable = false)
+    @Column(name = "is_available", nullable = false, columnDefinition = "tinyint(1)")
     private boolean isAvailable = true;
 
     public SeatAvailabilityModel() {
