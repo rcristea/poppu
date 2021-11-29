@@ -1,5 +1,6 @@
 package com.poppu.server.repository;
 
+import com.poppu.server.model.MovieModel;
 import com.poppu.server.model.ShowModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -11,5 +12,5 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RepositoryRestResource(collectionResourceRel = "shows", path = "shows", excerptProjection = InlineShowModel.class)
 public interface ShowRepository extends JpaRepository<ShowModel, Long> {
-    List<ShowModel> findAllByMovie(@Param("movieId") long movie_id);
+    List<ShowModel> findAllByMovie(@Param("movie") MovieModel movie);
 }

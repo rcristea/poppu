@@ -1,8 +1,10 @@
 package com.poppu.server.controller;
 
 import com.poppu.server.model.MovieModel;
+import com.poppu.server.model.SeatAvailabilityModel;
 import com.poppu.server.model.ShowModel;
 import com.poppu.server.repository.MovieRepository;
+import com.poppu.server.repository.SeatAvailabilityRepository;
 import com.poppu.server.repository.ShowRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -18,10 +20,12 @@ import java.util.Optional;
 public class MovieController {
     private MovieRepository movieRepository;
     private ShowRepository showRepository;
+    private SeatAvailabilityRepository seatAvailabilityRepository;
 
-    public MovieController(MovieRepository movieRepository, ShowRepository showRepository) {
+    public MovieController(MovieRepository movieRepository, ShowRepository showRepository, SeatAvailabilityRepository seatAvailabilityRepository) {
         this.movieRepository = movieRepository;
         this.showRepository = showRepository;
+        this.seatAvailabilityRepository = seatAvailabilityRepository;
     }
 
     @GetMapping("/")
@@ -41,8 +45,14 @@ public class MovieController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable("id") long id) {
-        List<ShowModel> list = this.showRepository.findAllByMovie(id);
-        list.forEach(show -> { this.showRepository.deleteById(show.getShowID()); });
+        List<ShowModel> list = this.showRepository.findAllByMovie(this.movieRepository.getById(id));
+        list.forEach(show -> {
+            List<SeatAvailabilityModel> seatAvailabilities = this.seatAvailabilityRepository.findAllByShow(this.showRepository.getById(show.getShowID()));
+            seatAvailabilities.forEach(seatAvailability -> {
+                this.seatAvailabilityRepository.deleteById(seatAvailability.getId());
+            });
+            this.showRepository.deleteById(show.getShowID());
+        });
         this.movieRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
