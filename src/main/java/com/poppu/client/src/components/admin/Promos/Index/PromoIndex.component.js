@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import './PromoIndex.component.css'
 import Sidebar from '../../Sidebar/Sidebar.component'
-import SearchBar from '../SearchBar/SearchBar.component'
 import Alert from '../../Alerts/Alert'
 import {BiDotsVerticalRounded, BiPlus} from 'react-icons/bi'
 import {Dropdown, Table} from 'react-bootstrap'
@@ -139,7 +138,6 @@ class PromoIndex extends Component {
                 </div>
               </div>
               <div className='promos-card-content'>
-                <SearchBar/>
                 <Table responsive bordered className='promos-card-table text-black'>
                   <thead>
                   <tr>
