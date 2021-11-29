@@ -8,7 +8,7 @@ public class SeatModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seat_generator")
-    @SequenceGenerator(name="seat_generator")
+    @SequenceGenerator(name="seat_generator", initialValue = 61)
     @Column(name = "seat_id")
     private long seatId;
 
