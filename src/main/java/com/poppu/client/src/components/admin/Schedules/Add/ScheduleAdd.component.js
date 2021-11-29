@@ -51,19 +51,8 @@ class ScheduleAdd extends Component {
   }
 
   createSeatAvailabilityModel(showID, showroom, seatId, isAvailable) {
-    let data = {
-      showID: showID,
-      showroomId: showroom,
-      seatId: seatId,
-      isAvailable: isAvailable,
-    }
-
-    return this.request('seatavailabilities', 'POST', data).then(response => {
-      console.log('createSeatAvailabilityModel', response)
-      return response.ok
-    }).catch(error => {
-      console.error('createSeatAvailabilityModel', error)
-      return false
+    fetch(`http://localhost:8080/api/seatAvailabilities/${showID}/${showroom}/${seatId}`, {
+      method: 'GET',
     })
   }
   
@@ -77,7 +66,6 @@ class ScheduleAdd extends Component {
 
     let showModelResponse = this.request('shows', 'POST', data).then(response => {
       return response.json().then(json => {
-        console.log('createShowModel', json)
         return json
       })
     }).catch(error => {
@@ -109,13 +97,12 @@ class ScheduleAdd extends Component {
   }
 
   getSeatModels(showroomId) {
-    return fetch(`http://localhost:8080/seats?showroom=${showroomId}`, {
+    return fetch(`http://localhost:8080/api/seats/showroom/${showroomId}`, {
       method: 'GET',
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          console.log('getSeatModels', json._embedded.seats)
-          return json._embedded.seats
+          return json
         })
       } else {
         console.error('getSeatModels', response)
@@ -133,7 +120,6 @@ class ScheduleAdd extends Component {
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          console.log('getMovieModel', json)
           return json
         })
       } else {
@@ -152,7 +138,6 @@ class ScheduleAdd extends Component {
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          console.log('getMovieModels', json)
           return json
         })
       } else {
@@ -171,7 +156,6 @@ class ScheduleAdd extends Component {
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          console.log('getShowModels', json._embedded.shows)
           return json._embedded.shows
         })
       } else {
@@ -190,7 +174,6 @@ class ScheduleAdd extends Component {
     }).then(response => {
       if (response.ok) {
         return response.json().then(json => {
-          console.log('getShowroomModel', json)
           return json
         })
       } else {
@@ -214,8 +197,6 @@ class ScheduleAdd extends Component {
     }
 
     let showroom = await this.getShowroomModel(this.state.showroom)
-    console.log(showroom)
-    console.log(this.state)
     if (showroom.ok === false) {
       this.setState({
         error: 'Oops! That showroom seems to not exist.'
@@ -301,13 +282,15 @@ class ScheduleAdd extends Component {
 
     let movie = await this.getMovieModel(this.state.movie)
     let showroom = await this.getShowroomModel(this.state.showroom)
-    await this.createShowModel(this.state.dateTime, this.state.duration, movie, showroom)
+    let show = await this.createShowModel(this.state.dateTime, this.state.duration, movie, showroom)
 
-    // TODO Create SeatAvailabilityModels (not required for this demo)
-    // let seatModels = await this.getSeatModels(this.state.showroom)
-    // seatModels.forEach(seatModel => {
-    //   this.createSeatAvailabilityModel(show.showID, this.state.showroom, seatModel.seatId, true)
-    // })
+    console.log('ScheduleAdd handleSubmit - show', show)
+    let seatModels = await this.getSeatModels(this.state.showroom)
+    console.log('ScheduleAdd handleSubmit - seatModels', seatModels)
+
+    seatModels.forEach(seatModel => {
+      this.createSeatAvailabilityModel(show.showID, this.state.showroom, seatModel.seatId, true)
+    })
 
     this.props.history.push('/schedule')
     sessionStorage.setItem('alert-success', 'The show time has been added successfully!')

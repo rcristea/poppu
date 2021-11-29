@@ -11,5 +11,5 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RepositoryRestResource(collectionResourceRel = "seats", path = "seats")
 public interface SeatRepository extends JpaRepository<SeatModel, Long> {
-    List<SeatModel> findAllByShowroom(@Param("showroom") String showroom);
+    List<SeatModel> findAllByShowroom(@Param("showroomId") Long showroomId);
 }

@@ -14,9 +14,8 @@ public class TicketModel {
     @Column(name = "ticket_id")
     private long ticketId;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false, length = 50)
-    private TicketType type;
+    private String type;
 
     @Column(name = "price", nullable = false)
     private double price;
@@ -40,7 +39,7 @@ public class TicketModel {
 
     }
 
-    public TicketModel(TicketType type, double price, ShowModel show, ShowroomModel showroom,
+    public TicketModel(String type, double price, ShowModel show, ShowroomModel showroom,
                        String seat, BookingModel booking) {
         this.type = type;
         this.price = price;
@@ -54,7 +53,7 @@ public class TicketModel {
         return ticketId;
     }
 
-    public TicketType getType() {
+    public String getType() {
         return type;
     }
 
@@ -78,7 +77,7 @@ public class TicketModel {
         return booking;
     }
 
-    public void setType(TicketType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
