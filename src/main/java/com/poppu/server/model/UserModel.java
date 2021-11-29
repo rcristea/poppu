@@ -25,8 +25,7 @@ public class UserModel {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", length = 12, nullable = false)
+    @Column(name = "role", nullable = false)
     private Role role;
 
     @Column(name = "email", nullable = false)
@@ -41,8 +40,7 @@ public class UserModel {
     @Column(name = "is_subscribed", columnDefinition = "tinyint(1) default 0")
     private boolean isSubscribed = false;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", columnDefinition = "varchar(10) default 'INACTIVE'", nullable = false)
+    @Column(name = "status", nullable = false, columnDefinition = "varchar(10) default 'Inactive'")
     private Status status = Status.INACTIVE;
 
     @OneToOne(cascade = CascadeType.ALL)

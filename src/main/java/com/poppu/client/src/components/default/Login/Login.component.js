@@ -96,6 +96,7 @@ export class Login extends Component {
 
 
         let role = user['role'].toLowerCase()
+        console.log('user', role)
         sessionStorage.setItem('role', role)
         sessionStorage.setItem('user_email', this.state.email)
         if (role === 'user') {
