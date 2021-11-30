@@ -64,7 +64,7 @@
   outline: 0 !important;
 }
 
-.ticket-row {
+.ticket-row, .order-row {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
@@ -115,4 +115,12 @@
   background-color: #000;
   border-radius: 5px;
   padding: 25px;
+}
+
+.booking-user-info, .booking-movie-info, .booking-show-info, .booking-ticket-info, .booking-seat-names-info, .booking-total-info {
+  border-bottom: 2px solid #685ed4;
+}
+
+.push-right {
+  margin-right: 15px;
 }
