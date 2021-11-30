@@ -1,4 +1,4 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
 import {withRouter} from 'react-router-dom';
 import {deleteAssociation} from "./methods";
@@ -20,16 +20,22 @@ export class addressComponent extends Component {
 
   render() {
     return (
-      <div className={'m-2 bg-info bg-opacity-25'}>
-        <HeadingComponent compTitle={this.props.compTitle}/>
-        <Card className={'m-2 bg-info bg-opacity-10'}>
-          <DisplayAttribute attName={'City'} attVal={this.props.address.city}/>
-          <DisplayAttribute attName={'Street'} attVal={this.props.address.street}/>
-          <DisplayAttribute attName={'Zip Code'} attVal={this.props.address.zipCode}/>
-          <Col md={3}>
-            <Button variant={'warning'} size={'sm'} onClick={this.handleEditAddress}>Edit Address</Button>
-          </Col>
-        </Card>
+      <div className='payment-address'>
+        <div className='profile-item'>
+          <p className='grow'>Street</p>
+          <p>{this.props.address.street}</p>
+        </div>
+        <div className='profile-item'>
+          <p className='grow'>City</p>
+          <p>{this.props.address.city}</p>
+        </div>
+        <div className='profile-item'>
+          <p className='grow'>Zipcode</p>
+          <p>{this.props.address.zipCode}</p>
+        </div>
+        <div className='profile-buttons'>
+          <button className='booking-submit' onClick={this.handleEditAddress}>Edit Address</button>
+        </div>
       </div>
     )
   }
@@ -64,23 +70,28 @@ export class paymentInfoComponent extends Component {
 
   render() {
     return (
-      <div className={'m-2 bg-success bg-opacity-50'}>
-        <HeadingComponent compTitle={this.props.compTitle}/>
-        <Card className={'m-2 bg-success bg-opacity-25'}>
-          <DisplayAttribute attName={'Card Number'} attVal={this.props.paymentInfo.cardNum}/>
-          <DisplayAttribute attName={'Card Type'} attVal={this.props.paymentInfo.cardType}/>
-          <DisplayAttribute attName={'Expiration Date'} attVal={this.props.paymentInfo.expDate}/>
-          <Card className={'m-2'}>
+      <>
+        <div className='payment-info'>
+          <div className='profile-header'>
+            <h4 className='profile-title'>Payment: {this.props.paymentInfo.cardType}</h4>
+          </div>
+          <div className='profile-item'>
+            <p className='grow'>Card Number</p>
+            <p>{this.props.paymentInfo.cardNum.substring(this.props.paymentInfo.cardNum.length - 5)}</p>
+          </div>
+          <div className='profile-item'>
+            <p className='grow'>Expiration Date</p>
+            <p>{this.props.paymentInfo.expDate}</p>
+          </div>
+          <div className='profile-item'>
             <AddressComponent compTitle={'Payment Address'} address={this.props.paymentInfo.address}/>
-          </Card>
-          <Col md={3}>
-            <Button variant={'warning'} size={'sm'} onClick={this.handleEditPayment}>Edit Payment</Button>
-          </Col>
-          <Col md={3}>
-            <Button variant={'danger'} size={'sm'} onClick={this.handleDeletePayment}>Delete Payment Method</Button>
-          </Col>
-        </Card>
-      </div>
+          </div>
+          <div className='profile-buttons'>
+            <button className='booking-submit' onClick={this.handleEditPayment}>Edit</button>
+            <button className='booking-cancel' onClick={this.handleDeletePayment}>Delete</button>
+          </div>
+        </div>
+      </>
     )
   }
 }
