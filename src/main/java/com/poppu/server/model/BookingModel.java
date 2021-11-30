@@ -103,6 +103,14 @@ public class BookingModel {
     // public boolean removeTicket(TicketModel t) { }
 
 
+    public List<TicketModel> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<TicketModel> tickets) {
+        this.tickets = tickets;
+    }
+
     @Override
     public String toString() {
         return "BookingModel{" +

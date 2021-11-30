@@ -2,7 +2,7 @@ import {Component} from 'react'
 import {Button, Col, Container, Row} from 'react-bootstrap'
 
 import 'react-bootstrap/'
-import {getUser} from "../Profile/methods";
+import {getData, getSeats, getUser} from "../Profile/methods";
 
 export class OrderSummaryComponent extends Component {
   constructor(props) {
@@ -16,15 +16,22 @@ export class OrderSummaryComponent extends Component {
     this.renderUser = this.renderUser.bind(this)
     this.renderMovie = this.renderMovie.bind(this)
     this.renderTickets = this.renderTickets.bind(this)
+    this.renderSeatNames = this.renderSeatNames.bind(this)
     this.renderShow = this.renderShow.bind(this)
     this.renderTotal = this.renderTotal.bind(this)
 
     this.goNext = this.goNext.bind(this)
     this.fetchUser = this.fetchUser.bind(this)
+    this.fetchSeats = this.fetchSeats.bind(this)
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.fetchUser()
+    let seatNames = await this.fetchSeats()
+    this.setState({
+      ...this.state,
+      seatNames: seatNames
+    })
   }
 
   async fetchUser() {
@@ -119,6 +126,44 @@ export class OrderSummaryComponent extends Component {
     )
   }
 
+  async fetchSeats() {
+    let seatRes = await getSeats("http://localhost:8080/seats/")
+    let seats = seatRes._embedded.seats;
+    let seatNames = []
+    console.log(seats);
+    seats.map(seat => {
+      if (this.state.selectedSeats.includes(seat.seatId)) {
+        seatNames.push(seat.seat)
+      }
+    })
+    return seatNames
+  }
+
+  renderSeatNames() {
+    if (this.state.seatNames) {
+      return (
+        <Container className={'m-2 bg-info bg-opacity-10'}>
+          <Row>
+            <h2>Seats Selected</h2>
+          </Row>
+          <Row>
+            {this.state.seatNames.map(seatName => {
+              return (
+                <Row className={'mx-4'}><strong>{seatName}</strong></Row>
+              )
+            })}
+          </Row>
+        </Container>
+      )
+    } else {
+      return (
+        <Container>
+
+        </Container>
+      )
+    }
+  }
+
   renderTickets() {
     return (
       <Container className={'m-2 bg-info bg-opacity-10'}>
@@ -145,9 +190,12 @@ export class OrderSummaryComponent extends Component {
   renderTotal() {
     let total = (this.state.adultTickets * 10.0) + (this.state.childTickets * 9) + (this.state.seniorTickets * 7)
     return (
-      <Container>
+      <Container className={'m-2 bg-info bg-opacity-10'}>
         <Row>
-          <h4>Total (pre-discount): {total}</h4>
+          <h4>Total (pre-discount): {total.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD',
+          })}</h4>
         </Row>
       </Container>
     )
@@ -184,6 +232,9 @@ export class OrderSummaryComponent extends Component {
         </Row>
         <Row>
           {this.renderTickets()}
+        </Row>
+        <Row>
+          {this.renderSeatNames()}
         </Row>
         <Row>
           {this.renderTotal()}
