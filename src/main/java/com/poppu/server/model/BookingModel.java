@@ -101,4 +101,18 @@ public class BookingModel {
     // public void addTicket(TicketModel t) { }
     // public List<TicketModel> getTickets() { }
     // public boolean removeTicket(TicketModel t) { }
+
+
+    @Override
+    public String toString() {
+        return "BookingModel{" +
+                "bookingNum=" + bookingNum +
+                ", movieTitle='" + movieTitle + '\'' +
+                ", showDateTime=" + showDateTime +
+                ", cardNum='" + cardNum + '\'' +
+                ", user=" + user +
+                ", promotion=" + promotion +
+                ", tickets=" + tickets +
+                '}';
+    }
 }

@@ -30,6 +30,7 @@ class Shows extends Component {
     this.renderButtons = this.renderButtons.bind(this);
     this.getDate = this.getDate.bind(this);
     this.goNext = this.goNext.bind(this);
+    this.renderPrices = this.renderPrices.bind(this)
   }
 
   goNext() {
@@ -71,7 +72,7 @@ class Shows extends Component {
     })
   }
 
-  getDate(timestamp){
+  getDate(timestamp) {
     const milliseconds = timestamp
     const dateObject = new Date(milliseconds)
     const humanDateFormat = dateObject.toLocaleString('en-US', {timeZone: 'EST'})
@@ -79,7 +80,7 @@ class Shows extends Component {
   }
 
 
-  renderButtons(movieId){
+  renderButtons(movieId) {
     return this.state.shows.map(show => {
       return <>
         <button type="button"
@@ -93,48 +94,63 @@ class Shows extends Component {
     });
   }
 
+  renderPrices() {
+    return (
+      <Container>
+        <Row className={'m-2'}>Prices</Row>
+        <Row className={'m-2'}>Adult Tickets: $10.00</Row>
+        <Row className={'m-2'}>Child Tickets: $9.00</Row>
+        <Row className={'m-2'}>Senior Tickets: $8.00</Row>
+      </Container>
+    )
+  }
+
   render() {
     return (
-        <Container className='my-3'>
-          <Row>
-            <h1>Ticket Selection</h1>
-          </Row>
-          <Row>
-            <Form>
-              <Card className='my-3'>
-                <Card.Body>
-                  <Form.Label>
-                    <h2>Select Your Date and Time:</h2>
-                      {this.renderButtons(this.state.movieId)}
-                  </Form.Label>
-                </Card.Body>
-              </Card>
-              <Card className='my-3'>
-                <Card.Body>
-                  <Form.Label>
-                    Adult Tickets
-                  </Form.Label>
-                  <Form.Control type='number' placeholder='Adult Tickets' value={this.state.adultTickets} onChange={e => this.setState({...this.state, adultTickets: e.target.value})}/>
-                  <Form.Label>
-                    Child Tickets
-                  </Form.Label>
-                  <Form.Control type='number' placeholder='Child Tickets' value={this.state.childTickets} onChange={e => this.setState({...this.state, childTickets: e.target.value})}/>
-                  <Form.Label>
-                    Senior Tickets
-                  </Form.Label>
-                  <Form.Control type='number' placeholder='Senior Tickets' value={this.state.seniorTickets} onChange={e => this.setState({...this.state, seniorTickets: e.target.value})}/>
-                </Card.Body>
-              </Card>
-              <Card className='my-3'>
-                <Card.Body>
-                  <Button className='mx-1' variant='primary' type='submit' onClick={event => this.goNext()}>Select
-                    Seats</Button>
-                  <Button className='mx-1' variant='danger' href={'/'}>Cancel</Button>
-                </Card.Body>
-              </Card>
-            </Form>
-          </Row>
-        </Container>
+      <Container className='my-3'>
+        <Row>
+          <h1>Ticket Selection</h1>
+        </Row>
+        <Row>
+          <Form>
+            <Card className='my-3'>
+              <Card.Body>
+                <Form.Label>
+                  <h2>Select Your Date and Time:</h2>
+                  {this.renderButtons(this.state.movieId)}
+                </Form.Label>
+              </Card.Body>
+            </Card>
+            <Card className='my-3'>
+              <Card.Title>{this.renderPrices()}</Card.Title>
+              <Card.Body>
+                <Form.Label>
+                  Adult Tickets
+                </Form.Label>
+                <Form.Control type='number' placeholder='Adult Tickets' value={this.state.adultTickets}
+                              onChange={e => this.setState({...this.state, adultTickets: e.target.value})}/>
+                <Form.Label>
+                  Child Tickets
+                </Form.Label>
+                <Form.Control type='number' placeholder='Child Tickets' value={this.state.childTickets}
+                              onChange={e => this.setState({...this.state, childTickets: e.target.value})}/>
+                <Form.Label>
+                  Senior Tickets
+                </Form.Label>
+                <Form.Control type='number' placeholder='Senior Tickets' value={this.state.seniorTickets}
+                              onChange={e => this.setState({...this.state, seniorTickets: e.target.value})}/>
+              </Card.Body>
+            </Card>
+            <Card className='my-3'>
+              <Card.Body>
+                <Button className='mx-1' variant='primary' type='submit' onClick={event => this.goNext()}>Select
+                  Seats</Button>
+                <Button className='mx-1' variant='danger' href={'/'}>Cancel</Button>
+              </Card.Body>
+            </Card>
+          </Form>
+        </Row>
+      </Container>
     )
   }
 }

@@ -1,8 +1,7 @@
 import {Component} from 'react'
-import {ButtonGroup, Card, Container, Row, Table} from 'react-bootstrap'
+import {ButtonGroup, Table} from 'react-bootstrap'
 import ViewButton from './Buttons/ViewButton.component'
 import DeleteButton from './Buttons/DeleteButton.component'
-import AddButton from './Buttons/AddButton.component'
 
 import 'react-bootstrap/'
 

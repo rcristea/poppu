@@ -9,6 +9,7 @@ export class OrderConfirmationComponent extends Component {
     this.state = this.props.history.location.state
     console.log(this.state)
   }
+
   render() {
     return (
       <Container>
