@@ -149,6 +149,10 @@ export class OrderConfirmationComponent extends Component {
     let bookingRes = await postData(bookingRequest, 'http://localhost:8080/api/booking/book')
     console.log(bookingRequest)
     console.log(bookingRes)
+    this.setState({
+      ...this.state,
+      bookingResponse: bookingRes
+    })
   }
 
   render() {

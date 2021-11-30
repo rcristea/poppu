@@ -14,6 +14,23 @@ INSERT INTO addresses VALUES (1, 'Dooleyville', '123 Play Ground Stret', 789563)
 INSERT INTO addresses VALUES (2, 'Transilvania', '575 Barbeque Drive', 777777);
 INSERT INTO addresses VALUES (3, 'Juno', '400 Freezing Lane', 999999);
 
+INSERT INTO payment_infos VALUES (1, '$2a$10$O1RbZIPCQCLr522HZUP51.uV/AgPDJ1d79PLofMafbxT9WNH5M0cq', 'MasterCard', '03/2025', 2, 2);
+INSERT INTO payment_infos VALUES (2, '$2a$10$O1RbZIPCQCLr522HZUP51.FXmFWbxRDPffdDGI63NzPfyJw1Rv9Je', 'Discover', '05/2022', 3, 2);
+
+INSERT INTO promotions VALUES   (300000, '2021:12:30 00:00:00', true, '$3', '2021:01:01 00:00:00'),
+                                (300001, '2021:12:30 00:00:00', true, '$4', '2021:01:01 00:00:00'),
+                                (300002, '2021:12:30 00:00:00', true, '$5', '2021:01:01 00:00:00'),
+                                (300003, '2021:12:30 00:00:00', true, '$6', '2021:01:01 00:00:00'),
+                                (300004, '2021:12:30 00:00:00', true, '$7', '2021:01:01 00:00:00'),
+                                (300005, '2021:12:30 00:00:00', true, '$1', '2021:01:01 00:00:00'),
+                                (300006, '2021:12:30 00:00:00', true, '$2', '2021:01:01 00:00:00'),
+                                (300007, '2021:12:30 00:00:00', true, '$2', '2021:01:01 00:00:00'),
+                                (300008, '2021:12:30 00:00:00', true, '$10', '2021:01:01 00:00:00'),
+                                (300009, '2021:12:30 00:00:00', true, '$2', '2021:01:01 00:00:00'),
+                                (300010, '2021:12:30 00:00:00', true, '$1', '2021:01:01 00:00:00'),
+                                (300011, '2021:12:30 00:00:00', true, '$2', '2021:01:01 00:00:00'),
+                                (300012, '2021:12:30 00:00:00', true, '$1', '2021:01:01 00:00:00');
+
 UPDATE users SET address_id = 1 WHERE user_id = 2;
 
 INSERT INTO showrooms VALUES (1,'A'),(2,'B'),(3,'C');
