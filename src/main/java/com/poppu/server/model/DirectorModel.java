@@ -7,8 +7,7 @@ import javax.persistence.*;
 public class DirectorModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "director_generator")
-    @SequenceGenerator(name="director_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "director_id")
     private long directorId;
 

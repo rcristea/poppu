@@ -9,8 +9,7 @@ import java.util.List;
 public class ShowroomModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "showroom_generator")
-    @SequenceGenerator(name="showroom_generator", initialValue = 4)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "showroom_id")
     private long showroomId;
 
