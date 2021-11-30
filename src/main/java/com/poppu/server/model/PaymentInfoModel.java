@@ -7,8 +7,7 @@ import javax.persistence.*;
 public class PaymentInfoModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_generator")
-    @SequenceGenerator(name="payment_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "payment_id")
     private long paymentID;
 

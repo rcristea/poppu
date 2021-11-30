@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class AddressModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "address_id")
     private long addressId;
 

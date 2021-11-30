@@ -6,8 +6,7 @@ import javax.persistence.*;
 @Table(name = "reviews")
 public class ReviewModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "review_generator")
-    @SequenceGenerator(name = "review_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long reviewId;
 
