@@ -11,52 +11,29 @@ public class BookingRequest {
     private long userID;
     private long promotionID;
 
-    private String ticketType;
     private long showID;
     private long showroomID;
-    private List<String> seats;
+    private List<Long> seats;
 
     private long adultTickets;
     private long childTickets;
     private long seniorTickets;
 
-    public BookingRequest(String movieTitle, Timestamp showDateTime, String cardNum, long userID, long promotionID, String ticketType, long showID, long showroomID, List<String> seats, long adultTickets, long childTickets, long seniorTickets) {
+    public BookingRequest() {
+    }
+
+    public BookingRequest(String movieTitle, Timestamp showDateTime, String cardNum, long userID, long promotionID, long showID, long showroomID, List<Long> seats, long adultTickets, long childTickets, long seniorTickets) {
         this.movieTitle = movieTitle;
         this.showDateTime = showDateTime;
         this.cardNum = cardNum;
         this.userID = userID;
         this.promotionID = promotionID;
-        this.ticketType = ticketType;
         this.showID = showID;
         this.showroomID = showroomID;
         this.seats = seats;
         this.adultTickets = adultTickets;
         this.childTickets = childTickets;
         this.seniorTickets = seniorTickets;
-    }
-
-    public BookingRequest(String movieTitle, Timestamp showDateTime, String cardNum, long userID, long promotionID, String ticketType, long showID, long showroomID, List<String> seats, List<String> types) {
-        this.movieTitle = movieTitle;
-        this.showDateTime = showDateTime;
-        this.cardNum = cardNum;
-        this.userID = userID;
-        this.promotionID = promotionID;
-        this.ticketType = ticketType;
-        this.showID = showID;
-        this.showroomID = showroomID;
-        this.seats = seats;
-    }
-
-    public BookingRequest(String movieTitle, Timestamp showDateTime, String cardNum, long userID, long promotionID, String ticketType, long showID, long showroomID, List<String> seats) {
-        this.movieTitle = movieTitle;
-        this.showDateTime = showDateTime;
-        this.cardNum = cardNum;
-        this.userID = userID;
-        this.promotionID = promotionID;
-        this.ticketType = ticketType;
-        this.showID = showID;
-        this.showroomID = showroomID;
-        this.seats = seats;
     }
 
     public String getMovieTitle() {
@@ -99,14 +76,6 @@ public class BookingRequest {
         this.promotionID = promotionID;
     }
 
-    public String getTicketType() {
-        return ticketType;
-    }
-
-    public void setTicketType(String ticketType) {
-        this.ticketType = ticketType;
-    }
-
     public long getShowID() {
         return showID;
     }
@@ -123,11 +92,11 @@ public class BookingRequest {
         this.showroomID = showroomID;
     }
 
-    public List<String> getSeats() {
+    public List<Long> getSeats() {
         return seats;
     }
 
-    public void setSeats(List<String> seats) {
+    public void setSeats(List<Long> seats) {
         this.seats = seats;
     }
 
@@ -163,7 +132,6 @@ public class BookingRequest {
                 ", cardNum='" + cardNum + '\'' +
                 ", userID=" + userID +
                 ", promotionID=" + promotionID +
-                ", ticketType='" + ticketType + '\'' +
                 ", showID=" + showID +
                 ", showroomID=" + showroomID +
                 ", seats=" + seats +
