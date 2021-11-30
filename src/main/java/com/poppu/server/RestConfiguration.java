@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 public class RestConfiguration implements RepositoryRestConfigurer {
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
+        config.exposeIdsFor(UserModel.class);
         config.exposeIdsFor(ShowroomModel.class);
         config.exposeIdsFor(MovieModel.class);
         config.exposeIdsFor(ShowModel.class);

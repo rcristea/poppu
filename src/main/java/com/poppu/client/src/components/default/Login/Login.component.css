@@ -6,7 +6,7 @@
 .form-border {
   margin: auto;
   width: 352px;
-  height: 402px;
+  height: 452px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,7 +19,7 @@
 
 .form-container {
   width: 350px;
-  height: 400px;
+  height: 450px;
   border-radius: 25px;
   background-color: #171717;
   display: flex;

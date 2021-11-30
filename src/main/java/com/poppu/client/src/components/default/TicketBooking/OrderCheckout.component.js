@@ -1,186 +1,168 @@
 import {Component} from 'react'
-import {Button, Card, Col, Container, Form, FormSelect, Row} from 'react-bootstrap'
+import {Button, Card, Container, Form} from 'react-bootstrap'
 
 import 'react-bootstrap/'
+import {TitleComponent} from "../Profile/Utils.component";
 
 export class OrderCheckoutComponent extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            addresses: null,
-            paymentInfos: null,
-            userProfile: null,
-            selectedAddress: null,
-            selectedPayment: null,
-        }
-        this.setState({
-            ...this.state,
-            selectedShow: this.props.history.location.selectedShow,
-            selectedMovie: this.props.history.location.selectedMovie,
-            adultTickets: this.props.history.location.adultTickets,
-            childTickets: this.props.history.location.childTickets,
-            seniorTickets: this.props.history.location.seniorTickets,
-            selectedSeats: this.props.history.location.selectedSeats
-        })
-        console.log(this.state)
-        this.getAddresses = this.getAddresses.bind(this)
-        this.getPayments = this.getPayments.bind(this)
-        this.setAddress = this.setAddress.bind(this)
-        this.setPayment = this.setPayment.bind(this)
+  constructor(props) {
+    super(props)
+    this.state = {
+      addresses: null,
+      paymentInfos: null,
+      userProfile: null,
+      cardType: '',
+      cardNum: '',
+      expDate: '',
+      street: '',
+      city: '',
+      zipCode: '',
+      promoCode: '',
     }
 
-    getAddresses() {
-        //fetch addresses for users here
-    }
+    console.log(this.state)
+    this.getAddresses = this.getAddresses.bind(this)
+    this.getPayments = this.getPayments.bind(this)
+    this.setAddress = this.setAddress.bind(this)
+    this.setPayment = this.setPayment.bind(this)
+  }
 
-    getPayments() {
-        //fetch payments for users here
-    }
+  getAddresses() {
+    //fetch addresses for users here
+  }
 
-    setPayment() {
-        //Set current payment
-    }
+  getPayments() {
+    //fetch payments for users here
+  }
 
-    setAddress() {
-        //Set current address
-    }
+  setPayment() {
+    //Set current payment
+  }
 
-    goNext() {
-        this.props.history.push({
-            pathname: '/booking/order/confirm',
-            state: {
-                userProfile: this.state.userProfile,
-                selectedAddress: this.state.selectedAddress,
-                selectedPayment: this.state.selectedPayment,
-                selectedShow: this.state.selectedShow,
-                selectedMovie: this.state.selectedMovie,
-                adultTickets: this.state.adultTickets,
-                childTickets: this.state.childTickets,
-                seniorTickets: this.state.seniorTickets,
-                selectedSeats: this.state.selectedSeats,
-            }
-        })
-    }
+  setAddress() {
+    //Set current address
+  }
 
-    render() {
-        return (
-            <Container className='my-3 bg-light'>
-                <Row>
-                    <h1>Order Checkout</h1>
-                </Row>
-                <Row>
-                    <Form>
-                        <Card className='my-3'>
-                            <Card.Body>
-                                <Form.Label>
-                                    <h2>Enter Billing Information:</h2>
-                                </Form.Label>
-                                <Row className='my-3'>
-                                    <Col md={2}><h5>Name</h5></Col>
-                                    <Col><Form.Control type='text' placeholder='First Name'/></Col>
-                                    <Col><Form.Control type='text' placeholder='Last Name'/></Col>
-                                </Row>
-                                <Row className='my-3'>
-                                    <Col md={2}><h5>Contact</h5></Col>
-                                    <Col md={3}><Form.Control type='number' placeholder='Phone Number'/></Col>
-                                    <Col md={7}><Form.Control type='email' placeholder='E-mail'/></Col>
-                                </Row>
-                                <Row className='my-3'>
-                                    <Col md={2}><h5>Address</h5>
-                                    </Col><Col>
-                                    <Form.Control className='my-3' type='text' placeholder='Street'/></Col>
-                                </Row>
-                                <Row className='my-3'>
-                                    <Col md={2}></Col>
-                                    <Col><Form.Control type='text' placeholder='Street Address'/></Col>
-                                    <Col md={2}><Form.Control type='text' placeholder='City'/></Col>
-                                    <Col md={2}>
-                                        <FormSelect>
-                                            <option value='AL'>Alabama</option>
-                                            <option value='AK'>Alaska</option>
-                                            <option value='AZ'>Arizona</option>
-                                            <option value='AR'>Arkansas</option>
-                                            <option value='CA'>California</option>
-                                            <option value='CO'>Colorado</option>
-                                            <option value='CT'>Connecticut</option>
-                                            <option value='DE'>Delaware</option>
-                                            <option value='DC'>District Of Columbia</option>
-                                            <option value='FL'>Florida</option>
-                                            <option value='GA'>Georgia</option>
-                                            <option value='HI'>Hawaii</option>
-                                            <option value='ID'>Idaho</option>
-                                            <option value='IL'>Illinois</option>
-                                            <option value='IN'>Indiana</option>
-                                            <option value='IA'>Iowa</option>
-                                            <option value='KS'>Kansas</option>
-                                            <option value='KY'>Kentucky</option>
-                                            <option value='LA'>Louisiana</option>
-                                            <option value='ME'>Maine</option>
-                                            <option value='MD'>Maryland</option>
-                                            <option value='MA'>Massachusetts</option>
-                                            <option value='MI'>Michigan</option>
-                                            <option value='MN'>Minnesota</option>
-                                            <option value='MS'>Mississippi</option>
-                                            <option value='MO'>Missouri</option>
-                                            <option value='MT'>Montana</option>
-                                            <option value='NE'>Nebraska</option>
-                                            <option value='NV'>Nevada</option>
-                                            <option value='NH'>New Hampshire</option>
-                                            <option value='NJ'>New Jersey</option>
-                                            <option value='NM'>New Mexico</option>
-                                            <option value='NY'>New York</option>
-                                            <option value='NC'>North Carolina</option>
-                                            <option value='ND'>North Dakota</option>
-                                            <option value='OH'>Ohio</option>
-                                            <option value='OK'>Oklahoma</option>
-                                            <option value='OR'>Oregon</option>
-                                            <option value='PA'>Pennsylvania</option>
-                                            <option value='RI'>Rhode Island</option>
-                                            <option value='SC'>South Carolina</option>
-                                            <option value='SD'>South Dakota</option>
-                                            <option value='TN'>Tennessee</option>
-                                            <option value='TX'>Texas</option>
-                                            <option value='UT'>Utah</option>
-                                            <option value='VT'>Vermont</option>
-                                            <option value='VA'>Virginia</option>
-                                            <option value='WA'>Washington</option>
-                                            <option value='WV'>West Virginia</option>
-                                            <option value='WI'>Wisconsin</option>
-                                            <option value='WY'>Wyoming</option>
-                                        </FormSelect>
-                                    </Col>
-                                    <Col md={2}><Form.Control type='number' placeholder='ZIP'/></Col>
-                                </Row>
-                                <Row className='my-3'>
-                                    <Col md={2}><h5>Credit Card</h5></Col>
-                                    <Col md={7}><Form.Control type='text' placeholder='Credit Card Number'/></Col>
-                                    <Col md={3}><Form.Control type='text' placeholder='Verification PIN'/></Col>
-                                </Row>
-                            </Card.Body>
-                        </Card>
-                        <Card className='my-3'>
-                            <Card.Body>
-                                <Form.Label>
-                                    <h2>Enter Optional Promotion Code:</h2>
-                                </Form.Label>
-                                <Row className='my-3'>
-                                    <Col><Form.Control type='number' placeholder='Promo Code'/></Col>
-                                </Row>
-                            </Card.Body>
-                        </Card>
-                        <Card className='my-3'>
-                            <Card.Body>
-                                <Button className='mx-1' variant='primary' type='submit'
-                                        href={'/booking/order/confirm'}>Confirm
-                                    Order</Button>
-                                <Button className='mx-1' variant='danger' href={'/'}>Cancel</Button>
-                            </Card.Body>
-                        </Card>
-                    </Form>
-                </Row>
-            </Container>
-        )
-    }
+
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      selectedShow: this.props.history.location.state.selectedShow,
+      selectedMovie: this.props.history.location.state.selectedMovie,
+      adultTickets: this.props.history.location.state.adultTickets,
+      childTickets: this.props.history.location.state.childTickets,
+      seniorTickets: this.props.history.location.state.seniorTickets,
+      selectedSeats: this.props.history.location.state.selectedSeats,
+      userProfile: this.props.history.location.state.userProfile,
+    })
+  }
+
+
+  goNext() {
+    this.props.history.push({
+      pathname: '/booking/order/confirm',
+      state: {
+        userProfile: this.state.userProfile,
+        selectedShow: this.state.selectedShow,
+        selectedMovie: this.state.selectedMovie,
+        adultTickets: this.state.adultTickets,
+        childTickets: this.state.childTickets,
+        seniorTickets: this.state.seniorTickets,
+        selectedSeats: this.state.selectedSeats,
+        cardType: this.state.cardType,
+        cardNum: this.state.cardNum,
+        expDate: this.state.expDate,
+        street: this.state.street,
+        city: this.state.city,
+        zipCode: this.state.zipCode,
+        promoCode: this.state.promoCode
+      }
+    })
+  }
+
+  render() {
+    return (
+      <Container className={'my-2 bg-light'}>
+        <TitleComponent compTitle={'Add New Movie'}/>
+        <Card className={'m-2'}>
+          <Form>
+            <div>
+              <div>
+                <Form.Group>
+                  <Form.Label><strong>Card Type</strong></Form.Label>
+                  <Form.Control type={'text'}
+                                placeholder={'Enter the card type.'}
+                                value={this.state.cardType}
+                                onChange={e => this.setState({
+                                  ...this.state, cardType: e.target.value
+                                })}/>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label><strong>Card Num</strong></Form.Label>
+                  <Form.Control type={'text'}
+                                placeholder={'Enter the card number.'}
+                                value={this.state.cardNum}
+                                onChange={e => this.setState({
+                                  ...this.state, cardNum: e.target.value
+                                })}/>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label><strong>Expiration Date</strong></Form.Label>
+                  <Form.Control type={'date'}
+                                placeholder={'Enter the expiration date of the card.'}
+                                value={this.state.expDate}
+                                onChange={e => this.setState({
+                                  ...this.state, expDate: e.target.value
+                                })}/>
+                </Form.Group>
+              </div>
+              <div>
+                <h2>Payment Address</h2>
+                <Form.Group>
+                  <Form.Label><strong>Street</strong></Form.Label>
+                  <Form.Control type={'text'}
+                                placeholder={'Enter street.'}
+                                value={this.state.street}
+                                onChange={e => this.setState({
+                                  ...this.state, street: e.target.value
+                                })}/>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label><strong>City</strong></Form.Label>
+                  <Form.Control type={'text'}
+                                placeholder={'Enter city.'}
+                                value={this.state.city}
+                                onChange={e => this.setState({
+                                  ...this.state, city: e.target.value
+                                })}/>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label><strong>Zip Code</strong></Form.Label>
+                  <Form.Control type={'number'}
+                                placeholder={'Enter zip code.'}
+                                value={this.state.zipCode}
+                                onChange={e => this.setState({
+                                  ...this.state, zipCode: e.target.value
+                                })}/>
+                </Form.Group>
+              </div>
+              <Form.Group>
+                <Form.Label><strong>Promotion Code</strong></Form.Label>
+                <Form.Control type={'number'}
+                              placeholder={'Enter Promotion Code.'}
+                              value={this.state.promoCode}
+                              onChange={e => this.setState({
+                                ...this.state, promoCode: e.target.value
+                              })}/>
+              </Form.Group>
+            </div>
+            <Button variant={'success'} onClick={event => this.goNext()}>Confirm Order</Button>
+            <Button variant={'danger'} href={'/'}>Cancel</Button>
+          </Form>
+        </Card>
+      </Container>
+    )
+  }
 }
 
 export default OrderCheckoutComponent

@@ -15,8 +15,8 @@
 }
 
 .selected-seat {
-  color: #72e3e3;
-  filter: invert(81%) sepia(68%) saturate(290%) hue-rotate(122deg) brightness(91%) contrast(94%);
+  color: #685ed4;
+  filter: invert(35%) sepia(82%) saturate(647%) hue-rotate(211deg) brightness(95%) contrast(97%);
 }
 
 .select-time {

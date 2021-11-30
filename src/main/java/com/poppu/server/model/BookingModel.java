@@ -100,4 +100,26 @@ public class BookingModel {
     // public void addTicket(TicketModel t) { }
     // public List<TicketModel> getTickets() { }
     // public boolean removeTicket(TicketModel t) { }
+
+
+    public List<TicketModel> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<TicketModel> tickets) {
+        this.tickets = tickets;
+    }
+
+    @Override
+    public String toString() {
+        return "BookingModel{" +
+                "bookingNum=" + bookingNum +
+                ", movieTitle='" + movieTitle + '\'' +
+                ", showDateTime=" + showDateTime +
+                ", cardNum='" + cardNum + '\'' +
+                ", user=" + user +
+                ", promotion=" + promotion +
+                ", tickets=" + tickets +
+                '}';
+    }
 }

@@ -7,6 +7,8 @@ import './methods'
 import {deleteAssociation, getAddress, getPaymentCards, getUser} from "./methods";
 import NavBar from "../NavBar/NavBar.component";
 
+import './profile.component.css'
+
 export class ViewProfileComponent extends Component {
   constructor(props) {
     super(props)
@@ -142,7 +144,7 @@ export class ViewProfileComponent extends Component {
   renderContent() {
     if (this.state.user) {
       return (
-        <Container className={'my-2 bg-light col-8'}>
+        <Container className={'customer-profile my-2 bg-light col-8'}>
           <TitleComponent compTitle={this.state.user.firstName.concat('\'s Profile')}/>
           <Card className={'bg-primary bg-opacity-25'}>
             <DisplayAttribute attName={'First Name'} attVal={this.state.user.firstName}/>

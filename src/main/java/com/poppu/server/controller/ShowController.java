@@ -34,11 +34,6 @@ public class ShowController {
             return showModel.getMovie().getMovieId() == movieID;
         }).collect(Collectors.toList());
     }
-
-    @GetMapping("/movie/{id}")
-    public List<ShowModel> getByMovieId(@PathVariable("movieId") long movieId) {
-        return this.showRepository.findAllByMovie(movieId);
-    }
   
     @PutMapping("/{id}")
     public ResponseEntity<ShowModel> putShow(@RequestBody ShowModel newShowInfo, @PathVariable("id") long id) throws URISyntaxException {

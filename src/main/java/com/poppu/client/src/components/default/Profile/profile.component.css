@@ -1,0 +1,14 @@
+.customer-profile {
+  padding: 25px;
+  border-radius: 5px;
+}
+
+.customer-profile h1 {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.customer-profile .bg-primary {
+  background-color: #eaeaea !important;
+  border: none;
+}
