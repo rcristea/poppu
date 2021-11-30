@@ -3,11 +3,13 @@ import {Button, Card, Container, Form} from 'react-bootstrap'
 
 import 'react-bootstrap/'
 import {TitleComponent} from "../Profile/Utils.component";
+import {getPaymentCards, getPromos} from "../Profile/methods";
 
 export class OrderCheckoutComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      selectedPromo: null,
       addresses: null,
       paymentInfos: null,
       userProfile: null,
@@ -21,26 +23,25 @@ export class OrderCheckoutComponent extends Component {
     }
 
     console.log(this.state)
-    this.getAddresses = this.getAddresses.bind(this)
     this.getPayments = this.getPayments.bind(this)
     this.setAddress = this.setAddress.bind(this)
     this.setPayment = this.setPayment.bind(this)
   }
 
-  getAddresses() {
-    //fetch addresses for users here
+  async getPayments() {
+    let paymentCards = await getPaymentCards('http://localhost:8080/users/'.concat(this.state.userProfile.id)/paymetCards)._embedded.paymentinfos
+    console.log(paymentCards)
+    this.setState({
+      ...this.state,
+      paymentInfos: paymentCards,
+    })
   }
 
-  getPayments() {
-    //fetch payments for users here
+  async getPromo() {
+    let promo = await getPromos('http://localhost:8080/promotions/'.concat(this.state.promoCode)/paymetCards)
   }
 
   setPayment() {
-    //Set current payment
-  }
-
-  setAddress() {
-    //Set current address
   }
 
 
@@ -88,6 +89,15 @@ export class OrderCheckoutComponent extends Component {
           <Form>
             <div>
               <div>
+                <Form.Group>
+                  <Form.Label><strong>Card Type</strong></Form.Label>
+                  <Form.Control type={'text'}
+                                placeholder={'Enter the card type.'}
+                                value={this.state.cardType}
+                                onChange={e => this.setState({
+                                  ...this.state, cardType: e.target.value
+                                })}/>
+                </Form.Group>
                 <Form.Group>
                   <Form.Label><strong>Card Type</strong></Form.Label>
                   <Form.Control type={'text'}

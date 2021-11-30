@@ -75,6 +75,22 @@ function getPaymentCards(paymentCard_link) {
   })
 }
 
+function getPromos(promo_link) {
+  return new Promise(function (resolve, reject) {
+    fetch(promo_link, {
+      method: 'GET',
+    }).then(response => {
+      response.json().then(json => {
+        resolve(json)
+      }).catch(error => {
+        reject(error)
+      })
+    }).catch(error => {
+      reject(error)
+    })
+  })
+}
+
 function putData(data, destination) {
   return new Promise(function (resolve, reject) {
     fetch(destination, {
@@ -157,4 +173,4 @@ function deleteAssociation(destination) {
   })
 }
 
-export {getUser, getPaymentCards, getAddress, putData, postData, putAssociation, deleteAssociation, getData, getSeats}
+export {getUser, getPaymentCards, getAddress, putData, postData, putAssociation, deleteAssociation, getData, getSeats, getPromos}
