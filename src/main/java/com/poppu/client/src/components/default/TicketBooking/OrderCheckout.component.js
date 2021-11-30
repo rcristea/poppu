@@ -3,16 +3,15 @@ import {Button, Card, Container, Form} from 'react-bootstrap'
 
 import 'react-bootstrap/'
 import {TitleComponent} from "../Profile/Utils.component";
-import {getPaymentCards, getPromos} from "../Profile/methods";
 
 export class OrderCheckoutComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedPromo: null,
-      addresses: null,
-      paymentInfos: null,
-      userProfile: null,
+      ...this.props.history.location.state,
+      promos: [],
+      addresses: [],
+      paymentInfos: [],
       cardType: '',
       cardNum: '',
       expDate: '',
@@ -24,38 +23,85 @@ export class OrderCheckoutComponent extends Component {
 
     console.log(this.state)
     this.getPayments = this.getPayments.bind(this)
-    this.setAddress = this.setAddress.bind(this)
-    this.setPayment = this.setPayment.bind(this)
+    this.fetchPaymentCards = this.fetchPaymentCards.bind(this)
+    this.fetchPromos = this.fetchPromos.bind(this)
+    this.changePayment = this.changePayment.bind(this)
   }
 
   async getPayments() {
-    let paymentCards = await getPaymentCards('http://localhost:8080/users/'.concat(this.state.userProfile.id)/paymetCards)._embedded.paymentinfos
-    console.log(paymentCards)
+    let paymentCards = await this.fetchPaymentCards('http://localhost:8080/users/'.concat(this.state.userProfile.id).concat('/paymentCards'))
     this.setState({
       ...this.state,
-      paymentInfos: paymentCards,
+      paymentInfos: paymentCards._embedded.paymentinfos.map(paymentCard => {
+        paymentCard.encrypedCard = paymentCard.cardNum
+        paymentCard.cardNum = Math.floor(Math.random()*1E16)
+        return paymentCard
+      }),
+    })
+    console.log(this.state)
+  }
+
+  async fetchPaymentCards(cards_link) {
+    return new Promise(function (resolve, reject) {
+      fetch(cards_link, {
+        method: 'GET',
+      }).then(response => {
+        response.json().then(json => {
+          resolve(json)
+        }).catch(error => {
+          reject(error)
+        })
+      }).catch(error => {
+        reject(error)
+      })
     })
   }
 
-  async getPromo() {
-    let promo = await getPromos('http://localhost:8080/promotions/'.concat(this.state.promoCode)/paymetCards)
+  async fetchAddress(address_link) {
+    return new Promise(function (resolve, reject) {
+      fetch(address_link, {
+        method: 'GET',
+      }).then(response => {
+        response.json().then(json => {
+          resolve(json)
+        }).catch(error => {
+          reject(error)
+        })
+      }).catch(error => {
+        reject(error)
+      })
+    })
   }
 
-  setPayment() {
+  async getPromos() {
+    let promos = await this.fetchPromos('http://localhost:8080/promotions/')
+    this.setState({
+      ...this.state,
+      promos: promos._embedded.promotions
+    })
+    console.log(this.state)
+  }
+
+  async fetchPromos(promo_link) {
+    return new Promise(function (resolve, reject) {
+      fetch(promo_link, {
+        method: 'GET',
+      }).then(response => {
+        response.json().then(json => {
+          resolve(json)
+        }).catch(error => {
+          reject(error)
+        })
+      }).catch(error => {
+        reject(error)
+      })
+    })
   }
 
 
   componentDidMount() {
-    this.setState({
-      ...this.state,
-      selectedShow: this.props.history.location.state.selectedShow,
-      selectedMovie: this.props.history.location.state.selectedMovie,
-      adultTickets: this.props.history.location.state.adultTickets,
-      childTickets: this.props.history.location.state.childTickets,
-      seniorTickets: this.props.history.location.state.seniorTickets,
-      selectedSeats: this.props.history.location.state.selectedSeats,
-      userProfile: this.props.history.location.state.userProfile,
-    })
+    this.getPayments()
+    this.getPromos()
   }
 
 
@@ -81,6 +127,41 @@ export class OrderCheckoutComponent extends Component {
     })
   }
 
+  async changePayment(paymentCard) {
+    let address = await this.fetchAddress(paymentCard._links.address.href)
+    if (this.state.cardNum != paymentCard.cardNum) {
+      this.setState({
+        ...this.state,
+        cardType: paymentCard.cardType,
+        cardNum: paymentCard.cardNum,
+        expDate: paymentCard.expDate,
+        street: address.street,
+        city: address.city,
+        zipCode: address.zipCode,
+      })
+    }
+  }
+
+  renderPaymentOptions() {
+    if (this.state.paymentInfos.length !== 0) {
+      return (
+        <Container>
+            {this.state.paymentInfos.map(paymentCard => {
+              return (
+                <Button onClick={event => {this.changePayment(paymentCard)}}>Card {paymentCard.cardType}</Button>
+              )
+            })}
+        </Container>
+      )
+    } else {
+      return (
+        <Container>
+
+        </Container>
+      )
+    }
+  }
+
   render() {
     return (
       <Container className={'my-2 bg-light'}>
@@ -89,6 +170,9 @@ export class OrderCheckoutComponent extends Component {
           <Form>
             <div>
               <div>
+                <div>
+                  {this.renderPaymentOptions()}
+                </div>
                 <Form.Group>
                   <Form.Label><strong>Card Type</strong></Form.Label>
                   <Form.Control type={'text'}
@@ -99,18 +183,9 @@ export class OrderCheckoutComponent extends Component {
                                 })}/>
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label><strong>Card Type</strong></Form.Label>
+                  <Form.Label><strong>Card Number</strong></Form.Label>
                   <Form.Control type={'text'}
                                 placeholder={'Enter the card type.'}
-                                value={this.state.cardType}
-                                onChange={e => this.setState({
-                                  ...this.state, cardType: e.target.value
-                                })}/>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label><strong>Card Num</strong></Form.Label>
-                  <Form.Control type={'text'}
-                                placeholder={'Enter the card number.'}
                                 value={this.state.cardNum}
                                 onChange={e => this.setState({
                                   ...this.state, cardNum: e.target.value
@@ -118,7 +193,7 @@ export class OrderCheckoutComponent extends Component {
                 </Form.Group>
                 <Form.Group>
                   <Form.Label><strong>Expiration Date</strong></Form.Label>
-                  <Form.Control type={'date'}
+                  <Form.Control type={'text'}
                                 placeholder={'Enter the expiration date of the card.'}
                                 value={this.state.expDate}
                                 onChange={e => this.setState({
