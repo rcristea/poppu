@@ -7,6 +7,7 @@
 }
 
 .seat {
+  color: #fff;
   font-weight: 900;
   flex: 0 1 calc(20% - 8px);
   text-align: center;
@@ -104,4 +105,14 @@
   margin-bottom: 25px;
   max-height: 115px;
   overflow-y: scroll;
+}
+
+.screen-img {
+  filter: invert(1);
+}
+
+.select-seats {
+  background-color: #000;
+  border-radius: 5px;
+  padding: 25px;
 }
