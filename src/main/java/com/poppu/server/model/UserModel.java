@@ -2,6 +2,7 @@ package com.poppu.server.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.poppu.server.util.Role;
 import com.poppu.server.util.Status;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -14,8 +15,7 @@ import java.util.List;
 public class UserModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
-    @SequenceGenerator(name="user_generator", initialValue = 3)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
     private long userId;
 
@@ -47,6 +47,7 @@ public class UserModel {
     @JoinColumn(name = "address_id", unique = true, foreignKey = @ForeignKey(name = "FK_user_address"))
     private AddressModel address;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private List<PaymentInfoModel> paymentCards = new ArrayList<PaymentInfoModel>();
 

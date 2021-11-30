@@ -13,8 +13,7 @@ import java.util.Set;
 public class ShowModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "show_generator")
-    @SequenceGenerator(name="show_generator", initialValue = 201)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "show_id")
     private long showID;
 
