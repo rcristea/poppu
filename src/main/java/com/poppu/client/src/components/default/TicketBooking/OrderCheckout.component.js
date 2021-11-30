@@ -149,7 +149,7 @@ export class OrderCheckoutComponent extends Component {
               <Form.Group>
                 <Form.Label><strong>Promotion Code</strong></Form.Label>
                 <Form.Control type={'number'}
-                              placeholder={'Enter zip code.'}
+                              placeholder={'Enter Promotion Code.'}
                               value={this.state.promoCode}
                               onChange={e => this.setState({
                                 ...this.state, promoCode: e.target.value
