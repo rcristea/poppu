@@ -2,6 +2,7 @@ import {Component} from 'react'
 import {Button, Card, Col, Container, Row} from 'react-bootstrap'
 
 import 'react-bootstrap/'
+import {postData} from "../Profile/methods";
 
 export class OrderConfirmationComponent extends Component {
   constructor(props) {
@@ -15,10 +16,15 @@ export class OrderConfirmationComponent extends Component {
     this.renderMovie = this.renderMovie.bind(this)
     this.renderUser = this.renderUser.bind(this)
 
+    this.theFinalFetch = this.theFinalFetch.bind(this)
+  }
+
+  componentDidMount() {
+    this.theFinalFetch()
   }
 
   renderUser() {
-    if(this.state.userProfile) {
+    if (this.state.userProfile) {
       return (
         <Container className={'m-2 bg-info bg-opacity-10'}>
           <Row>
@@ -107,7 +113,6 @@ export class OrderConfirmationComponent extends Component {
           <Col md={4}>Senior Tickets: $8.00</Col>
           <Col md={8}>{this.state.seniorTickets}</Col>
         </Row>
-
       </Container>
     )
   }
@@ -124,6 +129,26 @@ export class OrderConfirmationComponent extends Component {
         </Row>
       </Container>
     )
+  }
+
+  async theFinalFetch() {
+    let bookingRequest = {
+      movieTitle: this.state.selectedMovie.title,
+      showDateTime: Date.now(),
+      cardNum: parseInt(this.state.cardNum),
+      userID: this.state.userProfile.id,
+      promotionID: -1,
+      showID: this.state.selectedShow.showID,
+      showroomID: this.state.selectedShow.showroom.showroomId,
+      seats: this.state.selectedSeats,
+      adultTickets: this.state.adultTickets,
+      childTickets: this.state.childTickets,
+      seniorTickets: this.state.seniorTickets,
+    }
+
+    let bookingRes = await postData(bookingRequest, 'http://localhost:8080/api/booking/book')
+    console.log(bookingRequest)
+    console.log(bookingRes)
   }
 
   render() {

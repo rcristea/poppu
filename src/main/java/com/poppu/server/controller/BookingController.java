@@ -39,11 +39,11 @@ public class BookingController {
 
     @PostMapping("/book")
     public BookingModel bookMovie(@RequestBody BookingRequest bookingRequest) {
-        log.warn("Booking Request", bookingRequest);
+        log.warn("Booking Request", bookingRequest.toString());
         UserModel user = userRepository.findById(bookingRequest.getUserID()).get();
         log.warn("User", user);
 
-        PromotionModel promo = null;
+        PromotionModel promo;
         if (bookingRequest.getPromotionID() == -1) {
             promo = null;
         } else {
@@ -58,11 +58,11 @@ public class BookingController {
                 promo
                 );
         log.warn("Booking", booking);
+        BookingModel bookingRes = this.bookingRepository.save(booking);
 
         AtomicLong adultCounter = new AtomicLong(bookingRequest.getAdultTickets());
         AtomicLong childCounter = new AtomicLong(bookingRequest.getChildTickets());
         AtomicLong seniorCounter = new AtomicLong(bookingRequest.getSeniorTickets());
-        ArrayList<TicketModel> tickets = new ArrayList<TicketModel>();
 
         ShowModel show = this.showRepository.findById(bookingRequest.getShowID()).get();
         log.warn("Show", show);
@@ -95,15 +95,11 @@ public class BookingController {
                     show,
                     showroom,
                     seat,
-                    booking
+                    bookingRes
             );
-            tickets.add(ticket);
             return this.ticketRepository.save(ticket);
         }).collect(Collectors.toList());
 
-        booking.setTickets(tickets);
-        log.warn("Final Booking", booking);
-        
         return this.bookingRepository.save(booking);
     }
 }
