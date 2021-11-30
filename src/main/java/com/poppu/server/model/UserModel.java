@@ -2,6 +2,7 @@ package com.poppu.server.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.poppu.server.util.Role;
 import com.poppu.server.util.Status;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -46,6 +47,7 @@ public class UserModel {
     @JoinColumn(name = "address_id", unique = true, foreignKey = @ForeignKey(name = "FK_user_address"))
     private AddressModel address;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private List<PaymentInfoModel> paymentCards = new ArrayList<PaymentInfoModel>();
 

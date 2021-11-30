@@ -1,5 +1,7 @@
 package com.poppu.server.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -24,6 +26,7 @@ public class PaymentInfoModel {
     @JoinColumn (name = "address_id", foreignKey = @ForeignKey(name = "FK_payment_address"))
     private AddressModel address;
 
+    @JsonBackReference
     @ManyToOne(optional = false)
     @JoinColumn (name = "user_id", foreignKey = @ForeignKey(name = "FK_payment_user"))
     private UserModel user;

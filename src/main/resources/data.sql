@@ -14,8 +14,8 @@ INSERT INTO addresses VALUES (1, 'Dooleyville', '123 Play Ground Stret', 789563)
 INSERT INTO addresses VALUES (2, 'Transilvania', '575 Barbeque Drive', 777777);
 INSERT INTO addresses VALUES (3, 'Juno', '400 Freezing Lane', 999999);
 
-INSERT INTO payment_infos VALUES (1, 5252907538544784, 'MasterCard', '03/2025', 2, 2);
-INSERT INTO payment_infos VALUES (2, 6011090094195901, 'Discover', '05/2022', 3, 2);
+INSERT INTO payment_infos VALUES (1, '$2a$10$O1RbZIPCQCLr522HZUP51.uV/AgPDJ1d79PLofMafbxT9WNH5M0cq', 'MasterCard', '03/2025', 2, 2);
+INSERT INTO payment_infos VALUES (2, '$2a$10$O1RbZIPCQCLr522HZUP51.FXmFWbxRDPffdDGI63NzPfyJw1Rv9Je', 'Discover', '05/2022', 3, 2);
 
 UPDATE users SET address_id = 1 WHERE user_id = 2;
 
