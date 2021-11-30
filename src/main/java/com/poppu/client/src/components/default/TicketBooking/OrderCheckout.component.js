@@ -9,6 +9,7 @@ export class OrderCheckoutComponent extends Component {
     super(props)
     this.state = {
       ...this.props.history.location.state,
+      selectedPromo: null,
       promos: [],
       addresses: [],
       paymentInfos: [],
@@ -19,6 +20,7 @@ export class OrderCheckoutComponent extends Component {
       city: '',
       zipCode: '',
       promoCode: '',
+      discountText: ''
     }
 
     console.log(this.state)
@@ -26,6 +28,7 @@ export class OrderCheckoutComponent extends Component {
     this.fetchPaymentCards = this.fetchPaymentCards.bind(this)
     this.fetchPromos = this.fetchPromos.bind(this)
     this.changePayment = this.changePayment.bind(this)
+    this.applyPromos = this.applyPromos.bind(this)
   }
 
   async getPayments() {
@@ -34,7 +37,7 @@ export class OrderCheckoutComponent extends Component {
       ...this.state,
       paymentInfos: paymentCards._embedded.paymentinfos.map(paymentCard => {
         paymentCard.encrypedCard = paymentCard.cardNum
-        paymentCard.cardNum = Math.floor(Math.random()*1E16)
+        paymentCard.cardNum = Math.floor(Math.random() * 1E16)
         return paymentCard
       }),
     })
@@ -82,6 +85,26 @@ export class OrderCheckoutComponent extends Component {
     console.log(this.state)
   }
 
+  applyPromos(code) {
+    let codeInt = parseInt(code)
+    console.log(codeInt)
+    let selectedPromo = null;
+    if (this.state.promos && this.state.promos.map(promo => {return promo.promotionId}).includes(codeInt)) {
+      let index = this.state.promos.map(promo => {return promo.promotionId}).indexOf(codeInt)
+      this.setState({
+        ...this.state,
+        selectedPromo: this.state.promos[index],
+        discountText: 'You get: '.concat(this.state.promos[index].offer)
+      })
+    } else {
+      this.setState({
+        ...this.state,
+        selectedPromo: null,
+        discountText: 'No promotion applied'
+      })
+    }
+  }
+
   async fetchPromos(promo_link) {
     return new Promise(function (resolve, reject) {
       fetch(promo_link, {
@@ -98,6 +121,42 @@ export class OrderCheckoutComponent extends Component {
     })
   }
 
+  async changePayment(paymentCard) {
+    let address = await this.fetchAddress(paymentCard._links.address.href)
+    if (this.state.cardNum !== paymentCard.cardNum) {
+      this.setState({
+        ...this.state,
+        cardType: paymentCard.cardType,
+        cardNum: paymentCard.cardNum,
+        expDate: paymentCard.expDate,
+        street: address.street,
+        city: address.city,
+        zipCode: address.zipCode,
+      })
+    }
+  }
+
+  renderPaymentOptions() {
+    if (this.state.paymentInfos.length !== 0) {
+      return (
+        <Container>
+          {this.state.paymentInfos.map(paymentCard => {
+            return (
+              <Button onClick={event => {
+                this.changePayment(paymentCard)
+              }}>Card {paymentCard.cardType}</Button>
+            )
+          })}
+        </Container>
+      )
+    } else {
+      return (
+        <Container>
+
+        </Container>
+      )
+    }
+  }
 
   componentDidMount() {
     this.getPayments()
@@ -116,6 +175,7 @@ export class OrderCheckoutComponent extends Component {
         childTickets: this.state.childTickets,
         seniorTickets: this.state.seniorTickets,
         selectedSeats: this.state.selectedSeats,
+        selectedPromo: this.state.selectedPromo,
         cardType: this.state.cardType,
         cardNum: this.state.cardNum,
         expDate: this.state.expDate,
@@ -127,40 +187,6 @@ export class OrderCheckoutComponent extends Component {
     })
   }
 
-  async changePayment(paymentCard) {
-    let address = await this.fetchAddress(paymentCard._links.address.href)
-    if (this.state.cardNum != paymentCard.cardNum) {
-      this.setState({
-        ...this.state,
-        cardType: paymentCard.cardType,
-        cardNum: paymentCard.cardNum,
-        expDate: paymentCard.expDate,
-        street: address.street,
-        city: address.city,
-        zipCode: address.zipCode,
-      })
-    }
-  }
-
-  renderPaymentOptions() {
-    if (this.state.paymentInfos.length !== 0) {
-      return (
-        <Container>
-            {this.state.paymentInfos.map(paymentCard => {
-              return (
-                <Button onClick={event => {this.changePayment(paymentCard)}}>Card {paymentCard.cardType}</Button>
-              )
-            })}
-        </Container>
-      )
-    } else {
-      return (
-        <Container>
-
-        </Container>
-      )
-    }
-  }
 
   render() {
     return (
@@ -232,13 +258,15 @@ export class OrderCheckoutComponent extends Component {
                 </Form.Group>
               </div>
               <Form.Group>
-                <Form.Label><strong>Promotion Code</strong></Form.Label>
+                <Form.Label><strong>Promotion Code {this.state.discountText}</strong></Form.Label>
                 <Form.Control type={'number'}
                               placeholder={'Enter Promotion Code.'}
                               value={this.state.promoCode}
                               onChange={e => this.setState({
-                                ...this.state, promoCode: e.target.value
+                                ...this.state,
+                                promoCode: e.target.value
                               })}/>
+                <Button className={'mb-5'} variant={'success'} onClick={event => this.applyPromos(this.state.promoCode)}>Check for Promotion</Button>
               </Form.Group>
             </div>
             <Button variant={'success'} onClick={event => this.goNext()}>Confirm Order</Button>
