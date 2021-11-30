@@ -59,22 +59,6 @@ function getSeats(seats_link) {
   })
 }
 
-function getPaymentCards(paymentCard_link) {
-  return new Promise(function (resolve, reject) {
-    fetch(paymentCard_link, {
-      method: 'GET',
-    }).then(response => {
-      response.json().then(json => {
-        resolve(json)
-      }).catch(error => {
-        reject(error)
-      })
-    }).catch(error => {
-      reject(error)
-    })
-  })
-}
-
 function putData(data, destination) {
   return new Promise(function (resolve, reject) {
     fetch(destination, {
@@ -157,4 +141,20 @@ function deleteAssociation(destination) {
   })
 }
 
-export {getUser, getPaymentCards, getAddress, putData, postData, putAssociation, deleteAssociation, getData, getSeats}
+function getPaymentCards(cards_link) {
+  return new Promise(function (resolve, reject) {
+    fetch(cards_link, {
+      method: 'GET',
+    }).then(response => {
+      response.json().then(json => {
+        resolve(json)
+      }).catch(error => {
+        reject(error)
+      })
+    }).catch(error => {
+      reject(error)
+    })
+  })
+}
+
+export {getUser, getAddress, putData, postData, putAssociation, deleteAssociation, getData, getSeats, getPaymentCards}
