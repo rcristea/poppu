@@ -4,6 +4,7 @@ import com.poppu.server.model.ShowModel;
 import com.poppu.server.repository.ShowRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/shows")
 public class ShowController {
     private final Logger log = LoggerFactory.getLogger(ShowController.class);
+
+    @Autowired
     private ShowRepository showRepository;
 
     public ShowController(ShowRepository showRepository) {

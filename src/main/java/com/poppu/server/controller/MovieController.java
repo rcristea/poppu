@@ -6,6 +6,7 @@ import com.poppu.server.model.ShowModel;
 import com.poppu.server.repository.MovieRepository;
 import com.poppu.server.repository.SeatAvailabilityRepository;
 import com.poppu.server.repository.ShowRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,11 @@ import java.util.Optional;
 @RequestMapping("/api/movies")
 public class MovieController {
     private MovieRepository movieRepository;
+
+    @Autowired
     private ShowRepository showRepository;
+
+    @Autowired
     private SeatAvailabilityRepository seatAvailabilityRepository;
 
     public MovieController(MovieRepository movieRepository, ShowRepository showRepository, SeatAvailabilityRepository seatAvailabilityRepository) {
