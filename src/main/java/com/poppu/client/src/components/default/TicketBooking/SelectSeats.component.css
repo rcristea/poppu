@@ -55,7 +55,7 @@
   margin-bottom: 15px;
 }
 
-.booking-select, .ticket-amount {
+.booking-select, .ticket-amount, .payment-input {
   color: #fff;
   padding: 5px 10px;
   border: 2px solid #685ed4;
@@ -123,4 +123,20 @@
 
 .push-right {
   margin-right: 15px;
+}
+
+.payment-form {
+  max-width: 40%;
+}
+
+.order-heading {
+  color: #fff !important;
+  padding-bottom: 5px;
+  width: 115px;
+  border-bottom: 2px solid #685ed4;
+}
+
+.order-subtext {
+  color: #b7b7b7;
+  font-size: 0.75rem;
 }

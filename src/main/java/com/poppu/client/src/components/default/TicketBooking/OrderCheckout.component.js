@@ -1,8 +1,9 @@
-import {Component} from 'react'
+import React, {Component} from 'react'
 import {Button, Card, Container, Form} from 'react-bootstrap'
 
 import 'react-bootstrap/'
 import {TitleComponent} from "../Profile/Utils.component";
+import NavBar from "../NavBar/NavBar.component";
 
 export class OrderCheckoutComponent extends Component {
   constructor(props) {
@@ -89,8 +90,12 @@ export class OrderCheckoutComponent extends Component {
     let codeInt = parseInt(code)
     console.log(codeInt)
     let selectedPromo = null;
-    if (this.state.promos && this.state.promos.map(promo => {return promo.promotionId}).includes(codeInt)) {
-      let index = this.state.promos.map(promo => {return promo.promotionId}).indexOf(codeInt)
+    if (this.state.promos && this.state.promos.map(promo => {
+      return promo.promotionId
+    }).includes(codeInt)) {
+      let index = this.state.promos.map(promo => {
+        return promo.promotionId
+      }).indexOf(codeInt)
       this.setState({
         ...this.state,
         selectedPromo: this.state.promos[index],
@@ -139,22 +144,18 @@ export class OrderCheckoutComponent extends Component {
   renderPaymentOptions() {
     if (this.state.paymentInfos.length !== 0) {
       return (
-        <Container>
+        <>
           {this.state.paymentInfos.map(paymentCard => {
             return (
-              <Button onClick={event => {
+              <button className='booking-submit push-right' onClick={event => {
                 this.changePayment(paymentCard)
-              }}>Card {paymentCard.cardType}</Button>
+              }}>Your {paymentCard.cardType}</button>
             )
           })}
-        </Container>
+        </>
       )
     } else {
-      return (
-        <Container>
-
-        </Container>
-      )
+      return null
     }
   }
 
@@ -190,90 +191,69 @@ export class OrderCheckoutComponent extends Component {
 
   render() {
     return (
-      <Container className={'my-2 bg-light'}>
-        <TitleComponent compTitle={'Add New Movie'}/>
-        <Card className={'m-2'}>
-          <Form>
-            <div>
-              <div>
-                <div>
-                  {this.renderPaymentOptions()}
-                </div>
-                <Form.Group>
-                  <Form.Label><strong>Card Type</strong></Form.Label>
-                  <Form.Control type={'text'}
-                                placeholder={'Enter the card type.'}
-                                value={this.state.cardType}
-                                onChange={e => this.setState({
-                                  ...this.state, cardType: e.target.value
-                                })}/>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label><strong>Card Number</strong></Form.Label>
-                  <Form.Control type={'text'}
-                                placeholder={'Enter the card type.'}
-                                value={this.state.cardNum}
-                                onChange={e => this.setState({
-                                  ...this.state, cardNum: e.target.value
-                                })}/>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label><strong>Expiration Date</strong></Form.Label>
-                  <Form.Control type={'text'}
-                                placeholder={'Enter the expiration date of the card.'}
-                                value={this.state.expDate}
-                                onChange={e => this.setState({
-                                  ...this.state, expDate: e.target.value
-                                })}/>
-                </Form.Group>
-              </div>
-              <div>
-                <h2>Payment Address</h2>
-                <Form.Group>
-                  <Form.Label><strong>Street</strong></Form.Label>
-                  <Form.Control type={'text'}
-                                placeholder={'Enter street.'}
-                                value={this.state.street}
-                                onChange={e => this.setState({
-                                  ...this.state, street: e.target.value
-                                })}/>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label><strong>City</strong></Form.Label>
-                  <Form.Control type={'text'}
-                                placeholder={'Enter city.'}
-                                value={this.state.city}
-                                onChange={e => this.setState({
-                                  ...this.state, city: e.target.value
-                                })}/>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label><strong>Zip Code</strong></Form.Label>
-                  <Form.Control type={'number'}
-                                placeholder={'Enter zip code.'}
-                                value={this.state.zipCode}
-                                onChange={e => this.setState({
-                                  ...this.state, zipCode: e.target.value
-                                })}/>
-                </Form.Group>
-              </div>
-              <Form.Group>
-                <Form.Label><strong>Promotion Code {this.state.discountText}</strong></Form.Label>
-                <Form.Control type={'number'}
-                              placeholder={'Enter Promotion Code.'}
-                              value={this.state.promoCode}
-                              onChange={e => this.setState({
-                                ...this.state,
-                                promoCode: e.target.value
-                              })}/>
-                <Button className={'mb-5'} variant={'success'} onClick={event => this.applyPromos(this.state.promoCode)}>Check for Promotion</Button>
-              </Form.Group>
+      <>
+        <NavBar />
+        <div className='booking-container'>
+          <div className='booking-header'>
+            <h3 className='booking-title'>Checkout</h3>
+          </div>
+          <div className='payment-options'>
+            {this.renderPaymentOptions()}
+          </div>
+          <div className='payment-form'>
+            <div className='order-row'>
+              <p className='booking-label grow'>Card Type</p>
+              <input type='text' className='payment-input' value={this.state.cardType} onChange={e => this.setState({
+                ...this.state, cardType: e.target.value
+              })}/>
             </div>
-            <Button variant={'success'} onClick={event => this.goNext()}>Confirm Order</Button>
-            <Button variant={'danger'} href={'/'}>Cancel</Button>
-          </Form>
-        </Card>
-      </Container>
+            <div className='order-row'>
+              <p className='booking-label grow'>Card Number</p>
+              <input type={'text'} className='payment-input' value={this.state.cardNum} onChange={e => this.setState({
+                ...this.state, cardNum: e.target.value
+              })}/>
+            </div>
+            <div className='order-row'>
+              <p className='booking-label grow'>Expiration Date</p>
+              <input type={'text'} className='payment-input' value={this.state.expDate} onChange={e => this.setState({
+                ...this.state, expDate: e.target.value
+              })}/>
+            </div>
+            <p className='order-heading'>Billing Address</p>
+            <div className='order-row'>
+              <p className='booking-label grow'>Street</p>
+              <input type={'text'} className='payment-input' value={this.state.street} onChange={e => this.setState({
+                ...this.state, street: e.target.value
+              })}/>
+            </div>
+            <div className='order-row'>
+              <p className='booking-label grow'>City</p>
+              <input type={'text'} className='payment-input' value={this.state.city} onChange={e => this.setState({
+                ...this.state, city: e.target.value
+              })}/>
+            </div>
+            <div className='order-row'>
+              <p className='booking-label grow'>Zipcode</p>
+              <input type={'text'} className='payment-input' value={this.state.zipCode} onChange={e => this.setState({
+                ...this.state, zipCode: e.target.value
+              })}/>
+            </div>
+            <p className='order-heading'>Promotion</p>
+            <p className='order-subtext'>{this.state.discountText}</p>
+            <div className='order-row'>
+              <p className='booking-label grow'>Promotion Code</p>
+              <input type={'text'} className='payment-input' value={this.state.promoCode} onChange={e => this.setState({
+                ...this.state, promoCode: e.target.value
+              })}/>
+            </div>
+            <button className='booking-cancel' onClick={event => this.applyPromos(this.state.promoCode)}>Apply Promotion</button>
+            <div className='booking-buttons'>
+              <button className='booking-submit' onClick={event => this.goNext()}>Confirm Order</button>
+              <a type='button' className='booking-cancel' href={'/search'}>Cancel</a>
+            </div>
+          </div>
+        </div>
+      </>
     )
   }
 }
