@@ -1,13 +1,12 @@
 package com.poppu.server.controller;
 
-import com.poppu.server.model.UserModel;
 import com.poppu.server.model.ValidatorModel;
 import com.poppu.server.repository.ValidatorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.*;
@@ -24,6 +23,8 @@ import java.util.Properties;
 @RequestMapping("/api/validator")
 public class ValidatorController {
     private final Logger log = LoggerFactory.getLogger(ValidatorController.class);
+
+    @Autowired
     private ValidatorRepository validatorRepository;
 
     public ValidatorController(ValidatorRepository validatorRepository) {

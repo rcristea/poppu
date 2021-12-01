@@ -5,10 +5,12 @@ import com.poppu.server.repository.*;
 import com.poppu.server.util.TicketType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
@@ -18,13 +20,26 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/booking")
 public class BookingController {
     private final Logger log = LoggerFactory.getLogger(BookingController.class);
+
+    @Autowired
     private BookingRepository bookingRepository;
+
+    @Autowired
     private TicketRepository ticketRepository;
 
+    @Autowired
     private PromotionRepository promotionRepository;
+
+    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
     private ShowRepository showRepository;
+
+    @Autowired
     private ShowroomRepository showroomRepository;
+
+    @Autowired
     private SeatRepository seatRepository;
 
 
@@ -37,6 +52,19 @@ public class BookingController {
         this.showRepository = showRepository;
         this.showroomRepository = showroomRepository;
         this.seatRepository = seatRepository;
+    }
+
+    @GetMapping("/getByUser/{userId}")
+    public List<BookingModel> getAllByUserId(@PathVariable("userId") long userId) {
+        UserModel user = this.userRepository.findById(userId).get();
+        List<BookingModel> bookings = this.bookingRepository.findAll();
+        List<BookingModel> bookingsByUser = new LinkedList<>();
+        bookings.forEach(booking -> {
+            if (booking.getUser().getId() == user.getId()) {
+                bookingsByUser.add(booking);
+            }
+        });
+        return bookingsByUser;
     }
 
     @PostMapping("/book")

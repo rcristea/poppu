@@ -1,8 +1,9 @@
-import {Component} from 'react'
+import React, {Component} from 'react'
 import {Button, Card, Col, Container, Row} from 'react-bootstrap'
 
 import 'react-bootstrap/'
 import {postData} from "../Profile/methods";
+import NavBar from "../NavBar/NavBar.component";
 
 export class OrderConfirmationComponent extends Component {
   constructor(props) {
@@ -53,81 +54,70 @@ export class OrderConfirmationComponent extends Component {
 
   renderMovie() {
     return (
-      <Container className={'m-2 bg-info bg-opacity-10'}>
-        <Row>
-          <h2>Movie Information</h2>
-        </Row>
-        <Row>
-          <Col md={4}>Movie</Col>
-          <Col md={8}>{this.state.selectedMovie.title}</Col>
-        </Row>
-        <Row>
-          <Col md={4}>Rating</Col>
-          <Col md={8}>{this.state.selectedMovie.rating}</Col>
-        </Row>
-        <Row>
-          <Col md={4}>Duration</Col>
-          <Col md={8}>{this.state.selectedMovie.duration}</Col>
-        </Row>
-      </Container>
+      <>
+        <div className='booking-info'>
+          <div className='booking-subtitle'>Movie Info</div>
+          <div className='order-row'>
+            <p className='booking-label'>Movie: {this.state.selectedMovie.title}</p>
+          </div>
+          <div className='order-row'>
+            <p className='booking-label'>Rating: {this.state.selectedMovie.rating}</p>
+          </div>
+          <div className='order-row'>
+            <p className='booking-label'>Movie: {this.state.selectedMovie.duration}</p>
+          </div>
+        </div>
+      </>
     )
   }
 
   renderShow() {
     return (
-      <Container className={'m-2 bg-info bg-opacity-10'}>
-        <Row>
-          <h2>Show Information</h2>
-        </Row>
-        <Row>
-          <Col md={4}>Show Date</Col>
-          <Col md={8}>{new Date(this.state.selectedShow.dateTime).toLocaleDateString('en-US')}</Col>
-        </Row>
-        <Row>
-          <Col md={4}>Show Time</Col>
-          <Col md={8}>{new Date(this.state.selectedShow.dateTime).toLocaleTimeString('en-US')}</Col>
-        </Row>
-        <Row>
-          <Col md={4}>Show Room</Col>
-          <Col md={8}>{this.state.selectedShow.showroom.name}</Col>
-        </Row>
-      </Container>
+      <>
+        <div className='booking-info'>
+          <div className='booking-subtitle'>Show Info</div>
+          <div className='order-row'>
+            <p className='booking-label'>Show Date: {new Date(this.state.selectedShow.dateTime).toLocaleDateString('en-US')}</p>
+          </div>
+          <div className='order-row'>
+            <p className='booking-label'>Show Time: {new Date(this.state.selectedShow.dateTime).toLocaleTimeString('en-US')}</p>
+          </div>
+          <div className='order-row'>
+            <p className='booking-label'>Showroom: {this.state.selectedShow.showroom.name}</p>
+          </div>
+        </div>
+      </>
     )
   }
 
   renderTickets() {
     return (
-      <Container className={'m-2 bg-info bg-opacity-10'}>
-        <Row>
-          <h2>Ticket Information</h2>
-        </Row>
-        <Row>
-          <Col md={4}>Adult Tickets: $10.00</Col>
-          <Col md={8}>{this.state.adultTickets}</Col>
-        </Row>
-        <Row>
-          <Col md={4}>Child Tickets: $9.00</Col>
-          <Col md={8}>{this.state.childTickets}</Col>
-        </Row>
-        <Row>
-          <Col md={4}>Senior Tickets: $8.00</Col>
-          <Col md={8}>{this.state.seniorTickets}</Col>
-        </Row>
-      </Container>
+      <>
+        <div className='booking-info'>
+          <div className='booking-subtitle'>Ticket Info</div>
+          <div className='order-row'>
+            <p className='booking-label'>Adult Tickets: {this.state.adultTickets}</p>
+          </div>
+          <div className='order-row'>
+            <p className='booking-label'>Child Tickets: {this.state.childTickets}</p>
+          </div>
+          <div className='order-row'>
+            <p className='booking-label'>Senior Tickets: {this.state.seniorTickets}</p>
+          </div>
+        </div>
+      </>
     )
   }
 
   renderTotal() {
     let total = (this.state.adultTickets * 10.0) + (this.state.childTickets * 9) + (this.state.seniorTickets * 7)
     return (
-      <Container className={'m-2 bg-info bg-opacity-10'}>
-        <Row>
-          <h4>Total: {total.toLocaleString('en-US', {
+      <div className='order-total'>
+          <h4>Subtotal: {total.toLocaleString('en-US', {
             style: 'currency',
             currency: 'USD',
           })}</h4>
-        </Row>
-      </Container>
+      </div>
     )
   }
 
@@ -157,35 +147,47 @@ export class OrderConfirmationComponent extends Component {
 
   render() {
     return (
-      <Container className={'my-2 bg-light'}>
-        <Row>
-          {this.renderMovie()}
-        </Row>
-        <Row>
-          {this.renderShow()}
-        </Row>
-        <Row>
-          {this.renderTickets()}
-        </Row>
-        <Row>
-          {this.renderTotal()}
-        </Row>
-        <Row>
-        </Row>
-        <Row className={'mx-3'}>
-          <Col md={4}><Button variant={'success'} href={'/'}>Back To Home</Button></Col>
-        </Row>
-        <Card className='my-2 btn-outline-success'>
-          <Card.Title>
-            <h2>Confirmation Email Sent!</h2>
-          </Card.Title>
-          <Card.Body>
-            <Row>
-              {this.renderUser()}
-            </Row>
-          </Card.Body>
-        </Card>
-      </Container>
+      <>
+        <NavBar />
+        <div className='booking-container'>
+          <div className='booking-header'>
+            <h3 className='booking-title'>Booking Confirmation</h3>
+          </div>
+          <div className='order-row'>
+            <p className='order-success'>Confirmation email sent!</p>
+          </div>
+          <div className='order-row'>
+            {this.renderMovie()}
+          </div>
+          <div className='order-row'>
+            {this.renderShow()}
+          </div>
+          <div className='order-row'>
+            {this.renderTickets()}
+          </div>
+          <div className='order-row'>
+            {this.renderTotal()}
+          </div>
+          <div className='booking-buttons'>
+            <a href='/search' className='booking-submit'>Return to movies</a>
+          </div>
+        </div>
+      </>
+      //   </Row>
+      //   <Row className={'mx-3'}>
+      //     <Col md={4}><Button variant={'success'} href={'/'}>Back To Home</Button></Col>
+      //   </Row>
+      //   <Card className='my-2 btn-outline-success'>
+      //     <Card.Title>
+      //       <h2>Confirmation Email Sent!</h2>
+      //     </Card.Title>
+      //     <Card.Body>
+      //       <Row>
+      //         {this.renderUser()}
+      //       </Row>
+      //     </Card.Body>
+      //   </Card>
+      // </Container>
     )
   }
 }

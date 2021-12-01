@@ -5,6 +5,7 @@ import com.poppu.server.model.ShowModel;
 import com.poppu.server.repository.ReviewRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,8 @@ import java.util.List;
 @RequestMapping("/api/reviews")
 public class ReviewController {
     private final Logger log = LoggerFactory.getLogger(ShowController.class);
+
+    @Autowired
     private ReviewRepository reviewRepository;
 
     public ReviewController(ReviewRepository reviewRepository) {
