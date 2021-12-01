@@ -114,12 +114,15 @@ class PromoAdd extends Component {
 
     // build uri string with all the emails of the users that are subscribed
     let uri = '?'
+    console.log(1, subscribedUsers._embedded.users)
     subscribedUsers._embedded.users.forEach(subscribedUser => {
       uri += `&emails=${subscribedUser.email}`
     })
 
     uri += '&promo_id=' + this.state.promotionId
     uri += '&promo_amount=' + this.state.offer
+
+    console.log(11, uri)
 
     // Send post request to /api/promotion/send_promo_emails/ with the uri list
     fetch('http://localhost:8080/api/promotion/send_promo_emails', {

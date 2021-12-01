@@ -57,6 +57,9 @@ public class PromotionController {
 
     @PostMapping("/send_promo_emails")
     private ResponseEntity<String> sendPromotionEmails(@RequestParam("emails") String[] emails, @RequestParam("promo_id") String promoId, @RequestParam("promo_amount") String promoAmount) {
+        for (String email : emails) {
+            System.out.println(email);
+        }
         return ResponseEntity.ok().body(sendEmails(emails, promoId, promoAmount));
     }
 
@@ -90,7 +93,7 @@ public class PromotionController {
                         InternetAddress.parse(email, false));
                 msg.setSubject("Poppu has just released a new promotion!");
                 msg.setText("Dear customer, \n We have just released a new promotion! Use code "
-                    + promoId + " at checkout to get $"
+                    + promoId + " at checkout to get "
                     + promoAmount + " off on your next ticket. \n\n"
                     + "- The poppu team");
                 msg.setSentDate(new Date());
