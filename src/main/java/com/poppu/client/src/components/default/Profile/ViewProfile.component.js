@@ -294,7 +294,7 @@ export class ViewProfileComponent extends Component {
     } else {
       return (
         <>
-          <p>An error has occurred</p>
+          <p>Loading...</p>
         </>
       )
     }
