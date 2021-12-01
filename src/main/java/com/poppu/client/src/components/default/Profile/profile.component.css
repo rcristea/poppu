@@ -72,3 +72,12 @@
 .payment-address {
   width: 100%;
 }
+
+.profile-input {
+  color: #fff;
+  padding: 5px 10px;
+  border: 2px solid #685ed4;
+  border-radius: 50px;
+  background-color: #171717;
+  outline: 0 !important;
+}
