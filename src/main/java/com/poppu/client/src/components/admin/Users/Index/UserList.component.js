@@ -24,7 +24,7 @@ class UserList extends Component{
     async toggleSuspendUser(userId, shouldSuspend) {
         const users = this.state.users;
         const targetUserIndex = users.findIndex(user => user.id === userId)
-        users[targetUserIndex].status = shouldSuspend ? 'SUSPENDED' : 'ACTIVE';
+        users[targetUserIndex].status = shouldSuspend ? 'Suspended' : 'Active';
 
         await fetch(`/api/users/${users[targetUserIndex].id}`, {
             method: 'PUT',
@@ -45,7 +45,6 @@ class UserList extends Component{
                 <td>{user.firstName}</td>
                 <td>{user.lastName}</td>
                 <td>{user.email}</td>
-                <td>{user.phoneNum}</td>
                 <td>{user.isSubscribed ? 'Yes' : 'No'}</td>
                 <td>{user.role}</td>
                 <td>{user.status}</td>
@@ -53,8 +52,8 @@ class UserList extends Component{
                     <Button type="button"
                             name="status"
                             id="status"
-                            onClick={() => this.toggleSuspendUser(user.id, user.status === 'ACTIVE')}>
-                        {user.status === "ACTIVE" ? "SUSPEND" : "ACTIVE"}
+                            onClick={() => this.toggleSuspendUser(user.id, user.status === 'Active')}>
+                        {user.status === "Active" ? "Suspend" : "Activate"}
                     </Button>
                 </td>
                 <td>
@@ -81,7 +80,6 @@ class UserList extends Component{
                             <th width="15%">First Name</th>
                             <th width="15%">Last Name</th>
                             <th width="10%">Email</th>
-                            <th width="10%">Phone Number</th>
                             <th width="5%">Subscribed</th>
                             <th width="15%">Role</th>
                             <th width="15%">Status</th>
