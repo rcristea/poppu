@@ -6,9 +6,13 @@
 }
 
 .profile-left {
-  flex-grow: 2;
+  flex-grow: 1;
   max-width: 60%;
-  padding-right: 150px;
+  padding-right: 100px;
+}
+
+.profile-right {
+  width: 40%;
 }
 
 .profile-name {

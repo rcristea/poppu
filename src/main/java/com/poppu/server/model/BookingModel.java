@@ -1,5 +1,7 @@
 package com.poppu.server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class BookingModel {
     private PromotionModel promotion;
 
     @OneToMany(mappedBy = "booking")
+    @JsonIgnore
     private List<TicketModel> tickets = new ArrayList<TicketModel>();
 
     public BookingModel() {

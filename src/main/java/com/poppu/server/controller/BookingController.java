@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
@@ -35,6 +37,19 @@ public class BookingController {
         this.showRepository = showRepository;
         this.showroomRepository = showroomRepository;
         this.seatRepository = seatRepository;
+    }
+
+    @GetMapping("/getByUser/{userId}")
+    public List<BookingModel> getAllByUserId(@PathVariable("userId") long userId) {
+        UserModel user = this.userRepository.findById(userId).get();
+        List<BookingModel> bookings = this.bookingRepository.findAll();
+        List<BookingModel> bookingsByUser = new LinkedList<>();
+        bookings.forEach(booking -> {
+            if (booking.getUser().getId() == user.getId()) {
+                bookingsByUser.add(booking);
+            }
+        });
+        return bookingsByUser;
     }
 
     @PostMapping("/book")

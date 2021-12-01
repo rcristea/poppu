@@ -21,6 +21,7 @@ export class ViewProfileComponent extends Component {
       user: null,
       address: null,
       paymentCards: null,
+      orders: null,
     }
 
     this.handleEditProfileClick = this.handleEditProfileClick.bind(this)
@@ -30,6 +31,7 @@ export class ViewProfileComponent extends Component {
     this.handleEditPasswordClick = this.handleEditPasswordClick.bind(this)
     this.renderContent = this.renderContent.bind(this)
     this.renderAddress = this.renderAddress.bind(this)
+    this.renderOrders = this.renderOrders.bind(this)
     this.initContent = this.initContent.bind(this)
     this.logOut = this.logOut.bind(this)
   }
@@ -37,6 +39,17 @@ export class ViewProfileComponent extends Component {
   async initContent() {
     let email = sessionStorage.getItem('user_email')
     let user = await getUser(email)
+    console.log(111, user)
+    let orders = await fetch(`http://localhost:8080/api/booking/getByUser/${user.id}`, {
+      method: 'GET',
+    }).then(response => {
+      return response.json().then(json => {
+        return json
+      })
+    }).catch(error => {
+      console.log(error)
+    })
+    console.log('initContent', orders, user)
 
     let address_link = user._links.address.href
     let address = await getAddress(address_link).catch(error => {
@@ -56,6 +69,7 @@ export class ViewProfileComponent extends Component {
       user: user,
       address: address,
       paymentCards: paymentCards._embedded.paymentinfos,
+      orders: orders,
     })
   }
 
@@ -161,6 +175,39 @@ export class ViewProfileComponent extends Component {
     }
   }
 
+  renderOrders() {
+    if (this.state.orders) {
+      return (
+        <>
+          <div className='orders'>
+            {this.state.orders.map(order => {
+              return (
+                <>
+                  <div className='order mb-5'>
+                    <div className='profile-item'>
+                      <p className='grow'>Booking Number</p>
+                      <p>{order.bookingNum}</p>
+                    </div>
+                    <div className='profile-item'>
+                      <p className='grow'>Movie Title</p>
+                      <p>{order.movieTitle}</p>
+                    </div>
+                    <div className='profile-item'>
+                      <p className='grow'>Order Date</p>
+                      <p>{new Date(order.showDateTime).toDateString('en-US')}</p>
+                    </div>
+                  </div>
+                </>
+              )
+            })}
+          </div>
+        </>
+      )
+    } else {
+      return null
+    }
+  }
+
   renderContent() {
     let addressButton = null
     if (this.state.address) {
@@ -236,6 +283,9 @@ export class ViewProfileComponent extends Component {
             <div className='profile-right'>
               <div className='profile-header'>
                 <h4 className='profile-title'>Order History</h4>
+              </div>
+              <div className='profile-body'>
+                {this.renderOrders()}
               </div>
             </div>
           </div>
