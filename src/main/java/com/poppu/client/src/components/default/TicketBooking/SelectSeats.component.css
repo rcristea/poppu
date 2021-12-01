@@ -92,6 +92,7 @@
 }
 
 .booking-submit:hover, .booking-cancel:hover {
+  color: #fff;
   background-color: #000;
 }
 
@@ -117,7 +118,7 @@
   padding: 25px;
 }
 
-.booking-user-info, .booking-movie-info, .booking-show-info, .booking-ticket-info, .booking-seat-names-info, .booking-total-info {
+.booking-user-info, .booking-movie-info, .booking-show-info, .booking-ticket-info, .booking-seat-names-info, .booking-total-info, booking-info {
   border-bottom: 2px solid #685ed4;
 }
 
@@ -139,4 +140,23 @@
 .order-subtext {
   color: #b7b7b7;
   font-size: 0.75rem;
+}
+
+.booking-subtitle {
+  color: #fff;
+  font-variant: small-caps;
+  border-bottom: 2px solid #685ed4;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.order-total h4 {
+  color: #fff;
+  font-weight: 700;
+  font-variant: small-caps;
+  font-size: 1.25rem;
+}
+
+.order-success {
+  color: #0f0;
 }
