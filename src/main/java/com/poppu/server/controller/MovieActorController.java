@@ -48,7 +48,6 @@ public class MovieActorController {
         MovieActorModel m = new MovieActorModel(movie, actor, "N/A");
         MovieActorKey mkey = new MovieActorKey(movieID, actorID);
         m.setId(mkey);
-        log.warn(m.toString());
         MovieActorModel res = this.movieActorRepository.save(m);
         return res;
     }

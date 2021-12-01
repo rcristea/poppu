@@ -69,9 +69,7 @@ public class BookingController {
 
     @PostMapping("/book")
     public BookingModel bookMovie(@RequestBody BookingRequest bookingRequest) {
-        log.warn("Booking Request", bookingRequest.toString());
         UserModel user = userRepository.findById(bookingRequest.getUserID()).get();
-        log.warn("User", user);
 
         PromotionModel promo;
         if (bookingRequest.getPromotionID() == -1) {
@@ -87,7 +85,6 @@ public class BookingController {
                 user,
                 promo
                 );
-        log.warn("Booking", booking);
         BookingModel bookingRes = this.bookingRepository.save(booking);
 
         AtomicLong adultCounter = new AtomicLong(bookingRequest.getAdultTickets());
@@ -95,9 +92,7 @@ public class BookingController {
         AtomicLong seniorCounter = new AtomicLong(bookingRequest.getSeniorTickets());
 
         ShowModel show = this.showRepository.findById(bookingRequest.getShowID()).get();
-        log.warn("Show", show);
         ShowroomModel showroom = this.showroomRepository.findById(bookingRequest.getShowroomID()).get();
-        log.warn("Showroom", showroom);
 
         List<String> savedTickets = bookingRequest.getSeats().stream().map(s -> {
             TicketType ticketType = null;

@@ -80,7 +80,6 @@ public class SeatAvailabilityController {
         SeatAvailabilityKey key = new SeatAvailabilityKey(showID, showroomID, seatID);
         SeatAvailabilityModel model = new SeatAvailabilityModel(show, showroom, seat, true);
         model.setId(key);
-        log.warn(model.toString());
         return this.seatAvailabilityRepository.save(model);
     }
 
@@ -92,7 +91,6 @@ public class SeatAvailabilityController {
         SeatAvailabilityKey key = new SeatAvailabilityKey(showID, showroomID, seatID);
         SeatAvailabilityModel model = new SeatAvailabilityModel(show, showroom, seat, false);
         model.setId(key);
-        log.warn(model.toString());
         return this.seatAvailabilityRepository.save(model);
     }
 }
