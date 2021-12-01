@@ -11,5 +11,6 @@ import java.util.List;
 public interface InlineUserProfile {
     long getId();
     AddressModel getAddress();
+    String getEmail();
     List<PaymentInfoModel> getPaymentCards();
 }
