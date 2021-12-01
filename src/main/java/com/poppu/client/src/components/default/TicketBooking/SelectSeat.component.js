@@ -1,7 +1,7 @@
-import {Component} from 'react'
-import {Button, Card, Container, Form, Row} from 'react-bootstrap'
+import React, {Component} from 'react'
 import {MdOutlineChair} from 'react-icons/md'
 import './SelectSeats.component.css'
+import NavBar from "../NavBar/NavBar.component";
 
 
 export class SelectSeatComponent extends Component {
@@ -76,19 +76,20 @@ export class SelectSeatComponent extends Component {
         //   seat.available = false
         // }
 
-        let color = '#000'
+        let color = '#fff'
         if (!seat.available) {
-          color = '#eaeaea'
+          color = '#898989'
         } else if (this.state.selectedSeats && this.state.selectedSeats.includes(seat.id)) {
-          color = '#72e3e3'
+          color = '#685ed4'
         }
 
         return (
-          <div className='seat' key={seat.seat.seatId} onClick={seat.available ? (e) => this.toggleSeat(e, seat.seat.seatId) : null}>
+          <div className='seat' key={seat.seat.seatId}
+               onClick={seat.available ? (e) => this.toggleSeat(e, seat.seat.seatId) : null}>
             <div className='seat-icon'>
               <MdOutlineChair size={'50px'} color={color}/>
             </div>
-            <div className='seat-name'>
+            <div className='seat-name' style={{'color': color}}>
               {seat.seat.seat}
             </div>
           </div>
@@ -101,32 +102,29 @@ export class SelectSeatComponent extends Component {
 
   render() {
     return (
-      <Container className='my-3'>
-        <Row>
-          <h1>Seat Selection</h1>
-        </Row>
-        <Row>
-          <Form>
-            <Card className='my-3'>
-              <Card.Body>
-                <img src={`${process.env.PUBLIC_URL}/assets/img/selectSeats/screen.png`}
-                     alt={'Screen'}
-                     width={'100%'}/>
-                <div className='seats'>
-                  {this.renderSeats()}
-                </div>
-              </Card.Body>
-            </Card>
-            <Card className='my-3'>
-              <Card.Body>
-                <Button className='mx-1' variant='primary'
-                        onClick={event => this.goNext()}>Next</Button>
-                <Button className='mx-1' variant='danger' href={'/'}>Cancel</Button>
-              </Card.Body>
-            </Card>
-          </Form>
-        </Row>
-      </Container>
+      <>
+        <NavBar/>
+        <div className='booking-container'>
+          <div className='booking-header'>
+            <h3 className='booking-title'>Select Seats</h3>
+          </div>
+          <div className='select-seats'>
+            <div className='screen'>
+              <img src={`${process.env.PUBLIC_URL}/assets/img/selectSeats/screen.png`}
+                   alt={'Screen'}
+                   width={'100%'}
+                   className='screen-img'/>
+            </div>
+            <div className='seats'>
+              {this.renderSeats()}
+            </div>
+          </div>
+          <div className='booking-buttons'>
+            <button className='booking-submit' onClick={event => this.goNext()}>Next</button>
+            <a type='button' className='booking-cancel' href={'/search'}>Cancel</a>
+          </div>
+        </div>
+      </>
     )
   }
 }

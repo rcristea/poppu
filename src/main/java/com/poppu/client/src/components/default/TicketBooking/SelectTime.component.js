@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import {Button, Card, Container, Form, Row} from 'react-bootstrap'
+import {Container, Row} from 'react-bootstrap'
 import './SelectSeats.component.css'
+import NavBar from '../NavBar/NavBar.component'
 
 class Shows extends Component {
 
@@ -27,7 +28,7 @@ class Shows extends Component {
       seniorTickets: 0,
     };
 
-    this.renderButtons = this.renderButtons.bind(this);
+    this.renderButtons = this.renderButtons.bind(this)
     this.getDate = this.getDate.bind(this);
     this.goNext = this.goNext.bind(this);
     this.renderPrices = this.renderPrices.bind(this)
@@ -69,6 +70,7 @@ class Shows extends Component {
         trailerPhoto: movie.trailerPhoto,
       },
       selectedMovie: movie,
+      selectedShow: shows[0],
     })
   }
 
@@ -79,10 +81,20 @@ class Shows extends Component {
     return humanDateFormat
   }
 
+  onShowChange = e => {
+    const selected = e.target.value;
+    this.setState({
+      ...this.state,
+      selectedShow: selected,
+    })
+
+    console.log(this.state)
+  }
+
 
   renderButtons(movieId) {
     return this.state.shows.map(show => {
-      return <>
+      return (
         <button type="button"
                 className={`select-time ${this.state.selectedShow === show ? 'active-time' : ''}`}
                 name="dateTime"
@@ -90,7 +102,7 @@ class Shows extends Component {
                 onClick={event => this.setState({...this.state, selectedShow: show})}>
           {this.getDate((show.dateTime))}
         </button>
-      </>
+      )
     });
   }
 
@@ -107,50 +119,36 @@ class Shows extends Component {
 
   render() {
     return (
-      <Container className='my-3'>
-        <Row>
-          <h1>Ticket Selection</h1>
-        </Row>
-        <Row>
-          <Form>
-            <Card className='my-3'>
-              <Card.Body>
-                <Form.Label>
-                  <h2>Select Your Date and Time:</h2>
-                  {this.renderButtons(this.state.movieId)}
-                </Form.Label>
-              </Card.Body>
-            </Card>
-            <Card className='my-3'>
-              <Card.Title>{this.renderPrices()}</Card.Title>
-              <Card.Body>
-                <Form.Label>
-                  Adult Tickets
-                </Form.Label>
-                <Form.Control type='number' placeholder='Adult Tickets' value={this.state.adultTickets}
-                              onChange={e => this.setState({...this.state, adultTickets: e.target.value})}/>
-                <Form.Label>
-                  Child Tickets
-                </Form.Label>
-                <Form.Control type='number' placeholder='Child Tickets' value={this.state.childTickets}
-                              onChange={e => this.setState({...this.state, childTickets: e.target.value})}/>
-                <Form.Label>
-                  Senior Tickets
-                </Form.Label>
-                <Form.Control type='number' placeholder='Senior Tickets' value={this.state.seniorTickets}
-                              onChange={e => this.setState({...this.state, seniorTickets: e.target.value})}/>
-              </Card.Body>
-            </Card>
-            <Card className='my-3'>
-              <Card.Body>
-                <Button className='mx-1' variant='primary' type='submit' onClick={event => this.goNext()}>Select
-                  Seats</Button>
-                <Button className='mx-1' variant='danger' href={'/'}>Cancel</Button>
-              </Card.Body>
-            </Card>
-          </Form>
-        </Row>
-      </Container>
+      <>
+        <NavBar />
+        <div className='booking-container'>
+          <div className='booking-header'>
+            <h3 className='booking-title'>Book Tickets</h3>
+          </div>
+          <div className='show-times'>
+            <p className='booking-label'>Show Time: </p>
+            {this.renderButtons(this.state.movieId)}
+          </div>
+          <div className='tickets'>
+            <div className='ticket-row'>
+              <p className='booking-label'>Adult Tickets: </p>&nbsp;&nbsp;&nbsp;&nbsp;
+              <input className='ticket-amount' type='number' value={this.state.adultTickets} onChange={e => this.setState({...this.state, adultTickets: e.target.value})}/>
+            </div>
+            <div className='ticket-row'>
+              <p className='booking-label'>Child Tickets: </p>&nbsp;&nbsp;&nbsp;&nbsp;
+              <input className='ticket-amount' type='number' value={this.state.childTickets} onChange={e => this.setState({...this.state, childTickets: e.target.value})}/>
+            </div>
+            <div className='ticket-row'>
+              <p className='booking-label'>Senior Tickets: </p>&nbsp;
+              <input className='ticket-amount' type='number' value={this.state.seniorTickets} onChange={e => this.setState({...this.state, childTickets: e.target.value})}/>
+            </div>
+          </div>
+          <div className='booking-buttons'>
+            <button className='booking-submit' onClick={event => this.goNext()}>Select Seats</button>
+            <a type='button' className='booking-cancel' href={'/search'}>Cancel</a>
+          </div>
+        </div>
+      </>
     )
   }
 }
