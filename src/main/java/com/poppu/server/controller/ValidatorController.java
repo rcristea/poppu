@@ -66,7 +66,7 @@ public class ValidatorController {
         return ResponseEntity.ok().body(sendCustomEmail(email, subject, body));
     }
 
-    private String sendCustomEmail(String toEmail, String subject, String body) {
+    public static String sendCustomEmail(String toEmail, String subject, String body) {
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         Properties props = System.getProperties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com");

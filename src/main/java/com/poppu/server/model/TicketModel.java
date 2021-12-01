@@ -99,4 +99,17 @@ public class TicketModel {
     public void setBooking(BookingModel booking) {
         this.booking = booking;
     }
+
+    @Override
+    public String toString() {
+        return "TicketModel{" +
+                "ticketId=" + ticketId +
+                ", type=" + type +
+                ", price=" + price +
+                ", show=" + show +
+                ", showroom=" + showroom +
+                ", seat='" + seat + '\'' +
+                ", booking=" + booking +
+                '}';
+    }
 }

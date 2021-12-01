@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -98,7 +99,7 @@ public class BookingController {
         ShowroomModel showroom = this.showroomRepository.findById(bookingRequest.getShowroomID()).get();
         log.warn("Showroom", showroom);
 
-        bookingRequest.getSeats().stream().map(s -> {
+        List<String> savedTickets = bookingRequest.getSeats().stream().map(s -> {
             TicketType ticketType = null;
             String seat = seatRepository.findById(s).get().getSeat();
             double price = 0;
@@ -127,8 +128,16 @@ public class BookingController {
                     bookingRes
             );
             return this.ticketRepository.save(ticket);
+        }).collect(Collectors.toList()).stream().map(ticketModel -> {
+            return ticketModel.toString();
         }).collect(Collectors.toList());
 
+        String email = booking.toString() + "\n" +
+                user.toString() + "\n" +
+                Arrays.deepToString(savedTickets.toArray());
+        String toEmail = user.getEmail();
+        String subjectEmail = "Booking Notification";
+        ValidatorController.sendCustomEmail(toEmail, subjectEmail, email);
         return this.bookingRepository.save(booking);
     }
 }
