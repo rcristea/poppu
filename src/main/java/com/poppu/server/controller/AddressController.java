@@ -4,6 +4,7 @@ import com.poppu.server.model.AddressModel;
 import com.poppu.server.repository.AddressRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,8 @@ import java.util.Optional;
 @RequestMapping("/api/address")
 public class AddressController {
     private final Logger log = LoggerFactory.getLogger(AddressController.class);
+
+    @Autowired
     private AddressRepository addressRepository;
 
     public AddressController(AddressRepository addressRepository) {

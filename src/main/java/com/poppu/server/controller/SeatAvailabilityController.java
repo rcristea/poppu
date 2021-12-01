@@ -12,6 +12,7 @@ import com.poppu.server.repository.ShowroomRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,9 +26,17 @@ import java.util.List;
 @RequestMapping("/api/seatAvailabilities")
 public class SeatAvailabilityController {
     private final Logger log = LoggerFactory.getLogger(ShowController.class);
+
+    @Autowired
     private SeatAvailabilityRepository seatAvailabilityRepository;
+
+    @Autowired
     private SeatRepository seatRepository;
+
+    @Autowired
     private ShowRepository showRepository;
+
+    @Autowired
     private ShowroomRepository showroomRepository;
 
     public SeatAvailabilityController(SeatAvailabilityRepository seatAvailabilityRepository, ShowRepository showRepository, ShowroomRepository showroomRepository, SeatRepository seatRepository) {

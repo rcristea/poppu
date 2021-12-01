@@ -9,6 +9,7 @@ import com.poppu.server.repository.MovieActorRepository;
 import com.poppu.server.repository.MovieRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,11 @@ import java.util.List;
 public class MovieActorController {
     private final Logger log = LoggerFactory.getLogger(MovieActorController.class);
     private MovieActorRepository movieActorRepository;
+
+    @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
     private ActorRepository actorRepository;
 
     public MovieActorController(MovieActorRepository movieActorRepository, MovieRepository movieRepository, ActorRepository actorRepository) {
