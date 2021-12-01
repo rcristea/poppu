@@ -2,6 +2,7 @@ import {Component} from "react";
 import {Button, Card, Container, Form} from "react-bootstrap";
 import {TitleComponent} from "./Utils.component";
 import {putData} from "./methods";
+import NavBar from "../NavBar/NavBar.component";
 
 export class EditAddressComponent extends Component {
   constructor(props) {
@@ -43,59 +44,61 @@ export class EditAddressComponent extends Component {
 
   render() {
     return (
-      <div className={'my-2 bg-light'}>
-        <TitleComponent compTitle={'Edit Address'}/>
-        <Card className={'m-2'}>
-          <Form>
-            <div>
-              <Form.Group>
-                <Form.Label><strong>City</strong></Form.Label>
-                <Form.Control type={'text'}
-                              placeholder={'Enter the city you live in.'}
-                              value={this.state.address.city}
-                              onChange={e => this.setState({
-                                address: {
-                                  ...this.state.address,
-                                  city: e.target.value
-                                }
-                              })}/>
-              </Form.Group>
+      <>
+        <NavBar />
+        <div style={{marginTop: 150 + 'px'}}>
+          <div className='profile-container'>
+            <div className='profile-left'>
+              <div className='profile-header'>
+                <h3 className='profile-title'>Edit Your Address</h3>
+              </div>
+              <div className='profile-item mb-1'>
+                <p className='grow'>Street</p>
+                <input
+                  type='text'
+                  className='profile-input'
+                  value={this.state.address.street}
+                  onChange={e => this.setState({
+                    address: {
+                      ...this.state.address,
+                      street: e.target.value,
+                    },
+                  })}/>
+              </div>
+              <div className='profile-item mb-1'>
+                <p className='grow'>City</p>
+                <input
+                  type='text'
+                  className='profile-input'
+                  value={this.state.address.city}
+                  onChange={e => this.setState({
+                    address: {
+                      ...this.state.address,
+                      city: e.target.value,
+                    },
+                  })}/>
+              </div>
+              <div className='profile-item mb-1'>
+                <p className='grow'>Zipcode</p>
+                <input
+                  type='text'
+                  className='profile-input'
+                  value={this.state.address.zipCode}
+                  onChange={e => this.setState({
+                    address: {
+                      ...this.state.address,
+                      zipCode: e.target.value,
+                    },
+                  })}/>
+              </div>
             </div>
-            <div>
-              <Form.Group>
-                <Form.Label><strong>Street</strong></Form.Label>
-                <Form.Control type={'text'}
-                              placeholder={'Enter the street you live in.'}
-                              value={this.state.address.street}
-                              onChange={e => this.setState({
-                                address: {
-                                  ...this.state.address,
-                                  street: e.target.value
-                                }
-                              })}/>
-              </Form.Group>
+            <div className='profile-right'>
+              <button className='booking-submit' onClick={this.handleSubmitAddress}>Submit</button>
+              <button className='booking-cancel' onClick={this.handleBack}>Cancel</button>
             </div>
-            <div>
-              <Form.Group>
-                <Form.Label><strong>Zip Code</strong></Form.Label>
-                <Form.Control type={'text'}
-                              placeholder={'Enter your Zip Code.'}
-                              value={this.state.address.zipCode}
-                              onChange={e => this.setState({
-                                address: {
-                                  ...this.state.address,
-                                  zipCode: e.target.value
-                                }
-                              })}/>
-              </Form.Group>
-            </div>
-            <Container>
-              <Button variant={'success'} onClick={this.handleSubmitAddress}>Submit Address</Button>
-              <Button variant={'warning'} onClick={this.handleBack}>Go Back</Button>
-            </Container>
-          </Form>
-        </Card>
-      </div>
+          </div>
+        </div>
+      </>
     )
   }
 }
