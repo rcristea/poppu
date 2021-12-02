@@ -10,9 +10,9 @@ DELETE FROM users;
 INSERT INTO users VALUES (1, 'poppuofficial@gmail.com', 'poppu', true, 'admin', '$2a$10$O1RbZIPCQCLr522HZUP51.E43Zn4oYSnjIrMeKTUaLqmI46jBM74m', '(123) 456 - 7890', 'ADMIN', 'ACTIVE', null);
 INSERT INTO users VALUES (2, 'poppucustomer@gmail.com', 'poppu', true, 'customer', '$2a$10$O1RbZIPCQCLr522HZUP51.E43Zn4oYSnjIrMeKTUaLqmI46jBM74m', '(123) 456 - 7890', 'USER', 'ACTIVE', null);
 
-INSERT INTO addresses VALUES (1, 'Dooleyville', '123 Play Ground Stret', 789563);
-INSERT INTO addresses VALUES (2, 'Transilvania', '575 Barbeque Drive', 777777);
-INSERT INTO addresses VALUES (3, 'Juno', '400 Freezing Lane', 999999);
+INSERT INTO addresses VALUES (1, 'Dooleyville', '123 Play Ground Stret', 78956);
+INSERT INTO addresses VALUES (2, 'Transilvania', '575 Barbeque Drive', 77777);
+INSERT INTO addresses VALUES (3, 'Juno', '400 Freezing Lane', 99999);
 
 INSERT INTO payment_infos VALUES (1, '$2a$10$O1RbZIPCQCLr522HZUP51.uV/AgPDJ1d79PLofMafbxT9WNH5M0cq', 'MasterCard', '03/2025', 2, 2);
 INSERT INTO payment_infos VALUES (2, '$2a$10$O1RbZIPCQCLr522HZUP51.FXmFWbxRDPffdDGI63NzPfyJw1Rv9Je', 'Discover', '05/2022', 3, 2);
