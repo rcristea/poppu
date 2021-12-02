@@ -111,12 +111,37 @@ export class OrderConfirmationComponent extends Component {
 
   renderTotal() {
     let total = (this.state.adultTickets * 10.0) + (this.state.childTickets * 9) + (this.state.seniorTickets * 7)
+    let promoDiscount = this.state.selectedPromo.offer
+    let final_total = total - (parseInt(this.state.selectedPromo.offer.replaceAll('$', '').trim()))
     return (
       <div className='order-total'>
-          <h4>Subtotal: {total.toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD',
-          })}</h4>
+        <Container>
+          <h4>
+            <Row>
+              <Col>Pre-promo total:</Col>
+              <Col>{total.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+              })}</Col>
+            </Row>
+
+          </h4>
+          <h4>
+            <Row>
+              <Col>Promo offer:</Col>
+              <Col>{promoDiscount} saved!</Col>
+            </Row>
+          </h4>>
+          <h4>
+            <Row>
+              <Col>Final Total:</Col>
+              <Col>{final_total.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+              })}</Col>
+            </Row>
+          </h4>
+        </Container>
       </div>
     )
   }
@@ -127,7 +152,7 @@ export class OrderConfirmationComponent extends Component {
       showDateTime: Date.now(),
       cardNum: parseInt(this.state.cardNum),
       userID: this.state.userProfile.id,
-      promotionID: -1,
+      promotionID: this.state.selectedPromo.promotionId,
       showID: this.state.selectedShow.showID,
       showroomID: this.state.selectedShow.showroom.showroomId,
       seats: this.state.selectedSeats,
