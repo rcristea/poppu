@@ -126,10 +126,14 @@ public class BookingController {
         }).collect(Collectors.toList()).stream().map(ticketModel -> {
             return ticketModel.toString();
         }).collect(Collectors.toList());
-
-        String email = booking.toString() + "\n" +
-                "User email: " + user.getEmail() + "\n" +
-                "User name:" + user.getFirstName() + " " + user.getLastName();
+        String email = "Dear " + user.getFirstName() + ",\n" +
+                "Your new booking for " + booking.getMovieTitle() + " has been placed.\n\nDetails: \n" +
+                "Movie Title: " + booking.getMovieTitle() + "\n" +
+                "Show Time: " + booking.getShowDateTime() + "\n" +
+                "Movie Title: " + booking.getMovieTitle() + "\n" +
+                "\n Thank you for using Poppu. " +
+                "Enjoy your movie!\n\n" +
+                "- The Poppu Team";
         String toEmail = user.getEmail();
         String subjectEmail = "Booking Notification";
         ValidatorController.sendCustomEmail(toEmail, subjectEmail, email);

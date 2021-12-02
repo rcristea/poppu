@@ -176,7 +176,7 @@ export class ViewProfileComponent extends Component {
   }
 
   renderOrders() {
-    if (this.state.orders) {
+    if (this.state.orders.length !== 0) {
       return (
         <>
           <div className='orders'>
@@ -204,7 +204,11 @@ export class ViewProfileComponent extends Component {
         </>
       )
     } else {
-      return null
+      return (
+        <>
+          <p>No Orders Placed</p>
+        </>
+      )
     }
   }
 
@@ -261,10 +265,6 @@ export class ViewProfileComponent extends Component {
                 <div className='profile-item'>
                   <p className='grow'>Promotion Subscription:</p>
                   <p>{this.state.user.isSubscribed ? 'Subscribed' : 'Not Subscribed'}</p>
-                </div>
-                <div className='profile-item'>
-                  <p className='grow'>Status:</p>
-                  <p>{this.state.user.status}</p>
                 </div>
               </div>
               <div className='profile-address'>
