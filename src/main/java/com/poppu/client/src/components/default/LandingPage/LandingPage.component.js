@@ -38,6 +38,8 @@ export class LandingPage extends Component {
       nowShowing: await this.getMovieByShowing(true),
       comingSoon: await this.getMovieByShowing(false),
     })
+
+    sessionStorage.removeItem('alert')
   }
 
   closeAlert() {
@@ -47,7 +49,6 @@ export class LandingPage extends Component {
   renderAlert() {
     if (sessionStorage.getItem('alert')) {
       let message = sessionStorage.getItem('alert')
-      sessionStorage.removeItem('alert')
       return (
         <div className='session-alert' ref={this.alertRef}>
           <p>{message}</p><IoIosClose size='25px' color='#fff' onClick={this.closeAlert}/>
