@@ -150,6 +150,10 @@
   margin-bottom: 15px;
 }
 
+.order-total {
+  width: 500px;
+}
+
 .order-total h4 {
   color: #fff;
   font-weight: 700;

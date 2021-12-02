@@ -171,7 +171,7 @@ export class OrderSummaryComponent extends Component {
       <>
         <div className='booking-total-info'>
           <div className='order-row'>
-            <p className='booking-label'>Total (pre-discount): {total.toLocaleString('en-US', {
+            <p className='booking-label'>Total: {total.toLocaleString('en-US', {
               style: 'currency',
               currency: 'USD',
             })}</p>

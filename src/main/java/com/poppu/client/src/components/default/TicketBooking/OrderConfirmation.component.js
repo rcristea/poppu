@@ -77,10 +77,12 @@ export class OrderConfirmationComponent extends Component {
         <div className='booking-info'>
           <div className='booking-subtitle'>Show Info</div>
           <div className='order-row'>
-            <p className='booking-label'>Show Date: {new Date(this.state.selectedShow.dateTime).toLocaleDateString('en-US')}</p>
+            <p className='booking-label'>Show
+              Date: {new Date(this.state.selectedShow.dateTime).toLocaleDateString('en-US')}</p>
           </div>
           <div className='order-row'>
-            <p className='booking-label'>Show Time: {new Date(this.state.selectedShow.dateTime).toLocaleTimeString('en-US')}</p>
+            <p className='booking-label'>Show
+              Time: {new Date(this.state.selectedShow.dateTime).toLocaleTimeString('en-US')}</p>
           </div>
           <div className='order-row'>
             <p className='booking-label'>Showroom: {this.state.selectedShow.showroom.name}</p>
@@ -111,37 +113,55 @@ export class OrderConfirmationComponent extends Component {
 
   renderTotal() {
     let total = (this.state.adultTickets * 10.0) + (this.state.childTickets * 9) + (this.state.seniorTickets * 7)
+    let salesTax = total * 0.07
+    let onlineFee = 1.50
     let promoDiscount = this.state.selectedPromo.offer
-    let final_total = total - (parseInt(this.state.selectedPromo.offer.replaceAll('$', '').trim()))
+    let final_total = total - (parseInt(this.state.selectedPromo.offer.replaceAll('$', '').trim())) + salesTax + onlineFee
     return (
       <div className='order-total'>
-        <Container>
-          <h4>
-            <Row>
-              <Col>Pre-promo total:</Col>
-              <Col>{total.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD',
-              })}</Col>
-            </Row>
+        <p className='booking-label'>
+          <Row>
+            <Col>Total:</Col>
+            <Col>{total.toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            })}</Col>
+          </Row>
 
-          </h4>
-          <h4>
-            <Row>
-              <Col>Promo offer:</Col>
-              <Col>{promoDiscount} saved!</Col>
-            </Row>
-          </h4>>
-          <h4>
-            <Row>
-              <Col>Final Total:</Col>
-              <Col>{final_total.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD',
-              })}</Col>
-            </Row>
-          </h4>
-        </Container>
+        </p>
+        <p className='booking-label'>
+          <Row>
+            <Col>Promo offer:</Col>
+            <Col>{promoDiscount} saved!</Col>
+          </Row>
+        </p>
+        <p className='booking-label'>
+          <Row>
+            <Col>Sales Tax:</Col>
+            <Col>{salesTax.toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD'
+            })}</Col>
+          </Row>
+        </p>
+        <p className='booking-label'>
+          <Row>
+            <Col>Online Fees:</Col>
+            <Col>{onlineFee.toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD'
+            })}</Col>
+          </Row>
+        </p>
+        <h4 className={'mt-2'}>
+          <Row>
+            <Col>Subotal:</Col>
+            <Col>{final_total.toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            })}</Col>
+          </Row>
+        </h4>
       </div>
     )
   }
@@ -173,7 +193,7 @@ export class OrderConfirmationComponent extends Component {
   render() {
     return (
       <>
-        <NavBar />
+        <NavBar/>
         <div className='booking-container'>
           <div className='booking-header'>
             <h3 className='booking-title'>Booking Confirmation</h3>
