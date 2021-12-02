@@ -110,10 +110,9 @@ export class OrderConfirmationComponent extends Component {
   }
 
   renderTotal() {
-    console.log(this.state)
     let total = (this.state.adultTickets * 10.0) + (this.state.childTickets * 9) + (this.state.seniorTickets * 7)
     let promoDiscount = this.state.selectedPromo.offer
-    let final_total = total - - (parseInt(this.state.selectedPromo.offer.replaceAll('$', '').trim()))
+    let final_total = total - (parseInt(this.state.selectedPromo.offer.replaceAll('$', '').trim()))
     return (
       <div className='order-total'>
         <Container>

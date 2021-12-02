@@ -115,14 +115,14 @@ public class BookingModel {
 
     @Override
     public String toString() {
-        return "BookingModel{" +
-                "bookingNum=" + bookingNum +
-                ", movieTitle='" + movieTitle + '\'' +
-                ", showDateTime=" + showDateTime +
-                ", cardNum='" + cardNum + '\'' +
-                ", user=" + user +
-                ", promotion=" + promotion +
-                ", tickets=" + tickets +
+        return "BookingModel{" + "\n" +
+                "bookingNum=" + bookingNum + "\n" +
+                ", movieTitle='" + movieTitle + '\'' + "\n" +
+                ", showDateTime=" + showDateTime + "\n" +
+                ", cardNum='" + cardNum + '\'' + "\n" +
+                ", user=" + user + "\n" +
+                ", promotion=" + promotion + "\n" +
+                ", tickets=" + tickets + "\n" + 
                 '}';
     }
 }
