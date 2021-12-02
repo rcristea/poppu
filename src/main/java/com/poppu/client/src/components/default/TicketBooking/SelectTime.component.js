@@ -49,6 +49,11 @@ class Shows extends Component {
   }
 
   async componentDidMount() {
+    if (!sessionStorage.getItem('role')) {
+      this.props.history.push('/login')
+      alert('You must log in before you book a ticket.')
+    }
+
     this.getShows(this.props.match.params.id)
   }
 
