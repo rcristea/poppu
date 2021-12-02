@@ -140,7 +140,7 @@ class Shows extends Component {
             </div>
             <div className='ticket-row'>
               <p className='booking-label'>Senior Tickets: </p>&nbsp;
-              <input className='ticket-amount' type='number' value={this.state.seniorTickets} onChange={e => this.setState({...this.state, childTickets: e.target.value})}/>
+              <input className='ticket-amount' type='number' value={this.state.seniorTickets} onChange={e => this.setState({...this.state, seniorTickets: e.target.value})}/>
             </div>
           </div>
           <div className='booking-buttons'>

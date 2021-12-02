@@ -133,8 +133,8 @@ public class BookingController {
         }).collect(Collectors.toList());
 
         String email = booking.toString() + "\n" +
-                user.toString() + "\n" +
-                Arrays.deepToString(savedTickets.toArray());
+                "User email: " + user.getEmail() + "\n" +
+                "User name:" + user.getFirstName() + " " + user.getLastName();
         String toEmail = user.getEmail();
         String subjectEmail = "Booking Notification";
         ValidatorController.sendCustomEmail(toEmail, subjectEmail, email);
