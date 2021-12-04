@@ -1,0 +1,97 @@
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(179, 179, 179, .5);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.pagination {
+  justify-content: center;
+}
+
+.promos-container * {
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.promos-container {
+  position: relative;
+  margin: 50px 0 0 200px;
+  background: linear-gradient(90deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
+  min-height: 92vh;
+}
+
+.promos-card {
+  position: relative;
+  margin: 10px;
+  min-height: 90vh;
+  background-color: #fff;
+}
+
+.promos-card-heading {
+  padding: 50px 50px 0 50px;
+}
+
+.promos-card-heading h1 {
+  font-size: 2rem;
+  color: #171717;
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+.promos-card-heading h3 {
+  font-size: .75rem;
+  font-weight: 400;
+  color: #898989;
+}
+
+.promos-card-title {
+  display: flex;
+}
+
+.promos-card-title a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  border-radius: 50px;
+  background: hsla(245, 58%, 60%, 1);
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.promos-card-title a:hover {
+  box-shadow:  2px 2px 10px #d9d9d9;
+}
+
+.promos-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 50px;
+  max-height: 68vh;
+  overflow-y: scroll;
+}
+
+.card-table-dropdown-button {
+  margin-top: 0 !important;
+  margin-bottom: 5px;
+  background-color: transparent !important;
+}
+
+.card-table-dropdown-button:hover {
+  background-color: transparent !important;
+}
+
+.delete-promo {
+  margin-top: 0 !important;
+}
+
+.promos-card-table {
+  margin-top: 50px;
+}

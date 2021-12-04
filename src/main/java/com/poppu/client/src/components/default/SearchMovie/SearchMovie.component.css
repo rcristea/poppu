@@ -1,0 +1,83 @@
+.search-movie-container {
+  margin: 50px 0;
+}
+
+.query-container, .search-movie-form {
+  display: flex;
+}
+
+.query {
+  width: 300px;
+  border: 1px solid #000;
+  border-right: none;
+  padding: 30px !important;
+  height: 20px;
+  border-radius: 50px 0 0 50px;
+  outline: none;
+  color: #fff;
+  background-color: #131313;
+  font-size: 1.25rem;
+}
+
+.searchButton {
+  width: 40px;
+  height: 62px;
+  border: 1px solid #000;
+  background: #000;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 50px 50px 0;
+  cursor: pointer;
+}
+
+.category-container, .date-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+}
+
+.category-container label, .date-container label {
+  color: #fff;
+  margin-bottom: 7px;
+  font-size: 0.625rem;
+  font-weight: bold;
+}
+
+.category-container select {
+  border: 1px solid #000;
+  color: #fff;
+  background-color: #131313;
+  padding: 7px;
+  border-radius: 50px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.date-container input[type=date] {
+  border: 1px solid #000;
+  color: #fff;
+  background-color: #131313;
+  padding: 6px;
+  border-radius: 50px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+@media screen and (max-width: 767px) {
+  .search-movie-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .category-container, .date-container {
+    max-width: 150px;
+  }
+
+  .category-container label, .date-container label {
+    margin-top: 15px;
+  }
+}

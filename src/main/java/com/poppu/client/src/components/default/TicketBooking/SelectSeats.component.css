@@ -1,0 +1,166 @@
+.seats {
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.seat {
+  color: #fff;
+  font-weight: 900;
+  flex: 0 1 calc(20% - 8px);
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.selected-seat {
+  color: #685ed4;
+  filter: invert(35%) sepia(82%) saturate(647%) hue-rotate(211deg) brightness(95%) contrast(97%);
+}
+
+.select-time {
+  border: 2px solid hsla(245, 58%, 60%, 1) !important;
+  background-color: #171717 !important;
+  color: hsla(245, 58%, 60%, 1) !important;
+  margin: 5px;
+  padding: 1px 10px;
+  border-radius: 50px;
+}
+
+.active-time {
+  background-color: hsla(245, 58%, 60%, 1) !important;
+  color: #fff !important;
+}
+
+.booking-container {
+  margin: 200px auto;
+  max-width: 80%;
+}
+
+.booking-header {
+  margin-bottom: 50px;
+}
+
+.booking-title, .booking-label {
+  color: #fff;
+}
+
+.booking-label {
+  margin-bottom: 0;
+}
+
+.booking-select {
+  margin-bottom: 15px;
+}
+
+.booking-select, .ticket-amount, .payment-input {
+  color: #fff;
+  padding: 5px 10px;
+  border: 2px solid #685ed4;
+  border-radius: 50px;
+  background-color: #171717;
+  outline: 0 !important;
+}
+
+.ticket-row, .order-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.ticket-amount {
+  max-width: 110px;
+}
+
+.ticket-amount::-webkit-outer-spin-button,
+.ticket-amount::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.booking-submit, .booking-cancel {
+  margin: 15px 0;
+  padding: 5px 25px;
+  color: #fff;
+  border: 2px solid #685ed4;
+  background-color: #131313;
+  border-radius: 25px;
+  transition: 0.1s;
+  text-decoration: none;
+}
+
+.booking-submit:hover, .booking-cancel:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+.booking-cancel {
+  color: #fff !important;
+  margin-left: 10px;
+  border: 2px solid #898989;
+}
+
+.show-times {
+  margin-bottom: 25px;
+  max-height: 115px;
+  overflow-y: scroll;
+}
+
+.screen-img {
+  filter: invert(1);
+}
+
+.select-seats {
+  background-color: #000;
+  border-radius: 5px;
+  padding: 25px;
+}
+
+.booking-user-info, .booking-movie-info, .booking-show-info, .booking-ticket-info, .booking-seat-names-info, .booking-total-info, booking-info {
+  border-bottom: 2px solid #685ed4;
+}
+
+.push-right {
+  margin-right: 15px;
+}
+
+.payment-form {
+  max-width: 40%;
+}
+
+.order-heading {
+  color: #fff !important;
+  padding-bottom: 5px;
+  width: 115px;
+  border-bottom: 2px solid #685ed4;
+}
+
+.order-subtext {
+  color: #b7b7b7;
+  font-size: 0.75rem;
+}
+
+.booking-subtitle {
+  color: #fff;
+  font-variant: small-caps;
+  border-bottom: 2px solid #685ed4;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.order-total {
+  width: 500px;
+}
+
+.order-total h4 {
+  color: #fff;
+  font-weight: 700;
+  font-variant: small-caps;
+  font-size: 1.25rem;
+}
+
+.order-success {
+  color: #0f0;
+}

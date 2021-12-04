@@ -1,0 +1,12 @@
+@font-face {
+  font-family: MavenPro-ExtraBold;
+  src: url(../../assets/fonts/MavenPro-ExtraBold.woff2) format('woff2');
+}
+
+input {
+  padding-left: 10px !important;
+}
+
+.d-none {
+  display: none;
+}

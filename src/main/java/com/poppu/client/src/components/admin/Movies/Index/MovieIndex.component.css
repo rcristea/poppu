@@ -1,0 +1,65 @@
+.movies-container {
+  position: relative;
+  margin: 50px 0 0 200px;
+  background: linear-gradient(90deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
+  min-height: 92vh;
+}
+
+.movies-card {
+  position: relative;
+  margin: 10px;
+  min-height: 90vh;
+  background-color: #fff;
+}
+
+.movies-card-heading {
+  padding: 50px 50px 0 50px;
+}
+
+.movies-card-heading h1 {
+  font-size: 2rem;
+  color: #171717;
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+.movies-card-heading h3 {
+  font-size: .75rem;
+  font-weight: 400;
+  color: #898989;
+}
+
+.movies-card-title {
+  display: flex;
+}
+
+.movies-card-title a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  border-radius: 50px;
+  background: hsla(245, 58%, 60%, 1);
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.movies-card-title a:hover {
+  box-shadow:  2px 2px 10px #d9d9d9;
+}
+
+.movies-card-content {
+  flex-direction: column;
+  justify-content: center;
+  margin: 50px;
+  max-height: 65vh;
+  overflow-y: scroll;
+}
+
+.actor-list-table {
+  display: block;
+  max-height: 200px !important;
+  overflow-y: scroll;
+}

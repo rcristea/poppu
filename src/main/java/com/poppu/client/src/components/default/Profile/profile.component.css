@@ -1,0 +1,83 @@
+.profile-container {
+  max-width: 80%;
+  margin: auto;
+  display: flex;
+  color: #fff;
+}
+
+.profile-left {
+  flex-grow: 1;
+  max-width: 60%;
+  padding-right: 100px;
+}
+
+.profile-right {
+  width: 40%;
+}
+
+.profile-name {
+  text-transform: capitalize;
+}
+
+.profile-title {
+  text-transform: capitalize;
+  font-variant: small-caps;
+  border-bottom: 2px solid #685ed4;
+  padding-bottom: 5px;
+}
+
+.profile-header {
+  margin-bottom: 25px;
+  display: flex;
+}
+
+.profile-item {
+  display: flex;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.profile-dropdown {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile-header .dropdown-toggle {
+  background-color: #171717 !important;
+}
+
+.profile-header .dropdown-toggle:hover {
+  background-color: #685ed4 !important;
+}
+
+.dropdown-toggle:after {
+  display: none;
+}
+
+.profile-header .dropdown-menu {
+  background-color: #685ed4;
+}
+
+.profile-header .dropdown-item {
+  color: #fff;
+}
+
+.profile-header .dropdown-item:hover {
+  color: #fff;
+  background-color: #5245b7;
+}
+
+.payment-address {
+  width: 100%;
+}
+
+.profile-input {
+  color: #fff;
+  padding: 5px 10px;
+  border: 2px solid #685ed4;
+  border-radius: 50px;
+  background-color: #171717;
+  outline: 0 !important;
+}

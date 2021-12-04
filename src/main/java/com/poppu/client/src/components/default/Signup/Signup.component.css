@@ -1,0 +1,90 @@
+.signup-container {
+  padding: 150px;
+  background-color: #171717;
+}
+
+.subheading {
+  color: #898989;
+  font-size: 0.5rem;
+}
+
+.signup-form-border {
+  margin: auto;
+  width: 352px;
+  height: 602px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  background: hsla(283, 92%, 63%, 1);
+  background: linear-gradient(90deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
+  background: -moz-linear-gradient(90deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
+  background: -webkit-linear-gradient(90deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
+}
+
+.signup-form-container {
+  width: 350px;
+  height: 600px;
+  border-radius: 25px;
+  background-color: #171717;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-form-header {
+  margin: 50px 0 25px 0;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.form-signup {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-signup input {
+  margin: 10px 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+  border: 1px solid #000;
+  background-color: #131313;
+  color: #fff;
+  padding: 10px;
+  border-radius: 25px;
+}
+
+.form-signup button {
+  margin-top: 15px;
+  border-radius: 25px;
+  padding: 5px;
+  border: 1px solid #000;
+  background-color: #131313;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.5s ease;
+}
+
+.form-signup button:hover {
+  background: hsla(283, 92%, 63%, 1);
+  background: linear-gradient(180deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
+  background: -moz-linear-gradient(180deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
+  background: -webkit-linear-gradient(180deg, hsla(283, 92%, 63%, 1) 0%, hsla(180, 67%, 67%, 1) 50%, hsla(245, 58%, 60%, 1) 100%);
+}
+
+.login {
+  color: #fff;
+  margin-top: 15px;
+  font-size: 0.625rem;
+}
+
+.login a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.login a:hover {
+  text-decoration: underline;
+}

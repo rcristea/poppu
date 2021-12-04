@@ -1,0 +1,59 @@
+.horizontal-scroll-snap-child * {
+  text-shadow: none;
+  text-decoration: none;
+}
+
+.grow-1 {
+  flex-grow: 1;
+}
+
+.horizontal-scroll-snap-heading {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.horizontal-scroll-snap-container {
+  scroll-snap-type: x mandatory;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.horizontal-scroll-snap-child {
+  scroll-snap-align: start;
+  display: inline-block;
+  margin: 14px;
+}
+
+.btn-arrow {
+  display: flex;
+  align-items: center;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.horizontal-scroll-snap-left, .horizontal-scroll-snap-right, .horizontal-scroll-snap-child-info {
+  color: #fff;
+}
+
+.horizontal-scroll-snap-left svg, .horizontal-scroll-snap-right svg {
+  width: 32px;
+}
+
+.horizontal-scroll-snap-inline, .horizontal-scroll-snap-child-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.horizontal-scroll-snap-child-info {
+  margin: 10px 15px 0 0;
+}
+
+.horizontal-scroll-snap-child-info h2 {
+  font-size: 1rem;
+}
